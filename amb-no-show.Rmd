@@ -349,7 +349,7 @@ scheduling_data_raw <- scheduling_data_raw %>%
            as.Date(as.POSIXct(Appt.Cancel.DTTM,format="%Y-%m-%d %H:%M:%S",tz=Sys.timezone(),origin = "1970-01-01"), format="%Y-%m-%d")) %>%
   mutate(Appt.Status = case_when(Appt.Status == "Canceled" & Appt.DateYear == as.Date(Appt.Cancel.DateYear) ~ "Same-Day Canceled",
                                  TRUE ~ Appt.Status)) %>%
-  mutate(Campus.Specialty.Group.Group = case_when(str_detect(Campus.Specialty, "Peds") ~ "Peds Subspecialties",
+  mutate(Campus.Specialty.Group = case_when(str_detect(Campus.Specialty, "Peds") ~ "Peds Subspecialties",
                                             Campus.Specialty %in% c("OB/Gyn","Obstetrics","Gynecology") ~ "OB/Gyn",
                                             Campus.Specialty %in% c("Family Medicine","Internal Medicine") ~ "Primary Care",
                                             Campus.Specialty %in% c("Geriatrics","Gerontology") ~ "Geriatrics",
