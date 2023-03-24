@@ -948,7 +948,7 @@ no_show_ytd_mshs <- no_show_specialty %>%
   mutate(Campus = "MSHS Total") %>%
   group_by(Campus) %>%
   mutate(arrived_site = sum(Arrived),
-         arrived_perc = round(Arrived/tarrived_site,2)) 
+         arrived_perc = round(Arrived/arrived_site,2)) 
 
 
 no_show_ytd_merged <- bind_rows(no_show_ytd_site, no_show_ytd_mshs)
