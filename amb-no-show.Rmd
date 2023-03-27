@@ -6707,7 +6707,7 @@ htmltools::browsable(
     ),
 
 reactable(
-  no_show_ytd_last_function("MSDMG"),
+  no_show_last_function("MSDMG"),
   elementId = "msdmg_last_noshow-download-table",
   style = list(fontFamily = 'Calibri',
                  fontSize = '14px'),
