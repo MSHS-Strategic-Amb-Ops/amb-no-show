@@ -996,13 +996,13 @@ htmltools::browsable(
     #          columns = c("Mon_var", "Tue_var", "Wed_var", "Thu_var", "Fri_var"),
     #          headerStyle = list(color = "#d80b8c", fontSize = "16px"))
     
-    colGroup(name = paste0(last_year, " YTD Total Volume"), 
+    colGroup(name = paste0(last_year, " Total Volume"), 
              columns = c("Mon_total_day", "Tue_total_day", "Wed_total_day", "Thu_total_day", "Fri_total_day"),
              headerStyle = list(color = "#212070", fontSize = "16px")),
-    colGroup(name = paste0(last_year, " YTD Avg Volume per Day"), 
+    colGroup(name = paste0(last_year, " Avg Volume per Day"), 
              columns = c("Mon_avg_day", "Tue_avg_day", "Wed_avg_day", "Thu_avg_day", "Fri_avg_day"),
              headerStyle = list(color = "#7f7f7f", fontSize = "16px")),
-    colGroup(name = paste0(last_year, " YTD Variance from Daily Avg Volume"), 
+    colGroup(name = paste0(last_year, " Variance from Daily Avg Volume"), 
              columns = c("Mon_var", "Tue_var", "Wed_var", "Thu_var", "Fri_var"),
              headerStyle = list(color = "#d80b8c", fontSize = "16px"))
     ),
@@ -2271,7 +2271,7 @@ reactable(
     #          columns = c("noShow_rate", "noShow_rate_Established", "noShow_rate_New"),
     #          headerStyle = list(color = "#d80b8c", fontSize = "16px"))
     
-    colGroup(name = paste0(last_year, " YTD Visit Volume"), 
+    colGroup(name = paste0(last_year, " Visit Volume"), 
              columns = c("Arrived","arrived_perc","new_perc"),
              headerStyle = list(color = "#212070", fontSize = "16px")),
     colGroup(name = "No Show Rate - All", 
@@ -2659,7 +2659,7 @@ reactable(
     #          columns = c("noShow_rate", "noShow_rate_Established", "noShow_rate_New"),
     #          headerStyle = list(color = "#d80b8c", fontSize = "16px"))
     
-    colGroup(name = paste0(last_year, " YTD Visit Volume"), 
+    colGroup(name = paste0(last_year, " Visit Volume"), 
              columns = c("Arrived","arrived_perc","new_perc"),
              headerStyle = list(color = "#212070", fontSize = "16px")),
     colGroup(name = "No Show Rate - All", 
