@@ -1614,7 +1614,7 @@ reactable(
     ),
     
     `noShow_rate` = colDef(
-      name = "All New",
+      name = "All",
       maxWidth = 90,
       headerStyle = list(background = "#7f7f7f", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = JS("function(values, rows) {
@@ -2017,7 +2017,7 @@ reactable(
     ),
     
     `noShow_rate` = colDef(
-      name = "All New",
+      name = "All",
       maxWidth = 90,
       headerStyle = list(background = "#7f7f7f", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = JS("function(values, rows) {
@@ -2454,7 +2454,7 @@ reactable(
     ),
     
     `noShow_rate` = colDef(
-      name = "All New",
+      name = "All",
       maxWidth = 90,
       headerStyle = list(background = "#7f7f7f", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = JS("function(values, rows) {
@@ -2837,7 +2837,7 @@ reactable(
     ),
     
     `noShow_rate` = colDef(
-      name = "All New",
+      name = "All",
       maxWidth = 90,
       headerStyle = list(background = "#7f7f7f", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = JS("function(values, rows) {
@@ -4712,7 +4712,7 @@ reactable(
     ),
     
     `noShow_rate` = colDef(
-      name = "All New",
+      name = "All",
       maxWidth = 90,
       headerStyle = list(background = "#7f7f7f", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = JS("function(values, rows) {
@@ -5044,7 +5044,7 @@ reactable(
     ),
     
     `noShow_rate` = colDef(
-      name = "All New",
+      name = "All",
       maxWidth = 90,
       headerStyle = list(background = "#7f7f7f", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = JS("function(values, rows) {
@@ -6582,7 +6582,7 @@ reactable(
     ),
     
     `noShow_rate` = colDef(
-      name = "All New",
+      name = "All",
       maxWidth = 90,
       headerStyle = list(background = "#7f7f7f", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = JS("function(values, rows) {
@@ -6915,7 +6915,7 @@ reactable(
     ),
     
     `noShow_rate` = colDef(
-      name = "All New",
+      name = "All",
       maxWidth = 90,
       headerStyle = list(background = "#7f7f7f", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = JS("function(values, rows) {
@@ -8453,7 +8453,7 @@ reactable(
     ),
     
     `noShow_rate` = colDef(
-      name = "All New",
+      name = "All",
       maxWidth = 90,
       headerStyle = list(background = "#7f7f7f", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = JS("function(values, rows) {
@@ -8786,7 +8786,7 @@ reactable(
     ),
     
     `noShow_rate` = colDef(
-      name = "All New",
+      name = "All",
       maxWidth = 90,
       headerStyle = list(background = "#7f7f7f", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = JS("function(values, rows) {
@@ -10325,7 +10325,7 @@ reactable(
     ),
     
     `noShow_rate` = colDef(
-      name = "All New",
+      name = "All",
       maxWidth = 90,
       headerStyle = list(background = "#7f7f7f", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = JS("function(values, rows) {
@@ -10658,7 +10658,7 @@ reactable(
     ),
     
     `noShow_rate` = colDef(
-      name = "All New",
+      name = "All",
       maxWidth = 90,
       headerStyle = list(background = "#7f7f7f", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = JS("function(values, rows) {
@@ -12196,7 +12196,7 @@ reactable(
     ),
     
     `noShow_rate` = colDef(
-      name = "All New",
+      name = "All",
       maxWidth = 90,
       headerStyle = list(background = "#7f7f7f", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = JS("function(values, rows) {
@@ -12528,7 +12528,7 @@ reactable(
     ),
     
     `noShow_rate` = colDef(
-      name = "All New",
+      name = "All",
       maxWidth = 90,
       headerStyle = list(background = "#7f7f7f", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = JS("function(values, rows) {
@@ -14065,7 +14065,7 @@ reactable(
     ),
     
     `noShow_rate` = colDef(
-      name = "All New",
+      name = "All",
       maxWidth = 90,
       headerStyle = list(background = "#7f7f7f", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = JS("function(values, rows) {
@@ -14398,7 +14398,7 @@ reactable(
     ),
     
     `noShow_rate` = colDef(
-      name = "All New",
+      name = "All",
       maxWidth = 90,
       headerStyle = list(background = "#7f7f7f", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = JS("function(values, rows) {
@@ -15936,7 +15936,7 @@ reactable(
     ),
     
     `noShow_rate` = colDef(
-      name = "All New",
+      name = "All",
       maxWidth = 90,
       headerStyle = list(background = "#7f7f7f", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = JS("function(values, rows) {
@@ -16269,7 +16269,7 @@ reactable(
     ),
     
     `noShow_rate` = colDef(
-      name = "All New",
+      name = "All",
       maxWidth = 90,
       headerStyle = list(background = "#7f7f7f", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = JS("function(values, rows) {
@@ -17808,7 +17808,7 @@ reactable(
     ),
     
     `noShow_rate` = colDef(
-      name = "All New",
+      name = "All",
       maxWidth = 90,
       headerStyle = list(background = "#7f7f7f", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = JS("function(values, rows) {
@@ -18140,7 +18140,7 @@ reactable(
     ),
     
     `noShow_rate` = colDef(
-      name = "All New",
+      name = "All",
       maxWidth = 90,
       headerStyle = list(background = "#7f7f7f", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = JS("function(values, rows) {
@@ -19676,7 +19676,7 @@ reactable(
     ),
     
     `noShow_rate` = colDef(
-      name = "All New",
+      name = "All",
       maxWidth = 90,
       headerStyle = list(background = "#7f7f7f", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = JS("function(values, rows) {
@@ -20009,7 +20009,7 @@ reactable(
     ),
     
     `noShow_rate` = colDef(
-      name = "All New",
+      name = "All",
       maxWidth = 90,
       headerStyle = list(background = "#7f7f7f", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = JS("function(values, rows) {
