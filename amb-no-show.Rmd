@@ -634,7 +634,7 @@ ________________________________________________________________________________
 ## MSHS
 ### No Shows {.tabset .tabset-fade .tabset-pills}
 #### `r current_year` YTD
-<span style='font-size: 20px; color: #212070'>-- **No Show Rate by Site**</span><br/>
+<span style='font-size: 20px; color: #212070'>**No Show Rate by Site**</span><br/>
 ```{r MSHS No Show Current Year Output, echo = FALSE, warning = FALSE, message = FALSE}
 
 no_show_ytd_site <- no_show_specialty %>%
@@ -673,7 +673,7 @@ no_show_ytd_site <- no_show_specialty %>%
          noShow_rate = round((`NoShow_Established` + `SameDayCanceled_Established` + `NoShow_New` + `SameDayCanceled_New`)/Total,2),
          `noShow_rate_belowThirty` = round((`NoShow_belowThirty` + `SameDayCanceled_belowThirty`)/`Total_belowThirty`,2),
          `noShow_rate_overThirty` = round((`NoShow_overThirty` + `SameDayCanceled_overThirty`)/`Total_overThirty`,2),
-         new_perc = round(Total_New/Total,2)) %>%
+         new_perc = round(Arrived_New/Arrived,2)) %>%
   group_by(Campus) %>%
   mutate(arrived_site = sum(Arrived),
          arrived_perc = round(Arrived/arrived_site,2)) 
@@ -715,7 +715,7 @@ no_show_ytd_mshs <- no_show_specialty %>%
          noShow_rate = round((`NoShow_Established` + `SameDayCanceled_Established` + `NoShow_New` + `SameDayCanceled_New`)/Total,2),
          `noShow_rate_belowThirty` = round((`NoShow_belowThirty` + `SameDayCanceled_belowThirty`)/`Total_belowThirty`,2),
          `noShow_rate_overThirty` = round((`NoShow_overThirty` + `SameDayCanceled_overThirty`)/`Total_overThirty`,2),
-         new_perc = round(Total_New/Total,2)) %>%
+         new_perc = round(Arrived_New/Arrived,2)) %>%
   mutate(Campus = "MSHS Total") %>%
   group_by(Campus) %>%
   mutate(arrived_site = sum(Arrived),
@@ -828,7 +828,7 @@ reactable(
     ),
 
     new_perc = colDef(
-      name = "% New Visits",
+      name = "% New Arrived Visits",
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = JS("function(values, rows) {
@@ -838,7 +838,7 @@ reactable(
           totalTotal_New += row['Total_New']
           totalTotal += row['Total']
         })
-        return (totalTotal_New) / totalTotal
+        return (totalTotal_New) / totalTotal || '-'
       }"),
       format = colFormat(percent = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
@@ -857,7 +857,7 @@ reactable(
           totalSameDayCanceled_Established += row['SameDayCanceled_Established']
           totalTotal_Established += row['Total_Established']
         })
-        return (totalNoShow_Established + totalSameDayCanceled_Established) / totalTotal_Established
+        return (totalNoShow_Established + totalSameDayCanceled_Established) / totalTotal_Established || '-'
       }"),
       format = colFormat(percent = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
@@ -876,7 +876,7 @@ reactable(
           totalSameDayCanceled_belowThirty_Established += row['SameDayCanceled_belowThirty_Established']
           totalTotal_belowThirty_Established += row['Total_belowThirty_Established']
         })
-        return (totalNoShow_belowThirty_Established + totalSameDayCanceled_belowThirty_Established) / totalTotal_belowThirty_Established
+        return (totalNoShow_belowThirty_Established + totalSameDayCanceled_belowThirty_Established) / totalTotal_belowThirty_Established || '-'
       }"),
       format = colFormat(percent = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
@@ -895,7 +895,7 @@ reactable(
           totalSameDayCanceled_overThirty_Established += row['SameDayCanceled_overThirty_Established']
           totalTotal_overThirty_Established += row['Total_overThirty_Established']
         })
-        return (totalNoShow_overThirty_Established + totalSameDayCanceled_overThirty_Established) / totalTotal_overThirty_Established
+        return (totalNoShow_overThirty_Established + totalSameDayCanceled_overThirty_Established) / totalTotal_overThirty_Established || '-'
       }"),
       format = colFormat(percent = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
@@ -914,7 +914,7 @@ reactable(
           totalSameDayCanceled_New += row['SameDayCanceled_New']
           totalTotal_New += row['Total_New']
         })
-        return (totalNoShow_New + totalSameDayCanceled_New) / totalTotal_New
+        return (totalNoShow_New + totalSameDayCanceled_New) / totalTotal_New || '-'
       }"),
       format = colFormat(percent = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
@@ -933,7 +933,7 @@ reactable(
           totalSameDayCanceled_belowThirty_New += row['SameDayCanceled_belowThirty_New']
           totalTotal_belowThirty_New += row['Total_belowThirty_New']
         })
-        return (totalNoShow_belowThirty_New + totalSameDayCanceled_belowThirty_New) / totalTotal_belowThirty_New
+        return (totalNoShow_belowThirty_New + totalSameDayCanceled_belowThirty_New) / totalTotal_belowThirty_New || '-'
       }"),
       format = colFormat(percent = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
@@ -952,7 +952,7 @@ reactable(
           totalSameDayCanceled_overThirty_New += row['SameDayCanceled_overThirty_New']
           totalTotal_overThirty_New += row['Total_overThirty_New']
         })
-        return (totalNoShow_overThirty_New + totalSameDayCanceled_overThirty_New) / totalTotal_overThirty_New
+        return (totalNoShow_overThirty_New + totalSameDayCanceled_overThirty_New) / totalTotal_overThirty_New || '-'
       }"),
       format = colFormat(percent = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
@@ -971,7 +971,7 @@ reactable(
           totalSameDayCanceled += row['SameDayCanceled']
           totalTotal += row['Total']
         })
-        return (totalNoShow + totalSameDayCanceled) / totalTotal
+        return (totalNoShow + totalSameDayCanceled) / totalTotal || '-'
       }"),
       format = colFormat(percent = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
@@ -990,7 +990,7 @@ reactable(
           totalSameDayCanceled_belowThirty += row['SameDayCanceled_belowThirty']
           totalTotal_belowThirty += row['Total_belowThirty']
         })
-        return (totalNoShow_belowThirty + totalSameDayCanceled_belowThirty) / totalTotal_belowThirty
+        return (totalNoShow_belowThirty + totalSameDayCanceled_belowThirty) / totalTotal_belowThirty || '-'
       }"),
       format = colFormat(percent = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
@@ -1009,7 +1009,7 @@ reactable(
           totalSameDayCanceled_overThirty += row['SameDayCanceled_overThirty']
           totalTotal_overThirty += row['Total_overThirty']
         })
-        return (totalNoShow_overThirty + totalSameDayCanceled_overThirty) / totalTotal_overThirty
+        return (totalNoShow_overThirty + totalSameDayCanceled_overThirty) / totalTotal_overThirty || '-'
       }"),
       format = colFormat(percent = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
@@ -1070,7 +1070,7 @@ reactable(
 <br/>
 <br/>
 
-<span style='font-size: 20px; color: #212070'>-- **No Show Rate by Specialty**</span><br/>
+<span style='font-size: 20px; color: #212070'>**No Show Rate by Specialty**</span><br/>
 ```{r MSHS No Show by Specialty Current Year Output, echo = FALSE, warning = FALSE, message = FALSE}
 
 # no_show_ytd_specialty <- no_show_specialty %>%
@@ -1087,14 +1087,14 @@ reactable(
 #   mutate(Total = (Total_Established + Total_New),
 #          Arrived = (Arrived_Established + Arrived_New),
 #          noShow_rate = round((`NoShow_Established` + `SameDayCanceled_Established` + `NoShow_New` + `SameDayCanceled_New`)/Total,2),
-#          new_perc = round(Total_New/Total,2)) %>%
+#          new_perc = round(Arrived_New/Arrived,2)) %>%
 #   group_by(Campus.Specialty.Group) %>%
 #   mutate(arrived_site = sum(Arrived),
 #          arrived_perc = round(Arrived/arrived_site,2)) 
 
 no_show_ytd_specialty <- no_show_specialty %>%
   filter(Appt.Year == current_year) %>%
-  group_by(Campus.Specialty.Group, New.PT2) %>%
+  group_by(Campus.Specialty.Group, Campus, New.PT2) %>%
   summarise(Arrived = sum(Arrived),
             `Arrived_belowThirty` = sum(`Arrived_belowThirty`),
             `Arrived_overThirty` = sum(`Arrived_overThirty`),
@@ -1111,7 +1111,7 @@ no_show_ytd_specialty <- no_show_specialty %>%
          `noShow_rate_belowThirty` = round((`NoShow_belowThirty` + `SameDayCanceled_belowThirty`)/ `Total_belowThirty`,2),
          `noShow_rate_overThirty` = round((`NoShow_overThirty` + `SameDayCanceled_overThirty`)/ `Total_overThirty`,2)) %>%
   pivot_wider(names_from = New.PT2,
-              values_from = 3:17,
+              values_from = 4:18,
               values_fill = 0) %>%
   mutate(Total = (Total_Established + Total_New),
          `Total_belowThirty` = (`Total_belowThirty_Established` + `Total_belowThirty_New`),
@@ -1128,14 +1128,14 @@ no_show_ytd_specialty <- no_show_specialty %>%
          noShow_rate = round((`NoShow_Established` + `SameDayCanceled_Established` + `NoShow_New` + `SameDayCanceled_New`)/Total,2),
          `noShow_rate_belowThirty` = round((`NoShow_belowThirty` + `SameDayCanceled_belowThirty`)/`Total_belowThirty`,2),
          `noShow_rate_overThirty` = round((`NoShow_overThirty` + `SameDayCanceled_overThirty`)/`Total_overThirty`,2),
-         new_perc = round(Total_New/Total,2)) %>%
+         new_perc = round(Arrived_New/Arrived,2)) %>%
   group_by(Campus.Specialty.Group) %>%
   mutate(arrived_site = sum(Arrived),
          arrived_perc = round(Arrived/arrived_site,2))
 
 no_show_ytd_specialty <- no_show_ytd_specialty %>%
-  dplyr::select(1, 35, 47, 49, 
-                2:34, 36:46, 48)
+  dplyr::select(1:2, 36, 48, 50, 
+                3:35, 37:47, 49)
 
 
 # Table Output -----------------------------------------------------------------
@@ -1204,6 +1204,10 @@ reactable(
       name = "Specialty",
       maxWidth = 250),
     
+    Campus = colDef(
+      name = "Site",
+      maxWidth = 150),
+    
     Arrived = colDef(
       name = "Total Arrived Visits",
       maxWidth = 90,
@@ -1231,7 +1235,7 @@ reactable(
     ),
 
     new_perc = colDef(
-      name = "% New Visits",
+      name = "% New Arrived Visits",
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = JS("function(values, rows) {
@@ -1260,7 +1264,7 @@ reactable(
           totalSameDayCanceled_Established += row['SameDayCanceled_Established']
           totalTotal_Established += row['Total_Established']
         })
-        return (totalNoShow_Established + totalSameDayCanceled_Established) / totalTotal_Established
+        return (totalNoShow_Established + totalSameDayCanceled_Established) / totalTotal_Established || '-'
       }"),
       format = colFormat(percent = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
@@ -1279,7 +1283,7 @@ reactable(
           totalSameDayCanceled_belowThirty_Established += row['SameDayCanceled_belowThirty_Established']
           totalTotal_belowThirty_Established += row['Total_belowThirty_Established']
         })
-        return (totalNoShow_belowThirty_Established + totalSameDayCanceled_belowThirty_Established) / totalTotal_belowThirty_Established
+        return (totalNoShow_belowThirty_Established + totalSameDayCanceled_belowThirty_Established) / totalTotal_belowThirty_Established || '-'
       }"),
       format = colFormat(percent = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
@@ -1298,7 +1302,7 @@ reactable(
           totalSameDayCanceled_overThirty_Established += row['SameDayCanceled_overThirty_Established']
           totalTotal_overThirty_Established += row['Total_overThirty_Established']
         })
-        return (totalNoShow_overThirty_Established + totalSameDayCanceled_overThirty_Established) / totalTotal_overThirty_Established
+        return (totalNoShow_overThirty_Established + totalSameDayCanceled_overThirty_Established) / totalTotal_overThirty_Established || '-'
       }"),
       format = colFormat(percent = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
@@ -1317,7 +1321,7 @@ reactable(
           totalSameDayCanceled_New += row['SameDayCanceled_New']
           totalTotal_New += row['Total_New']
         })
-        return (totalNoShow_New + totalSameDayCanceled_New) / totalTotal_New
+        return (totalNoShow_New + totalSameDayCanceled_New) / totalTotal_New || '-'
       }"),
       format = colFormat(percent = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
@@ -1336,7 +1340,7 @@ reactable(
           totalSameDayCanceled_belowThirty_New += row['SameDayCanceled_belowThirty_New']
           totalTotal_belowThirty_New += row['Total_belowThirty_New']
         })
-        return (totalNoShow_belowThirty_New + totalSameDayCanceled_belowThirty_New) / totalTotal_belowThirty_New
+        return (totalNoShow_belowThirty_New + totalSameDayCanceled_belowThirty_New) / totalTotal_belowThirty_New || '-'
       }"),
       format = colFormat(percent = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
@@ -1355,7 +1359,7 @@ reactable(
           totalSameDayCanceled_overThirty_New += row['SameDayCanceled_overThirty_New']
           totalTotal_overThirty_New += row['Total_overThirty_New']
         })
-        return (totalNoShow_overThirty_New + totalSameDayCanceled_overThirty_New) / totalTotal_overThirty_New
+        return (totalNoShow_overThirty_New + totalSameDayCanceled_overThirty_New) / totalTotal_overThirty_New || '-'
       }"),
       format = colFormat(percent = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
@@ -1374,7 +1378,7 @@ reactable(
           totalSameDayCanceled += row['SameDayCanceled']
           totalTotal += row['Total']
         })
-        return (totalNoShow + totalSameDayCanceled) / totalTotal
+        return (totalNoShow + totalSameDayCanceled) / totalTotal || '-'
       }"),
       format = colFormat(percent = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
@@ -1393,7 +1397,7 @@ reactable(
           totalSameDayCanceled_belowThirty += row['SameDayCanceled_belowThirty']
           totalTotal_belowThirty += row['Total_belowThirty']
         })
-        return (totalNoShow_belowThirty + totalSameDayCanceled_belowThirty) / totalTotal_belowThirty
+        return (totalNoShow_belowThirty + totalSameDayCanceled_belowThirty) / totalTotal_belowThirty || '-'
       }"),
       format = colFormat(percent = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
@@ -1412,7 +1416,7 @@ reactable(
           totalSameDayCanceled_overThirty += row['SameDayCanceled_overThirty']
           totalTotal_overThirty += row['Total_overThirty']
         })
-        return (totalNoShow_overThirty + totalSameDayCanceled_overThirty) / totalTotal_overThirty
+        return (totalNoShow_overThirty + totalSameDayCanceled_overThirty) / totalTotal_overThirty || '-'
       }"),
       format = colFormat(percent = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
@@ -1513,7 +1517,7 @@ no_show_last_site <- no_show_specialty %>%
          noShow_rate = round((`NoShow_Established` + `SameDayCanceled_Established` + `NoShow_New` + `SameDayCanceled_New`)/Total,2),
          `noShow_rate_belowThirty` = round((`NoShow_belowThirty` + `SameDayCanceled_belowThirty`)/`Total_belowThirty`,2),
          `noShow_rate_overThirty` = round((`NoShow_overThirty` + `SameDayCanceled_overThirty`)/`Total_overThirty`,2),
-         new_perc = round(Total_New/Total,2)) %>%
+         new_perc = round(Arrived_New/Arrived,2)) %>%
   group_by(Campus) %>%
   mutate(arrived_site = sum(Arrived),
          arrived_perc = round(Arrived/arrived_site,2)) 
@@ -1555,7 +1559,7 @@ no_show_last_mshs <- no_show_specialty %>%
          noShow_rate = round((`NoShow_Established` + `SameDayCanceled_Established` + `NoShow_New` + `SameDayCanceled_New`)/Total,2),
          `noShow_rate_belowThirty` = round((`NoShow_belowThirty` + `SameDayCanceled_belowThirty`)/`Total_belowThirty`,2),
          `noShow_rate_overThirty` = round((`NoShow_overThirty` + `SameDayCanceled_overThirty`)/`Total_overThirty`,2),
-         new_perc = round(Total_New/Total,2)) %>%
+         new_perc = round(Arrived_New/Arrived,2)) %>%
   mutate(Campus = "MSHS Total") %>%
   group_by(Campus) %>%
   mutate(arrived_site = sum(Arrived),
@@ -1668,7 +1672,7 @@ reactable(
     ),
 
     new_perc = colDef(
-      name = "% New Visits",
+      name = "% New Arrived Visits",
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = JS("function(values, rows) {
@@ -1697,7 +1701,7 @@ reactable(
           totalSameDayCanceled_Established += row['SameDayCanceled_Established']
           totalTotal_Established += row['Total_Established']
         })
-        return (totalNoShow_Established + totalSameDayCanceled_Established) / totalTotal_Established
+        return (totalNoShow_Established + totalSameDayCanceled_Established) / totalTotal_Established || '-'
       }"),
       format = colFormat(percent = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
@@ -1716,7 +1720,7 @@ reactable(
           totalSameDayCanceled_belowThirty_Established += row['SameDayCanceled_belowThirty_Established']
           totalTotal_belowThirty_Established += row['Total_belowThirty_Established']
         })
-        return (totalNoShow_belowThirty_Established + totalSameDayCanceled_belowThirty_Established) / totalTotal_belowThirty_Established
+        return (totalNoShow_belowThirty_Established + totalSameDayCanceled_belowThirty_Established) / totalTotal_belowThirty_Established || '-'
       }"),
       format = colFormat(percent = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
@@ -1735,7 +1739,7 @@ reactable(
           totalSameDayCanceled_overThirty_Established += row['SameDayCanceled_overThirty_Established']
           totalTotal_overThirty_Established += row['Total_overThirty_Established']
         })
-        return (totalNoShow_overThirty_Established + totalSameDayCanceled_overThirty_Established) / totalTotal_overThirty_Established
+        return (totalNoShow_overThirty_Established + totalSameDayCanceled_overThirty_Established) / totalTotal_overThirty_Established || '-'
       }"),
       format = colFormat(percent = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
@@ -1773,7 +1777,7 @@ reactable(
           totalSameDayCanceled_belowThirty_New += row['SameDayCanceled_belowThirty_New']
           totalTotal_belowThirty_New += row['Total_belowThirty_New']
         })
-        return (totalNoShow_belowThirty_New + totalSameDayCanceled_belowThirty_New) / totalTotal_belowThirty_New
+        return (totalNoShow_belowThirty_New + totalSameDayCanceled_belowThirty_New) / totalTotal_belowThirty_New || '-'
       }"),
       format = colFormat(percent = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
@@ -1792,7 +1796,7 @@ reactable(
           totalSameDayCanceled_overThirty_New += row['SameDayCanceled_overThirty_New']
           totalTotal_overThirty_New += row['Total_overThirty_New']
         })
-        return (totalNoShow_overThirty_New + totalSameDayCanceled_overThirty_New) / totalTotal_overThirty_New
+        return (totalNoShow_overThirty_New + totalSameDayCanceled_overThirty_New) / totalTotal_overThirty_New || '-'
       }"),
       format = colFormat(percent = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
@@ -1830,7 +1834,7 @@ reactable(
           totalSameDayCanceled_belowThirty += row['SameDayCanceled_belowThirty']
           totalTotal_belowThirty += row['Total_belowThirty']
         })
-        return (totalNoShow_belowThirty + totalSameDayCanceled_belowThirty) / totalTotal_belowThirty
+        return (totalNoShow_belowThirty + totalSameDayCanceled_belowThirty) / totalTotal_belowThirty || '-'
       }"),
       format = colFormat(percent = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
@@ -1849,7 +1853,7 @@ reactable(
           totalSameDayCanceled_overThirty += row['SameDayCanceled_overThirty']
           totalTotal_overThirty += row['Total_overThirty']
         })
-        return (totalNoShow_overThirty + totalSameDayCanceled_overThirty) / totalTotal_overThirty
+        return (totalNoShow_overThirty + totalSameDayCanceled_overThirty) / totalTotal_overThirty || '-'
       }"),
       format = colFormat(percent = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
@@ -1948,7 +1952,7 @@ no_show_last_specialty <- no_show_specialty %>%
          noShow_rate = round((`NoShow_Established` + `SameDayCanceled_Established` + `NoShow_New` + `SameDayCanceled_New`)/Total,2),
          `noShow_rate_belowThirty` = round((`NoShow_belowThirty` + `SameDayCanceled_belowThirty`)/`Total_belowThirty`,2),
          `noShow_rate_overThirty` = round((`NoShow_overThirty` + `SameDayCanceled_overThirty`)/`Total_overThirty`,2),
-         new_perc = round(Total_New/Total,2)) %>%
+         new_perc = round(Arrived_New/Arrived,2)) %>%
   group_by(Campus.Specialty.Group) %>%
   mutate(arrived_site = sum(Arrived),
          arrived_perc = round(Arrived/arrived_site,2))
@@ -2051,7 +2055,7 @@ reactable(
     ),
 
     new_perc = colDef(
-      name = "% New Visits",
+      name = "% New Arrived Visits",
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = JS("function(values, rows) {
@@ -2607,7 +2611,7 @@ no_show_ytd_site_function <- function(site){
          noShow_rate = round((`NoShow_Established` + `SameDayCanceled_Established` + `NoShow_New` + `SameDayCanceled_New`)/Total,2),
          `noShow_rate_belowThirty` = round((`NoShow_belowThirty` + `SameDayCanceled_belowThirty`)/`Total_belowThirty`,2),
          `noShow_rate_overThirty` = round((`NoShow_overThirty` + `SameDayCanceled_overThirty`)/`Total_overThirty`,2),
-         new_perc = round(Total_New/Total,2)) %>%
+         new_perc = round(Arrived_New/Arrived,2)) %>%
     group_by(Campus.Specialty.Group) %>%
   mutate(arrived_site = sum(Arrived),
          arrived_perc = round(Arrived/arrived_site,2)) %>%
@@ -2663,7 +2667,7 @@ no_show_last_site_function <- function(site){
          noShow_rate = round((`NoShow_Established` + `SameDayCanceled_Established` + `NoShow_New` + `SameDayCanceled_New`)/Total,2),
          `noShow_rate_belowThirty` = round((`NoShow_belowThirty` + `SameDayCanceled_belowThirty`)/`Total_belowThirty`,2),
          `noShow_rate_overThirty` = round((`NoShow_overThirty` + `SameDayCanceled_overThirty`)/`Total_overThirty`,2),
-         new_perc = round(Total_New/Total,2)) %>%
+         new_perc = round(Arrived_New/Arrived,2)) %>%
     group_by(Campus.Specialty.Group) %>%
   mutate(arrived_site = sum(Arrived),
          arrived_perc = round(Arrived/arrived_site,2)) %>%
@@ -2792,7 +2796,7 @@ reactable(
     ),
 
     new_perc = colDef(
-      name = "% New Visits",
+      name = "% New Arrived Visits",
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = JS("function(values, rows) {
@@ -3124,7 +3128,7 @@ reactable(
     ),
 
     new_perc = colDef(
-      name = "% New Visits",
+      name = "% New Arrived Visits",
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = JS("function(values, rows) {
@@ -3527,7 +3531,7 @@ reactable(
     ),
 
     new_perc = colDef(
-      name = "% New Visits",
+      name = "% New Arrived Visits",
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = JS("function(values, rows) {
@@ -3860,7 +3864,7 @@ reactable(
     ),
 
     new_perc = colDef(
-      name = "% New Visits",
+      name = "% New Arrived Visits",
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = JS("function(values, rows) {
@@ -4263,7 +4267,7 @@ reactable(
     ),
 
     new_perc = colDef(
-      name = "% New Visits",
+      name = "% New Arrived Visits",
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = JS("function(values, rows) {
@@ -4596,7 +4600,7 @@ reactable(
     ),
 
     new_perc = colDef(
-      name = "% New Visits",
+      name = "% New Arrived Visits",
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = JS("function(values, rows) {
@@ -5000,7 +5004,7 @@ reactable(
     ),
 
     new_perc = colDef(
-      name = "% New Visits",
+      name = "% New Arrived Visits",
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = JS("function(values, rows) {
@@ -5333,7 +5337,7 @@ reactable(
     ),
 
     new_perc = colDef(
-      name = "% New Visits",
+      name = "% New Arrived Visits",
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = JS("function(values, rows) {
@@ -5736,7 +5740,7 @@ reactable(
     ),
 
     new_perc = colDef(
-      name = "% New Visits",
+      name = "% New Arrived Visits",
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = JS("function(values, rows) {
@@ -6068,7 +6072,7 @@ reactable(
     ),
 
     new_perc = colDef(
-      name = "% New Visits",
+      name = "% New Arrived Visits",
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = JS("function(values, rows) {
@@ -6470,7 +6474,7 @@ reactable(
     ),
 
     new_perc = colDef(
-      name = "% New Visits",
+      name = "% New Arrived Visits",
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = JS("function(values, rows) {
@@ -6803,7 +6807,7 @@ reactable(
     ),
 
     new_perc = colDef(
-      name = "% New Visits",
+      name = "% New Arrived Visits",
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = JS("function(values, rows) {
@@ -7206,7 +7210,7 @@ reactable(
     ),
 
     new_perc = colDef(
-      name = "% New Visits",
+      name = "% New Arrived Visits",
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = JS("function(values, rows) {
@@ -7539,7 +7543,7 @@ reactable(
     ),
 
     new_perc = colDef(
-      name = "% New Visits",
+      name = "% New Arrived Visits",
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = JS("function(values, rows) {
@@ -7943,7 +7947,7 @@ reactable(
     ),
 
     new_perc = colDef(
-      name = "% New Visits",
+      name = "% New Arrived Visits",
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = JS("function(values, rows) {
@@ -8275,7 +8279,7 @@ reactable(
     ),
 
     new_perc = colDef(
-      name = "% New Visits",
+      name = "% New Arrived Visits",
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = JS("function(values, rows) {
@@ -8677,7 +8681,7 @@ reactable(
     ),
 
     new_perc = colDef(
-      name = "% New Visits",
+      name = "% New Arrived Visits",
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = JS("function(values, rows) {
@@ -9010,7 +9014,7 @@ reactable(
     ),
 
     new_perc = colDef(
-      name = "% New Visits",
+      name = "% New Arrived Visits",
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = JS("function(values, rows) {
