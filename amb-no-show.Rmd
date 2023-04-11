@@ -831,7 +831,7 @@ reactable(
     #          columns = c("noShow_rate", "noShow_rate_Established", "noShow_rate_New"),
     #          headerStyle = list(color = "#d80b8c", fontSize = "16px"))
     colGroup(name = "", 
-             columns = c("Campus","Campus.Specialty.Group"), sticky = "left", sticky = "left",
+             columns = c("Campus","Campus.Specialty.Group"), sticky = "left", 
              headerStyle = list(fontSize = "16px")),
     colGroup(name = paste0(current_year, " YTD Visit Volume"), 
              columns = c("Arrived","arrived_perc","new_perc"),
