@@ -851,6 +851,7 @@ reactable(
 
     Campus = colDef(
       # footer = "Total",
+      sticky = "left",
       name = "Site",
       minWidth = 200),
 
