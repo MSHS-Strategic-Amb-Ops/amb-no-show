@@ -852,11 +852,11 @@ reactable(
     Campus = colDef(
       # footer = "Total",
       name = "Site",
-      maxWidth = 220),
+      minWidth = 200),
 
     Campus.Specialty.Group = colDef(
       name = "Specialty",
-      maxWidth = 250),
+      minWidth = 250),
     
     Arrived = colDef(
       name = "Total Arrived Visits",
@@ -1420,11 +1420,11 @@ reactable(
 
     Campus.Specialty.Group = colDef(
       name = "Specialty",
-      maxWidth = 250),
+      minWidth = 250),
     
     Campus = colDef(
       name = "Site",
-      maxWidth = 150),
+      minWidth = 150),
     
     Arrived = colDef(
       name = "Total Arrived Visits",
@@ -2038,11 +2038,11 @@ reactable(
     Campus = colDef(
       # footer = "Total",
       name = "Site",
-      maxWidth = 220),
+      minWidth = 220),
 
     Campus.Specialty.Group = colDef(
       name = "Specialty",
-      maxWidth = 250),
+      minWidth = 250),
     
     Arrived = colDef(
       name = "Total Arrived Visits",
@@ -2588,7 +2588,7 @@ reactable(
 
     Campus.Specialty.Group = colDef(
       name = "Specialty",
-      maxWidth = 250),
+      minWidth = 250),
     
     Arrived = colDef(
       name = "Total Arrived Visits",
@@ -3510,7 +3510,7 @@ reactable(
 
     Campus.Specialty.Group = colDef(
       name = "Specialty",
-      maxWidth = 250),
+      minWidth = 250),
     
     Arrived = colDef(
       name = "Total Arrived Visits",
@@ -3981,7 +3981,7 @@ reactable(
 
     Campus.Specialty.Group = colDef(
       name = "Specialty",
-      maxWidth = 250),
+      minWidth = 250),
     
     Arrived = colDef(
       name = "Total Arrived Visits",
@@ -4523,7 +4523,7 @@ reactable(
 
     Campus.Specialty.Group = colDef(
       name = "Specialty",
-      maxWidth = 250),
+      minWidth = 250),
     
     Arrived = colDef(
       name = "Total Arrived Visits",
@@ -4994,7 +4994,7 @@ reactable(
 
     Campus.Specialty.Group = colDef(
       name = "Specialty",
-      maxWidth = 250),
+      minWidth = 250),
     
     Arrived = colDef(
       name = "Total Arrived Visits",
@@ -5535,7 +5535,7 @@ reactable(
 
     Campus.Specialty.Group = colDef(
       name = "Specialty",
-      maxWidth = 250),
+      minWidth = 250),
     
     Arrived = colDef(
       name = "Total Arrived Visits",
@@ -6006,7 +6006,7 @@ reactable(
 
     Campus.Specialty.Group = colDef(
       name = "Specialty",
-      maxWidth = 250),
+      minWidth = 250),
     
     Arrived = colDef(
       name = "Total Arrived Visits",
@@ -6548,7 +6548,7 @@ reactable(
 
     Campus.Specialty.Group = colDef(
       name = "Specialty",
-      maxWidth = 250),
+      minWidth = 250),
     
     Arrived = colDef(
       name = "Total Arrived Visits",
@@ -7019,7 +7019,7 @@ reactable(
 
     Campus.Specialty.Group = colDef(
       name = "Specialty",
-      maxWidth = 250),
+      minWidth = 250),
     
     Arrived = colDef(
       name = "Total Arrived Visits",
@@ -7561,7 +7561,7 @@ reactable(
 
     Campus.Specialty.Group = colDef(
       name = "Specialty",
-      maxWidth = 250),
+      minWidth = 250),
     
     Arrived = colDef(
       name = "Total Arrived Visits",
@@ -8032,7 +8032,7 @@ reactable(
 
     Campus.Specialty.Group = colDef(
       name = "Specialty",
-      maxWidth = 250),
+      minWidth = 250),
     
     Arrived = colDef(
       name = "Total Arrived Visits",
@@ -8573,7 +8573,7 @@ reactable(
 
     Campus.Specialty.Group = colDef(
       name = "Specialty",
-      maxWidth = 250),
+      minWidth = 250),
     
     Arrived = colDef(
       name = "Total Arrived Visits",
@@ -9045,7 +9045,7 @@ reactable(
 
     Campus.Specialty.Group = colDef(
       name = "Specialty",
-      maxWidth = 250),
+      minWidth = 250),
     
     Arrived = colDef(
       name = "Total Arrived Visits",
@@ -9586,7 +9586,7 @@ reactable(
 
     Campus.Specialty.Group = colDef(
       name = "Specialty",
-      maxWidth = 250),
+      minWidth = 250),
     
     Arrived = colDef(
       name = "Total Arrived Visits",
@@ -10057,7 +10057,7 @@ reactable(
 
     Campus.Specialty.Group = colDef(
       name = "Specialty",
-      maxWidth = 250),
+      minWidth = 250),
     
     Arrived = colDef(
       name = "Total Arrived Visits",
@@ -10600,7 +10600,7 @@ reactable(
 
     Campus.Specialty.Group = colDef(
       name = "Specialty",
-      maxWidth = 250),
+      minWidth = 250),
     
     Arrived = colDef(
       name = "Total Arrived Visits",
@@ -11071,7 +11071,7 @@ reactable(
 
     Campus.Specialty.Group = colDef(
       name = "Specialty",
-      maxWidth = 250),
+      minWidth = 250),
     
     Arrived = colDef(
       name = "Total Arrived Visits",
@@ -11612,7 +11612,7 @@ reactable(
 
     Campus.Specialty.Group = colDef(
       name = "Specialty",
-      maxWidth = 250),
+      minWidth = 250),
     
     Arrived = colDef(
       name = "Total Arrived Visits",
@@ -12083,7 +12083,7 @@ reactable(
 
     Campus.Specialty.Group = colDef(
       name = "Specialty",
-      maxWidth = 250),
+      minWidth = 250),
     
     Arrived = colDef(
       name = "Total Arrived Visits",
