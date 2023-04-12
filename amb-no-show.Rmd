@@ -4470,7 +4470,7 @@ reactable(
   #           }
   #         },
 
-  groupBy = c("Campus.Specialty.Group","Campus"),
+  groupBy = c("Campus.Specialty.Group"),
 
   columnGroups = list(
     # colGroup(name = paste0(format(as.Date(start_date), "%b"),"-",format(as.Date(end_date), "%b %Y"), " Visit Volume"), 
@@ -4480,7 +4480,7 @@ reactable(
     #          columns = c("noShow_rate", "noShow_rate_Established", "noShow_rate_New"),
     #          headerStyle = list(color = "#d80b8c", fontSize = "16px"))
     colGroup(name = "", 
-             columns = c("Campus","Campus.Specialty.Group","Appt.Source.New"), sticky = "left",
+             columns = c("Campus","Campus.Specialty.Group"), sticky = "left",
              headerStyle = list(fontSize = "16px")),
     colGroup(name = paste0(last_year, " Visit Volume"), 
              columns = c("Arrived","arrived_perc","new_perc"),
@@ -4506,9 +4506,9 @@ reactable(
       name = "Site",
       minWidth = 200),
     
-    Appt.Source.New = colDef(
-      name = "Source",
-      minWidth = 100),
+    # Appt.Source.New = colDef(
+    #   name = "Source",
+    #   minWidth = 100),
     
     Arrived = colDef(
       name = "Total Arrived Visits",
