@@ -355,7 +355,8 @@ scheduling_data_raw <- scheduling_data_raw %>%
 scheduling_data_raw <- scheduling_data_raw %>%
   mutate(Appt.Cancel.DateYear = 
            as.Date(as.POSIXct(Appt.Cancel.DTTM,format="%Y-%m-%d %H:%M:%S",tz=Sys.timezone(),origin = "1970-01-01"), format="%Y-%m-%d")) %>%
-  mutate(Appt.Status = case_when(Appt.Status == "Canceled" & Appt.DateYear == as.Date(Appt.Cancel.DateYear) ~ "SameDayCanceled",
+   mutate(Appt.Status = case_when(Appt.Status == "Canceled" & Lead.Days <=0 ~ "SameDayCanceled",
+  # mutate(Appt.Status = case_when(Appt.Status == "Canceled" & Appt.DateYear == as.Date(Appt.Cancel.DateYear) ~ "SameDayCanceled",
                                  TRUE ~ Appt.Status),
          Appt.Status = case_when(Appt.Status == "No Show" ~ "NoShow",
                                  TRUE ~ Appt.Status)) %>%
