@@ -1565,7 +1565,7 @@ reactable(
     
     Appt.Source.New = colDef(
       name = "Source",
-      minWidth = 250),
+      minWidth = 100),
     
     Arrived = colDef(
       name = "Total Arrived Visits",
