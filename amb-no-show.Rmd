@@ -332,13 +332,13 @@ not_all_na <- function(x) all(!is.na(x)) # Exclude columns with All NAs
 
 # scheduling_data_raw <- as.data.frame(readRDS("historical_data.rds")) %>%
 #   mutate(Campus = ifelse(Campus == "MSDD", "MSDMG", Campus)) %>%
-#   filter(!is.na(Campus)) %>%
-#   filter(Appt.Status %in% c("Arrived","No Show","Canceled"))
+#   filter(!is.na(Campus))
+  # filter(Appt.Status %in% c("Arrived","No Show","Canceled"))
 
 scheduling_data_raw <- as.data.frame(readRDS("/nfs/data/Applications/Ambulatory/Data_Updated/historical_data.rds")) %>%
   mutate(Campus = ifelse(Campus == "MSDD", "MSDMG", Campus)) %>%
-  filter(!is.na(Campus)) %>%
-  filter(Appt.Status %in% c("Arrived","No Show","Canceled"))
+  filter(!is.na(Campus)) 
+  # filter(Appt.Status %in% c("Arrived","No Show","Canceled"))
   
 
 sites <- c("NETWORK","MSM","MSH-MSDFP","ONCOLOGY","MSW","MSBI","MSUS","MSH- AMBULATORY CARE","MSDMG")
@@ -563,82 +563,7 @@ last_year <- year(report_run_date)-1
 # By Specialty -------------------------------------------------------------------
 no_show_specialty <- scheduling_data_raw %>%
   filter(Campus %in% sites) %>%
-  filter(Appt.Status %in% c("Arrived", "NoShow", "SameDayCanceled")) %>%
-  group_by(Campus, Campus.Specialty.Group, Appt.Year, Appt.MonthYear, New.PT2, wait_time_type, Appt.Status) %>%
-  summarise(total = n()) %>%
-  pivot_wider(names_from = Appt.Status:wait_time_type,
-              values_from = total,
-              values_fill = 0) 
-
-# Add Missing ApptStatusFinal
-  nms <- c("Campus", "Campus.Specialty.Group", "Appt.Year", "Appt.MonthYear", "New.PT2",
-          "Arrived", "Arrived_sameDay", "Arrived_belowFourteen", "Arrived_belowThirty", "Arrived_overThirty",
-          "NoShow", "NoShow_sameDay", "NoShow_belowFourteen", "NoShow_belowThirty", "NoShow_overThirty",
-          "SameDayCanceled", "SameDayCanceled_sameDay", "SameDayCanceled_belowFourteen", "SameDayCanceled_belowThirty", "SameDayCanceled_overThirty")   # Vector of columns you want in this data.frame
-  
-  Missing <- setdiff(nms, names(no_show_specialty))  # Find names of missing columns
-  no_show_specialty[Missing] <- 0                    # Add them, filled with '0's
-  no_show_specialty <- no_show_specialty[nms]     
-  
-
-no_show_specialty <- no_show_specialty %>%
-  mutate(`Arrived` = `Arrived_sameDay` + `Arrived_belowFourteen` + `Arrived_belowThirty` + `Arrived_overThirty`,
-         `NoShow` = `NoShow_sameDay` + `NoShow_belowFourteen` + `NoShow_belowThirty` + `NoShow_overThirty`,
-         `SameDayCanceled` = `SameDayCanceled_sameDay` + `SameDayCanceled_belowFourteen` + `SameDayCanceled_belowThirty` + `SameDayCanceled_overThirty`)
-
-  
-  no_show_specialty <- no_show_specialty %>%
-    mutate(Total = Arrived + `NoShow` + `SameDayCanceled`,
-           `Total_sameDay` = `Arrived_sameDay` + `NoShow_sameDay` + `SameDayCanceled_sameDay`,
-           `Total_belowFourteen` = `Arrived_belowFourteen` + `NoShow_belowFourteen` + `SameDayCanceled_belowFourteen`,
-           `Total_belowThirty` = `Arrived_belowThirty` + `NoShow_belowThirty` + `SameDayCanceled_belowThirty`,
-           `Total_overThirty` = `Arrived_overThirty` + `NoShow_overThirty` + `SameDayCanceled_overThirty`) 
-  
-  
-  
-# By Department -------------------------------------------------------------------
-no_show_dept <- scheduling_data_raw %>%
-  filter(Campus %in% sites) %>%
-  filter(Appt.Status %in% c("Arrived", "NoShow", "SameDayCanceled")) %>%
-  group_by(Campus, Campus.Specialty.Group, Department, Appt.Year, Appt.MonthYear, New.PT2, wait_time_type, Appt.Status) %>%
-  summarise(total = n()) %>%
-  pivot_wider(names_from = Appt.Status:wait_time_type,
-              values_from = total,
-              values_fill = 0) 
-
-# Add Missing ApptStatusFinal
-  nms <- c("Campus", "Campus.Specialty.Group", "Department", "Appt.Year", "Appt.MonthYear", "New.PT2",
-          "Arrived", "Arrived_sameDay", "Arrived_belowFourteen", "Arrived_belowThirty", "Arrived_overThirty",
-          "NoShow", "NoShow_sameDay", "NoShow_belowFourteen", "NoShow_belowThirty", "NoShow_overThirty",
-          "SameDayCanceled", "SameDayCanceled_sameDay", "SameDayCanceled_belowFourteen", "SameDayCanceled_belowThirty", "SameDayCanceled_overThirty")   # Vector of columns you want in this data.frame
-  
-  Missing <- setdiff(nms, names(no_show_dept))  # Find names of missing columns
-  no_show_dept [Missing] <- 0                    # Add them, filled with '0's
-  no_show_dept  <- no_show_dept [nms]     
-  
-  no_show_dept <- no_show_dept %>%
-  mutate(`Arrived` = `Arrived_sameDay` + `Arrived_belowFourteen` + `Arrived_belowThirty` + `Arrived_overThirty`,
-         `NoShow` = `NoShow_sameDay` + `NoShow_belowFourteen` + `NoShow_belowThirty` + `NoShow_overThirty`,
-         `SameDayCanceled` = `SameDayCanceled_sameDay` + `SameDayCanceled_belowFourteen` + `SameDayCanceled_belowThirty` + `SameDayCanceled_overThirty`)
-
-  
-  no_show_dept <- no_show_dept %>%
-    mutate(Total = Arrived + `NoShow` + `SameDayCanceled`,
-           `Total_sameDay` = `Arrived_sameDay` + `NoShow_sameDay` + `SameDayCanceled_sameDay`,
-           `Total_belowFourteen` = `Arrived_belowFourteen` + `NoShow_belowFourteen` + `SameDayCanceled_belowFourteen`,
-           `Total_belowThirty` = `Arrived_belowThirty` + `NoShow_belowThirty` + `SameDayCanceled_belowThirty`,
-           `Total_overThirty` = `Arrived_overThirty` + `NoShow_overThirty` + `SameDayCanceled_overThirty`) 
-  
-
-```
-
-
-```{r TEST No Show Calculation, echo = FALSE, warning = FALSE, message = FALSE}
-
-# By Specialty -------------------------------------------------------------------
-no_show_specialty <- scheduling_data_raw %>%
-  filter(Campus %in% sites) %>%
-  filter(Appt.Status %in% c("Arrived", "NoShow", "SameDayCanceled")) %>%
+  filter(Appt.Status %in% c("Arrived", "NoShow", "SameDayCanceled", "Canceled")) %>%
   group_by(Campus, Campus.Specialty.Group, Appt.Source.New, Appt.Year, Appt.MonthYear, New.PT2, wait_time_type, Appt.Status) %>%
   summarise(total = n()) %>%
   pivot_wider(names_from = Appt.Status:wait_time_type,
@@ -649,7 +574,8 @@ no_show_specialty <- scheduling_data_raw %>%
   nms <- c("Campus", "Campus.Specialty.Group", "Appt.Source.New", "Appt.Year", "Appt.MonthYear", "New.PT2",
           "Arrived", "Arrived_sameDay", "Arrived_belowFourteen", "Arrived_belowThirty", "Arrived_overThirty",
           "NoShow", "NoShow_sameDay", "NoShow_belowFourteen", "NoShow_belowThirty", "NoShow_overThirty",
-          "SameDayCanceled", "SameDayCanceled_sameDay", "SameDayCanceled_belowFourteen", "SameDayCanceled_belowThirty", "SameDayCanceled_overThirty")   # Vector of columns you want in this data.frame
+          "SameDayCanceled", "SameDayCanceled_sameDay", "SameDayCanceled_belowFourteen", "SameDayCanceled_belowThirty", "SameDayCanceled_overThirty",
+          "Canceled", "Canceled_sameDay", "Canceled_belowFourteen", "Canceled_belowThirty", "Canceled_overThirty")   # Vector of columns you want in this data.frame
   
   Missing <- setdiff(nms, names(no_show_specialty))  # Find names of missing columns
   no_show_specialty[Missing] <- 0                    # Add them, filled with '0's
@@ -659,7 +585,8 @@ no_show_specialty <- scheduling_data_raw %>%
 no_show_specialty <- no_show_specialty %>%
   mutate(`Arrived` = `Arrived_sameDay` + `Arrived_belowFourteen` + `Arrived_belowThirty` + `Arrived_overThirty`,
          `NoShow` = `NoShow_sameDay` + `NoShow_belowFourteen` + `NoShow_belowThirty` + `NoShow_overThirty`,
-         `SameDayCanceled` = `SameDayCanceled_sameDay` + `SameDayCanceled_belowFourteen` + `SameDayCanceled_belowThirty` + `SameDayCanceled_overThirty`)
+         `SameDayCanceled` = `SameDayCanceled_sameDay` + `SameDayCanceled_belowFourteen` + `SameDayCanceled_belowThirty` + `SameDayCanceled_overThirty`,
+         Canceled = Canceled_sameDay + Canceled_belowFourteen + Canceled_belowThirty + Canceled_overThirty)
 
   
   no_show_specialty <- no_show_specialty %>%
@@ -674,7 +601,7 @@ no_show_specialty <- no_show_specialty %>%
 # By Department -------------------------------------------------------------------
 no_show_dept <- scheduling_data_raw %>%
   filter(Campus %in% sites) %>%
-  filter(Appt.Status %in% c("Arrived", "NoShow", "SameDayCanceled")) %>%
+  filter(Appt.Status %in% c("Arrived", "NoShow", "SameDayCanceled", "Canceled")) %>%
   group_by(Campus, Campus.Specialty.Group, Department, Appt.Source.New, Appt.Year, Appt.MonthYear, New.PT2, wait_time_type, Appt.Status) %>%
   summarise(total = n()) %>%
   pivot_wider(names_from = Appt.Status:wait_time_type,
@@ -685,7 +612,8 @@ no_show_dept <- scheduling_data_raw %>%
   nms <- c("Campus", "Campus.Specialty.Group", "Department", "Appt.Source.New", "Appt.Year", "Appt.MonthYear", "New.PT2",
           "Arrived", "Arrived_sameDay", "Arrived_belowFourteen", "Arrived_belowThirty", "Arrived_overThirty",
           "NoShow", "NoShow_sameDay", "NoShow_belowFourteen", "NoShow_belowThirty", "NoShow_overThirty",
-          "SameDayCanceled", "SameDayCanceled_sameDay", "SameDayCanceled_belowFourteen", "SameDayCanceled_belowThirty", "SameDayCanceled_overThirty")   # Vector of columns you want in this data.frame
+          "SameDayCanceled", "SameDayCanceled_sameDay", "SameDayCanceled_belowFourteen", "SameDayCanceled_belowThirty", "SameDayCanceled_overThirty",
+           "Canceled", "Canceled_sameDay", "Canceled_belowFourteen", "Canceled_belowThirty", "Canceled_overThirty")   # Vector of columns you want in this data.frame
   
   Missing <- setdiff(nms, names(no_show_dept))  # Find names of missing columns
   no_show_dept [Missing] <- 0                    # Add them, filled with '0's
@@ -694,7 +622,8 @@ no_show_dept <- scheduling_data_raw %>%
   no_show_dept <- no_show_dept %>%
   mutate(`Arrived` = `Arrived_sameDay` + `Arrived_belowFourteen` + `Arrived_belowThirty` + `Arrived_overThirty`,
          `NoShow` = `NoShow_sameDay` + `NoShow_belowFourteen` + `NoShow_belowThirty` + `NoShow_overThirty`,
-         `SameDayCanceled` = `SameDayCanceled_sameDay` + `SameDayCanceled_belowFourteen` + `SameDayCanceled_belowThirty` + `SameDayCanceled_overThirty`)
+         `SameDayCanceled` = `SameDayCanceled_sameDay` + `SameDayCanceled_belowFourteen` + `SameDayCanceled_belowThirty` + `SameDayCanceled_overThirty`,
+         Canceled = Canceled_sameDay + Canceled_belowFourteen + Canceled_belowThirty + Canceled_overThirty)
 
   
   no_show_dept <- no_show_dept %>%
@@ -703,7 +632,168 @@ no_show_dept <- scheduling_data_raw %>%
            `Total_belowFourteen` = `Arrived_belowFourteen` + `NoShow_belowFourteen` + `SameDayCanceled_belowFourteen`,
            `Total_belowThirty` = `Arrived_belowThirty` + `NoShow_belowThirty` + `SameDayCanceled_belowThirty`,
            `Total_overThirty` = `Arrived_overThirty` + `NoShow_overThirty` + `SameDayCanceled_overThirty`) 
+
+```
+
+
+```{r No Show Original Calculation, echo = FALSE, warning = FALSE, message = FALSE}
+
+# By Specialty -------------------------------------------------------------------
+no_show_org_specialty <- scheduling_data_raw %>%
+  filter(Campus %in% sites) %>%
+  filter(Appt.Status %in% c("Arrived", "NoShow", "SameDayCanceled", "Canceled")) %>%
+  group_by(Campus, Campus.Specialty.Group, Appt.Source.New, Appt.Year, Appt.MonthYear, New.PT2, wait_time_type, Appt.Status) %>%
+  summarise(total = n()) %>%
+  pivot_wider(names_from = Appt.Status:wait_time_type,
+              values_from = total,
+              values_fill = 0) 
+
+# Add Missing ApptStatusFinal
+  nms <- c("Campus", "Campus.Specialty.Group", "Appt.Source.New", "Appt.Year", "Appt.MonthYear", "New.PT2",
+          "Arrived", "Arrived_sameDay", "Arrived_belowFourteen", "Arrived_belowThirty", "Arrived_overThirty",
+          "NoShow", "NoShow_sameDay", "NoShow_belowFourteen", "NoShow_belowThirty", "NoShow_overThirty",
+          "SameDayCanceled", "SameDayCanceled_sameDay", "SameDayCanceled_belowFourteen", "SameDayCanceled_belowThirty", "SameDayCanceled_overThirty",
+          "Canceled", "Canceled_sameDay", "Canceled_belowFourteen", "Canceled_belowThirty", "Canceled_overThirty")   # Vector of columns you want in this data.frame
   
+  Missing <- setdiff(nms, names(no_show_org_specialty))  # Find names of missing columns
+  no_show_org_specialty[Missing] <- 0                    # Add them, filled with '0's
+  no_show_org_specialty <- no_show_org_specialty[nms]     
+  
+
+no_show_org_specialty <- no_show_org_specialty %>%
+  mutate(`Arrived` = `Arrived_sameDay` + `Arrived_belowFourteen` + `Arrived_belowThirty` + `Arrived_overThirty`,
+         `NoShow` = `NoShow_sameDay` + `NoShow_belowFourteen` + `NoShow_belowThirty` + `NoShow_overThirty`,
+         `SameDayCanceled` = `SameDayCanceled_sameDay` + `SameDayCanceled_belowFourteen` + `SameDayCanceled_belowThirty` + `SameDayCanceled_overThirty`,
+         Canceled = Canceled_sameDay + Canceled_belowFourteen + Canceled_belowThirty + Canceled_overThirty)
+
+  
+  no_show_org_specialty <- no_show_org_specialty %>%
+    mutate(Total = Arrived + `NoShow`,
+           `Total_sameDay` = `Arrived_sameDay` + `NoShow_sameDay`,
+           `Total_belowFourteen` = `Arrived_belowFourteen` + `NoShow_belowFourteen`,
+           `Total_belowThirty` = `Arrived_belowThirty` + `NoShow_belowThirty`,
+           `Total_overThirty` = `Arrived_overThirty` + `NoShow_overThirty`)
+  
+  
+# By Department -------------------------------------------------------------------
+no_show_org_dept <- scheduling_data_raw %>%
+  filter(Campus %in% sites) %>%
+  filter(Appt.Status %in% c("Arrived", "NoShow", "SameDayCanceled", "Canceled")) %>%
+  group_by(Campus, Campus.Specialty.Group, Department, Appt.Source.New, Appt.Year, Appt.MonthYear, New.PT2, wait_time_type, Appt.Status) %>%
+  summarise(total = n()) %>%
+  pivot_wider(names_from = Appt.Status:wait_time_type,
+              values_from = total,
+              values_fill = 0) 
+
+# Add Missing ApptStatusFinal
+  nms <- c("Campus", "Campus.Specialty.Group", "Department", "Appt.Source.New", "Appt.Year", "Appt.MonthYear", "New.PT2",
+          "Arrived", "Arrived_sameDay", "Arrived_belowFourteen", "Arrived_belowThirty", "Arrived_overThirty",
+          "NoShow", "NoShow_sameDay", "NoShow_belowFourteen", "NoShow_belowThirty", "NoShow_overThirty",
+          "SameDayCanceled", "SameDayCanceled_sameDay", "SameDayCanceled_belowFourteen", "SameDayCanceled_belowThirty", "SameDayCanceled_overThirty",
+           "Canceled", "Canceled_sameDay", "Canceled_belowFourteen", "Canceled_belowThirty", "Canceled_overThirty")   # Vector of columns you want in this data.frame
+  
+  Missing <- setdiff(nms, names(no_show_org_dept))  # Find names of missing columns
+  no_show_org_dept [Missing] <- 0                    # Add them, filled with '0's
+  no_show_org_dept  <- no_show_org_dept[nms]     
+  
+  no_show_org_dept <- no_show_org_dept %>%
+  mutate(`Arrived` = `Arrived_sameDay` + `Arrived_belowFourteen` + `Arrived_belowThirty` + `Arrived_overThirty`,
+         `NoShow` = `NoShow_sameDay` + `NoShow_belowFourteen` + `NoShow_belowThirty` + `NoShow_overThirty`,
+         `SameDayCanceled` = `SameDayCanceled_sameDay` + `SameDayCanceled_belowFourteen` + `SameDayCanceled_belowThirty` + `SameDayCanceled_overThirty`,
+         Canceled = Canceled_sameDay + Canceled_belowFourteen + Canceled_belowThirty + Canceled_overThirty)
+
+  
+  no_show_org_dept <- no_show_org_dept %>%
+    mutate(Total= Arrived + `NoShow`,
+           `Total_sameDay` = `Arrived_sameDay` + `NoShow_sameDay`,
+           `Total_belowFourteen` = `Arrived_belowFourteen` + `NoShow_belowFourteen`,
+           `Total_belowThirty` = `Arrived_belowThirty` + `NoShow_belowThirty`,
+           `Total_overThirty` = `Arrived_overThirty` + `NoShow_overThirty`) 
+
+```
+
+
+```{r No Show All Statuses Calculation, echo = FALSE, warning = FALSE, message = FALSE}
+
+# By Specialty -------------------------------------------------------------------
+no_show_all_specialty <- scheduling_data_raw %>%
+  filter(Campus %in% sites) %>%
+  mutate(Appt.Status = case_when(Appt.Status %in% c("Arrived", "NoShow", "SameDayCanceled", "Canceled") ~ Appt.Status,
+                                 TRUE ~ "Other")) %>%
+  # filter(Appt.Status %in% c("Arrived", "NoShow", "SameDayCanceled", "Canceled")) %>%
+  group_by(Campus, Campus.Specialty.Group, Appt.Source.New, Appt.Year, Appt.MonthYear, New.PT2, wait_time_type, Appt.Status) %>%
+  summarise(total = n()) %>%
+  pivot_wider(names_from = Appt.Status:wait_time_type,
+              values_from = total,
+              values_fill = 0) 
+
+# Add Missing ApptStatusFinal
+  nms <- c("Campus", "Campus.Specialty.Group", "Appt.Source.New", "Appt.Year", "Appt.MonthYear", "New.PT2",
+          "Arrived", "Arrived_sameDay", "Arrived_belowFourteen", "Arrived_belowThirty", "Arrived_overThirty",
+          "NoShow", "NoShow_sameDay", "NoShow_belowFourteen", "NoShow_belowThirty", "NoShow_overThirty",
+          "SameDayCanceled", "SameDayCanceled_sameDay", "SameDayCanceled_belowFourteen", "SameDayCanceled_belowThirty", "SameDayCanceled_overThirty",
+          "Canceled", "Canceled_sameDay", "Canceled_belowFourteen", "Canceled_belowThirty", "Canceled_overThirty",
+          "Other", "Other_sameDay", "Other_belowFourteen", "Other_belowThirty", "Other_overThirty")   # Vector of columns you want in this data.frame
+  
+  Missing <- setdiff(nms, names(no_show_all_specialty))  # Find names of missing columns
+  no_show_all_specialty[Missing] <- 0                    # Add them, filled with '0's
+  no_show_all_specialty <- no_show_all_specialty[nms]     
+  
+
+no_show_all_specialty <- no_show_all_specialty %>%
+  mutate(`Arrived` = `Arrived_sameDay` + `Arrived_belowFourteen` + `Arrived_belowThirty` + `Arrived_overThirty`,
+         `NoShow` = `NoShow_sameDay` + `NoShow_belowFourteen` + `NoShow_belowThirty` + `NoShow_overThirty`,
+         `SameDayCanceled` = `SameDayCanceled_sameDay` + `SameDayCanceled_belowFourteen` + `SameDayCanceled_belowThirty` + `SameDayCanceled_overThirty`,
+         Canceled = Canceled_sameDay + Canceled_belowFourteen + Canceled_belowThirty + Canceled_overThirty,
+         Other = Other_sameDay + Other_belowFourteen + Other_belowThirty + Other_overThirty)
+
+  
+  no_show_all_specialty <- no_show_all_specialty %>%
+    mutate(Total = Arrived + `NoShow` + `SameDayCanceled` + Canceled + Other,
+           `Total_sameDay` = `Arrived_sameDay` + `NoShow_sameDay` + `SameDayCanceled_sameDay` + `Canceled_sameDay` + `Other_sameDay`,
+           `Total_belowFourteen` = `Arrived_belowFourteen` + `NoShow_belowFourteen` + `SameDayCanceled_belowFourteen` + `Canceled_belowFourteen` + `Other_belowFourteen`,
+           `Total_belowThirty` = `Arrived_belowThirty` + `NoShow_belowThirty` + `SameDayCanceled_belowThirty` + `Canceled_belowThirty` + `Other_belowThirty`,
+           `Total_overThirty` = `Arrived_overThirty` + `NoShow_overThirty` + `SameDayCanceled_overThirty`+ `Canceled_overThirty` + `Other_overThirty`) 
+  
+  
+# By Department -------------------------------------------------------------------
+no_show_all_dept <- scheduling_data_raw %>%
+  filter(Campus %in% sites) %>%
+    mutate(Appt.Status = case_when(Appt.Status %in% c("Arrived", "NoShow", "SameDayCanceled", "Canceled") ~ Appt.Status,
+                                 TRUE ~ "Other")) %>%
+  # filter(Appt.Status %in% c("Arrived", "NoShow", "SameDayCanceled", "Canceled")) %>%
+  group_by(Campus, Campus.Specialty.Group, Department, Appt.Source.New, Appt.Year, Appt.MonthYear, New.PT2, wait_time_type, Appt.Status) %>%
+  summarise(total = n()) %>%
+  pivot_wider(names_from = Appt.Status:wait_time_type,
+              values_from = total,
+              values_fill = 0) 
+
+# Add Missing ApptStatusFinal
+  nms <- c("Campus", "Campus.Specialty.Group", "Department", "Appt.Source.New", "Appt.Year", "Appt.MonthYear", "New.PT2",
+          "Arrived", "Arrived_sameDay", "Arrived_belowFourteen", "Arrived_belowThirty", "Arrived_overThirty",
+          "NoShow", "NoShow_sameDay", "NoShow_belowFourteen", "NoShow_belowThirty", "NoShow_overThirty",
+          "SameDayCanceled", "SameDayCanceled_sameDay", "SameDayCanceled_belowFourteen", "SameDayCanceled_belowThirty", "SameDayCanceled_overThirty",
+           "Canceled", "Canceled_sameDay", "Canceled_belowFourteen", "Canceled_belowThirty", "Canceled_overThirty",
+          "Other", "Other_sameDay", "Other_belowFourteen", "Other_belowThirty", "Other_overThirty")   # Vector of columns you want in this data.frame
+  
+  Missing <- setdiff(nms, names(no_show_all_dept))  # Find names of missing columns
+  no_show_all_dept [Missing] <- 0                    # Add them, filled with '0's
+  no_show_all_dept  <- no_show_all_dept[nms]     
+  
+  no_show_all_dept <- no_show_all_dept %>%
+  mutate(`Arrived` = `Arrived_sameDay` + `Arrived_belowFourteen` + `Arrived_belowThirty` + `Arrived_overThirty`,
+         `NoShow` = `NoShow_sameDay` + `NoShow_belowFourteen` + `NoShow_belowThirty` + `NoShow_overThirty`,
+         `SameDayCanceled` = `SameDayCanceled_sameDay` + `SameDayCanceled_belowFourteen` + `SameDayCanceled_belowThirty` + `SameDayCanceled_overThirty`,
+         Canceled = Canceled_sameDay + Canceled_belowFourteen + Canceled_belowThirty + Canceled_overThirty,
+         Other = Other_sameDay + Other_belowFourteen + Other_belowThirty + Other_overThirty)
+
+  
+  no_show_all_dept <- no_show_all_dept %>%
+    mutate(Total = Arrived + `NoShow` + `SameDayCanceled` + Canceled + Other,
+           `Total_sameDay` = `Arrived_sameDay` + `NoShow_sameDay` + `SameDayCanceled_sameDay` + `Canceled_sameDay` + `Other_sameDay`,
+           `Total_belowFourteen` = `Arrived_belowFourteen` + `NoShow_belowFourteen` + `SameDayCanceled_belowFourteen` + `Canceled_belowFourteen` + `Other_belowFourteen`,
+           `Total_belowThirty` = `Arrived_belowThirty` + `NoShow_belowThirty` + `SameDayCanceled_belowThirty` + `Canceled_belowThirty` + `Other_belowThirty`,
+           `Total_overThirty` = `Arrived_overThirty` + `NoShow_overThirty` + `SameDayCanceled_overThirty`+ `Canceled_overThirty` + `Other_overThirty`) 
 
 ```
 
@@ -723,625 +813,10 @@ ________________________________________________________________________________
 <br/>
 
 ## MSHS
-### No Shows {.tabset .tabset-fade .tabset-pills}
+### No Show Plus Rate {.tabset .tabset-fade .tabset-pills}
 #### `r current_year` YTD
-<span style='font-size: 20px; color: #212070'>**No Show Rate by Site**</span><br/>
+<span style='font-size: 20px; color: #212070'>**No Show Rate by Site**</span><br/
 ```{r MSHS No Show Current Year Output, echo = FALSE, warning = FALSE, message = FALSE}
-
-# no_show_ytd_site <- no_show_specialty %>%
-#   filter(Appt.Year == current_year) %>%
-#   group_by(Campus, Campus.Specialty.Group, New.PT2) %>%
-#   summarise(Arrived = sum(Arrived),
-#             `Arrived_sameDay` = sum(`Arrived_sameDay`),
-#             `Arrived_belowFourteen` = sum(`Arrived_belowFourteen`),
-#             `Arrived_belowThirty` = sum(`Arrived_belowThirty`),
-#             `Arrived_overThirty` = sum(`Arrived_overThirty`),
-#             `NoShow` = sum(`NoShow`),
-#             `NoShow_sameDay` = sum(`NoShow_sameDay`),
-#             `NoShow_belowFourteen` = sum(`NoShow_belowFourteen`),
-#             `NoShow_belowThirty` = sum(`NoShow_belowThirty`),
-#             `NoShow_overThirty` = sum(`NoShow_overThirty`),
-#             `SameDayCanceled` = sum(`SameDayCanceled`),
-#             `SameDayCanceled_sameDay` = sum(`SameDayCanceled_sameDay`),
-#             `SameDayCanceled_belowFourteen` = sum(`SameDayCanceled_belowFourteen`),
-#             `SameDayCanceled_belowThirty` = sum(`SameDayCanceled_belowThirty`),
-#             `SameDayCanceled_overThirty` = sum(`SameDayCanceled_overThirty`),
-#             Total = sum(Total),
-#             `Total_sameDay` = sum(`Total_sameDay`),
-#             `Total_belowFourteen` = sum(`Total_belowFourteen`),
-#             `Total_belowThirty` = sum(`Total_belowThirty`),
-#             `Total_overThirty` = sum(`Total_overThirty`)) %>%
-#   mutate(noShow_rate = round((`NoShow` + `SameDayCanceled`)/ Total,2),
-#          `noShow_rate_sameDay` = round((`NoShow_sameDay` + `SameDayCanceled_sameDay`)/ `Total_sameDay`,2),
-#          `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen` + `SameDayCanceled_belowFourteen`)/ `Total_belowFourteen`,2),
-#          `noShow_rate_belowThirty` = round((`NoShow_belowThirty` + `SameDayCanceled_belowThirty`)/ `Total_belowThirty`,2),
-#          `noShow_rate_overThirty` = round((`NoShow_overThirty` + `SameDayCanceled_overThirty`)/ `Total_overThirty`,2)) %>%
-#   pivot_wider(names_from = New.PT2,
-#               values_from = 4:28,
-#               values_fill = 0) %>%
-#   mutate(Total = (Total_Established + Total_New),
-#          `Total_sameDay` = (`Total_sameDay_Established` + `Total_sameDay_New`),
-#          `Total_belowFourteen` = (`Total_belowFourteen_Established` + `Total_belowFourteen_New`),
-#          `Total_belowThirty` = (`Total_belowThirty_Established` + `Total_belowThirty_New`),
-#          `Total_overThirty` = (`Total_overThirty_Established` + `Total_overThirty_New`),
-#          Arrived = (Arrived_Established + Arrived_New),
-#          `Arrived_sameDay` = (`Arrived_sameDay_Established` + `Arrived_sameDay_New`),
-#          `Arrived_belowFourteen` = (`Arrived_belowFourteen_Established` + `Arrived_belowFourteen_New`),
-#          `Arrived_belowThirty` = (`Arrived_belowThirty_Established` + `Arrived_belowThirty_New`),
-#          `Arrived_overThirty` = (`Arrived_overThirty_Established` + `Arrived_overThirty_New`),
-#          NoShow = (NoShow_Established + NoShow_New),
-#          `NoShow_sameDay` = (`NoShow_sameDay_Established` + `NoShow_sameDay_New`),
-#          `NoShow_belowFourteen` = (`NoShow_belowFourteen_Established` + `NoShow_belowFourteen_New`),
-#          `NoShow_belowThirty` = (`NoShow_belowThirty_Established` + `NoShow_belowThirty_New`),
-#          `NoShow_overThirty` = (`NoShow_overThirty_Established` + `NoShow_overThirty_New`),
-#          SameDayCanceled = (SameDayCanceled_Established + SameDayCanceled_New),
-#          `SameDayCanceled_sameDay` = (`SameDayCanceled_sameDay_Established` + `SameDayCanceled_sameDay_New`),
-#          `SameDayCanceled_belowFourteen` = (`SameDayCanceled_belowFourteen_Established` + `SameDayCanceled_belowFourteen_New`),
-#          `SameDayCanceled_belowThirty` = (`SameDayCanceled_belowThirty_Established` + `SameDayCanceled_belowThirty_New`),
-#          `SameDayCanceled_overThirty` = (`SameDayCanceled_overThirty_Established` + `SameDayCanceled_overThirty_New`),
-#          noShow_rate = round((`NoShow_Established` + `SameDayCanceled_Established` + `NoShow_New` + `SameDayCanceled_New`)/Total,2),
-#          `noShow_rate_sameDay` = round((`NoShow_sameDay` + `SameDayCanceled_sameDay`)/`Total_sameDay`,2),
-#          `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen` + `SameDayCanceled_belowFourteen`)/`Total_belowFourteen`,2),
-#          `noShow_rate_belowThirty` = round((`NoShow_belowThirty` + `SameDayCanceled_belowThirty`)/`Total_belowThirty`,2),
-#          `noShow_rate_overThirty` = round((`NoShow_overThirty` + `SameDayCanceled_overThirty`)/`Total_overThirty`,2),
-#          new_perc = round(Arrived_New/Arrived,2)) %>%
-#   group_by(Campus) %>%
-#   mutate(arrived_site = sum(Arrived),
-#          arrived_perc = round(Arrived/arrived_site,2)) 
-# 
-# 
-# no_show_ytd_mshs <- no_show_specialty %>%
-#   filter(Appt.Year == current_year) %>%
-#   group_by(Campus.Specialty.Group, New.PT2) %>%
-#   summarise(Arrived = sum(Arrived),
-#             `Arrived_sameDay` = sum(`Arrived_sameDay`),
-#             `Arrived_belowFourteen` = sum(`Arrived_belowFourteen`),
-#             `Arrived_belowThirty` = sum(`Arrived_belowThirty`),
-#             `Arrived_overThirty` = sum(`Arrived_overThirty`),
-#             `NoShow` = sum(`NoShow`),
-#             `NoShow_sameDay` = sum(`NoShow_sameDay`),
-#             `NoShow_belowFourteen` = sum(`NoShow_belowFourteen`),
-#             `NoShow_belowThirty` = sum(`NoShow_belowThirty`),
-#             `NoShow_overThirty` = sum(`NoShow_overThirty`),
-#             `SameDayCanceled` = sum(`SameDayCanceled`),
-#             `SameDayCanceled_sameDay` = sum(`SameDayCanceled_sameDay`),
-#             `SameDayCanceled_belowFourteen` = sum(`SameDayCanceled_belowFourteen`),
-#             `SameDayCanceled_belowThirty` = sum(`SameDayCanceled_belowThirty`),
-#             `SameDayCanceled_overThirty` = sum(`SameDayCanceled_overThirty`),
-#             Total = sum(Total),
-#             `Total_sameDay` = sum(`Total_sameDay`),
-#             `Total_belowFourteen` = sum(`Total_belowFourteen`),
-#             `Total_belowThirty` = sum(`Total_belowThirty`),
-#             `Total_overThirty` = sum(`Total_overThirty`)) %>%
-#   mutate(noShow_rate = round((`NoShow` + `SameDayCanceled`)/ Total,2),
-#          `noShow_rate_sameDay` = round((`NoShow_sameDay` + `SameDayCanceled_sameDay`)/ `Total_sameDay`,2),
-#          `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen` + `SameDayCanceled_belowFourteen`)/ `Total_belowFourteen`,2),
-#          `noShow_rate_belowThirty` = round((`NoShow_belowThirty` + `SameDayCanceled_belowThirty`)/ `Total_belowThirty`,2),
-#          `noShow_rate_overThirty` = round((`NoShow_overThirty` + `SameDayCanceled_overThirty`)/ `Total_overThirty`,2)) %>%
-#   pivot_wider(names_from = New.PT2,
-#               values_from = 3:27,
-#               values_fill = 0) %>%
-#   mutate(Total = (Total_Established + Total_New),
-#          `Total_sameDay` = (`Total_sameDay_Established` + `Total_sameDay_New`),
-#          `Total_belowFourteen` = (`Total_belowFourteen_Established` + `Total_belowFourteen_New`),
-#          `Total_belowThirty` = (`Total_belowThirty_Established` + `Total_belowThirty_New`),
-#          `Total_overThirty` = (`Total_overThirty_Established` + `Total_overThirty_New`),
-#          Arrived = (Arrived_Established + Arrived_New),
-#          `Arrived_sameDay` = (`Arrived_sameDay_Established` + `Arrived_sameDay_New`),
-#          `Arrived_belowFourteen` = (`Arrived_belowFourteen_Established` + `Arrived_belowFourteen_New`),
-#          `Arrived_belowThirty` = (`Arrived_belowThirty_Established` + `Arrived_belowThirty_New`),
-#          `Arrived_overThirty` = (`Arrived_overThirty_Established` + `Arrived_overThirty_New`),
-#          NoShow = (NoShow_Established + NoShow_New),
-#          `NoShow_sameDay` = (`NoShow_sameDay_Established` + `NoShow_sameDay_New`),
-#          `NoShow_belowFourteen` = (`NoShow_belowFourteen_Established` + `NoShow_belowFourteen_New`),
-#          `NoShow_belowThirty` = (`NoShow_belowThirty_Established` + `NoShow_belowThirty_New`),
-#          `NoShow_overThirty` = (`NoShow_overThirty_Established` + `NoShow_overThirty_New`),
-#          SameDayCanceled = (SameDayCanceled_Established + SameDayCanceled_New),
-#          `SameDayCanceled_sameDay` = (`SameDayCanceled_sameDay_Established` + `SameDayCanceled_sameDay_New`),
-#          `SameDayCanceled_belowFourteen` = (`SameDayCanceled_belowFourteen_Established` + `SameDayCanceled_belowFourteen_New`),
-#          `SameDayCanceled_belowThirty` = (`SameDayCanceled_belowThirty_Established` + `SameDayCanceled_belowThirty_New`),
-#          `SameDayCanceled_overThirty` = (`SameDayCanceled_overThirty_Established` + `SameDayCanceled_overThirty_New`),
-#          noShow_rate = round((`NoShow_Established` + `SameDayCanceled_Established` + `NoShow_New` + `SameDayCanceled_New`)/Total,2),
-#          `noShow_rate_sameDay` = round((`NoShow_sameDay` + `SameDayCanceled_sameDay`)/`Total_sameDay`,2),
-#          `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen` + `SameDayCanceled_belowFourteen`)/`Total_belowFourteen`,2),
-#          `noShow_rate_belowThirty` = round((`NoShow_belowThirty` + `SameDayCanceled_belowThirty`)/`Total_belowThirty`,2),
-#          `noShow_rate_overThirty` = round((`NoShow_overThirty` + `SameDayCanceled_overThirty`)/`Total_overThirty`,2),
-#          new_perc = round(Arrived_New/Arrived,2)) %>%
-#   mutate(Campus = "MSHS Total") %>%
-#   group_by(Campus) %>%
-#   mutate(arrived_site = sum(Arrived),
-#          arrived_perc = round(Arrived/arrived_site,2)) 
-# 
-# 
-# no_show_ytd_merged <- bind_rows(no_show_ytd_site, no_show_ytd_mshs)
-# 
-# no_show_ytd_merged <- no_show_ytd_merged %>%
-#   dplyr::select(1:2, 58, 78, 80, 
-#                 3:57, 59:77, 79)
-# 
-# 
-# 
-# # Table Output -----------------------------------------------------------------
-# htmltools::browsable(
-#   tagList(
-#     tags$button(
-#       tagList(fontawesome::fa("download"), "Download Table"),
-#       onclick = "Reactable.downloadDataCSV('mshs_ytd_noshow-download-table', 'Avg No Show Rate')"
-#     ),
-# 
-# reactable(
-#   no_show_ytd_merged,
-#   elementId = "mshs_ytd_noshow-download-table",
-#   style = list(fontFamily = 'Calibri',
-#                  fontSize = '14px'),
-#     defaultColDef = colDef(align = "left",
-#                            headerStyle = list(fontWeight = "Bold", fontSize = "14px"),
-#                            headerClass = "bar-sort-header"),
-#   # RowStyle = function(index) {
-#   #           if (index %in% c(nrow(referral_vol_site_data_mshs))) {
-#   #             list(`border-top` = "2px solid rgb(184,184,184)",
-#   #                  fontWeight = "Bold")
-#   #           }
-#   #         },
-#     highlight = TRUE,
-#     # filterable = TRUE,
-#     pagination = FALSE,
-#     # height = 800,
-#     wrap = TRUE,
-#   searchable = TRUE,
-#   
-#   rowStyle = function(index) {
-#             if (index %in% c(10)) {
-#               list(`border-top` = "2px solid rgb(184,184,184)",
-#                    fontWeight = "Bold")
-#             }
-#           },
-# 
-#   groupBy = "Campus",
-# 
-#   columnGroups = list(
-#     # colGroup(name = paste0(format(as.Date(start_date), "%b"),"-",format(as.Date(end_date), "%b %Y"), " Visit Volume"), 
-#     #          columns = c("Total", "new_perc"),
-#     #          headerStyle = list(color = "#212070", fontSize = "16px")),
-#     # colGroup(name = paste0(format(as.Date(start_date), "%b"),"-",format(as.Date(end_date), "%b %Y"), " No Show Rate"), 
-#     #          columns = c("noShow_rate", "noShow_rate_Established", "noShow_rate_New"),
-#     #          headerStyle = list(color = "#d80b8c", fontSize = "16px"))
-#     colGroup(name = "", 
-#              columns = c("Campus","Campus.Specialty.Group"), sticky = "left", 
-#              headerStyle = list(fontSize = "16px")),
-#     colGroup(name = paste0(current_year, " YTD Visit Volume"), 
-#              columns = c("Arrived","arrived_perc","new_perc"),
-#              headerStyle = list(color = "#212070", fontSize = "16px")),
-#     colGroup(name = "No Show Rate - All", 
-#              columns = c("noShow_rate", "noShow_rate_sameDay", "noShow_rate_belowFourteen", "noShow_rate_belowThirty", "noShow_rate_overThirty"),
-#              headerStyle = list(color = "#7f7f7f", fontSize = "16px")),
-#     colGroup(name = "No Show Rate - Established", 
-#              columns = c("noShow_rate_Established", "noShow_rate_sameDay_Established", "noShow_rate_belowFourteen_Established", "noShow_rate_belowThirty_Established", "noShow_rate_overThirty_Established"),
-#              headerStyle = list(color = "#d80b8c", fontSize = "16px")),
-#     colGroup(name = "No Show Rate - New", 
-#              columns = c("noShow_rate_New","noShow_rate_sameDay_New", "noShow_rate_belowFourteen_New","noShow_rate_belowThirty_New", "noShow_rate_overThirty_New"),
-#              headerStyle = list(color = "#00aeef", fontSize = "16px"))
-#     ),
-# 
-#   columns = list(
-# 
-#     Campus = colDef(
-#       # footer = "Total",
-#       name = "Site",
-#       minWidth = 200),
-# 
-#     Campus.Specialty.Group = colDef(
-#       name = "Specialty",
-#       minWidth = 250),
-#     
-#     Arrived = colDef(
-#       name = "Total Arrived Visits",
-#       maxWidth = 90,
-#       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
-#       aggregate = 'sum',
-#       format = colFormat(separators = TRUE, digits = 0),
-#       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
-#     ),
-# 
-#     arrived_perc = colDef(
-#       name = "% of Site Total Arrived Visits",
-#       maxWidth = 90,
-#      headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
-#       # aggregate = JS("function(values, rows) {
-#       #   let totalArrived = 0
-#       #   let totalarrived_site = 0
-#       #   rows.forEach(function(row) {
-#       #     totalArrived += row['Arrived']
-#       #     totalarrived_site += row['arrived_site']
-#       #   })
-#       #   return totalArrived / totalarrived_site
-#       # }"),
-#       format = colFormat(percent = TRUE, digits = 0),
-#       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
-#     ),
-# 
-#     new_perc = colDef(
-#       name = "% New Arrived Visits",
-#       maxWidth = 90,
-#       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
-#       aggregate = JS("function(values, rows) {
-#         let totalTotal_New = 0
-#         let totalTotal = 0
-#         rows.forEach(function(row) {
-#           totalTotal_New += row['Total_New']
-#           totalTotal += row['Total']
-#         })
-#         return (totalTotal_New) / totalTotal || '-'
-#       }"),
-#       format = colFormat(percent = TRUE, digits = 0),
-#       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
-#     ),
-# 
-#     `noShow_rate_Established` = colDef(
-#       name = "All Established",
-#       maxWidth = 90,
-#       headerStyle = list(background = "#d80b8c", color = "white", fontWeight = "Bold", fontSize = "14px"),
-#       aggregate = JS("function(values, rows) {
-#         let totalNoShow_Established = 0
-#         let totalSameDayCanceled_Established = 0
-#         let totalTotal_Established = 0
-#         rows.forEach(function(row) {
-#           totalNoShow_Established += row['NoShow_Established']
-#           totalSameDayCanceled_Established += row['SameDayCanceled_Established']
-#           totalTotal_Established += row['Total_Established']
-#         })
-#         return (totalNoShow_Established + totalSameDayCanceled_Established) / totalTotal_Established || '-'
-#       }"),
-#       format = colFormat(percent = TRUE, digits = 0),
-#       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
-#     ),
-# 
-#     `noShow_rate_sameDay_Established` = colDef(
-#       name = "Scheduled Same-Day",
-#       maxWidth = 90,
-#       headerStyle = list(background = "#d80b8c", color = "white", fontWeight = "Bold", fontSize = "14px"),
-#       aggregate = JS("function(values, rows) {
-#         let totalNoShow_sameDay_Established = 0
-#         let totalSameDayCanceled_sameDay_Established = 0
-#         let totalTotal_sameDay_Established = 0
-#         rows.forEach(function(row) {
-#           totalNoShow_sameDay_Established += row['NoShow_sameDay_Established']
-#           totalSameDayCanceled_sameDay_Established += row['SameDayCanceled_sameDay_Established']
-#           totalTotal_sameDay_Established += row['Total_sameDay_Established']
-#         })
-#         return (totalNoShow_sameDay_Established + totalSameDayCanceled_sameDay_Established) / totalTotal_sameDay_Established || '-'
-#       }"),
-#       format = colFormat(percent = TRUE, digits = 0),
-#       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
-#     ),
-#     
-#    `noShow_rate_belowFourteen_Established` = colDef(
-#       name = "Scheduled 1-14 Days",
-#       maxWidth = 90,
-#       headerStyle = list(background = "#d80b8c", color = "white", fontWeight = "Bold", fontSize = "14px"),
-#       aggregate = JS("function(values, rows) {
-#         let totalNoShow_belowFourteen_Established = 0
-#         let totalSameDayCanceled_belowFourteen_Established = 0
-#         let totalTotal_belowFourteen_Established = 0
-#         rows.forEach(function(row) {
-#           totalNoShow_belowFourteen_Established += row['NoShow_belowFourteen_Established']
-#           totalSameDayCanceled_belowFourteen_Established += row['SameDayCanceled_belowFourteen_Established']
-#           totalTotal_belowFourteen_Established += row['Total_belowFourteen_Established']
-#         })
-#         return (totalNoShow_belowFourteen_Established + totalSameDayCanceled_belowFourteen_Established) / totalTotal_belowFourteen_Established || '-'
-#       }"),
-#       format = colFormat(percent = TRUE, digits = 0),
-#       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
-#     ),
-#     
-#     `noShow_rate_belowThirty_Established` = colDef(
-#       name = "Scheduled 15-30 Days",
-#       maxWidth = 90,
-#       headerStyle = list(background = "#d80b8c", color = "white", fontWeight = "Bold", fontSize = "14px"),
-#       aggregate = JS("function(values, rows) {
-#         let totalNoShow_belowThirty_Established = 0
-#         let totalSameDayCanceled_belowThirty_Established = 0
-#         let totalTotal_belowThirty_Established = 0
-#         rows.forEach(function(row) {
-#           totalNoShow_belowThirty_Established += row['NoShow_belowThirty_Established']
-#           totalSameDayCanceled_belowThirty_Established += row['SameDayCanceled_belowThirty_Established']
-#           totalTotal_belowThirty_Established += row['Total_belowThirty_Established']
-#         })
-#         return (totalNoShow_belowThirty_Established + totalSameDayCanceled_belowThirty_Established) / totalTotal_belowThirty_Established || '-'
-#       }"),
-#       format = colFormat(percent = TRUE, digits = 0),
-#       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
-#     ),
-#     
-#     `noShow_rate_overThirty_Established` = colDef(
-#       name = "Scheduled >30 Days",
-#       maxWidth = 90,
-#       headerStyle = list(background = "#d80b8c", color = "white", fontWeight = "Bold", fontSize = "14px"),
-#       aggregate = JS("function(values, rows) {
-#         let totalNoShow_overThirty_Established = 0
-#         let totalSameDayCanceled_overThirty_Established = 0
-#         let totalTotal_overThirty_Established = 0
-#         rows.forEach(function(row) {
-#           totalNoShow_overThirty_Established += row['NoShow_overThirty_Established']
-#           totalSameDayCanceled_overThirty_Established += row['SameDayCanceled_overThirty_Established']
-#           totalTotal_overThirty_Established += row['Total_overThirty_Established']
-#         })
-#         return (totalNoShow_overThirty_Established + totalSameDayCanceled_overThirty_Established) / totalTotal_overThirty_Established || '-'
-#       }"),
-#       format = colFormat(percent = TRUE, digits = 0),
-#       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
-#     ),
-#     
-#     `noShow_rate_New` = colDef(
-#       name = "All New",
-#       maxWidth = 90,
-#       headerStyle = list(background = "#00aeef", color = "white", fontWeight = "Bold", fontSize = "14px"),
-#       aggregate = JS("function(values, rows) {
-#         let totalNoShow_New = 0
-#         let totalSameDayCanceled_New = 0
-#         let totalTotal_New = 0
-#         rows.forEach(function(row) {
-#           totalNoShow_New += row['NoShow_New']
-#           totalSameDayCanceled_New += row['SameDayCanceled_New']
-#           totalTotal_New += row['Total_New']
-#         })
-#         return (totalNoShow_New + totalSameDayCanceled_New) / totalTotal_New || '-'
-#       }"),
-#       format = colFormat(percent = TRUE, digits = 0),
-#       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
-#     ),
-#    
-#    `noShow_rate_sameDay_New` = colDef(
-#       name = "Scheduled Same-Day",
-#       maxWidth = 90,
-#       headerStyle = list(background = "#00aeef", color = "white", fontWeight = "Bold", fontSize = "14px"),
-#       aggregate = JS("function(values, rows) {
-#         let totalNoShow_sameDay_New = 0
-#         let totalSameDayCanceled_sameDay_New = 0
-#         let totalTotal_sameDay_New = 0
-#         rows.forEach(function(row) {
-#           totalNoShow_sameDay_New += row['NoShow_sameDay_New']
-#           totalSameDayCanceled_sameDay_New += row['SameDayCanceled_sameDay_New']
-#           totalTotal_sameDay_New += row['Total_sameDay_New']
-#         })
-#         return (totalNoShow_sameDay_New + totalSameDayCanceled_sameDay_New) / totalTotal_sameDay_New || '-'
-#       }"),
-#       format = colFormat(percent = TRUE, digits = 0),
-#       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
-#     ),
-#    
-#    `noShow_rate_belowFourteen_New` = colDef(
-#       name = "Scheduled 1-14 Days",
-#       maxWidth = 90,
-#       headerStyle = list(background = "#00aeef", color = "white", fontWeight = "Bold", fontSize = "14px"),
-#       aggregate = JS("function(values, rows) {
-#         let totalNoShow_belowFourteen_New = 0
-#         let totalSameDayCanceled_belowFourteen_New = 0
-#         let totalTotal_belowFourteen_New = 0
-#         rows.forEach(function(row) {
-#           totalNoShow_belowFourteen_New += row['NoShow_belowFourteen_New']
-#           totalSameDayCanceled_belowFourteen_New += row['SameDayCanceled_belowFourteen_New']
-#           totalTotal_belowFourteen_New += row['Total_belowFourteen_New']
-#         })
-#         return (totalNoShow_belowFourteen_New + totalSameDayCanceled_belowFourteen_New) / totalTotal_belowFourteen_New || '-'
-#       }"),
-#       format = colFormat(percent = TRUE, digits = 0),
-#       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
-#     ),
-#     
-#     `noShow_rate_belowThirty_New` = colDef(
-#       name = "Scheduled 15-30 Days",
-#       maxWidth = 90,
-#       headerStyle = list(background = "#00aeef", color = "white", fontWeight = "Bold", fontSize = "14px"),
-#       aggregate = JS("function(values, rows) {
-#         let totalNoShow_belowThirty_New = 0
-#         let totalSameDayCanceled_belowThirty_New = 0
-#         let totalTotal_belowThirty_New = 0
-#         rows.forEach(function(row) {
-#           totalNoShow_belowThirty_New += row['NoShow_belowThirty_New']
-#           totalSameDayCanceled_belowThirty_New += row['SameDayCanceled_belowThirty_New']
-#           totalTotal_belowThirty_New += row['Total_belowThirty_New']
-#         })
-#         return (totalNoShow_belowThirty_New + totalSameDayCanceled_belowThirty_New) / totalTotal_belowThirty_New || '-'
-#       }"),
-#       format = colFormat(percent = TRUE, digits = 0),
-#       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
-#     ),
-#     
-#     `noShow_rate_overThirty_New` = colDef(
-#       name = "Scheduled >30 Days",
-#       maxWidth = 90,
-#       headerStyle = list(background = "#00aeef", color = "white", fontWeight = "Bold", fontSize = "14px"),
-#       aggregate = JS("function(values, rows) {
-#         let totalNoShow_overThirty_New = 0
-#         let totalSameDayCanceled_overThirty_New = 0
-#         let totalTotal_overThirty_New = 0
-#         rows.forEach(function(row) {
-#           totalNoShow_overThirty_New += row['NoShow_overThirty_New']
-#           totalSameDayCanceled_overThirty_New += row['SameDayCanceled_overThirty_New']
-#           totalTotal_overThirty_New += row['Total_overThirty_New']
-#         })
-#         return (totalNoShow_overThirty_New + totalSameDayCanceled_overThirty_New) / totalTotal_overThirty_New || '-'
-#       }"),
-#       format = colFormat(percent = TRUE, digits = 0),
-#       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
-#     ),
-#     
-#     `noShow_rate` = colDef(
-#       name = "All",
-#       maxWidth = 90,
-#       headerStyle = list(background = "#7f7f7f", color = "white", fontWeight = "Bold", fontSize = "14px"),
-#       aggregate = JS("function(values, rows) {
-#         let totalNoShow = 0
-#         let totalSameDayCanceled = 0
-#         let totalTotal = 0
-#         rows.forEach(function(row) {
-#           totalNoShow += row['NoShow']
-#           totalSameDayCanceled += row['SameDayCanceled']
-#           totalTotal += row['Total']
-#         })
-#         return (totalNoShow + totalSameDayCanceled) / totalTotal || '-'
-#       }"),
-#       format = colFormat(percent = TRUE, digits = 0),
-#       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
-#     ),
-#     
-#    `noShow_rate_sameDay` = colDef(
-#       name = "Scheduled Same-Day",
-#       maxWidth = 90,
-#       headerStyle = list(background = "#7f7f7f", color = "white", fontWeight = "Bold", fontSize = "14px"),
-#       aggregate = JS("function(values, rows) {
-#         let totalNoShow_sameDay = 0
-#         let totalSameDayCanceled_sameDay = 0
-#         let totalTotal_sameDay = 0
-#         rows.forEach(function(row) {
-#           totalNoShow_sameDay += row['NoShow_sameDay']
-#           totalSameDayCanceled_sameDay += row['SameDayCanceled_sameDay']
-#           totalTotal_sameDay += row['Total_sameDay']
-#         })
-#         return (totalNoShow_sameDay + totalSameDayCanceled_sameDay) / totalTotal_sameDay || '-'
-#       }"),
-#       format = colFormat(percent = TRUE, digits = 0),
-#       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
-#     ),
-#    
-#    `noShow_rate_belowFourteen` = colDef(
-#       name = "Scheduled 1-14 Days",
-#       maxWidth = 90,
-#       headerStyle = list(background = "#7f7f7f", color = "white", fontWeight = "Bold", fontSize = "14px"),
-#       aggregate = JS("function(values, rows) {
-#         let totalNoShow_belowFourteen = 0
-#         let totalSameDayCanceled_belowFourteen = 0
-#         let totalTotal_belowFourteen = 0
-#         rows.forEach(function(row) {
-#           totalNoShow_belowFourteen += row['NoShow_belowFourteen']
-#           totalSameDayCanceled_belowFourteen += row['SameDayCanceled_belowFourteen']
-#           totalTotal_belowFourteen += row['Total_belowFourteen']
-#         })
-#         return (totalNoShow_belowFourteen + totalSameDayCanceled_belowFourteen) / totalTotal_belowFourteen || '-'
-#       }"),
-#       format = colFormat(percent = TRUE, digits = 0),
-#       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
-#     ),
-#    
-#     `noShow_rate_belowThirty` = colDef(
-#       name = "Scheduled 15-30 Days",
-#       maxWidth = 90,
-#       headerStyle = list(background = "#7f7f7f", color = "white", fontWeight = "Bold", fontSize = "14px"),
-#       aggregate = JS("function(values, rows) {
-#         let totalNoShow_belowThirty = 0
-#         let totalSameDayCanceled_belowThirty = 0
-#         let totalTotal_belowThirty = 0
-#         rows.forEach(function(row) {
-#           totalNoShow_belowThirty += row['NoShow_belowThirty']
-#           totalSameDayCanceled_belowThirty += row['SameDayCanceled_belowThirty']
-#           totalTotal_belowThirty += row['Total_belowThirty']
-#         })
-#         return (totalNoShow_belowThirty + totalSameDayCanceled_belowThirty) / totalTotal_belowThirty || '-'
-#       }"),
-#       format = colFormat(percent = TRUE, digits = 0),
-#       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
-#     ),
-#     
-#     `noShow_rate_overThirty` = colDef(
-#       name = "Scheduled >30 Days",
-#       maxWidth = 90,
-#       headerStyle = list(background = "#7f7f7f", color = "white", fontWeight = "Bold", fontSize = "14px"),
-#       aggregate = JS("function(values, rows) {
-#         let totalNoShow_overThirty = 0
-#         let totalSameDayCanceled_overThirty = 0
-#         let totalTotal_overThirty = 0
-#         rows.forEach(function(row) {
-#           totalNoShow_overThirty += row['NoShow_overThirty']
-#           totalSameDayCanceled_overThirty += row['SameDayCanceled_overThirty']
-#           totalTotal_overThirty += row['Total_overThirty']
-#         })
-#         return (totalNoShow_overThirty + totalSameDayCanceled_overThirty) / totalTotal_overThirty || '-'
-#       }"),
-#       format = colFormat(percent = TRUE, digits = 0),
-#       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
-#     ),
-#     
-#     Arrived_Established = colDef(show =F),
-#     Arrived_New = colDef(show =F),
-#     Arrived_sameDay_Established = colDef(show =F),
-#     Arrived_sameDay_New = colDef(show =F),
-#     Arrived_belowFourteen_Established = colDef(show =F),
-#     Arrived_belowFourteen_New = colDef(show =F),
-#     Arrived_belowThirty_Established = colDef(show =F),
-#     Arrived_belowThirty_New = colDef(show =F),
-#     Arrived_overThirty_Established = colDef(show =F),
-#     Arrived_overThirty_New = colDef(show =F),
-#     
-#     NoShow_Established = colDef(show =F),
-#     NoShow_New = colDef(show =F),
-#     NoShow_sameDay_Established = colDef(show =F),
-#     NoShow_sameDay_New = colDef(show =F),
-#     NoShow_belowFourteen_Established = colDef(show =F),
-#     NoShow_belowFourteen_New = colDef(show =F),
-#     NoShow_belowThirty_Established = colDef(show =F),
-#     NoShow_belowThirty_New = colDef(show =F),
-#     NoShow_overThirty_Established = colDef(show =F),
-#     NoShow_overThirty_New = colDef(show =F),
-#     
-#     SameDayCanceled_Established = colDef(show =F),
-#     SameDayCanceled_New = colDef(show =F),
-#     SameDayCanceled_sameDay_Established = colDef(show =F),
-#     SameDayCanceled_sameDay_New = colDef(show =F),
-#     SameDayCanceled_belowFourteen_Established = colDef(show =F),
-#     SameDayCanceled_belowFourteen_New = colDef(show =F),
-#     SameDayCanceled_belowThirty_Established = colDef(show =F),
-#     SameDayCanceled_belowThirty_New = colDef(show =F),
-#     SameDayCanceled_overThirty_Established = colDef(show =F),
-#     SameDayCanceled_overThirty_New = colDef(show =F),
-#     
-#     Total_Established = colDef(show =F),
-#     Total_New = colDef(show =F),
-#     Total_sameDay_Established = colDef(show =F),
-#     Total_sameDay_New = colDef(show =F),
-#     Total_belowFourteen_Established = colDef(show =F),
-#     Total_belowFourteen_New = colDef(show =F),
-#     Total_belowThirty_Established = colDef(show =F),
-#     Total_belowThirty_New = colDef(show =F),
-#     Total_overThirty_Established = colDef(show =F),
-#     Total_overThirty_New = colDef(show =F),
-#     
-#     Total = colDef(show =F),
-#     Total_sameDay = colDef(show =F),
-#     Total_belowFourteen = colDef(show =F),
-#     Total_belowThirty = colDef(show =F),
-#     Total_overThirty = colDef(show =F),
-#     
-#     Arrived_sameDay = colDef(show =F),
-#     Arrived_belowFourteen = colDef(show =F),
-#     Arrived_belowThirty = colDef(show =F),
-#     Arrived_overThirty = colDef(show =F),
-#     
-#     NoShow = colDef(show =F),
-#     NoShow_sameDay = colDef(show =F),
-#     NoShow_belowFourteen = colDef(show =F),
-#     NoShow_belowThirty = colDef(show =F),
-#     NoShow_overThirty = colDef(show =F),
-#     
-#     SameDayCanceled = colDef(show =F),
-#     SameDayCanceled_sameDay = colDef(show =F),
-#     SameDayCanceled_belowFourteen = colDef(show =F),
-#     SameDayCanceled_belowThirty = colDef(show =F),
-#     SameDayCanceled_overThirty = colDef(show =F),
-#     arrived_site = colDef(show =F)
-#    
-#   ) # Close Columns
-# 
-#   ) # Close Reactable
-# 
-#  )
-# )
-
-```
-
-
-
-```{r TEST MSHS No Show Current Year Output, echo = FALSE, warning = FALSE, message = FALSE}
 
 no_show_ytd_site <- no_show_specialty %>%
   filter(Appt.Year == current_year) %>%
@@ -1542,13 +1017,13 @@ reactable(
     colGroup(name = paste0(current_year, " YTD Visit Volume"), 
              columns = c("Arrived","arrived_perc","new_perc"),
              headerStyle = list(color = "#212070", fontSize = "16px")),
-    colGroup(name = "No Show Rate - All", 
+    colGroup(name = "No Show Plus Rate - All", 
              columns = c("noShow_rate", "noShow_rate_sameDay", "noShow_rate_belowFourteen", "noShow_rate_belowThirty", "noShow_rate_overThirty"),
              headerStyle = list(color = "#7f7f7f", fontSize = "16px")),
-    colGroup(name = "No Show Rate - Established", 
+    colGroup(name = "No Show Plus Rate - Established", 
              columns = c("noShow_rate_Established", "noShow_rate_sameDay_Established", "noShow_rate_belowFourteen_Established", "noShow_rate_belowThirty_Established", "noShow_rate_overThirty_Established"),
              headerStyle = list(color = "#d80b8c", fontSize = "16px")),
-    colGroup(name = "No Show Rate - New", 
+    colGroup(name = "No Show Plus Rate - New", 
              columns = c("noShow_rate_New","noShow_rate_sameDay_New", "noShow_rate_belowFourteen_New","noShow_rate_belowThirty_New", "noShow_rate_overThirty_New"),
              headerStyle = list(color = "#00aeef", fontSize = "16px"))
     ),
@@ -2130,13 +1605,13 @@ reactable(
     colGroup(name = paste0(current_year, " YTD Visit Volume"), 
              columns = c("Arrived","arrived_perc","new_perc"),
              headerStyle = list(color = "#212070", fontSize = "16px")),
-    colGroup(name = "No Show Rate - All", 
+    colGroup(name = "No Show Plus Rate - All", 
              columns = c("noShow_rate", "noShow_rate_sameDay", "noShow_rate_belowFourteen", "noShow_rate_belowThirty", "noShow_rate_overThirty"),
              headerStyle = list(color = "#7f7f7f", fontSize = "16px")),
-    colGroup(name = "No Show Rate - Established", 
+    colGroup(name = "No Show Plus Rate - Established", 
              columns = c("noShow_rate_Established", "noShow_rate_sameDay_Established", "noShow_rate_belowFourteen_Established", "noShow_rate_belowThirty_Established", "noShow_rate_overThirty_Established"),
              headerStyle = list(color = "#d80b8c", fontSize = "16px")),
-    colGroup(name = "No Show Rate - New", 
+    colGroup(name = "No Show Plus Rate - New", 
              columns = c("noShow_rate_New","noShow_rate_sameDay_New", "noShow_rate_belowFourteen_New","noShow_rate_belowThirty_New", "noShow_rate_overThirty_New"),
              headerStyle = list(color = "#00aeef", fontSize = "16px"))
     ),
@@ -2696,13 +2171,13 @@ reactable(
     colGroup(name = paste0(current_year, " YTD Visit Volume"), 
              columns = c("Arrived","arrived_perc","new_perc"),
              headerStyle = list(color = "#212070", fontSize = "16px")),
-    colGroup(name = "No Show Rate - All", 
+    colGroup(name = "No Show Plus Rate - All", 
              columns = c("noShow_rate", "noShow_rate_sameDay", "noShow_rate_belowFourteen", "noShow_rate_belowThirty", "noShow_rate_overThirty"),
              headerStyle = list(color = "#7f7f7f", fontSize = "16px")),
-    colGroup(name = "No Show Rate - Established", 
+    colGroup(name = "No Show Plus Rate - Established", 
              columns = c("noShow_rate_Established", "noShow_rate_sameDay_Established", "noShow_rate_belowFourteen_Established", "noShow_rate_belowThirty_Established", "noShow_rate_overThirty_Established"),
              headerStyle = list(color = "#d80b8c", fontSize = "16px")),
-    colGroup(name = "No Show Rate - New", 
+    colGroup(name = "No Show Plus Rate - New", 
              columns = c("noShow_rate_New","noShow_rate_sameDay_New", "noShow_rate_belowFourteen_New","noShow_rate_belowThirty_New", "noShow_rate_overThirty_New"),
              headerStyle = list(color = "#00aeef", fontSize = "16px"))
     ),
@@ -3131,621 +2606,6 @@ reactable(
 
 #### `r last_year` YTD
 ```{r MSHS No Show Last Year Output, echo = FALSE, warning = FALSE, message = FALSE}
-# 
-# no_show_last_site <- no_show_specialty %>%
-#   filter(Appt.Year == last_year) %>%
-#   group_by(Campus, Campus.Specialty.Group, New.PT2) %>%
-#   group_by(Campus, Campus.Specialty.Group, New.PT2) %>%
-#   summarise(Arrived = sum(Arrived),
-#             `Arrived_sameDay` = sum(`Arrived_sameDay`),
-#             `Arrived_belowFourteen` = sum(`Arrived_belowFourteen`),
-#             `Arrived_belowThirty` = sum(`Arrived_belowThirty`),
-#             `Arrived_overThirty` = sum(`Arrived_overThirty`),
-#             `NoShow` = sum(`NoShow`),
-#             `NoShow_sameDay` = sum(`NoShow_sameDay`),
-#             `NoShow_belowFourteen` = sum(`NoShow_belowFourteen`),
-#             `NoShow_belowThirty` = sum(`NoShow_belowThirty`),
-#             `NoShow_overThirty` = sum(`NoShow_overThirty`),
-#             `SameDayCanceled` = sum(`SameDayCanceled`),
-#             `SameDayCanceled_sameDay` = sum(`SameDayCanceled_sameDay`),
-#             `SameDayCanceled_belowFourteen` = sum(`SameDayCanceled_belowFourteen`),
-#             `SameDayCanceled_belowThirty` = sum(`SameDayCanceled_belowThirty`),
-#             `SameDayCanceled_overThirty` = sum(`SameDayCanceled_overThirty`),
-#             Total = sum(Total),
-#             `Total_sameDay` = sum(`Total_sameDay`),
-#             `Total_belowFourteen` = sum(`Total_belowFourteen`),
-#             `Total_belowThirty` = sum(`Total_belowThirty`),
-#             `Total_overThirty` = sum(`Total_overThirty`)) %>%
-#   mutate(noShow_rate = round((`NoShow` + `SameDayCanceled`)/ Total,2),
-#          `noShow_rate_sameDay` = round((`NoShow_sameDay` + `SameDayCanceled_sameDay`)/ `Total_sameDay`,2),
-#          `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen` + `SameDayCanceled_belowFourteen`)/ `Total_belowFourteen`,2),
-#          `noShow_rate_belowThirty` = round((`NoShow_belowThirty` + `SameDayCanceled_belowThirty`)/ `Total_belowThirty`,2),
-#          `noShow_rate_overThirty` = round((`NoShow_overThirty` + `SameDayCanceled_overThirty`)/ `Total_overThirty`,2)) %>%
-#   pivot_wider(names_from = New.PT2,
-#               values_from = 4:28,
-#               values_fill = 0) %>%
-#   mutate(Total = (Total_Established + Total_New),
-#          `Total_sameDay` = (`Total_sameDay_Established` + `Total_sameDay_New`),
-#          `Total_belowFourteen` = (`Total_belowFourteen_Established` + `Total_belowFourteen_New`),
-#          `Total_belowThirty` = (`Total_belowThirty_Established` + `Total_belowThirty_New`),
-#          `Total_overThirty` = (`Total_overThirty_Established` + `Total_overThirty_New`),
-#          Arrived = (Arrived_Established + Arrived_New),
-#          `Arrived_sameDay` = (`Arrived_sameDay_Established` + `Arrived_sameDay_New`),
-#          `Arrived_belowFourteen` = (`Arrived_belowFourteen_Established` + `Arrived_belowFourteen_New`),
-#          `Arrived_belowThirty` = (`Arrived_belowThirty_Established` + `Arrived_belowThirty_New`),
-#          `Arrived_overThirty` = (`Arrived_overThirty_Established` + `Arrived_overThirty_New`),
-#          NoShow = (NoShow_Established + NoShow_New),
-#          `NoShow_sameDay` = (`NoShow_sameDay_Established` + `NoShow_sameDay_New`),
-#          `NoShow_belowFourteen` = (`NoShow_belowFourteen_Established` + `NoShow_belowFourteen_New`),
-#          `NoShow_belowThirty` = (`NoShow_belowThirty_Established` + `NoShow_belowThirty_New`),
-#          `NoShow_overThirty` = (`NoShow_overThirty_Established` + `NoShow_overThirty_New`),
-#          SameDayCanceled = (SameDayCanceled_Established + SameDayCanceled_New),
-#          `SameDayCanceled_sameDay` = (`SameDayCanceled_sameDay_Established` + `SameDayCanceled_sameDay_New`),
-#          `SameDayCanceled_belowFourteen` = (`SameDayCanceled_belowFourteen_Established` + `SameDayCanceled_belowFourteen_New`),
-#          `SameDayCanceled_belowThirty` = (`SameDayCanceled_belowThirty_Established` + `SameDayCanceled_belowThirty_New`),
-#          `SameDayCanceled_overThirty` = (`SameDayCanceled_overThirty_Established` + `SameDayCanceled_overThirty_New`),
-#          noShow_rate = round((`NoShow_Established` + `SameDayCanceled_Established` + `NoShow_New` + `SameDayCanceled_New`)/Total,2),
-#          `noShow_rate_sameDay` = round((`NoShow_sameDay` + `SameDayCanceled_sameDay`)/`Total_sameDay`,2),
-#          `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen` + `SameDayCanceled_belowFourteen`)/`Total_belowFourteen`,2),
-#          `noShow_rate_belowThirty` = round((`NoShow_belowThirty` + `SameDayCanceled_belowThirty`)/`Total_belowThirty`,2),
-#          `noShow_rate_overThirty` = round((`NoShow_overThirty` + `SameDayCanceled_overThirty`)/`Total_overThirty`,2),
-#          new_perc = round(Arrived_New/Arrived,2)) %>%
-#   group_by(Campus) %>%
-#   mutate(arrived_site = sum(Arrived),
-#          arrived_perc = round(Arrived/arrived_site,2)) 
-# 
-# 
-# no_show_last_mshs <- no_show_specialty %>%
-#   filter(Appt.Year == last_year) %>%
-#   group_by(Campus.Specialty.Group, New.PT2) %>%
-#   summarise(Arrived = sum(Arrived),
-#             `Arrived_sameDay` = sum(`Arrived_sameDay`),
-#             `Arrived_belowFourteen` = sum(`Arrived_belowFourteen`),
-#             `Arrived_belowThirty` = sum(`Arrived_belowThirty`),
-#             `Arrived_overThirty` = sum(`Arrived_overThirty`),
-#             `NoShow` = sum(`NoShow`),
-#             `NoShow_sameDay` = sum(`NoShow_sameDay`),
-#             `NoShow_belowFourteen` = sum(`NoShow_belowFourteen`),
-#             `NoShow_belowThirty` = sum(`NoShow_belowThirty`),
-#             `NoShow_overThirty` = sum(`NoShow_overThirty`),
-#             `SameDayCanceled` = sum(`SameDayCanceled`),
-#             `SameDayCanceled_sameDay` = sum(`SameDayCanceled_sameDay`),
-#             `SameDayCanceled_belowFourteen` = sum(`SameDayCanceled_belowFourteen`),
-#             `SameDayCanceled_belowThirty` = sum(`SameDayCanceled_belowThirty`),
-#             `SameDayCanceled_overThirty` = sum(`SameDayCanceled_overThirty`),
-#             Total = sum(Total),
-#             `Total_sameDay` = sum(`Total_sameDay`),
-#             `Total_belowFourteen` = sum(`Total_belowFourteen`),
-#             `Total_belowThirty` = sum(`Total_belowThirty`),
-#             `Total_overThirty` = sum(`Total_overThirty`)) %>%
-#   mutate(noShow_rate = round((`NoShow` + `SameDayCanceled`)/ Total,2),
-#          `noShow_rate_sameDay` = round((`NoShow_sameDay` + `SameDayCanceled_sameDay`)/ `Total_sameDay`,2),
-#          `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen` + `SameDayCanceled_belowFourteen`)/ `Total_belowFourteen`,2),
-#          `noShow_rate_belowThirty` = round((`NoShow_belowThirty` + `SameDayCanceled_belowThirty`)/ `Total_belowThirty`,2),
-#          `noShow_rate_overThirty` = round((`NoShow_overThirty` + `SameDayCanceled_overThirty`)/ `Total_overThirty`,2)) %>%
-#   pivot_wider(names_from = New.PT2,
-#               values_from = 3:27,
-#               values_fill = 0) %>%
-#   mutate(Total = (Total_Established + Total_New),
-#          `Total_sameDay` = (`Total_sameDay_Established` + `Total_sameDay_New`),
-#          `Total_belowFourteen` = (`Total_belowFourteen_Established` + `Total_belowFourteen_New`),
-#          `Total_belowThirty` = (`Total_belowThirty_Established` + `Total_belowThirty_New`),
-#          `Total_overThirty` = (`Total_overThirty_Established` + `Total_overThirty_New`),
-#          Arrived = (Arrived_Established + Arrived_New),
-#          `Arrived_sameDay` = (`Arrived_sameDay_Established` + `Arrived_sameDay_New`),
-#          `Arrived_belowFourteen` = (`Arrived_belowFourteen_Established` + `Arrived_belowFourteen_New`),
-#          `Arrived_belowThirty` = (`Arrived_belowThirty_Established` + `Arrived_belowThirty_New`),
-#          `Arrived_overThirty` = (`Arrived_overThirty_Established` + `Arrived_overThirty_New`),
-#          NoShow = (NoShow_Established + NoShow_New),
-#          `NoShow_sameDay` = (`NoShow_sameDay_Established` + `NoShow_sameDay_New`),
-#          `NoShow_belowFourteen` = (`NoShow_belowFourteen_Established` + `NoShow_belowFourteen_New`),
-#          `NoShow_belowThirty` = (`NoShow_belowThirty_Established` + `NoShow_belowThirty_New`),
-#          `NoShow_overThirty` = (`NoShow_overThirty_Established` + `NoShow_overThirty_New`),
-#          SameDayCanceled = (SameDayCanceled_Established + SameDayCanceled_New),
-#          `SameDayCanceled_sameDay` = (`SameDayCanceled_sameDay_Established` + `SameDayCanceled_sameDay_New`),
-#          `SameDayCanceled_belowFourteen` = (`SameDayCanceled_belowFourteen_Established` + `SameDayCanceled_belowFourteen_New`),
-#          `SameDayCanceled_belowThirty` = (`SameDayCanceled_belowThirty_Established` + `SameDayCanceled_belowThirty_New`),
-#          `SameDayCanceled_overThirty` = (`SameDayCanceled_overThirty_Established` + `SameDayCanceled_overThirty_New`),
-#          noShow_rate = round((`NoShow_Established` + `SameDayCanceled_Established` + `NoShow_New` + `SameDayCanceled_New`)/Total,2),
-#          `noShow_rate_sameDay` = round((`NoShow_sameDay` + `SameDayCanceled_sameDay`)/`Total_sameDay`,2),
-#          `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen` + `SameDayCanceled_belowFourteen`)/`Total_belowFourteen`,2),
-#          `noShow_rate_belowThirty` = round((`NoShow_belowThirty` + `SameDayCanceled_belowThirty`)/`Total_belowThirty`,2),
-#          `noShow_rate_overThirty` = round((`NoShow_overThirty` + `SameDayCanceled_overThirty`)/`Total_overThirty`,2),
-#          new_perc = round(Arrived_New/Arrived,2)) %>%
-#   mutate(Campus = "MSHS Total") %>%
-#   group_by(Campus) %>%
-#   mutate(arrived_site = sum(Arrived),
-#          arrived_perc = round(Arrived/arrived_site,2)) 
-# 
-# 
-# no_show_last_merged <- bind_rows(no_show_last_site, no_show_last_mshs)
-# 
-# no_show_last_merged <- no_show_last_merged %>%
-#   dplyr::select(1:2, 58, 78, 80, 
-#                 3:57, 59:77, 79)
-# 
-# 
-# 
-# # Table Output -----------------------------------------------------------------
-# htmltools::browsable(
-#   tagList(
-#     tags$button(
-#       tagList(fontawesome::fa("download"), "Download Table"),
-#       onclick = "Reactable.downloadDataCSV('mshs_last_noshow-download-table', 'Avg No Show Rate')"
-#     ),
-# 
-# reactable(
-#   no_show_last_merged,
-#   elementId = "mshs_last_noshow-download-table",
-#   style = list(fontFamily = 'Calibri',
-#                  fontSize = '14px'),
-#     defaultColDef = colDef(align = "left",
-#                            headerStyle = list(fontWeight = "Bold", fontSize = "14px"),
-#                            headerClass = "bar-sort-header"),
-#   # RowStyle = function(index) {
-#   #           if (index %in% c(nrow(referral_vol_site_data_mshs))) {
-#   #             list(`border-top` = "2px solid rgb(184,184,184)",
-#   #                  fontWeight = "Bold")
-#   #           }
-#   #         },
-#     highlight = TRUE,
-#     # filterable = TRUE,
-#     pagination = FALSE,
-#     # height = 800,
-#     wrap = TRUE,
-#   searchable = TRUE,
-#   
-#   rowStyle = function(index) {
-#             if (index %in% c(10)) {
-#               list(`border-top` = "2px solid rgb(184,184,184)",
-#                    fontWeight = "Bold")
-#             }
-#           },
-# 
-#   groupBy = "Campus",
-# 
-#   columnGroups = list(
-#     # colGroup(name = paste0(format(as.Date(start_date), "%b"),"-",format(as.Date(end_date), "%b %Y"), " Visit Volume"), 
-#     #          columns = c("Total", "new_perc"),
-#     #          headerStyle = list(color = "#212070", fontSize = "16px")),
-#     # colGroup(name = paste0(format(as.Date(start_date), "%b"),"-",format(as.Date(end_date), "%b %Y"), " No Show Rate"), 
-#     #          columns = c("noShow_rate", "noShow_rate_Established", "noShow_rate_New"),
-#     #          headerStyle = list(color = "#d80b8c", fontSize = "16px"))
-#     colGroup(name = "", 
-#              columns = c("Campus","Campus.Specialty.Group"), sticky = "left",
-#              headerStyle = list(fontSize = "16px")),
-#     colGroup(name = paste0(last_year, " Visit Volume"), 
-#              columns = c("Arrived","arrived_perc","new_perc"),
-#              headerStyle = list(color = "#212070", fontSize = "16px")),
-#     colGroup(name = "No Show Rate - All", 
-#              columns = c("noShow_rate", "noShow_rate_sameDay", "noShow_rate_belowFourteen", "noShow_rate_belowThirty", "noShow_rate_overThirty"),
-#              headerStyle = list(color = "#7f7f7f", fontSize = "16px")),
-#     colGroup(name = "No Show Rate - Established", 
-#              columns = c("noShow_rate_Established", "noShow_rate_sameDay_Established", "noShow_rate_belowFourteen_Established", "noShow_rate_belowThirty_Established", "noShow_rate_overThirty_Established"),
-#              headerStyle = list(color = "#d80b8c", fontSize = "16px")),
-#     colGroup(name = "No Show Rate - New", 
-#              columns = c("noShow_rate_New","noShow_rate_sameDay_New", "noShow_rate_belowFourteen_New","noShow_rate_belowThirty_New", "noShow_rate_overThirty_New"),
-#              headerStyle = list(color = "#00aeef", fontSize = "16px"))
-#     ),
-# 
-#   columns = list(
-# 
-#     Campus = colDef(
-#       # footer = "Total",
-#       name = "Site",
-#       minWidth = 220),
-# 
-#     Campus.Specialty.Group = colDef(
-#       name = "Specialty",
-#       minWidth = 250),
-#     
-#     Arrived = colDef(
-#       name = "Total Arrived Visits",
-#       maxWidth = 90,
-#       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
-#       aggregate = 'sum',
-#       format = colFormat(separators = TRUE, digits = 0),
-#       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
-#     ),
-# 
-#     arrived_perc = colDef(
-#       name = "% of Site Total Arrived Visits",
-#       maxWidth = 90,
-#      headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
-#       # aggregate = JS("function(values, rows) {
-#       #   let totalArrived = 0
-#       #   let totalarrived_site = 0
-#       #   rows.forEach(function(row) {
-#       #     totalArrived += row['Arrived']
-#       #     totalarrived_site += row['arrived_site']
-#       #   })
-#       #   return totalArrived / totalarrived_site
-#       # }"),
-#       format = colFormat(percent = TRUE, digits = 0),
-#       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
-#     ),
-# 
-#     new_perc = colDef(
-#       name = "% New Arrived Visits",
-#       maxWidth = 90,
-#       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
-#       aggregate = JS("function(values, rows) {
-#         let totalTotal_New = 0
-#         let totalTotal = 0
-#         rows.forEach(function(row) {
-#           totalTotal_New += row['Total_New']
-#           totalTotal += row['Total']
-#         })
-#         return (totalTotal_New) / totalTotal
-#       }"),
-#       format = colFormat(percent = TRUE, digits = 0),
-#       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
-#     ),
-# 
-#     `noShow_rate_Established` = colDef(
-#       name = "All Established",
-#       maxWidth = 90,
-#       headerStyle = list(background = "#d80b8c", color = "white", fontWeight = "Bold", fontSize = "14px"),
-#       aggregate = JS("function(values, rows) {
-#         let totalNoShow_Established = 0
-#         let totalSameDayCanceled_Established = 0
-#         let totalTotal_Established = 0
-#         rows.forEach(function(row) {
-#           totalNoShow_Established += row['NoShow_Established']
-#           totalSameDayCanceled_Established += row['SameDayCanceled_Established']
-#           totalTotal_Established += row['Total_Established']
-#         })
-#         return (totalNoShow_Established + totalSameDayCanceled_Established) / totalTotal_Established || '-'
-#       }"),
-#       format = colFormat(percent = TRUE, digits = 0),
-#       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
-#     ),
-# 
-#     `noShow_rate_sameDay_Established` = colDef(
-#       name = "Scheduled Same-Day",
-#       maxWidth = 90,
-#       headerStyle = list(background = "#d80b8c", color = "white", fontWeight = "Bold", fontSize = "14px"),
-#       aggregate = JS("function(values, rows) {
-#         let totalNoShow_sameDay_Established = 0
-#         let totalSameDayCanceled_sameDay_Established = 0
-#         let totalTotal_sameDay_Established = 0
-#         rows.forEach(function(row) {
-#           totalNoShow_sameDay_Established += row['NoShow_sameDay_Established']
-#           totalSameDayCanceled_sameDay_Established += row['SameDayCanceled_sameDay_Established']
-#           totalTotal_sameDay_Established += row['Total_sameDay_Established']
-#         })
-#         return (totalNoShow_sameDay_Established + totalSameDayCanceled_sameDay_Established) / totalTotal_sameDay_Established || '-'
-#       }"),
-#       format = colFormat(percent = TRUE, digits = 0),
-#       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
-#     ),
-#     
-#    `noShow_rate_belowFourteen_Established` = colDef(
-#       name = "Scheduled 1-14 Days",
-#       maxWidth = 90,
-#       headerStyle = list(background = "#d80b8c", color = "white", fontWeight = "Bold", fontSize = "14px"),
-#       aggregate = JS("function(values, rows) {
-#         let totalNoShow_belowFourteen_Established = 0
-#         let totalSameDayCanceled_belowFourteen_Established = 0
-#         let totalTotal_belowFourteen_Established = 0
-#         rows.forEach(function(row) {
-#           totalNoShow_belowFourteen_Established += row['NoShow_belowFourteen_Established']
-#           totalSameDayCanceled_belowFourteen_Established += row['SameDayCanceled_belowFourteen_Established']
-#           totalTotal_belowFourteen_Established += row['Total_belowFourteen_Established']
-#         })
-#         return (totalNoShow_belowFourteen_Established + totalSameDayCanceled_belowFourteen_Established) / totalTotal_belowFourteen_Established || '-'
-#       }"),
-#       format = colFormat(percent = TRUE, digits = 0),
-#       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
-#     ),
-#     
-#     `noShow_rate_belowThirty_Established` = colDef(
-#       name = "Scheduled 15-30 Days",
-#       maxWidth = 90,
-#       headerStyle = list(background = "#d80b8c", color = "white", fontWeight = "Bold", fontSize = "14px"),
-#       aggregate = JS("function(values, rows) {
-#         let totalNoShow_belowThirty_Established = 0
-#         let totalSameDayCanceled_belowThirty_Established = 0
-#         let totalTotal_belowThirty_Established = 0
-#         rows.forEach(function(row) {
-#           totalNoShow_belowThirty_Established += row['NoShow_belowThirty_Established']
-#           totalSameDayCanceled_belowThirty_Established += row['SameDayCanceled_belowThirty_Established']
-#           totalTotal_belowThirty_Established += row['Total_belowThirty_Established']
-#         })
-#         return (totalNoShow_belowThirty_Established + totalSameDayCanceled_belowThirty_Established) / totalTotal_belowThirty_Established || '-'
-#       }"),
-#       format = colFormat(percent = TRUE, digits = 0),
-#       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
-#     ),
-#     
-#     `noShow_rate_overThirty_Established` = colDef(
-#       name = "Scheduled >30 Days",
-#       maxWidth = 90,
-#       headerStyle = list(background = "#d80b8c", color = "white", fontWeight = "Bold", fontSize = "14px"),
-#       aggregate = JS("function(values, rows) {
-#         let totalNoShow_overThirty_Established = 0
-#         let totalSameDayCanceled_overThirty_Established = 0
-#         let totalTotal_overThirty_Established = 0
-#         rows.forEach(function(row) {
-#           totalNoShow_overThirty_Established += row['NoShow_overThirty_Established']
-#           totalSameDayCanceled_overThirty_Established += row['SameDayCanceled_overThirty_Established']
-#           totalTotal_overThirty_Established += row['Total_overThirty_Established']
-#         })
-#         return (totalNoShow_overThirty_Established + totalSameDayCanceled_overThirty_Established) / totalTotal_overThirty_Established || '-'
-#       }"),
-#       format = colFormat(percent = TRUE, digits = 0),
-#       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
-#     ),
-#     
-#     `noShow_rate_New` = colDef(
-#       name = "All New",
-#       maxWidth = 90,
-#       headerStyle = list(background = "#00aeef", color = "white", fontWeight = "Bold", fontSize = "14px"),
-#       aggregate = JS("function(values, rows) {
-#         let totalNoShow_New = 0
-#         let totalSameDayCanceled_New = 0
-#         let totalTotal_New = 0
-#         rows.forEach(function(row) {
-#           totalNoShow_New += row['NoShow_New']
-#           totalSameDayCanceled_New += row['SameDayCanceled_New']
-#           totalTotal_New += row['Total_New']
-#         })
-#         return (totalNoShow_New + totalSameDayCanceled_New) / totalTotal_New || '-'
-#       }"),
-#       format = colFormat(percent = TRUE, digits = 0),
-#       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
-#     ),
-#    
-#    `noShow_rate_sameDay_New` = colDef(
-#       name = "Scheduled Same-Day",
-#       maxWidth = 90,
-#       headerStyle = list(background = "#00aeef", color = "white", fontWeight = "Bold", fontSize = "14px"),
-#       aggregate = JS("function(values, rows) {
-#         let totalNoShow_sameDay_New = 0
-#         let totalSameDayCanceled_sameDay_New = 0
-#         let totalTotal_sameDay_New = 0
-#         rows.forEach(function(row) {
-#           totalNoShow_sameDay_New += row['NoShow_sameDay_New']
-#           totalSameDayCanceled_sameDay_New += row['SameDayCanceled_sameDay_New']
-#           totalTotal_sameDay_New += row['Total_sameDay_New']
-#         })
-#         return (totalNoShow_sameDay_New + totalSameDayCanceled_sameDay_New) / totalTotal_sameDay_New || '-'
-#       }"),
-#       format = colFormat(percent = TRUE, digits = 0),
-#       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
-#     ),
-#    
-#    `noShow_rate_belowFourteen_New` = colDef(
-#       name = "Scheduled 1-14 Days",
-#       maxWidth = 90,
-#       headerStyle = list(background = "#00aeef", color = "white", fontWeight = "Bold", fontSize = "14px"),
-#       aggregate = JS("function(values, rows) {
-#         let totalNoShow_belowFourteen_New = 0
-#         let totalSameDayCanceled_belowFourteen_New = 0
-#         let totalTotal_belowFourteen_New = 0
-#         rows.forEach(function(row) {
-#           totalNoShow_belowFourteen_New += row['NoShow_belowFourteen_New']
-#           totalSameDayCanceled_belowFourteen_New += row['SameDayCanceled_belowFourteen_New']
-#           totalTotal_belowFourteen_New += row['Total_belowFourteen_New']
-#         })
-#         return (totalNoShow_belowFourteen_New + totalSameDayCanceled_belowFourteen_New) / totalTotal_belowFourteen_New || '-'
-#       }"),
-#       format = colFormat(percent = TRUE, digits = 0),
-#       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
-#     ),
-#     
-#     `noShow_rate_belowThirty_New` = colDef(
-#       name = "Scheduled 15-30 Days",
-#       maxWidth = 90,
-#       headerStyle = list(background = "#00aeef", color = "white", fontWeight = "Bold", fontSize = "14px"),
-#       aggregate = JS("function(values, rows) {
-#         let totalNoShow_belowThirty_New = 0
-#         let totalSameDayCanceled_belowThirty_New = 0
-#         let totalTotal_belowThirty_New = 0
-#         rows.forEach(function(row) {
-#           totalNoShow_belowThirty_New += row['NoShow_belowThirty_New']
-#           totalSameDayCanceled_belowThirty_New += row['SameDayCanceled_belowThirty_New']
-#           totalTotal_belowThirty_New += row['Total_belowThirty_New']
-#         })
-#         return (totalNoShow_belowThirty_New + totalSameDayCanceled_belowThirty_New) / totalTotal_belowThirty_New || '-'
-#       }"),
-#       format = colFormat(percent = TRUE, digits = 0),
-#       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
-#     ),
-#     
-#     `noShow_rate_overThirty_New` = colDef(
-#       name = "Scheduled >30 Days",
-#       maxWidth = 90,
-#       headerStyle = list(background = "#00aeef", color = "white", fontWeight = "Bold", fontSize = "14px"),
-#       aggregate = JS("function(values, rows) {
-#         let totalNoShow_overThirty_New = 0
-#         let totalSameDayCanceled_overThirty_New = 0
-#         let totalTotal_overThirty_New = 0
-#         rows.forEach(function(row) {
-#           totalNoShow_overThirty_New += row['NoShow_overThirty_New']
-#           totalSameDayCanceled_overThirty_New += row['SameDayCanceled_overThirty_New']
-#           totalTotal_overThirty_New += row['Total_overThirty_New']
-#         })
-#         return (totalNoShow_overThirty_New + totalSameDayCanceled_overThirty_New) / totalTotal_overThirty_New || '-'
-#       }"),
-#       format = colFormat(percent = TRUE, digits = 0),
-#       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
-#     ),
-#     
-#     `noShow_rate` = colDef(
-#       name = "All",
-#       maxWidth = 90,
-#       headerStyle = list(background = "#7f7f7f", color = "white", fontWeight = "Bold", fontSize = "14px"),
-#       aggregate = JS("function(values, rows) {
-#         let totalNoShow = 0
-#         let totalSameDayCanceled = 0
-#         let totalTotal = 0
-#         rows.forEach(function(row) {
-#           totalNoShow += row['NoShow']
-#           totalSameDayCanceled += row['SameDayCanceled']
-#           totalTotal += row['Total']
-#         })
-#         return (totalNoShow + totalSameDayCanceled) / totalTotal || '-'
-#       }"),
-#       format = colFormat(percent = TRUE, digits = 0),
-#       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
-#     ),
-#     
-#    `noShow_rate_sameDay` = colDef(
-#       name = "Scheduled Same-Day",
-#       maxWidth = 90,
-#       headerStyle = list(background = "#7f7f7f", color = "white", fontWeight = "Bold", fontSize = "14px"),
-#       aggregate = JS("function(values, rows) {
-#         let totalNoShow_sameDay = 0
-#         let totalSameDayCanceled_sameDay = 0
-#         let totalTotal_sameDay = 0
-#         rows.forEach(function(row) {
-#           totalNoShow_sameDay += row['NoShow_sameDay']
-#           totalSameDayCanceled_sameDay += row['SameDayCanceled_sameDay']
-#           totalTotal_sameDay += row['Total_sameDay']
-#         })
-#         return (totalNoShow_sameDay + totalSameDayCanceled_sameDay) / totalTotal_sameDay || '-'
-#       }"),
-#       format = colFormat(percent = TRUE, digits = 0),
-#       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
-#     ),
-#    
-#    `noShow_rate_belowFourteen` = colDef(
-#       name = "Scheduled 1-14 Days",
-#       maxWidth = 90,
-#       headerStyle = list(background = "#7f7f7f", color = "white", fontWeight = "Bold", fontSize = "14px"),
-#       aggregate = JS("function(values, rows) {
-#         let totalNoShow_belowFourteen = 0
-#         let totalSameDayCanceled_belowFourteen = 0
-#         let totalTotal_belowFourteen = 0
-#         rows.forEach(function(row) {
-#           totalNoShow_belowFourteen += row['NoShow_belowFourteen']
-#           totalSameDayCanceled_belowFourteen += row['SameDayCanceled_belowFourteen']
-#           totalTotal_belowFourteen += row['Total_belowFourteen']
-#         })
-#         return (totalNoShow_belowFourteen + totalSameDayCanceled_belowFourteen) / totalTotal_belowFourteen || '-'
-#       }"),
-#       format = colFormat(percent = TRUE, digits = 0),
-#       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
-#     ),
-#    
-#     `noShow_rate_belowThirty` = colDef(
-#       name = "Scheduled 15-30 Days",
-#       maxWidth = 90,
-#       headerStyle = list(background = "#7f7f7f", color = "white", fontWeight = "Bold", fontSize = "14px"),
-#       aggregate = JS("function(values, rows) {
-#         let totalNoShow_belowThirty = 0
-#         let totalSameDayCanceled_belowThirty = 0
-#         let totalTotal_belowThirty = 0
-#         rows.forEach(function(row) {
-#           totalNoShow_belowThirty += row['NoShow_belowThirty']
-#           totalSameDayCanceled_belowThirty += row['SameDayCanceled_belowThirty']
-#           totalTotal_belowThirty += row['Total_belowThirty']
-#         })
-#         return (totalNoShow_belowThirty + totalSameDayCanceled_belowThirty) / totalTotal_belowThirty || '-'
-#       }"),
-#       format = colFormat(percent = TRUE, digits = 0),
-#       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
-#     ),
-#     
-#     `noShow_rate_overThirty` = colDef(
-#       name = "Scheduled >30 Days",
-#       maxWidth = 90,
-#       headerStyle = list(background = "#7f7f7f", color = "white", fontWeight = "Bold", fontSize = "14px"),
-#       aggregate = JS("function(values, rows) {
-#         let totalNoShow_overThirty = 0
-#         let totalSameDayCanceled_overThirty = 0
-#         let totalTotal_overThirty = 0
-#         rows.forEach(function(row) {
-#           totalNoShow_overThirty += row['NoShow_overThirty']
-#           totalSameDayCanceled_overThirty += row['SameDayCanceled_overThirty']
-#           totalTotal_overThirty += row['Total_overThirty']
-#         })
-#         return (totalNoShow_overThirty + totalSameDayCanceled_overThirty) / totalTotal_overThirty || '-'
-#       }"),
-#       format = colFormat(percent = TRUE, digits = 0),
-#       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
-#     ),
-#     
-#     Arrived_Established = colDef(show =F),
-#     Arrived_New = colDef(show =F),
-#     Arrived_sameDay_Established = colDef(show =F),
-#     Arrived_sameDay_New = colDef(show =F),
-#     Arrived_belowFourteen_Established = colDef(show =F),
-#     Arrived_belowFourteen_New = colDef(show =F),
-#     Arrived_belowThirty_Established = colDef(show =F),
-#     Arrived_belowThirty_New = colDef(show =F),
-#     Arrived_overThirty_Established = colDef(show =F),
-#     Arrived_overThirty_New = colDef(show =F),
-#     
-#     NoShow_Established = colDef(show =F),
-#     NoShow_New = colDef(show =F),
-#     NoShow_sameDay_Established = colDef(show =F),
-#     NoShow_sameDay_New = colDef(show =F),
-#     NoShow_belowFourteen_Established = colDef(show =F),
-#     NoShow_belowFourteen_New = colDef(show =F),
-#     NoShow_belowThirty_Established = colDef(show =F),
-#     NoShow_belowThirty_New = colDef(show =F),
-#     NoShow_overThirty_Established = colDef(show =F),
-#     NoShow_overThirty_New = colDef(show =F),
-#     
-#     SameDayCanceled_Established = colDef(show =F),
-#     SameDayCanceled_New = colDef(show =F),
-#     SameDayCanceled_sameDay_Established = colDef(show =F),
-#     SameDayCanceled_sameDay_New = colDef(show =F),
-#     SameDayCanceled_belowFourteen_Established = colDef(show =F),
-#     SameDayCanceled_belowFourteen_New = colDef(show =F),
-#     SameDayCanceled_belowThirty_Established = colDef(show =F),
-#     SameDayCanceled_belowThirty_New = colDef(show =F),
-#     SameDayCanceled_overThirty_Established = colDef(show =F),
-#     SameDayCanceled_overThirty_New = colDef(show =F),
-#     
-#     Total_Established = colDef(show =F),
-#     Total_New = colDef(show =F),
-#     Total_sameDay_Established = colDef(show =F),
-#     Total_sameDay_New = colDef(show =F),
-#     Total_belowFourteen_Established = colDef(show =F),
-#     Total_belowFourteen_New = colDef(show =F),
-#     Total_belowThirty_Established = colDef(show =F),
-#     Total_belowThirty_New = colDef(show =F),
-#     Total_overThirty_Established = colDef(show =F),
-#     Total_overThirty_New = colDef(show =F),
-#     
-#     Total = colDef(show =F),
-#     Total_sameDay = colDef(show =F),
-#     Total_belowFourteen = colDef(show =F),
-#     Total_belowThirty = colDef(show =F),
-#     Total_overThirty = colDef(show =F),
-#     
-#     Arrived_sameDay = colDef(show =F),
-#     Arrived_belowFourteen = colDef(show =F),
-#     Arrived_belowThirty = colDef(show =F),
-#     Arrived_overThirty = colDef(show =F),
-#     
-#     NoShow = colDef(show =F),
-#     NoShow_sameDay = colDef(show =F),
-#     NoShow_belowFourteen = colDef(show =F),
-#     NoShow_belowThirty = colDef(show =F),
-#     NoShow_overThirty = colDef(show =F),
-#     
-#     SameDayCanceled = colDef(show =F),
-#     SameDayCanceled_sameDay = colDef(show =F),
-#     SameDayCanceled_belowFourteen = colDef(show =F),
-#     SameDayCanceled_belowThirty = colDef(show =F),
-#     SameDayCanceled_overThirty = colDef(show =F),
-#     arrived_site = colDef(show =F)
-#    
-#   ) # Close Columns
-# 
-#   ) # Close Reactable
-# 
-#  )
-# )
-
-```
-
-
-```{r TEST MSHS No Show Last Year Output, echo = FALSE, warning = FALSE, message = FALSE}
 
 no_show_last_site <- no_show_specialty %>%
   filter(Appt.Year == last_year) %>%
@@ -3931,13 +2791,13 @@ reactable(
     colGroup(name = paste0(last_year, " Visit Volume"), 
              columns = c("Arrived","arrived_perc","new_perc"),
              headerStyle = list(color = "#212070", fontSize = "16px")),
-    colGroup(name = "No Show Rate - All", 
+    colGroup(name = "No Show Plus Rate - All", 
              columns = c("noShow_rate", "noShow_rate_sameDay", "noShow_rate_belowFourteen", "noShow_rate_belowThirty", "noShow_rate_overThirty"),
              headerStyle = list(color = "#7f7f7f", fontSize = "16px")),
-    colGroup(name = "No Show Rate - Established", 
+    colGroup(name = "No Show Plus Rate - Established", 
              columns = c("noShow_rate_Established", "noShow_rate_sameDay_Established", "noShow_rate_belowFourteen_Established", "noShow_rate_belowThirty_Established", "noShow_rate_overThirty_Established"),
              headerStyle = list(color = "#d80b8c", fontSize = "16px")),
-    colGroup(name = "No Show Rate - New", 
+    colGroup(name = "No Show Plus Rate - New", 
              columns = c("noShow_rate_New","noShow_rate_sameDay_New", "noShow_rate_belowFourteen_New","noShow_rate_belowThirty_New", "noShow_rate_overThirty_New"),
              headerStyle = list(color = "#00aeef", fontSize = "16px"))
     ),
@@ -3988,13 +2848,13 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = JS("function(values, rows) {
-        let totalTotal_New = 0
-        let totalTotal = 0
+        let totalArrived_New = 0
+        let totalArrived = 0
         rows.forEach(function(row) {
-          totalTotal_New += row['Total_New']
-          totalTotal += row['Total']
+          totalArrived_New += row['Arrived_New']
+          totalArrived += row['Arrived']
         })
-        return (totalTotal_New) / totalTotal
+        return (totalArrived_New) / totalArrived
       }"),
       format = colFormat(percent = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
@@ -4366,6 +3226,1153 @@ reactable(
 <br/>
 
 
+```{r MSHS No Show Original Last Year Output, echo = FALSE, warning = FALSE, message = FALSE}
+
+no_show_org_last_site <- no_show_org_specialty %>%
+  filter(Appt.Year == last_year) %>%
+  group_by(Campus, Campus.Specialty.Group, New.PT2) %>%
+  summarise(Arrived = sum(Arrived),
+            `Arrived_sameDay` = sum(`Arrived_sameDay`),
+            `Arrived_belowFourteen` = sum(`Arrived_belowFourteen`),
+            `Arrived_belowThirty` = sum(`Arrived_belowThirty`),
+            `Arrived_overThirty` = sum(`Arrived_overThirty`),
+            `NoShow` = sum(`NoShow`),
+            `NoShow_sameDay` = sum(`NoShow_sameDay`),
+            `NoShow_belowFourteen` = sum(`NoShow_belowFourteen`),
+            `NoShow_belowThirty` = sum(`NoShow_belowThirty`),
+            `NoShow_overThirty` = sum(`NoShow_overThirty`),
+            Total = sum(Total),
+            `Total_sameDay` = sum(`Total_sameDay`),
+            `Total_belowFourteen` = sum(`Total_belowFourteen`),
+            `Total_belowThirty` = sum(`Total_belowThirty`),
+            `Total_overThirty` = sum(`Total_overThirty`)) %>%
+  mutate(noShow_rate = round((`NoShow`)/ Total,2),
+         `noShow_rate_sameDay` = round((`NoShow_sameDay`)/ `Total_sameDay`,2),
+         `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen`)/ `Total_belowFourteen`,2),
+         `noShow_rate_belowThirty` = round((`NoShow_belowThirty`)/ `Total_belowThirty`,2),
+         `noShow_rate_overThirty` = round((`NoShow_overThirty`)/ `Total_overThirty`,2)) %>%
+  pivot_wider(names_from = New.PT2,
+              values_from = 4:23,
+              values_fill = 0) %>%
+  mutate(Total = (Total_Established + Total_New),
+         `Total_sameDay` = (`Total_sameDay_Established` + `Total_sameDay_New`),
+         `Total_belowFourteen` = (`Total_belowFourteen_Established` + `Total_belowFourteen_New`),
+         `Total_belowThirty` = (`Total_belowThirty_Established` + `Total_belowThirty_New`),
+         `Total_overThirty` = (`Total_overThirty_Established` + `Total_overThirty_New`),
+         Arrived = (Arrived_Established + Arrived_New),
+         `Arrived_sameDay` = (`Arrived_sameDay_Established` + `Arrived_sameDay_New`),
+         `Arrived_belowFourteen` = (`Arrived_belowFourteen_Established` + `Arrived_belowFourteen_New`),
+         `Arrived_belowThirty` = (`Arrived_belowThirty_Established` + `Arrived_belowThirty_New`),
+         `Arrived_overThirty` = (`Arrived_overThirty_Established` + `Arrived_overThirty_New`),
+         NoShow = (NoShow_Established + NoShow_New),
+         `NoShow_sameDay` = (`NoShow_sameDay_Established` + `NoShow_sameDay_New`),
+         `NoShow_belowFourteen` = (`NoShow_belowFourteen_Established` + `NoShow_belowFourteen_New`),
+         `NoShow_belowThirty` = (`NoShow_belowThirty_Established` + `NoShow_belowThirty_New`),
+         `NoShow_overThirty` = (`NoShow_overThirty_Established` + `NoShow_overThirty_New`),
+         noShow_rate = round((`NoShow_Established` + `NoShow_New`)/Total,2),
+         `noShow_rate_sameDay` = round((`NoShow_sameDay`)/`Total_sameDay`,2),
+         `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen`)/`Total_belowFourteen`,2),
+         `noShow_rate_belowThirty` = round((`NoShow_belowThirty`)/`Total_belowThirty`,2),
+         `noShow_rate_overThirty` = round((`NoShow_overThirty`)/`Total_overThirty`,2),
+         new_perc = round(Arrived_New/Arrived,2)) %>%
+  group_by(Campus) %>%
+  mutate(arrived_site = sum(Arrived),
+         arrived_perc = round(Arrived/arrived_site,2)) 
+
+
+no_show_org_last_mshs <- no_show_org_specialty %>%
+  filter(Appt.Year == last_year) %>%
+  group_by(Campus.Specialty.Group, New.PT2) %>%
+  summarise(Arrived = sum(Arrived),
+            `Arrived_sameDay` = sum(`Arrived_sameDay`),
+            `Arrived_belowFourteen` = sum(`Arrived_belowFourteen`),
+            `Arrived_belowThirty` = sum(`Arrived_belowThirty`),
+            `Arrived_overThirty` = sum(`Arrived_overThirty`),
+            `NoShow` = sum(`NoShow`),
+            `NoShow_sameDay` = sum(`NoShow_sameDay`),
+            `NoShow_belowFourteen` = sum(`NoShow_belowFourteen`),
+            `NoShow_belowThirty` = sum(`NoShow_belowThirty`),
+            `NoShow_overThirty` = sum(`NoShow_overThirty`),
+            Total = sum(Total),
+            `Total_sameDay` = sum(`Total_sameDay`),
+            `Total_belowFourteen` = sum(`Total_belowFourteen`),
+            `Total_belowThirty` = sum(`Total_belowThirty`),
+            `Total_overThirty` = sum(`Total_overThirty`)) %>%
+  mutate(noShow_rate = round((`NoShow`)/ Total,2),
+         `noShow_rate_sameDay` = round((`NoShow_sameDay`)/ `Total_sameDay`,2),
+         `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen`)/ `Total_belowFourteen`,2),
+         `noShow_rate_belowThirty` = round((`NoShow_belowThirty`)/ `Total_belowThirty`,2),
+         `noShow_rate_overThirty` = round((`NoShow_overThirty`)/ `Total_overThirty`,2)) %>%
+  pivot_wider(names_from = New.PT2,
+              values_from = 3:22,
+              values_fill = 0) %>%
+  mutate(Total = (Total_Established + Total_New),
+         `Total_sameDay` = (`Total_sameDay_Established` + `Total_sameDay_New`),
+         `Total_belowFourteen` = (`Total_belowFourteen_Established` + `Total_belowFourteen_New`),
+         `Total_belowThirty` = (`Total_belowThirty_Established` + `Total_belowThirty_New`),
+         `Total_overThirty` = (`Total_overThirty_Established` + `Total_overThirty_New`),
+         Arrived = (Arrived_Established + Arrived_New),
+         `Arrived_sameDay` = (`Arrived_sameDay_Established` + `Arrived_sameDay_New`),
+         `Arrived_belowFourteen` = (`Arrived_belowFourteen_Established` + `Arrived_belowFourteen_New`),
+         `Arrived_belowThirty` = (`Arrived_belowThirty_Established` + `Arrived_belowThirty_New`),
+         `Arrived_overThirty` = (`Arrived_overThirty_Established` + `Arrived_overThirty_New`),
+         NoShow = (NoShow_Established + NoShow_New),
+         `NoShow_sameDay` = (`NoShow_sameDay_Established` + `NoShow_sameDay_New`),
+         `NoShow_belowFourteen` = (`NoShow_belowFourteen_Established` + `NoShow_belowFourteen_New`),
+         `NoShow_belowThirty` = (`NoShow_belowThirty_Established` + `NoShow_belowThirty_New`),
+         `NoShow_overThirty` = (`NoShow_overThirty_Established` + `NoShow_overThirty_New`),
+         noShow_rate = round((`NoShow_Established` + `NoShow_New`)/Total,2),
+         `noShow_rate_sameDay` = round((`NoShow_sameDay`)/`Total_sameDay`,2),
+         `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen`)/`Total_belowFourteen`,2),
+         `noShow_rate_belowThirty` = round((`NoShow_belowThirty`)/`Total_belowThirty`,2),
+         `noShow_rate_overThirty` = round((`NoShow_overThirty`)/`Total_overThirty`,2),
+         new_perc = round(Arrived_New/Arrived,2)) %>%
+  mutate(Campus = "MSHS Total") %>%
+  group_by(Campus) %>%
+  mutate(arrived_site = sum(Arrived),
+         arrived_perc = round(Arrived/arrived_site,2)) 
+
+
+no_show_org_last_merged <- bind_rows(no_show_org_last_site, no_show_org_last_mshs)
+
+no_show_org_last_merged <- no_show_org_last_merged %>%
+  dplyr::select(1:2, 48, 63, 65, 
+                3:47, 49:62, 64)
+
+
+
+# Table Output -----------------------------------------------------------------
+htmltools::browsable(
+  tagList(
+    tags$button(
+      tagList(fontawesome::fa("download"), "Download Table"),
+      onclick = "Reactable.downloadDataCSV('mshs_last_noshow_org-download-table', 'Avg No Show Rate')"
+    ),
+
+reactable(
+  no_show_org_last_merged,
+  elementId = "mshs_last_noshow_org-download-table",
+  style = list(fontFamily = 'Calibri',
+                 fontSize = '14px'),
+    defaultColDef = colDef(align = "left",
+                           headerStyle = list(fontWeight = "Bold", fontSize = "14px"),
+                           headerClass = "bar-sort-header"),
+  # RowStyle = function(index) {
+  #           if (index %in% c(nrow(referral_vol_site_data_mshs))) {
+  #             list(`border-top` = "2px solid rgb(184,184,184)",
+  #                  fontWeight = "Bold")
+  #           }
+  #         },
+    highlight = TRUE,
+    # filterable = TRUE,
+    pagination = FALSE,
+    # height = 800,
+    wrap = TRUE,
+  searchable = TRUE,
+  
+  rowStyle = function(index) {
+            if (index %in% c(10)) {
+              list(`border-top` = "2px solid rgb(184,184,184)",
+                   fontWeight = "Bold")
+            }
+          },
+
+  groupBy = c("Campus","Campus.Specialty.Group"),
+
+  columnGroups = list(
+    # colGroup(name = paste0(format(as.Date(start_date), "%b"),"-",format(as.Date(end_date), "%b %Y"), " Visit Volume"), 
+    #          columns = c("Total", "new_perc"),
+    #          headerStyle = list(color = "#212070", fontSize = "16px")),
+    # colGroup(name = paste0(format(as.Date(start_date), "%b"),"-",format(as.Date(end_date), "%b %Y"), " No Show Rate"), 
+    #          columns = c("noShow_rate", "noShow_rate_Established", "noShow_rate_New"),
+    #          headerStyle = list(color = "#d80b8c", fontSize = "16px"))
+    colGroup(name = "", 
+             columns = c("Campus","Campus.Specialty.Group"), sticky = "left",
+             headerStyle = list(fontSize = "16px")),
+    colGroup(name = paste0(last_year, " Visit Volume"), 
+             columns = c("Arrived","arrived_perc","new_perc"),
+             headerStyle = list(color = "#212070", fontSize = "16px")),
+    colGroup(name = "No Show Rate - All", 
+             columns = c("noShow_rate", "noShow_rate_sameDay", "noShow_rate_belowFourteen", "noShow_rate_belowThirty", "noShow_rate_overThirty"),
+             headerStyle = list(color = "#7f7f7f", fontSize = "16px")),
+    colGroup(name = "No Show Rate - Established", 
+             columns = c("noShow_rate_Established", "noShow_rate_sameDay_Established", "noShow_rate_belowFourteen_Established", "noShow_rate_belowThirty_Established", "noShow_rate_overThirty_Established"),
+             headerStyle = list(color = "#d80b8c", fontSize = "16px")),
+    colGroup(name = "No Show Rate - New", 
+             columns = c("noShow_rate_New","noShow_rate_sameDay_New", "noShow_rate_belowFourteen_New","noShow_rate_belowThirty_New", "noShow_rate_overThirty_New"),
+             headerStyle = list(color = "#00aeef", fontSize = "16px"))
+    ),
+
+  columns = list(
+
+    Campus = colDef(
+      # footer = "Total",
+      name = "Site",
+      minWidth = 220),
+
+    Campus.Specialty.Group = colDef(
+      name = "Specialty",
+      minWidth = 250),
+    
+    # Appt.Source.New = colDef(
+    #   name = "Source",
+    #   minWidth = 100),
+    
+    Arrived = colDef(
+      name = "Total Arrived Visits",
+      maxWidth = 90,
+      headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
+      aggregate = 'sum',
+      format = colFormat(separators = TRUE, digits = 0),
+      style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
+    ),
+
+    arrived_perc = colDef(
+      name = "% of Site Total Arrived Visits",
+      maxWidth = 90,
+     headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
+      # aggregate = JS("function(values, rows) {
+      #   let totalArrived = 0
+      #   let totalarrived_site = 0
+      #   rows.forEach(function(row) {
+      #     totalArrived += row['Arrived']
+      #     totalarrived_site += row['arrived_site']
+      #   })
+      #   return totalArrived / totalarrived_site
+      # }"),
+      format = colFormat(percent = TRUE, digits = 0),
+      style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
+    ),
+
+    new_perc = colDef(
+      name = "% New Arrived Visits",
+      maxWidth = 90,
+      headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
+      aggregate = JS("function(values, rows) {
+        let totalArrived_New = 0
+        let totalArrived = 0
+        rows.forEach(function(row) {
+          totalArrived_New += row['Arrived_New']
+          totalArrived += row['Arrived']
+        })
+        return (totalArrived_New) / totalArrived
+      }"),
+      format = colFormat(percent = TRUE, digits = 0),
+      style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
+    ),
+
+    `noShow_rate_Established` = colDef(
+      name = "All Established",
+      maxWidth = 90,
+      headerStyle = list(background = "#d80b8c", color = "white", fontWeight = "Bold", fontSize = "14px"),
+      aggregate = JS("function(values, rows) {
+        let totalNoShow_Established = 0
+        let totalTotal_Established = 0
+        rows.forEach(function(row) {
+          totalNoShow_Established += row['NoShow_Established']
+          totalTotal_Established += row['Total_Established']
+        })
+        return (totalNoShow_Established) / totalTotal_Established || '-'
+      }"),
+      format = colFormat(percent = TRUE, digits = 0),
+      style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
+    ),
+
+    `noShow_rate_sameDay_Established` = colDef(
+      name = "Scheduled Same-Day",
+      maxWidth = 90,
+      headerStyle = list(background = "#d80b8c", color = "white", fontWeight = "Bold", fontSize = "14px"),
+      aggregate = JS("function(values, rows) {
+        let totalNoShow_sameDay_Established = 0
+        let totalTotal_sameDay_Established = 0
+        rows.forEach(function(row) {
+          totalNoShow_sameDay_Established += row['NoShow_sameDay_Established']
+          totalTotal_sameDay_Established += row['Total_sameDay_Established']
+        })
+        return (totalNoShow_sameDay_Established) / totalTotal_sameDay_Established || '-'
+      }"),
+      format = colFormat(percent = TRUE, digits = 0),
+      style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
+    ),
+    
+   `noShow_rate_belowFourteen_Established` = colDef(
+      name = "Scheduled 1-14 Days",
+      maxWidth = 90,
+      headerStyle = list(background = "#d80b8c", color = "white", fontWeight = "Bold", fontSize = "14px"),
+      aggregate = JS("function(values, rows) {
+        let totalNoShow_belowFourteen_Established = 0
+        let totalTotal_belowFourteen_Established = 0
+        rows.forEach(function(row) {
+          totalNoShow_belowFourteen_Established += row['NoShow_belowFourteen_Established']
+          totalTotal_belowFourteen_Established += row['Total_belowFourteen_Established']
+        })
+        return (totalNoShow_belowFourteen_Established) / totalTotal_belowFourteen_Established || '-'
+      }"),
+      format = colFormat(percent = TRUE, digits = 0),
+      style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
+    ),
+    
+    `noShow_rate_belowThirty_Established` = colDef(
+      name = "Scheduled 15-30 Days",
+      maxWidth = 90,
+      headerStyle = list(background = "#d80b8c", color = "white", fontWeight = "Bold", fontSize = "14px"),
+      aggregate = JS("function(values, rows) {
+        let totalNoShow_belowThirty_Established = 0
+        let totalTotal_belowThirty_Established = 0
+        rows.forEach(function(row) {
+          totalNoShow_belowThirty_Established += row['NoShow_belowThirty_Established']
+          totalTotal_belowThirty_Established += row['Total_belowThirty_Established']
+        })
+        return (totalNoShow_belowThirty_Established) / totalTotal_belowThirty_Established || '-'
+      }"),
+      format = colFormat(percent = TRUE, digits = 0),
+      style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
+    ),
+    
+    `noShow_rate_overThirty_Established` = colDef(
+      name = "Scheduled >30 Days",
+      maxWidth = 90,
+      headerStyle = list(background = "#d80b8c", color = "white", fontWeight = "Bold", fontSize = "14px"),
+      aggregate = JS("function(values, rows) {
+        let totalNoShow_overThirty_Established = 0
+        let totalTotal_overThirty_Established = 0
+        rows.forEach(function(row) {
+          totalNoShow_overThirty_Established += row['NoShow_overThirty_Established']
+          totalTotal_overThirty_Established += row['Total_overThirty_Established']
+        })
+        return (totalNoShow_overThirty_Established) / totalTotal_overThirty_Established || '-'
+      }"),
+      format = colFormat(percent = TRUE, digits = 0),
+      style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
+    ),
+    
+    `noShow_rate_New` = colDef(
+      name = "All New",
+      maxWidth = 90,
+      headerStyle = list(background = "#00aeef", color = "white", fontWeight = "Bold", fontSize = "14px"),
+      aggregate = JS("function(values, rows) {
+        let totalNoShow_New = 0
+        let totalTotal_New = 0
+        rows.forEach(function(row) {
+          totalNoShow_New += row['NoShow_New']
+          totalTotal_New += row['Total_New']
+        })
+        return (totalNoShow_New) / totalTotal_New || '-'
+      }"),
+      format = colFormat(percent = TRUE, digits = 0),
+      style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
+    ),
+   
+   `noShow_rate_sameDay_New` = colDef(
+      name = "Scheduled Same-Day",
+      maxWidth = 90,
+      headerStyle = list(background = "#00aeef", color = "white", fontWeight = "Bold", fontSize = "14px"),
+      aggregate = JS("function(values, rows) {
+        let totalNoShow_sameDay_New = 0
+        let totalTotal_sameDay_New = 0
+        rows.forEach(function(row) {
+          totalNoShow_sameDay_New += row['NoShow_sameDay_New']
+          totalTotal_sameDay_New += row['Total_sameDay_New']
+        })
+        return (totalNoShow_sameDay_New) / totalTotal_sameDay_New || '-'
+      }"),
+      format = colFormat(percent = TRUE, digits = 0),
+      style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
+    ),
+   
+   `noShow_rate_belowFourteen_New` = colDef(
+      name = "Scheduled 1-14 Days",
+      maxWidth = 90,
+      headerStyle = list(background = "#00aeef", color = "white", fontWeight = "Bold", fontSize = "14px"),
+      aggregate = JS("function(values, rows) {
+        let totalNoShow_belowFourteen_New = 0
+        let totalTotal_belowFourteen_New = 0
+        rows.forEach(function(row) {
+          totalNoShow_belowFourteen_New += row['NoShow_belowFourteen_New']
+          totalTotal_belowFourteen_New += row['Total_belowFourteen_New']
+        })
+        return (totalNoShow_belowFourteen_New) / totalTotal_belowFourteen_New || '-'
+      }"),
+      format = colFormat(percent = TRUE, digits = 0),
+      style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
+    ),
+    
+    `noShow_rate_belowThirty_New` = colDef(
+      name = "Scheduled 15-30 Days",
+      maxWidth = 90,
+      headerStyle = list(background = "#00aeef", color = "white", fontWeight = "Bold", fontSize = "14px"),
+      aggregate = JS("function(values, rows) {
+        let totalNoShow_belowThirty_New = 0
+        let totalTotal_belowThirty_New = 0
+        rows.forEach(function(row) {
+          totalNoShow_belowThirty_New += row['NoShow_belowThirty_New']
+          totalTotal_belowThirty_New += row['Total_belowThirty_New']
+        })
+        return (totalNoShow_belowThirty_New) / totalTotal_belowThirty_New || '-'
+      }"),
+      format = colFormat(percent = TRUE, digits = 0),
+      style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
+    ),
+    
+    `noShow_rate_overThirty_New` = colDef(
+      name = "Scheduled >30 Days",
+      maxWidth = 90,
+      headerStyle = list(background = "#00aeef", color = "white", fontWeight = "Bold", fontSize = "14px"),
+      aggregate = JS("function(values, rows) {
+        let totalNoShow_overThirty_New = 0
+        let totalTotal_overThirty_New = 0
+        rows.forEach(function(row) {
+          totalNoShow_overThirty_New += row['NoShow_overThirty_New']
+          totalTotal_overThirty_New += row['Total_overThirty_New']
+        })
+        return (totalNoShow_overThirty_New) / totalTotal_overThirty_New || '-'
+      }"),
+      format = colFormat(percent = TRUE, digits = 0),
+      style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
+    ),
+    
+    `noShow_rate` = colDef(
+      name = "All",
+      maxWidth = 90,
+      headerStyle = list(background = "#7f7f7f", color = "white", fontWeight = "Bold", fontSize = "14px"),
+      aggregate = JS("function(values, rows) {
+        let totalNoShow = 0
+        let totalTotal = 0
+        rows.forEach(function(row) {
+          totalNoShow += row['NoShow']
+          totalTotal += row['Total']
+        })
+        return (totalNoShow) / totalTotal || '-'
+      }"),
+      format = colFormat(percent = TRUE, digits = 0),
+      style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
+    ),
+    
+   `noShow_rate_sameDay` = colDef(
+      name = "Scheduled Same-Day",
+      maxWidth = 90,
+      headerStyle = list(background = "#7f7f7f", color = "white", fontWeight = "Bold", fontSize = "14px"),
+      aggregate = JS("function(values, rows) {
+        let totalNoShow_sameDay = 0
+        let totalTotal_sameDay = 0
+        rows.forEach(function(row) {
+          totalNoShow_sameDay += row['NoShow_sameDay']
+          totalTotal_sameDay += row['Total_sameDay']
+        })
+        return (totalNoShow_sameDay) / totalTotal_sameDay || '-'
+      }"),
+      format = colFormat(percent = TRUE, digits = 0),
+      style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
+    ),
+   
+   `noShow_rate_belowFourteen` = colDef(
+      name = "Scheduled 1-14 Days",
+      maxWidth = 90,
+      headerStyle = list(background = "#7f7f7f", color = "white", fontWeight = "Bold", fontSize = "14px"),
+      aggregate = JS("function(values, rows) {
+        let totalNoShow_belowFourteen = 0
+        let totalTotal_belowFourteen = 0
+        rows.forEach(function(row) {
+          totalNoShow_belowFourteen += row['NoShow_belowFourteen']
+          totalTotal_belowFourteen += row['Total_belowFourteen']
+        })
+        return (totalNoShow_belowFourteen) / totalTotal_belowFourteen || '-'
+      }"),
+      format = colFormat(percent = TRUE, digits = 0),
+      style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
+    ),
+   
+    `noShow_rate_belowThirty` = colDef(
+      name = "Scheduled 15-30 Days",
+      maxWidth = 90,
+      headerStyle = list(background = "#7f7f7f", color = "white", fontWeight = "Bold", fontSize = "14px"),
+      aggregate = JS("function(values, rows) {
+        let totalNoShow_belowThirty = 0
+        let totalTotal_belowThirty = 0
+        rows.forEach(function(row) {
+          totalNoShow_belowThirty += row['NoShow_belowThirty']
+          totalTotal_belowThirty += row['Total_belowThirty']
+        })
+        return (totalNoShow_belowThirty) / totalTotal_belowThirty || '-'
+      }"),
+      format = colFormat(percent = TRUE, digits = 0),
+      style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
+    ),
+    
+    `noShow_rate_overThirty` = colDef(
+      name = "Scheduled >30 Days",
+      maxWidth = 90,
+      headerStyle = list(background = "#7f7f7f", color = "white", fontWeight = "Bold", fontSize = "14px"),
+      aggregate = JS("function(values, rows) {
+        let totalNoShow_overThirty = 0
+        let totalTotal_overThirty = 0
+        rows.forEach(function(row) {
+          totalNoShow_overThirty += row['NoShow_overThirty']
+          totalTotal_overThirty += row['Total_overThirty']
+        })
+        return (totalNoShow_overThirty) / totalTotal_overThirty || '-'
+      }"),
+      format = colFormat(percent = TRUE, digits = 0),
+      style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
+    ),
+    
+    Arrived_Established = colDef(show =F),
+    Arrived_New = colDef(show =F),
+    Arrived_sameDay_Established = colDef(show =F),
+    Arrived_sameDay_New = colDef(show =F),
+    Arrived_belowFourteen_Established = colDef(show =F),
+    Arrived_belowFourteen_New = colDef(show =F),
+    Arrived_belowThirty_Established = colDef(show =F),
+    Arrived_belowThirty_New = colDef(show =F),
+    Arrived_overThirty_Established = colDef(show =F),
+    Arrived_overThirty_New = colDef(show =F),
+    
+    NoShow_Established = colDef(show =F),
+    NoShow_New = colDef(show =F),
+    NoShow_sameDay_Established = colDef(show =F),
+    NoShow_sameDay_New = colDef(show =F),
+    NoShow_belowFourteen_Established = colDef(show =F),
+    NoShow_belowFourteen_New = colDef(show =F),
+    NoShow_belowThirty_Established = colDef(show =F),
+    NoShow_belowThirty_New = colDef(show =F),
+    NoShow_overThirty_Established = colDef(show =F),
+    NoShow_overThirty_New = colDef(show =F),
+    
+    Total_Established = colDef(show =F),
+    Total_New = colDef(show =F),
+    Total_sameDay_Established = colDef(show =F),
+    Total_sameDay_New = colDef(show =F),
+    Total_belowFourteen_Established = colDef(show =F),
+    Total_belowFourteen_New = colDef(show =F),
+    Total_belowThirty_Established = colDef(show =F),
+    Total_belowThirty_New = colDef(show =F),
+    Total_overThirty_Established = colDef(show =F),
+    Total_overThirty_New = colDef(show =F),
+    
+    Total = colDef(show =F),
+    Total_sameDay = colDef(show =F),
+    Total_belowFourteen = colDef(show =F),
+    Total_belowThirty = colDef(show =F),
+    Total_overThirty = colDef(show =F),
+    
+    Arrived_sameDay = colDef(show =F),
+    Arrived_belowFourteen = colDef(show =F),
+    Arrived_belowThirty = colDef(show =F),
+    Arrived_overThirty = colDef(show =F),
+    
+    NoShow = colDef(show =F),
+    NoShow_sameDay = colDef(show =F),
+    NoShow_belowFourteen = colDef(show =F),
+    NoShow_belowThirty = colDef(show =F),
+    NoShow_overThirty = colDef(show =F),
+    
+    arrived_site = colDef(show =F)
+   
+  ) # Close Columns
+
+  ) # Close Reactable
+
+ )
+)
+
+```
+<br/>
+<br/>
+<br/>
+
+
+```{r MSHS No Show All Statuses Last Year Output, echo = FALSE, warning = FALSE, message = FALSE}
+
+no_show_all_last_site <- no_show_all_specialty %>%
+  filter(Appt.Year == last_year) %>%
+  group_by(Campus, Campus.Specialty.Group, New.PT2) %>%
+  summarise(Arrived = sum(Arrived),
+            `Arrived_sameDay` = sum(`Arrived_sameDay`),
+            `Arrived_belowFourteen` = sum(`Arrived_belowFourteen`),
+            `Arrived_belowThirty` = sum(`Arrived_belowThirty`),
+            `Arrived_overThirty` = sum(`Arrived_overThirty`),
+            `NoShow` = sum(`NoShow`),
+            `NoShow_sameDay` = sum(`NoShow_sameDay`),
+            `NoShow_belowFourteen` = sum(`NoShow_belowFourteen`),
+            `NoShow_belowThirty` = sum(`NoShow_belowThirty`),
+            `NoShow_overThirty` = sum(`NoShow_overThirty`),
+            `SameDayCanceled` = sum(`SameDayCanceled`),
+            `SameDayCanceled_sameDay` = sum(`SameDayCanceled_sameDay`),
+            `SameDayCanceled_belowFourteen` = sum(`SameDayCanceled_belowFourteen`),
+            `SameDayCanceled_belowThirty` = sum(`SameDayCanceled_belowThirty`),
+            `SameDayCanceled_overThirty` = sum(`SameDayCanceled_overThirty`),
+            Total = sum(Total),
+            `Total_sameDay` = sum(`Total_sameDay`),
+            `Total_belowFourteen` = sum(`Total_belowFourteen`),
+            `Total_belowThirty` = sum(`Total_belowThirty`),
+            `Total_overThirty` = sum(`Total_overThirty`)) %>%
+  mutate(noShow_rate = round((`NoShow`)/ Total,2),
+         `noShow_rate_sameDay` = round((`NoShow_sameDay`)/ `Total_sameDay`,2),
+         `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen`)/ `Total_belowFourteen`,2),
+         `noShow_rate_belowThirty` = round((`NoShow_belowThirty`)/ `Total_belowThirty`,2),
+         `noShow_rate_overThirty` = round((`NoShow_overThirty`)/ `Total_overThirty`,2)) %>%
+  pivot_wider(names_from = New.PT2,
+              values_from = 4:28,
+              values_fill = 0) %>%
+  mutate(Total = (Total_Established + Total_New),
+         `Total_sameDay` = (`Total_sameDay_Established` + `Total_sameDay_New`),
+         `Total_belowFourteen` = (`Total_belowFourteen_Established` + `Total_belowFourteen_New`),
+         `Total_belowThirty` = (`Total_belowThirty_Established` + `Total_belowThirty_New`),
+         `Total_overThirty` = (`Total_overThirty_Established` + `Total_overThirty_New`),
+         Arrived = (Arrived_Established + Arrived_New),
+         `Arrived_sameDay` = (`Arrived_sameDay_Established` + `Arrived_sameDay_New`),
+         `Arrived_belowFourteen` = (`Arrived_belowFourteen_Established` + `Arrived_belowFourteen_New`),
+         `Arrived_belowThirty` = (`Arrived_belowThirty_Established` + `Arrived_belowThirty_New`),
+         `Arrived_overThirty` = (`Arrived_overThirty_Established` + `Arrived_overThirty_New`),
+         NoShow = (NoShow_Established + NoShow_New),
+         `NoShow_sameDay` = (`NoShow_sameDay_Established` + `NoShow_sameDay_New`),
+         `NoShow_belowFourteen` = (`NoShow_belowFourteen_Established` + `NoShow_belowFourteen_New`),
+         `NoShow_belowThirty` = (`NoShow_belowThirty_Established` + `NoShow_belowThirty_New`),
+         `NoShow_overThirty` = (`NoShow_overThirty_Established` + `NoShow_overThirty_New`),
+         SameDayCanceled = (SameDayCanceled_Established + SameDayCanceled_New),
+         `SameDayCanceled_sameDay` = (`SameDayCanceled_sameDay_Established` + `SameDayCanceled_sameDay_New`),
+         `SameDayCanceled_belowFourteen` = (`SameDayCanceled_belowFourteen_Established` + `SameDayCanceled_belowFourteen_New`),
+         `SameDayCanceled_belowThirty` = (`SameDayCanceled_belowThirty_Established` + `SameDayCanceled_belowThirty_New`),
+         `SameDayCanceled_overThirty` = (`SameDayCanceled_overThirty_Established` + `SameDayCanceled_overThirty_New`),
+         noShow_rate = round((`NoShow_Established` + `NoShow_New`)/Total,2),
+         `noShow_rate_sameDay` = round((`NoShow_sameDay`)/`Total_sameDay`,2),
+         `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen`)/`Total_belowFourteen`,2),
+         `noShow_rate_belowThirty` = round((`NoShow_belowThirty`)/`Total_belowThirty`,2),
+         `noShow_rate_overThirty` = round((`NoShow_overThirty`)/`Total_overThirty`,2),
+         new_perc = round(Arrived_New/Arrived,2)) %>%
+  group_by(Campus) %>%
+  mutate(arrived_site = sum(Arrived),
+         arrived_perc = round(Arrived/arrived_site,2)) 
+
+
+no_show_all_last_mshs <- no_show_all_specialty %>%
+  filter(Appt.Year == last_year) %>%
+  group_by(Campus.Specialty.Group, New.PT2) %>%
+  summarise(Arrived = sum(Arrived),
+            `Arrived_sameDay` = sum(`Arrived_sameDay`),
+            `Arrived_belowFourteen` = sum(`Arrived_belowFourteen`),
+            `Arrived_belowThirty` = sum(`Arrived_belowThirty`),
+            `Arrived_overThirty` = sum(`Arrived_overThirty`),
+            `NoShow` = sum(`NoShow`),
+            `NoShow_sameDay` = sum(`NoShow_sameDay`),
+            `NoShow_belowFourteen` = sum(`NoShow_belowFourteen`),
+            `NoShow_belowThirty` = sum(`NoShow_belowThirty`),
+            `NoShow_overThirty` = sum(`NoShow_overThirty`),
+            `SameDayCanceled` = sum(`SameDayCanceled`),
+            `SameDayCanceled_sameDay` = sum(`SameDayCanceled_sameDay`),
+            `SameDayCanceled_belowFourteen` = sum(`SameDayCanceled_belowFourteen`),
+            `SameDayCanceled_belowThirty` = sum(`SameDayCanceled_belowThirty`),
+            `SameDayCanceled_overThirty` = sum(`SameDayCanceled_overThirty`),
+            Total = sum(Total),
+            `Total_sameDay` = sum(`Total_sameDay`),
+            `Total_belowFourteen` = sum(`Total_belowFourteen`),
+            `Total_belowThirty` = sum(`Total_belowThirty`),
+            `Total_overThirty` = sum(`Total_overThirty`)) %>%
+  mutate(noShow_rate = round((`NoShow`)/ Total,2),
+         `noShow_rate_sameDay` = round((`NoShow_sameDay`)/ `Total_sameDay`,2),
+         `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen`)/ `Total_belowFourteen`,2),
+         `noShow_rate_belowThirty` = round((`NoShow_belowThirty`)/ `Total_belowThirty`,2),
+         `noShow_rate_overThirty` = round((`NoShow_overThirty`)/ `Total_overThirty`,2)) %>%
+  pivot_wider(names_from = New.PT2,
+              values_from = 3:27,
+              values_fill = 0) %>%
+  mutate(Total = (Total_Established + Total_New),
+         `Total_sameDay` = (`Total_sameDay_Established` + `Total_sameDay_New`),
+         `Total_belowFourteen` = (`Total_belowFourteen_Established` + `Total_belowFourteen_New`),
+         `Total_belowThirty` = (`Total_belowThirty_Established` + `Total_belowThirty_New`),
+         `Total_overThirty` = (`Total_overThirty_Established` + `Total_overThirty_New`),
+         Arrived = (Arrived_Established + Arrived_New),
+         `Arrived_sameDay` = (`Arrived_sameDay_Established` + `Arrived_sameDay_New`),
+         `Arrived_belowFourteen` = (`Arrived_belowFourteen_Established` + `Arrived_belowFourteen_New`),
+         `Arrived_belowThirty` = (`Arrived_belowThirty_Established` + `Arrived_belowThirty_New`),
+         `Arrived_overThirty` = (`Arrived_overThirty_Established` + `Arrived_overThirty_New`),
+         NoShow = (NoShow_Established + NoShow_New),
+         `NoShow_sameDay` = (`NoShow_sameDay_Established` + `NoShow_sameDay_New`),
+         `NoShow_belowFourteen` = (`NoShow_belowFourteen_Established` + `NoShow_belowFourteen_New`),
+         `NoShow_belowThirty` = (`NoShow_belowThirty_Established` + `NoShow_belowThirty_New`),
+         `NoShow_overThirty` = (`NoShow_overThirty_Established` + `NoShow_overThirty_New`),
+         SameDayCanceled = (SameDayCanceled_Established + SameDayCanceled_New),
+         `SameDayCanceled_sameDay` = (`SameDayCanceled_sameDay_Established` + `SameDayCanceled_sameDay_New`),
+         `SameDayCanceled_belowFourteen` = (`SameDayCanceled_belowFourteen_Established` + `SameDayCanceled_belowFourteen_New`),
+         `SameDayCanceled_belowThirty` = (`SameDayCanceled_belowThirty_Established` + `SameDayCanceled_belowThirty_New`),
+         `SameDayCanceled_overThirty` = (`SameDayCanceled_overThirty_Established` + `SameDayCanceled_overThirty_New`),
+         noShow_rate = round((`NoShow_Established` + `NoShow_New`)/Total,2),
+         `noShow_rate_sameDay` = round((`NoShow_sameDay`)/`Total_sameDay`,2),
+         `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen`)/`Total_belowFourteen`,2),
+         `noShow_rate_belowThirty` = round((`NoShow_belowThirty`)/`Total_belowThirty`,2),
+         `noShow_rate_overThirty` = round((`NoShow_overThirty`)/`Total_overThirty`,2),
+         new_perc = round(Arrived_New/Arrived,2)) %>%
+  mutate(Campus = "MSHS Total") %>%
+  group_by(Campus) %>%
+  group_by(Campus) %>%
+  mutate(arrived_site = sum(Arrived),
+         arrived_perc = round(Arrived/arrived_site,2))
+
+
+no_show_all_last_merged <- bind_rows(no_show_all_last_site, no_show_all_last_mshs)
+
+no_show_all_last_merged <- no_show_all_last_merged %>%
+  dplyr::select(1:2, 58, 78, 80, 
+                3:57, 59:77, 79)
+
+
+
+# Table Output -----------------------------------------------------------------
+htmltools::browsable(
+  tagList(
+    tags$button(
+      tagList(fontawesome::fa("download"), "Download Table"),
+      onclick = "Reactable.downloadDataCSV('mshs_last_noshow_all-download-table', 'Avg No Show Rate')"
+    ),
+
+reactable(
+  no_show_all_last_merged,
+  elementId = "mshs_last_noshow_all-download-table",
+  style = list(fontFamily = 'Calibri',
+                 fontSize = '14px'),
+    defaultColDef = colDef(align = "left",
+                           headerStyle = list(fontWeight = "Bold", fontSize = "14px"),
+                           headerClass = "bar-sort-header"),
+  # RowStyle = function(index) {
+  #           if (index %in% c(nrow(referral_vol_site_data_mshs))) {
+  #             list(`border-top` = "2px solid rgb(184,184,184)",
+  #                  fontWeight = "Bold")
+  #           }
+  #         },
+    highlight = TRUE,
+    # filterable = TRUE,
+    pagination = FALSE,
+    # height = 800,
+    wrap = TRUE,
+  searchable = TRUE,
+  
+  rowStyle = function(index) {
+            if (index %in% c(10)) {
+              list(`border-top` = "2px solid rgb(184,184,184)",
+                   fontWeight = "Bold")
+            }
+          },
+
+  groupBy = c("Campus","Campus.Specialty.Group"),
+
+  columnGroups = list(
+    # colGroup(name = paste0(format(as.Date(start_date), "%b"),"-",format(as.Date(end_date), "%b %Y"), " Visit Volume"), 
+    #          columns = c("Total", "new_perc"),
+    #          headerStyle = list(color = "#212070", fontSize = "16px")),
+    # colGroup(name = paste0(format(as.Date(start_date), "%b"),"-",format(as.Date(end_date), "%b %Y"), " No Show Rate"), 
+    #          columns = c("noShow_rate", "noShow_rate_Established", "noShow_rate_New"),
+    #          headerStyle = list(color = "#d80b8c", fontSize = "16px"))
+    colGroup(name = "", 
+             columns = c("Campus","Campus.Specialty.Group"), sticky = "left",
+             headerStyle = list(fontSize = "16px")),
+    colGroup(name = paste0(last_year, " Visit Volume"), 
+             columns = c("Arrived","arrived_perc","new_perc"),
+             headerStyle = list(color = "#212070", fontSize = "16px")),
+    colGroup(name = "No Show Rate (All Statuses) - All", 
+             columns = c("noShow_rate", "noShow_rate_sameDay", "noShow_rate_belowFourteen", "noShow_rate_belowThirty", "noShow_rate_overThirty"),
+             headerStyle = list(color = "#7f7f7f", fontSize = "16px")),
+    colGroup(name = "No Show Plus Rate (All Statuses) - Established", 
+             columns = c("noShow_rate_Established", "noShow_rate_sameDay_Established", "noShow_rate_belowFourteen_Established", "noShow_rate_belowThirty_Established", "noShow_rate_overThirty_Established"),
+             headerStyle = list(color = "#d80b8c", fontSize = "16px")),
+    colGroup(name = "No Show Plus Rate (All Statuses) - New", 
+             columns = c("noShow_rate_New","noShow_rate_sameDay_New", "noShow_rate_belowFourteen_New","noShow_rate_belowThirty_New", "noShow_rate_overThirty_New"),
+             headerStyle = list(color = "#00aeef", fontSize = "16px"))
+    ),
+
+  columns = list(
+
+    Campus = colDef(
+      # footer = "Total",
+      name = "Site",
+      minWidth = 220),
+
+    Campus.Specialty.Group = colDef(
+      name = "Specialty",
+      minWidth = 250),
+    
+    # Appt.Source.New = colDef(
+    #   name = "Source",
+    #   minWidth = 100),
+    
+    Arrived = colDef(
+      name = "Total Arrived Visits",
+      maxWidth = 90,
+      headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
+      aggregate = 'sum',
+      format = colFormat(separators = TRUE, digits = 0),
+      style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
+    ),
+
+    arrived_perc = colDef(
+      name = "% of Site Total Arrived Visits",
+      maxWidth = 90,
+     headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
+      # aggregate = JS("function(values, rows) {
+      #   let totalArrived = 0
+      #   let totalarrived_site = 0
+      #   rows.forEach(function(row) {
+      #     totalArrived += row['Arrived']
+      #     totalarrived_site += row['arrived_site']
+      #   })
+      #   return totalArrived / totalarrived_site
+      # }"),
+      format = colFormat(percent = TRUE, digits = 0),
+      style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
+    ),
+
+    new_perc = colDef(
+      name = "% New Arrived Visits",
+      maxWidth = 90,
+      headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
+      aggregate = JS("function(values, rows) {
+        let totalArrived_New = 0
+        let totalArrived = 0
+        rows.forEach(function(row) {
+          totalArrived_New += row['Arrived_New']
+          totalArrived += row['Arrived']
+        })
+        return (totalArrived_New) / totalArrived
+      }"),
+      format = colFormat(percent = TRUE, digits = 0),
+      style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
+    ),
+
+    `noShow_rate_Established` = colDef(
+      name = "All Established",
+      maxWidth = 90,
+      headerStyle = list(background = "#d80b8c", color = "white", fontWeight = "Bold", fontSize = "14px"),
+      aggregate = JS("function(values, rows) {
+        let totalNoShow_Established = 0
+        let totalTotal_Established = 0
+        rows.forEach(function(row) {
+          totalNoShow_Established += row['NoShow_Established']
+          totalTotal_Established += row['Total_Established']
+        })
+        return (totalNoShow_Established) / totalTotal_Established || '-'
+      }"),
+      format = colFormat(percent = TRUE, digits = 0),
+      style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
+    ),
+
+    `noShow_rate_sameDay_Established` = colDef(
+      name = "Scheduled Same-Day",
+      maxWidth = 90,
+      headerStyle = list(background = "#d80b8c", color = "white", fontWeight = "Bold", fontSize = "14px"),
+      aggregate = JS("function(values, rows) {
+        let totalNoShow_sameDay_Established = 0
+        let totalTotal_sameDay_Established = 0
+        rows.forEach(function(row) {
+          totalNoShow_sameDay_Established += row['NoShow_sameDay_Established']
+          totalTotal_sameDay_Established += row['Total_sameDay_Established']
+        })
+        return (totalNoShow_sameDay_Established) / totalTotal_sameDay_Established || '-'
+      }"),
+      format = colFormat(percent = TRUE, digits = 0),
+      style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
+    ),
+    
+   `noShow_rate_belowFourteen_Established` = colDef(
+      name = "Scheduled 1-14 Days",
+      maxWidth = 90,
+      headerStyle = list(background = "#d80b8c", color = "white", fontWeight = "Bold", fontSize = "14px"),
+      aggregate = JS("function(values, rows) {
+        let totalNoShow_belowFourteen_Established = 0
+        let totalTotal_belowFourteen_Established = 0
+        rows.forEach(function(row) {
+          totalNoShow_belowFourteen_Established += row['NoShow_belowFourteen_Established']
+          totalTotal_belowFourteen_Established += row['Total_belowFourteen_Established']
+        })
+        return (totalNoShow_belowFourteen_Established) / totalTotal_belowFourteen_Established || '-'
+      }"),
+      format = colFormat(percent = TRUE, digits = 0),
+      style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
+    ),
+    
+    `noShow_rate_belowThirty_Established` = colDef(
+      name = "Scheduled 15-30 Days",
+      maxWidth = 90,
+      headerStyle = list(background = "#d80b8c", color = "white", fontWeight = "Bold", fontSize = "14px"),
+      aggregate = JS("function(values, rows) {
+        let totalNoShow_belowThirty_Established = 0
+        let totalTotal_belowThirty_Established = 0
+        rows.forEach(function(row) {
+          totalNoShow_belowThirty_Established += row['NoShow_belowThirty_Established']
+          totalTotal_belowThirty_Established += row['Total_belowThirty_Established']
+        })
+        return (totalNoShow_belowThirty_Established) / totalTotal_belowThirty_Established || '-'
+      }"),
+      format = colFormat(percent = TRUE, digits = 0),
+      style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
+    ),
+    
+    `noShow_rate_overThirty_Established` = colDef(
+      name = "Scheduled >30 Days",
+      maxWidth = 90,
+      headerStyle = list(background = "#d80b8c", color = "white", fontWeight = "Bold", fontSize = "14px"),
+      aggregate = JS("function(values, rows) {
+        let totalNoShow_overThirty_Established = 0
+        let totalTotal_overThirty_Established = 0
+        rows.forEach(function(row) {
+          totalNoShow_overThirty_Established += row['NoShow_overThirty_Established']
+          totalTotal_overThirty_Established += row['Total_overThirty_Established']
+        })
+        return (totalNoShow_overThirty_Established) / totalTotal_overThirty_Established || '-'
+      }"),
+      format = colFormat(percent = TRUE, digits = 0),
+      style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
+    ),
+    
+    `noShow_rate_New` = colDef(
+      name = "All New",
+      maxWidth = 90,
+      headerStyle = list(background = "#00aeef", color = "white", fontWeight = "Bold", fontSize = "14px"),
+      aggregate = JS("function(values, rows) {
+        let totalNoShow_New = 0
+        let totalTotal_New = 0
+        rows.forEach(function(row) {
+          totalNoShow_New += row['NoShow_New']
+          totalTotal_New += row['Total_New']
+        })
+        return (totalNoShow_New) / totalTotal_New || '-'
+      }"),
+      format = colFormat(percent = TRUE, digits = 0),
+      style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
+    ),
+   
+   `noShow_rate_sameDay_New` = colDef(
+      name = "Scheduled Same-Day",
+      maxWidth = 90,
+      headerStyle = list(background = "#00aeef", color = "white", fontWeight = "Bold", fontSize = "14px"),
+      aggregate = JS("function(values, rows) {
+        let totalNoShow_sameDay_New = 0
+        let totalTotal_sameDay_New = 0
+        rows.forEach(function(row) {
+          totalNoShow_sameDay_New += row['NoShow_sameDay_New']
+          totalTotal_sameDay_New += row['Total_sameDay_New']
+        })
+        return (totalNoShow_sameDay_New) / totalTotal_sameDay_New || '-'
+      }"),
+      format = colFormat(percent = TRUE, digits = 0),
+      style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
+    ),
+   
+   `noShow_rate_belowFourteen_New` = colDef(
+      name = "Scheduled 1-14 Days",
+      maxWidth = 90,
+      headerStyle = list(background = "#00aeef", color = "white", fontWeight = "Bold", fontSize = "14px"),
+      aggregate = JS("function(values, rows) {
+        let totalNoShow_belowFourteen_New = 0
+        let totalTotal_belowFourteen_New = 0
+        rows.forEach(function(row) {
+          totalNoShow_belowFourteen_New += row['NoShow_belowFourteen_New']
+          totalTotal_belowFourteen_New += row['Total_belowFourteen_New']
+        })
+        return (totalNoShow_belowFourteen_New) / totalTotal_belowFourteen_New || '-'
+      }"),
+      format = colFormat(percent = TRUE, digits = 0),
+      style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
+    ),
+    
+    `noShow_rate_belowThirty_New` = colDef(
+      name = "Scheduled 15-30 Days",
+      maxWidth = 90,
+      headerStyle = list(background = "#00aeef", color = "white", fontWeight = "Bold", fontSize = "14px"),
+      aggregate = JS("function(values, rows) {
+        let totalNoShow_belowThirty_New = 0
+        let totalTotal_belowThirty_New = 0
+        rows.forEach(function(row) {
+          totalNoShow_belowThirty_New += row['NoShow_belowThirty_New']
+        })
+        return (totalNoShow_belowThirty_New) / totalTotal_belowThirty_New || '-'
+      }"),
+      format = colFormat(percent = TRUE, digits = 0),
+      style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
+    ),
+    
+    `noShow_rate_overThirty_New` = colDef(
+      name = "Scheduled >30 Days",
+      maxWidth = 90,
+      headerStyle = list(background = "#00aeef", color = "white", fontWeight = "Bold", fontSize = "14px"),
+      aggregate = JS("function(values, rows) {
+        let totalNoShow_overThirty_New = 0
+        let totalTotal_overThirty_New = 0
+        rows.forEach(function(row) {
+          totalNoShow_overThirty_New += row['NoShow_overThirty_New']
+          totalTotal_overThirty_New += row['Total_overThirty_New']
+        })
+        return (totalNoShow_overThirty_New) / totalTotal_overThirty_New || '-'
+      }"),
+      format = colFormat(percent = TRUE, digits = 0),
+      style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
+    ),
+    
+    `noShow_rate` = colDef(
+      name = "All",
+      maxWidth = 90,
+      headerStyle = list(background = "#7f7f7f", color = "white", fontWeight = "Bold", fontSize = "14px"),
+      aggregate = JS("function(values, rows) {
+        let totalNoShow = 0
+        let totalSameDayCanceled = 0
+        let totalTotal = 0
+        rows.forEach(function(row) {
+          totalNoShow += row['NoShow']
+          totalTotal += row['Total']
+        })
+        return (totalNoShow) / totalTotal || '-'
+      }"),
+      format = colFormat(percent = TRUE, digits = 0),
+      style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
+    ),
+    
+   `noShow_rate_sameDay` = colDef(
+      name = "Scheduled Same-Day",
+      maxWidth = 90,
+      headerStyle = list(background = "#7f7f7f", color = "white", fontWeight = "Bold", fontSize = "14px"),
+      aggregate = JS("function(values, rows) {
+        let totalNoShow_sameDay = 0
+        let totalTotal_sameDay = 0
+        rows.forEach(function(row) {
+          totalNoShow_sameDay += row['NoShow_sameDay']
+          totalTotal_sameDay += row['Total_sameDay']
+        })
+        return (totalNoShow_sameDay) / totalTotal_sameDay || '-'
+      }"),
+      format = colFormat(percent = TRUE, digits = 0),
+      style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
+    ),
+   
+   `noShow_rate_belowFourteen` = colDef(
+      name = "Scheduled 1-14 Days",
+      maxWidth = 90,
+      headerStyle = list(background = "#7f7f7f", color = "white", fontWeight = "Bold", fontSize = "14px"),
+      aggregate = JS("function(values, rows) {
+        let totalNoShow_belowFourteen = 0
+        let totalTotal_belowFourteen = 0
+        rows.forEach(function(row) {
+          totalNoShow_belowFourteen += row['NoShow_belowFourteen']
+          totalTotal_belowFourteen += row['Total_belowFourteen']
+        })
+        return (totalNoShow_belowFourteen) / totalTotal_belowFourteen || '-'
+      }"),
+      format = colFormat(percent = TRUE, digits = 0),
+      style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
+    ),
+   
+    `noShow_rate_belowThirty` = colDef(
+      name = "Scheduled 15-30 Days",
+      maxWidth = 90,
+      headerStyle = list(background = "#7f7f7f", color = "white", fontWeight = "Bold", fontSize = "14px"),
+      aggregate = JS("function(values, rows) {
+        let totalNoShow_belowThirty = 0
+        let totalTotal_belowThirty = 0
+        rows.forEach(function(row) {
+          totalNoShow_belowThirty += row['NoShow_belowThirty']
+          totalTotal_belowThirty += row['Total_belowThirty']
+        })
+        return (totalNoShow_belowThirty) / totalTotal_belowThirty || '-'
+      }"),
+      format = colFormat(percent = TRUE, digits = 0),
+      style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
+    ),
+    
+    `noShow_rate_overThirty` = colDef(
+      name = "Scheduled >30 Days",
+      maxWidth = 90,
+      headerStyle = list(background = "#7f7f7f", color = "white", fontWeight = "Bold", fontSize = "14px"),
+      aggregate = JS("function(values, rows) {
+        let totalNoShow_overThirty = 0
+        let totalTotal_overThirty = 0
+        rows.forEach(function(row) {
+          totalNoShow_overThirty += row['NoShow_overThirty']
+          totalTotal_overThirty += row['Total_overThirty']
+        })
+        return (totalNoShow_overThirty) / totalTotal_overThirty || '-'
+      }"),
+      format = colFormat(percent = TRUE, digits = 0),
+      style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
+    ),
+    
+    Arrived_Established = colDef(show =F),
+    Arrived_New = colDef(show =F),
+    Arrived_sameDay_Established = colDef(show =F),
+    Arrived_sameDay_New = colDef(show =F),
+    Arrived_belowFourteen_Established = colDef(show =F),
+    Arrived_belowFourteen_New = colDef(show =F),
+    Arrived_belowThirty_Established = colDef(show =F),
+    Arrived_belowThirty_New = colDef(show =F),
+    Arrived_overThirty_Established = colDef(show =F),
+    Arrived_overThirty_New = colDef(show =F),
+    
+    NoShow_Established = colDef(show =F),
+    NoShow_New = colDef(show =F),
+    NoShow_sameDay_Established = colDef(show =F),
+    NoShow_sameDay_New = colDef(show =F),
+    NoShow_belowFourteen_Established = colDef(show =F),
+    NoShow_belowFourteen_New = colDef(show =F),
+    NoShow_belowThirty_Established = colDef(show =F),
+    NoShow_belowThirty_New = colDef(show =F),
+    NoShow_overThirty_Established = colDef(show =F),
+    NoShow_overThirty_New = colDef(show =F),
+    
+    SameDayCanceled_Established = colDef(show =F),
+    SameDayCanceled_New = colDef(show =F),
+    SameDayCanceled_sameDay_Established = colDef(show =F),
+    SameDayCanceled_sameDay_New = colDef(show =F),
+    SameDayCanceled_belowFourteen_Established = colDef(show =F),
+    SameDayCanceled_belowFourteen_New = colDef(show =F),
+    SameDayCanceled_belowThirty_Established = colDef(show =F),
+    SameDayCanceled_belowThirty_New = colDef(show =F),
+    SameDayCanceled_overThirty_Established = colDef(show =F),
+    SameDayCanceled_overThirty_New = colDef(show =F),
+    
+    Total_Established = colDef(show =F),
+    Total_New = colDef(show =F),
+    Total_sameDay_Established = colDef(show =F),
+    Total_sameDay_New = colDef(show =F),
+    Total_belowFourteen_Established = colDef(show =F),
+    Total_belowFourteen_New = colDef(show =F),
+    Total_belowThirty_Established = colDef(show =F),
+    Total_belowThirty_New = colDef(show =F),
+    Total_overThirty_Established = colDef(show =F),
+    Total_overThirty_New = colDef(show =F),
+    
+    Total = colDef(show =F),
+    Total_sameDay = colDef(show =F),
+    Total_belowFourteen = colDef(show =F),
+    Total_belowThirty = colDef(show =F),
+    Total_overThirty = colDef(show =F),
+    
+    Arrived_sameDay = colDef(show =F),
+    Arrived_belowFourteen = colDef(show =F),
+    Arrived_belowThirty = colDef(show =F),
+    Arrived_overThirty = colDef(show =F),
+    
+    NoShow = colDef(show =F),
+    NoShow_sameDay = colDef(show =F),
+    NoShow_belowFourteen = colDef(show =F),
+    NoShow_belowThirty = colDef(show =F),
+    NoShow_overThirty = colDef(show =F),
+    
+    SameDayCanceled = colDef(show =F),
+    SameDayCanceled_sameDay = colDef(show =F),
+    SameDayCanceled_belowFourteen = colDef(show =F),
+    SameDayCanceled_belowThirty = colDef(show =F),
+    SameDayCanceled_overThirty = colDef(show =F),
+    arrived_site = colDef(show =F)
+   
+  ) # Close Columns
+
+  ) # Close Reactable
+
+ )
+)
+
+```
+<br/>
+<br/>
+<br/>
+
+
 ```{r MSHS No Show by Specialty Last Year Output, echo = FALSE, warning = FALSE, message = FALSE}
 
 no_show_last_specialty <- no_show_specialty %>%
@@ -4486,13 +4493,13 @@ reactable(
     colGroup(name = paste0(last_year, " Visit Volume"), 
              columns = c("Arrived","arrived_perc","new_perc"),
              headerStyle = list(color = "#212070", fontSize = "16px")),
-    colGroup(name = "No Show Rate - All", 
+    colGroup(name = "No Show Plus Rate - All", 
              columns = c("noShow_rate", "noShow_rate_sameDay", "noShow_rate_belowFourteen", "noShow_rate_belowThirty", "noShow_rate_overThirty"),
              headerStyle = list(color = "#7f7f7f", fontSize = "16px")),
-    colGroup(name = "No Show Rate - Established", 
+    colGroup(name = "No Show Plus Rate - Established", 
              columns = c("noShow_rate_Established", "noShow_rate_sameDay_Established", "noShow_rate_belowFourteen_Established", "noShow_rate_belowThirty_Established", "noShow_rate_overThirty_Established"),
              headerStyle = list(color = "#d80b8c", fontSize = "16px")),
-    colGroup(name = "No Show Rate - New", 
+    colGroup(name = "No Show Plus Rate - New", 
              columns = c("noShow_rate_New","noShow_rate_sameDay_New", "noShow_rate_belowFourteen_New","noShow_rate_belowThirty_New", "noShow_rate_overThirty_New"),
              headerStyle = list(color = "#00aeef", fontSize = "16px"))
     ),
@@ -5054,13 +5061,13 @@ reactable(
     colGroup(name = paste0(last_year, " Visit Volume"), 
              columns = c("Arrived","arrived_perc","new_perc"),
              headerStyle = list(color = "#212070", fontSize = "16px")),
-    colGroup(name = "No Show Rate - All", 
+    colGroup(name = "No Show Plus Rate - All", 
              columns = c("noShow_rate", "noShow_rate_sameDay", "noShow_rate_belowFourteen", "noShow_rate_belowThirty", "noShow_rate_overThirty"),
              headerStyle = list(color = "#7f7f7f", fontSize = "16px")),
-    colGroup(name = "No Show Rate - Established", 
+    colGroup(name = "No Show Plus Rate - Established", 
              columns = c("noShow_rate_Established", "noShow_rate_sameDay_Established", "noShow_rate_belowFourteen_Established", "noShow_rate_belowThirty_Established", "noShow_rate_overThirty_Established"),
              headerStyle = list(color = "#d80b8c", fontSize = "16px")),
-    colGroup(name = "No Show Rate - New", 
+    colGroup(name = "No Show Plus Rate - New", 
              columns = c("noShow_rate_New","noShow_rate_sameDay_New", "noShow_rate_belowFourteen_New","noShow_rate_belowThirty_New", "noShow_rate_overThirty_New"),
              headerStyle = list(color = "#00aeef", fontSize = "16px"))
     ),
@@ -5511,7 +5518,7 @@ map(unique(no_show_trend_mshs$Campus), function(x){
 highchart() %>%
   hc_yAxis_multiples(
     # list(title = list(text = "Avg Volume per Day"), lineWidth = 3),
-    list(title = list(text = "No Show Rate"), lineWidth = 3, 
+    list(title = list(text = "No Show Plus Rate"), lineWidth = 3, 
          labels = list(format = '{value}%'),
          plotLines = list(list(value = 20, color = "red", width = 2,
                                dashStyle = "shortdash")))
@@ -5985,13 +5992,13 @@ reactable(
     colGroup(name = paste0(current_year, " YTD Visit Volume"), 
              columns = c("Arrived","arrived_perc","new_perc"),
              headerStyle = list(color = "#212070", fontSize = "16px")),
-    colGroup(name = "No Show Rate - All", 
+    colGroup(name = "No Show Plus Rate - All", 
              columns = c("noShow_rate", "noShow_rate_sameDay", "noShow_rate_belowFourteen", "noShow_rate_belowThirty", "noShow_rate_overThirty"),
              headerStyle = list(color = "#7f7f7f", fontSize = "16px")),
-    colGroup(name = "No Show Rate - Established", 
+    colGroup(name = "No Show Plus Rate - Established", 
              columns = c("noShow_rate_Established", "noShow_rate_sameDay_Established", "noShow_rate_belowFourteen_Established", "noShow_rate_belowThirty_Established", "noShow_rate_overThirty_Established"),
              headerStyle = list(color = "#d80b8c", fontSize = "16px")),
-    colGroup(name = "No Show Rate - New", 
+    colGroup(name = "No Show Plus Rate - New", 
              columns = c("noShow_rate_New","noShow_rate_sameDay_New", "noShow_rate_belowFourteen_New","noShow_rate_belowThirty_New", "noShow_rate_overThirty_New"),
              headerStyle = list(color = "#00aeef", fontSize = "16px"))
     ),
@@ -6460,13 +6467,13 @@ reactable(
     colGroup(name = paste0(last_year, " YTD Visit Volume"), 
              columns = c("Arrived","arrived_perc","new_perc"),
              headerStyle = list(color = "#212070", fontSize = "16px")),
-    colGroup(name = "No Show Rate - All", 
+    colGroup(name = "No Show Plus Rate - All", 
              columns = c("noShow_rate", "noShow_rate_sameDay", "noShow_rate_belowFourteen", "noShow_rate_belowThirty", "noShow_rate_overThirty"),
              headerStyle = list(color = "#7f7f7f", fontSize = "16px")),
-    colGroup(name = "No Show Rate - Established", 
+    colGroup(name = "No Show Plus Rate - Established", 
              columns = c("noShow_rate_Established", "noShow_rate_sameDay_Established", "noShow_rate_belowFourteen_Established", "noShow_rate_belowThirty_Established", "noShow_rate_overThirty_Established"),
              headerStyle = list(color = "#d80b8c", fontSize = "16px")),
-    colGroup(name = "No Show Rate - New", 
+    colGroup(name = "No Show Plus Rate - New", 
              columns = c("noShow_rate_New","noShow_rate_sameDay_New", "noShow_rate_belowFourteen_New","noShow_rate_belowThirty_New", "noShow_rate_overThirty_New"),
              headerStyle = list(color = "#00aeef", fontSize = "16px"))
     ),
@@ -7006,13 +7013,13 @@ reactable(
     colGroup(name = paste0(current_year, " YTD Visit Volume"), 
              columns = c("Arrived","arrived_perc","new_perc"),
              headerStyle = list(color = "#212070", fontSize = "16px")),
-    colGroup(name = "No Show Rate - All", 
+    colGroup(name = "No Show Plus Rate - All", 
              columns = c("noShow_rate", "noShow_rate_sameDay", "noShow_rate_belowFourteen", "noShow_rate_belowThirty", "noShow_rate_overThirty"),
              headerStyle = list(color = "#7f7f7f", fontSize = "16px")),
-    colGroup(name = "No Show Rate - Established", 
+    colGroup(name = "No Show Plus Rate - Established", 
              columns = c("noShow_rate_Established", "noShow_rate_sameDay_Established", "noShow_rate_belowFourteen_Established", "noShow_rate_belowThirty_Established", "noShow_rate_overThirty_Established"),
              headerStyle = list(color = "#d80b8c", fontSize = "16px")),
-    colGroup(name = "No Show Rate - New", 
+    colGroup(name = "No Show Plus Rate - New", 
              columns = c("noShow_rate_New","noShow_rate_sameDay_New", "noShow_rate_belowFourteen_New","noShow_rate_belowThirty_New", "noShow_rate_overThirty_New"),
              headerStyle = list(color = "#00aeef", fontSize = "16px"))
     ),
@@ -7481,13 +7488,13 @@ reactable(
     colGroup(name = paste0(last_year, " YTD Visit Volume"), 
              columns = c("Arrived","arrived_perc","new_perc"),
              headerStyle = list(color = "#212070", fontSize = "16px")),
-    colGroup(name = "No Show Rate - All", 
+    colGroup(name = "No Show Plus Rate - All", 
              columns = c("noShow_rate", "noShow_rate_sameDay", "noShow_rate_belowFourteen", "noShow_rate_belowThirty", "noShow_rate_overThirty"),
              headerStyle = list(color = "#7f7f7f", fontSize = "16px")),
-    colGroup(name = "No Show Rate - Established", 
+    colGroup(name = "No Show Plus Rate - Established", 
              columns = c("noShow_rate_Established", "noShow_rate_sameDay_Established", "noShow_rate_belowFourteen_Established", "noShow_rate_belowThirty_Established", "noShow_rate_overThirty_Established"),
              headerStyle = list(color = "#d80b8c", fontSize = "16px")),
-    colGroup(name = "No Show Rate - New", 
+    colGroup(name = "No Show Plus Rate - New", 
              columns = c("noShow_rate_New","noShow_rate_sameDay_New", "noShow_rate_belowFourteen_New","noShow_rate_belowThirty_New", "noShow_rate_overThirty_New"),
              headerStyle = list(color = "#00aeef", fontSize = "16px"))
     ),
@@ -8026,13 +8033,13 @@ reactable(
     colGroup(name = paste0(current_year, " YTD Visit Volume"), 
              columns = c("Arrived","arrived_perc","new_perc"),
              headerStyle = list(color = "#212070", fontSize = "16px")),
-    colGroup(name = "No Show Rate - All", 
+    colGroup(name = "No Show Plus Rate - All", 
              columns = c("noShow_rate", "noShow_rate_sameDay", "noShow_rate_belowFourteen", "noShow_rate_belowThirty", "noShow_rate_overThirty"),
              headerStyle = list(color = "#7f7f7f", fontSize = "16px")),
-    colGroup(name = "No Show Rate - Established", 
+    colGroup(name = "No Show Plus Rate - Established", 
              columns = c("noShow_rate_Established", "noShow_rate_sameDay_Established", "noShow_rate_belowFourteen_Established", "noShow_rate_belowThirty_Established", "noShow_rate_overThirty_Established"),
              headerStyle = list(color = "#d80b8c", fontSize = "16px")),
-    colGroup(name = "No Show Rate - New", 
+    colGroup(name = "No Show Plus Rate - New", 
              columns = c("noShow_rate_New","noShow_rate_sameDay_New", "noShow_rate_belowFourteen_New","noShow_rate_belowThirty_New", "noShow_rate_overThirty_New"),
              headerStyle = list(color = "#00aeef", fontSize = "16px"))
     ),
@@ -8501,13 +8508,13 @@ reactable(
     colGroup(name = paste0(last_year, " YTD Visit Volume"), 
              columns = c("Arrived","arrived_perc","new_perc"),
              headerStyle = list(color = "#212070", fontSize = "16px")),
-    colGroup(name = "No Show Rate - All", 
+    colGroup(name = "No Show Plus Rate - All", 
              columns = c("noShow_rate", "noShow_rate_sameDay", "noShow_rate_belowFourteen", "noShow_rate_belowThirty", "noShow_rate_overThirty"),
              headerStyle = list(color = "#7f7f7f", fontSize = "16px")),
-    colGroup(name = "No Show Rate - Established", 
+    colGroup(name = "No Show Plus Rate - Established", 
              columns = c("noShow_rate_Established", "noShow_rate_sameDay_Established", "noShow_rate_belowFourteen_Established", "noShow_rate_belowThirty_Established", "noShow_rate_overThirty_Established"),
              headerStyle = list(color = "#d80b8c", fontSize = "16px")),
-    colGroup(name = "No Show Rate - New", 
+    colGroup(name = "No Show Plus Rate - New", 
              columns = c("noShow_rate_New","noShow_rate_sameDay_New", "noShow_rate_belowFourteen_New","noShow_rate_belowThirty_New", "noShow_rate_overThirty_New"),
              headerStyle = list(color = "#00aeef", fontSize = "16px"))
     ),
@@ -9047,13 +9054,13 @@ reactable(
     colGroup(name = paste0(current_year, " YTD Visit Volume"), 
              columns = c("Arrived","arrived_perc","new_perc"),
              headerStyle = list(color = "#212070", fontSize = "16px")),
-    colGroup(name = "No Show Rate - All", 
+    colGroup(name = "No Show Plus Rate - All", 
              columns = c("noShow_rate", "noShow_rate_sameDay", "noShow_rate_belowFourteen", "noShow_rate_belowThirty", "noShow_rate_overThirty"),
              headerStyle = list(color = "#7f7f7f", fontSize = "16px")),
-    colGroup(name = "No Show Rate - Established", 
+    colGroup(name = "No Show Plus Rate - Established", 
              columns = c("noShow_rate_Established", "noShow_rate_sameDay_Established", "noShow_rate_belowFourteen_Established", "noShow_rate_belowThirty_Established", "noShow_rate_overThirty_Established"),
              headerStyle = list(color = "#d80b8c", fontSize = "16px")),
-    colGroup(name = "No Show Rate - New", 
+    colGroup(name = "No Show Plus Rate - New", 
              columns = c("noShow_rate_New","noShow_rate_sameDay_New", "noShow_rate_belowFourteen_New","noShow_rate_belowThirty_New", "noShow_rate_overThirty_New"),
              headerStyle = list(color = "#00aeef", fontSize = "16px"))
     ),
@@ -9522,13 +9529,13 @@ reactable(
     colGroup(name = paste0(last_year, " YTD Visit Volume"), 
              columns = c("Arrived","arrived_perc","new_perc"),
              headerStyle = list(color = "#212070", fontSize = "16px")),
-    colGroup(name = "No Show Rate - All", 
+    colGroup(name = "No Show Plus Rate - All", 
              columns = c("noShow_rate", "noShow_rate_sameDay", "noShow_rate_belowFourteen", "noShow_rate_belowThirty", "noShow_rate_overThirty"),
              headerStyle = list(color = "#7f7f7f", fontSize = "16px")),
-    colGroup(name = "No Show Rate - Established", 
+    colGroup(name = "No Show Plus Rate - Established", 
              columns = c("noShow_rate_Established", "noShow_rate_sameDay_Established", "noShow_rate_belowFourteen_Established", "noShow_rate_belowThirty_Established", "noShow_rate_overThirty_Established"),
              headerStyle = list(color = "#d80b8c", fontSize = "16px")),
-    colGroup(name = "No Show Rate - New", 
+    colGroup(name = "No Show Plus Rate - New", 
              columns = c("noShow_rate_New","noShow_rate_sameDay_New", "noShow_rate_belowFourteen_New","noShow_rate_belowThirty_New", "noShow_rate_overThirty_New"),
              headerStyle = list(color = "#00aeef", fontSize = "16px"))
     ),
@@ -10068,13 +10075,13 @@ reactable(
     colGroup(name = paste0(current_year, " YTD Visit Volume"), 
              columns = c("Arrived","arrived_perc","new_perc"),
              headerStyle = list(color = "#212070", fontSize = "16px")),
-    colGroup(name = "No Show Rate - All", 
+    colGroup(name = "No Show Plus Rate - All", 
              columns = c("noShow_rate", "noShow_rate_sameDay", "noShow_rate_belowFourteen", "noShow_rate_belowThirty", "noShow_rate_overThirty"),
              headerStyle = list(color = "#7f7f7f", fontSize = "16px")),
-    colGroup(name = "No Show Rate - Established", 
+    colGroup(name = "No Show Plus Rate - Established", 
              columns = c("noShow_rate_Established", "noShow_rate_sameDay_Established", "noShow_rate_belowFourteen_Established", "noShow_rate_belowThirty_Established", "noShow_rate_overThirty_Established"),
              headerStyle = list(color = "#d80b8c", fontSize = "16px")),
-    colGroup(name = "No Show Rate - New", 
+    colGroup(name = "No Show Plus Rate - New", 
              columns = c("noShow_rate_New","noShow_rate_sameDay_New", "noShow_rate_belowFourteen_New","noShow_rate_belowThirty_New", "noShow_rate_overThirty_New"),
              headerStyle = list(color = "#00aeef", fontSize = "16px"))
     ),
@@ -10543,13 +10550,13 @@ reactable(
     colGroup(name = paste0(last_year, " YTD Visit Volume"), 
              columns = c("Arrived","arrived_perc","new_perc"),
              headerStyle = list(color = "#212070", fontSize = "16px")),
-    colGroup(name = "No Show Rate - All", 
+    colGroup(name = "No Show Plus Rate - All", 
              columns = c("noShow_rate", "noShow_rate_sameDay", "noShow_rate_belowFourteen", "noShow_rate_belowThirty", "noShow_rate_overThirty"),
              headerStyle = list(color = "#7f7f7f", fontSize = "16px")),
-    colGroup(name = "No Show Rate - Established", 
+    colGroup(name = "No Show Plus Rate - Established", 
              columns = c("noShow_rate_Established", "noShow_rate_sameDay_Established", "noShow_rate_belowFourteen_Established", "noShow_rate_belowThirty_Established", "noShow_rate_overThirty_Established"),
              headerStyle = list(color = "#d80b8c", fontSize = "16px")),
-    colGroup(name = "No Show Rate - New", 
+    colGroup(name = "No Show Plus Rate - New", 
              columns = c("noShow_rate_New","noShow_rate_sameDay_New", "noShow_rate_belowFourteen_New","noShow_rate_belowThirty_New", "noShow_rate_overThirty_New"),
              headerStyle = list(color = "#00aeef", fontSize = "16px"))
     ),
@@ -11088,13 +11095,13 @@ reactable(
     colGroup(name = paste0(current_year, " YTD Visit Volume"), 
              columns = c("Arrived","arrived_perc","new_perc"),
              headerStyle = list(color = "#212070", fontSize = "16px")),
-    colGroup(name = "No Show Rate - All", 
+    colGroup(name = "No Show Plus Rate - All", 
              columns = c("noShow_rate", "noShow_rate_sameDay", "noShow_rate_belowFourteen", "noShow_rate_belowThirty", "noShow_rate_overThirty"),
              headerStyle = list(color = "#7f7f7f", fontSize = "16px")),
-    colGroup(name = "No Show Rate - Established", 
+    colGroup(name = "No Show Plus Rate - Established", 
              columns = c("noShow_rate_Established", "noShow_rate_sameDay_Established", "noShow_rate_belowFourteen_Established", "noShow_rate_belowThirty_Established", "noShow_rate_overThirty_Established"),
              headerStyle = list(color = "#d80b8c", fontSize = "16px")),
-    colGroup(name = "No Show Rate - New", 
+    colGroup(name = "No Show Plus Rate - New", 
              columns = c("noShow_rate_New","noShow_rate_sameDay_New", "noShow_rate_belowFourteen_New","noShow_rate_belowThirty_New", "noShow_rate_overThirty_New"),
              headerStyle = list(color = "#00aeef", fontSize = "16px"))
     ),
@@ -11564,13 +11571,13 @@ reactable(
     colGroup(name = paste0(last_year, " YTD Visit Volume"), 
              columns = c("Arrived","arrived_perc","new_perc"),
              headerStyle = list(color = "#212070", fontSize = "16px")),
-    colGroup(name = "No Show Rate - All", 
+    colGroup(name = "No Show Plus Rate - All", 
              columns = c("noShow_rate", "noShow_rate_sameDay", "noShow_rate_belowFourteen", "noShow_rate_belowThirty", "noShow_rate_overThirty"),
              headerStyle = list(color = "#7f7f7f", fontSize = "16px")),
-    colGroup(name = "No Show Rate - Established", 
+    colGroup(name = "No Show Plus Rate - Established", 
              columns = c("noShow_rate_Established", "noShow_rate_sameDay_Established", "noShow_rate_belowFourteen_Established", "noShow_rate_belowThirty_Established", "noShow_rate_overThirty_Established"),
              headerStyle = list(color = "#d80b8c", fontSize = "16px")),
-    colGroup(name = "No Show Rate - New", 
+    colGroup(name = "No Show Plus Rate - New", 
              columns = c("noShow_rate_New","noShow_rate_sameDay_New", "noShow_rate_belowFourteen_New","noShow_rate_belowThirty_New", "noShow_rate_overThirty_New"),
              headerStyle = list(color = "#00aeef", fontSize = "16px"))
     ),
@@ -12109,13 +12116,13 @@ reactable(
     colGroup(name = paste0(current_year, " YTD Visit Volume"), 
              columns = c("Arrived","arrived_perc","new_perc"),
              headerStyle = list(color = "#212070", fontSize = "16px")),
-    colGroup(name = "No Show Rate - All", 
+    colGroup(name = "No Show Plus Rate - All", 
              columns = c("noShow_rate", "noShow_rate_sameDay", "noShow_rate_belowFourteen", "noShow_rate_belowThirty", "noShow_rate_overThirty"),
              headerStyle = list(color = "#7f7f7f", fontSize = "16px")),
-    colGroup(name = "No Show Rate - Established", 
+    colGroup(name = "No Show Plus Rate - Established", 
              columns = c("noShow_rate_Established", "noShow_rate_sameDay_Established", "noShow_rate_belowFourteen_Established", "noShow_rate_belowThirty_Established", "noShow_rate_overThirty_Established"),
              headerStyle = list(color = "#d80b8c", fontSize = "16px")),
-    colGroup(name = "No Show Rate - New", 
+    colGroup(name = "No Show Plus Rate - New", 
              columns = c("noShow_rate_New","noShow_rate_sameDay_New", "noShow_rate_belowFourteen_New","noShow_rate_belowThirty_New", "noShow_rate_overThirty_New"),
              headerStyle = list(color = "#00aeef", fontSize = "16px"))
     ),
@@ -12584,13 +12591,13 @@ reactable(
     colGroup(name = paste0(last_year, " YTD Visit Volume"), 
              columns = c("Arrived","arrived_perc","new_perc"),
              headerStyle = list(color = "#212070", fontSize = "16px")),
-    colGroup(name = "No Show Rate - All", 
+    colGroup(name = "No Show Plus Rate - All", 
              columns = c("noShow_rate", "noShow_rate_sameDay", "noShow_rate_belowFourteen", "noShow_rate_belowThirty", "noShow_rate_overThirty"),
              headerStyle = list(color = "#7f7f7f", fontSize = "16px")),
-    colGroup(name = "No Show Rate - Established", 
+    colGroup(name = "No Show Plus Rate - Established", 
              columns = c("noShow_rate_Established", "noShow_rate_sameDay_Established", "noShow_rate_belowFourteen_Established", "noShow_rate_belowThirty_Established", "noShow_rate_overThirty_Established"),
              headerStyle = list(color = "#d80b8c", fontSize = "16px")),
-    colGroup(name = "No Show Rate - New", 
+    colGroup(name = "No Show Plus Rate - New", 
              columns = c("noShow_rate_New","noShow_rate_sameDay_New", "noShow_rate_belowFourteen_New","noShow_rate_belowThirty_New", "noShow_rate_overThirty_New"),
              headerStyle = list(color = "#00aeef", fontSize = "16px"))
     ),
@@ -13131,13 +13138,13 @@ reactable(
     colGroup(name = paste0(current_year, " YTD Visit Volume"), 
              columns = c("Arrived","arrived_perc","new_perc"),
              headerStyle = list(color = "#212070", fontSize = "16px")),
-    colGroup(name = "No Show Rate - All", 
+    colGroup(name = "No Show Plus Rate - All", 
              columns = c("noShow_rate", "noShow_rate_sameDay", "noShow_rate_belowFourteen", "noShow_rate_belowThirty", "noShow_rate_overThirty"),
              headerStyle = list(color = "#7f7f7f", fontSize = "16px")),
-    colGroup(name = "No Show Rate - Established", 
+    colGroup(name = "No Show Plus Rate - Established", 
              columns = c("noShow_rate_Established", "noShow_rate_sameDay_Established", "noShow_rate_belowFourteen_Established", "noShow_rate_belowThirty_Established", "noShow_rate_overThirty_Established"),
              headerStyle = list(color = "#d80b8c", fontSize = "16px")),
-    colGroup(name = "No Show Rate - New", 
+    colGroup(name = "No Show Plus Rate - New", 
              columns = c("noShow_rate_New","noShow_rate_sameDay_New", "noShow_rate_belowFourteen_New","noShow_rate_belowThirty_New", "noShow_rate_overThirty_New"),
              headerStyle = list(color = "#00aeef", fontSize = "16px"))
     ),
@@ -13606,13 +13613,13 @@ reactable(
     colGroup(name = paste0(last_year, " YTD Visit Volume"), 
              columns = c("Arrived","arrived_perc","new_perc"),
              headerStyle = list(color = "#212070", fontSize = "16px")),
-    colGroup(name = "No Show Rate - All", 
+    colGroup(name = "No Show Plus Rate - All", 
              columns = c("noShow_rate", "noShow_rate_sameDay", "noShow_rate_belowFourteen", "noShow_rate_belowThirty", "noShow_rate_overThirty"),
              headerStyle = list(color = "#7f7f7f", fontSize = "16px")),
-    colGroup(name = "No Show Rate - Established", 
+    colGroup(name = "No Show Plus Rate - Established", 
              columns = c("noShow_rate_Established", "noShow_rate_sameDay_Established", "noShow_rate_belowFourteen_Established", "noShow_rate_belowThirty_Established", "noShow_rate_overThirty_Established"),
              headerStyle = list(color = "#d80b8c", fontSize = "16px")),
-    colGroup(name = "No Show Rate - New", 
+    colGroup(name = "No Show Plus Rate - New", 
              columns = c("noShow_rate_New","noShow_rate_sameDay_New", "noShow_rate_belowFourteen_New","noShow_rate_belowThirty_New", "noShow_rate_overThirty_New"),
              headerStyle = list(color = "#00aeef", fontSize = "16px"))
     ),
@@ -14151,13 +14158,13 @@ reactable(
     colGroup(name = paste0(current_year, " YTD Visit Volume"), 
              columns = c("Arrived","arrived_perc","new_perc"),
              headerStyle = list(color = "#212070", fontSize = "16px")),
-    colGroup(name = "No Show Rate - All", 
+    colGroup(name = "No Show Plus Rate - All", 
              columns = c("noShow_rate", "noShow_rate_sameDay", "noShow_rate_belowFourteen", "noShow_rate_belowThirty", "noShow_rate_overThirty"),
              headerStyle = list(color = "#7f7f7f", fontSize = "16px")),
-    colGroup(name = "No Show Rate - Established", 
+    colGroup(name = "No Show Plus Rate - Established", 
              columns = c("noShow_rate_Established", "noShow_rate_sameDay_Established", "noShow_rate_belowFourteen_Established", "noShow_rate_belowThirty_Established", "noShow_rate_overThirty_Established"),
              headerStyle = list(color = "#d80b8c", fontSize = "16px")),
-    colGroup(name = "No Show Rate - New", 
+    colGroup(name = "No Show Plus Rate - New", 
              columns = c("noShow_rate_New","noShow_rate_sameDay_New", "noShow_rate_belowFourteen_New","noShow_rate_belowThirty_New", "noShow_rate_overThirty_New"),
              headerStyle = list(color = "#00aeef", fontSize = "16px"))
     ),
@@ -14626,13 +14633,13 @@ reactable(
     colGroup(name = paste0(last_year, " YTD Visit Volume"), 
              columns = c("Arrived","arrived_perc","new_perc"),
              headerStyle = list(color = "#212070", fontSize = "16px")),
-    colGroup(name = "No Show Rate - All", 
+    colGroup(name = "No Show Plus Rate - All", 
              columns = c("noShow_rate", "noShow_rate_sameDay", "noShow_rate_belowFourteen", "noShow_rate_belowThirty", "noShow_rate_overThirty"),
              headerStyle = list(color = "#7f7f7f", fontSize = "16px")),
-    colGroup(name = "No Show Rate - Established", 
+    colGroup(name = "No Show Plus Rate - Established", 
              columns = c("noShow_rate_Established", "noShow_rate_sameDay_Established", "noShow_rate_belowFourteen_Established", "noShow_rate_belowThirty_Established", "noShow_rate_overThirty_Established"),
              headerStyle = list(color = "#d80b8c", fontSize = "16px")),
-    colGroup(name = "No Show Rate - New", 
+    colGroup(name = "No Show Plus Rate - New", 
              columns = c("noShow_rate_New","noShow_rate_sameDay_New", "noShow_rate_belowFourteen_New","noShow_rate_belowThirty_New", "noShow_rate_overThirty_New"),
              headerStyle = list(color = "#00aeef", fontSize = "16px"))
     ),
