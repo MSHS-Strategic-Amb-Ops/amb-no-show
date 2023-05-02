@@ -1074,13 +1074,13 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = JS("function(values, rows) {
-        let totalTotal_New = 0
-        let totalTotal = 0
+        let totalArrived_New = 0
+        let totalArrived = 0
         rows.forEach(function(row) {
-          totalTotal_New += row['Total_New']
-          totalTotal += row['Total']
+          totalArrived_New += row['Arrived_New']
+          totalArrived += row['Arrived']
         })
-        return (totalTotal_New) / totalTotal || '-'
+        return (totalArrived_New) / totalArrived
       }"),
       format = colFormat(percent = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
@@ -1661,13 +1661,13 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = JS("function(values, rows) {
-        let totalTotal_New = 0
-        let totalTotal = 0
+        let totalArrived_New = 0
+        let totalArrived = 0
         rows.forEach(function(row) {
-          totalTotal_New += row['Total_New']
-          totalTotal += row['Total']
+          totalArrived_New += row['Arrived_New']
+          totalArrived += row['Arrived']
         })
-        return (totalTotal_New) / totalTotal
+        return (totalArrived_New) / totalArrived
       }"),
       format = colFormat(percent = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
@@ -2227,13 +2227,13 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = JS("function(values, rows) {
-        let totalTotal_New = 0
-        let totalTotal = 0
+        let totalArrived_New = 0
+        let totalArrived = 0
         rows.forEach(function(row) {
-          totalTotal_New += row['Total_New']
-          totalTotal += row['Total']
+          totalArrived_New += row['Arrived_New']
+          totalArrived += row['Arrived']
         })
-        return (totalTotal_New) / totalTotal
+        return (totalArrived_New) / totalArrived
       }"),
       format = colFormat(percent = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
@@ -4549,13 +4549,13 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = JS("function(values, rows) {
-        let totalTotal_New = 0
-        let totalTotal = 0
+        let totalArrived_New = 0
+        let totalArrived = 0
         rows.forEach(function(row) {
-          totalTotal_New += row['Total_New']
-          totalTotal += row['Total']
+          totalArrived_New += row['Arrived_New']
+          totalArrived += row['Arrived']
         })
-        return (totalTotal_New) / totalTotal
+        return (totalArrived_New) / totalArrived
       }"),
       format = colFormat(percent = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
@@ -5117,13 +5117,13 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = JS("function(values, rows) {
-        let totalTotal_New = 0
-        let totalTotal = 0
+        let totalArrived_New = 0
+        let totalArrived = 0
         rows.forEach(function(row) {
-          totalTotal_New += row['Total_New']
-          totalTotal += row['Total']
+          totalArrived_New += row['Arrived_New']
+          totalArrived += row['Arrived']
         })
-        return (totalTotal_New) / totalTotal
+        return (totalArrived_New) / totalArrived
       }"),
       format = colFormat(percent = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
@@ -6044,13 +6044,13 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = JS("function(values, rows) {
-        let totalTotal_New = 0
-        let totalTotal = 0
+        let totalArrived_New = 0
+        let totalArrived = 0
         rows.forEach(function(row) {
-          totalTotal_New += row['Total_New']
-          totalTotal += row['Total']
+          totalArrived_New += row['Arrived_New']
+          totalArrived += row['Arrived']
         })
-        return (totalTotal_New) / totalTotal
+        return (totalArrived_New) / totalArrived
       }"),
       format = colFormat(percent = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
@@ -6519,13 +6519,13 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = JS("function(values, rows) {
-        let totalTotal_New = 0
-        let totalTotal = 0
+        let totalArrived_New = 0
+        let totalArrived = 0
         rows.forEach(function(row) {
-          totalTotal_New += row['Total_New']
-          totalTotal += row['Total']
+          totalArrived_New += row['Arrived_New']
+          totalArrived += row['Arrived']
         })
-        return (totalTotal_New) / totalTotal
+        return (totalArrived_New) / totalArrived
       }"),
       format = colFormat(percent = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
@@ -7065,13 +7065,13 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = JS("function(values, rows) {
-        let totalTotal_New = 0
-        let totalTotal = 0
+        let totalArrived_New = 0
+        let totalArrived = 0
         rows.forEach(function(row) {
-          totalTotal_New += row['Total_New']
-          totalTotal += row['Total']
+          totalArrived_New += row['Arrived_New']
+          totalArrived += row['Arrived']
         })
-        return (totalTotal_New) / totalTotal
+        return (totalArrived_New) / totalArrived
       }"),
       format = colFormat(percent = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
@@ -7540,13 +7540,13 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = JS("function(values, rows) {
-        let totalTotal_New = 0
-        let totalTotal = 0
+        let totalArrived_New = 0
+        let totalArrived = 0
         rows.forEach(function(row) {
-          totalTotal_New += row['Total_New']
-          totalTotal += row['Total']
+          totalArrived_New += row['Arrived_New']
+          totalArrived += row['Arrived']
         })
-        return (totalTotal_New) / totalTotal
+        return (totalArrived_New) / totalArrived
       }"),
       format = colFormat(percent = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
@@ -8085,13 +8085,13 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = JS("function(values, rows) {
-        let totalTotal_New = 0
-        let totalTotal = 0
+        let totalArrived_New = 0
+        let totalArrived = 0
         rows.forEach(function(row) {
-          totalTotal_New += row['Total_New']
-          totalTotal += row['Total']
+          totalArrived_New += row['Arrived_New']
+          totalArrived += row['Arrived']
         })
-        return (totalTotal_New) / totalTotal
+        return (totalArrived_New) / totalArrived
       }"),
       format = colFormat(percent = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
@@ -8560,13 +8560,13 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = JS("function(values, rows) {
-        let totalTotal_New = 0
-        let totalTotal = 0
+        let totalArrived_New = 0
+        let totalArrived = 0
         rows.forEach(function(row) {
-          totalTotal_New += row['Total_New']
-          totalTotal += row['Total']
+          totalArrived_New += row['Arrived_New']
+          totalArrived += row['Arrived']
         })
-        return (totalTotal_New) / totalTotal
+        return (totalArrived_New) / totalArrived
       }"),
       format = colFormat(percent = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
@@ -9106,13 +9106,13 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = JS("function(values, rows) {
-        let totalTotal_New = 0
-        let totalTotal = 0
+        let totalArrived_New = 0
+        let totalArrived = 0
         rows.forEach(function(row) {
-          totalTotal_New += row['Total_New']
-          totalTotal += row['Total']
+          totalArrived_New += row['Arrived_New']
+          totalArrived += row['Arrived']
         })
-        return (totalTotal_New) / totalTotal
+        return (totalArrived_New) / totalArrived
       }"),
       format = colFormat(percent = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
@@ -9581,18 +9581,18 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = JS("function(values, rows) {
-        let totalTotal_New = 0
-        let totalTotal = 0
+        let totalArrived_New = 0
+        let totalArrived = 0
         rows.forEach(function(row) {
-          totalTotal_New += row['Total_New']
-          totalTotal += row['Total']
+          totalArrived_New += row['Arrived_New']
+          totalArrived += row['Arrived']
         })
-        return (totalTotal_New) / totalTotal
+        return (totalArrived_New) / totalArrived
       }"),
       format = colFormat(percent = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
-
+    
     `noShow_rate_Established` = colDef(
       name = "All Established",
       maxWidth = 90,
@@ -10127,13 +10127,13 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = JS("function(values, rows) {
-        let totalTotal_New = 0
-        let totalTotal = 0
+        let totalArrived_New = 0
+        let totalArrived = 0
         rows.forEach(function(row) {
-          totalTotal_New += row['Total_New']
-          totalTotal += row['Total']
+          totalArrived_New += row['Arrived_New']
+          totalArrived += row['Arrived']
         })
-        return (totalTotal_New) / totalTotal
+        return (totalArrived_New) / totalArrived
       }"),
       format = colFormat(percent = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
@@ -10602,13 +10602,13 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = JS("function(values, rows) {
-        let totalTotal_New = 0
-        let totalTotal = 0
+        let totalArrived_New = 0
+        let totalArrived = 0
         rows.forEach(function(row) {
-          totalTotal_New += row['Total_New']
-          totalTotal += row['Total']
+          totalArrived_New += row['Arrived_New']
+          totalArrived += row['Arrived']
         })
-        return (totalTotal_New) / totalTotal
+        return (totalArrived_New) / totalArrived
       }"),
       format = colFormat(percent = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
@@ -11147,13 +11147,13 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = JS("function(values, rows) {
-        let totalTotal_New = 0
-        let totalTotal = 0
+        let totalArrived_New = 0
+        let totalArrived = 0
         rows.forEach(function(row) {
-          totalTotal_New += row['Total_New']
-          totalTotal += row['Total']
+          totalArrived_New += row['Arrived_New']
+          totalArrived += row['Arrived']
         })
-        return (totalTotal_New) / totalTotal
+        return (totalArrived_New) / totalArrived
       }"),
       format = colFormat(percent = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
@@ -11623,13 +11623,13 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = JS("function(values, rows) {
-        let totalTotal_New = 0
-        let totalTotal = 0
+        let totalArrived_New = 0
+        let totalArrived = 0
         rows.forEach(function(row) {
-          totalTotal_New += row['Total_New']
-          totalTotal += row['Total']
+          totalArrived_New += row['Arrived_New']
+          totalArrived += row['Arrived']
         })
-        return (totalTotal_New) / totalTotal
+        return (totalArrived_New) / totalArrived
       }"),
       format = colFormat(percent = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
@@ -12168,13 +12168,13 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = JS("function(values, rows) {
-        let totalTotal_New = 0
-        let totalTotal = 0
+        let totalArrived_New = 0
+        let totalArrived = 0
         rows.forEach(function(row) {
-          totalTotal_New += row['Total_New']
-          totalTotal += row['Total']
+          totalArrived_New += row['Arrived_New']
+          totalArrived += row['Arrived']
         })
-        return (totalTotal_New) / totalTotal
+        return (totalArrived_New) / totalArrived
       }"),
       format = colFormat(percent = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
@@ -12643,13 +12643,13 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = JS("function(values, rows) {
-        let totalTotal_New = 0
-        let totalTotal = 0
+        let totalArrived_New = 0
+        let totalArrived = 0
         rows.forEach(function(row) {
-          totalTotal_New += row['Total_New']
-          totalTotal += row['Total']
+          totalArrived_New += row['Arrived_New']
+          totalArrived += row['Arrived']
         })
-        return (totalTotal_New) / totalTotal
+        return (totalArrived_New) / totalArrived
       }"),
       format = colFormat(percent = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
@@ -13190,13 +13190,13 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = JS("function(values, rows) {
-        let totalTotal_New = 0
-        let totalTotal = 0
+        let totalArrived_New = 0
+        let totalArrived = 0
         rows.forEach(function(row) {
-          totalTotal_New += row['Total_New']
-          totalTotal += row['Total']
+          totalArrived_New += row['Arrived_New']
+          totalArrived += row['Arrived']
         })
-        return (totalTotal_New) / totalTotal
+        return (totalArrived_New) / totalArrived
       }"),
       format = colFormat(percent = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
@@ -13665,13 +13665,13 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = JS("function(values, rows) {
-        let totalTotal_New = 0
-        let totalTotal = 0
+        let totalArrived_New = 0
+        let totalArrived = 0
         rows.forEach(function(row) {
-          totalTotal_New += row['Total_New']
-          totalTotal += row['Total']
+          totalArrived_New += row['Arrived_New']
+          totalArrived += row['Arrived']
         })
-        return (totalTotal_New) / totalTotal
+        return (totalArrived_New) / totalArrived
       }"),
       format = colFormat(percent = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
@@ -14210,13 +14210,13 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = JS("function(values, rows) {
-        let totalTotal_New = 0
-        let totalTotal = 0
+        let totalArrived_New = 0
+        let totalArrived = 0
         rows.forEach(function(row) {
-          totalTotal_New += row['Total_New']
-          totalTotal += row['Total']
+          totalArrived_New += row['Arrived_New']
+          totalArrived += row['Arrived']
         })
-        return (totalTotal_New) / totalTotal
+        return (totalArrived_New) / totalArrived
       }"),
       format = colFormat(percent = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
@@ -14685,18 +14685,18 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = JS("function(values, rows) {
-        let totalTotal_New = 0
-        let totalTotal = 0
+        let totalArrived_New = 0
+        let totalArrived = 0
         rows.forEach(function(row) {
-          totalTotal_New += row['Total_New']
-          totalTotal += row['Total']
+          totalArrived_New += row['Arrived_New']
+          totalArrived += row['Arrived']
         })
-        return (totalTotal_New) / totalTotal
+        return (totalArrived_New) / totalArrived
       }"),
       format = colFormat(percent = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
-
+    
     `noShow_rate_Established` = colDef(
       name = "All Established",
       maxWidth = 90,
