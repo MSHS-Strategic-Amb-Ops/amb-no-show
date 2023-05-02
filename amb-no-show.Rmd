@@ -2604,7 +2604,7 @@ reactable(
 <br/>
 <br/>
 
-#### `r last_year` YTD
+#### `r last_year` 
 ```{r MSHS No Show Last Year Output, echo = FALSE, warning = FALSE, message = FALSE}
 
 no_show_last_site <- no_show_specialty %>%
@@ -6420,7 +6420,7 @@ reactable(
 <br/>
 <br/>
 
-#### `r last_year` YTD
+#### `r last_year`
 ```{r MSBI No Show Last Year Output, echo = FALSE, warning = FALSE, message = FALSE}
 
 # Table Output -----------------------------------------------------------------
@@ -7441,7 +7441,7 @@ reactable(
 <br/>
 <br/>
 
-#### `r last_year` YTD
+#### `r last_year`
 ```{r MSDMG No Show Last Year Output, echo = FALSE, warning = FALSE, message = FALSE}
 
 # Table Output -----------------------------------------------------------------
@@ -8461,7 +8461,7 @@ reactable(
 <br/>
 <br/>
 
-#### `r last_year` YTD
+#### `r last_year`
 ```{r MSH- AMBULATORY CARE No Show Last Year Output, echo = FALSE, warning = FALSE, message = FALSE}
 
 # Table Output -----------------------------------------------------------------
@@ -9482,7 +9482,7 @@ reactable(
 <br/>
 <br/>
 
-#### `r last_year` YTD
+#### `r last_year`
 ```{r MSH-MSDFP No Show Last Year Output, echo = FALSE, warning = FALSE, message = FALSE}
 
 # Table Output -----------------------------------------------------------------
@@ -10503,7 +10503,7 @@ reactable(
 <br/>
 <br/>
 
-#### `r last_year` YTD
+#### `r last_year` 
 ```{r MSM No Show Last Year Output, echo = FALSE, warning = FALSE, message = FALSE}
 
 # Table Output -----------------------------------------------------------------
@@ -11524,7 +11524,7 @@ reactable(
 <br/>
 <br/>
 
-#### `r last_year` YTD
+#### `r last_year` 
 ```{r MSUS No Show Last Year Output, echo = FALSE, warning = FALSE, message = FALSE}
 
 # Table Output -----------------------------------------------------------------
@@ -12544,7 +12544,7 @@ reactable(
 <br/>
 <br/>
 
-#### `r last_year` YTD
+#### `r last_year` 
 ```{r MSW No Show Last Year Output, echo = FALSE, warning = FALSE, message = FALSE}
 
 # Table Output -----------------------------------------------------------------
@@ -13566,7 +13566,7 @@ reactable(
 <br/>
 <br/>
 
-#### `r last_year` YTD
+#### `r last_year` 
 ```{r NETWORK No Show Last Year Output, echo = FALSE, warning = FALSE, message = FALSE}
 
 # Table Output -----------------------------------------------------------------
@@ -14586,7 +14586,7 @@ reactable(
 <br/>
 <br/>
 
-#### `r last_year` YTD
+#### `r last_year` 
 ```{r ONCOLOGY Last Year No Show Output, echo = FALSE, warning = FALSE, message = FALSE}
 
 # Table Output -----------------------------------------------------------------
