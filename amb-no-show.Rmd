@@ -815,7 +815,7 @@ ________________________________________________________________________________
 ## MSHS
 ### No Show Plus Rate {.tabset .tabset-fade .tabset-pills}
 #### `r current_year` YTD
-<span style='font-size: 20px; color: #212070'>**No Show Rate by Site**</span><br/
+<span style='font-size: 20px; color: #212070'>**No Show Rate by Site**</span><br/>
 ```{r MSHS No Show Current Year Output, echo = FALSE, warning = FALSE, message = FALSE}
 
 no_show_ytd_site <- no_show_specialty %>%
