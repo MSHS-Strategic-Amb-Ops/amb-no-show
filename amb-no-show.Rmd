@@ -388,10 +388,10 @@ last_year <- year(report_run_date)-1
 
 ```{r}
 
-comparison_data <- scheduling_data_raw %>%
-  filter(Appt.DateYear == "2022-11-02") %>%
-  filter(Provider == "COUN, DAVID") %>%
-  dplyr::select(Campus, Department, Provider, PAT_ENC_CSN_ID, MRN, Appt.DTTM, Appt.Made.DTTM, Appt.Cancel.DTTM, Appt.Status)
+# comparison_data <- scheduling_data_raw %>%
+#   filter(Appt.DateYear == "2022-11-02") %>%
+#   filter(Provider == "COUN, DAVID") %>%
+#   dplyr::select(Campus, Department, Provider, PAT_ENC_CSN_ID, MRN, Appt.DTTM, Appt.Made.DTTM, Appt.Cancel.DTTM, Appt.Status)
 
 ```
 
@@ -1003,7 +1003,7 @@ reactable(
     highlight = TRUE,
     # filterable = TRUE,
     pagination = FALSE,
-    # height = 800,
+    height = 700,
     wrap = TRUE,
   searchable = TRUE,
   
@@ -2778,7 +2778,7 @@ reactable(
     highlight = TRUE,
     # filterable = TRUE,
     pagination = FALSE,
-    # height = 800,
+    height = 700,
     wrap = TRUE,
   searchable = TRUE,
   
@@ -3380,7 +3380,7 @@ reactable(
     highlight = TRUE,
     # filterable = TRUE,
     pagination = FALSE,
-    # height = 800,
+   height = 700,
     wrap = TRUE,
   searchable = TRUE,
   
@@ -3957,7 +3957,7 @@ reactable(
     highlight = TRUE,
     # filterable = TRUE,
     pagination = FALSE,
-    # height = 800,
+   height = 700,
     wrap = TRUE,
   searchable = TRUE,
   
@@ -5991,7 +5991,7 @@ reactable(
     highlight = TRUE,
     # filterable = TRUE,
     pagination = FALSE,
-    # height = 800,
+    height = 700,
     wrap = TRUE,
   searchable = TRUE,
 
@@ -6467,7 +6467,7 @@ reactable(
     highlight = TRUE,
     # filterable = TRUE,
     pagination = FALSE,
-    # height = 800,
+    height = 700,
     wrap = TRUE,
   searchable = TRUE,
 
@@ -7015,7 +7015,7 @@ reactable(
     highlight = TRUE,
     # filterable = TRUE,
     pagination = FALSE,
-    # height = 800,
+    height = 700,
     wrap = TRUE,
   searchable = TRUE,
 
@@ -7491,7 +7491,7 @@ reactable(
     highlight = TRUE,
     # filterable = TRUE,
     pagination = FALSE,
-    # height = 800,
+    height = 700,
     wrap = TRUE,
   searchable = TRUE,
 
@@ -8038,7 +8038,7 @@ reactable(
     highlight = TRUE,
     # filterable = TRUE,
     pagination = FALSE,
-    # height = 800,
+    height = 700,
     wrap = TRUE,
   searchable = TRUE,
 
@@ -8514,7 +8514,7 @@ reactable(
     highlight = TRUE,
     # filterable = TRUE,
     pagination = FALSE,
-    # height = 800,
+    height = 700,
     wrap = TRUE,
   searchable = TRUE,
 
@@ -9062,7 +9062,7 @@ reactable(
     highlight = TRUE,
     # filterable = TRUE,
     pagination = FALSE,
-    # height = 800,
+    height = 700,
     wrap = TRUE,
   searchable = TRUE,
 
@@ -9538,7 +9538,7 @@ reactable(
     highlight = TRUE,
     # filterable = TRUE,
     pagination = FALSE,
-    # height = 800,
+    height = 700,
     wrap = TRUE,
   searchable = TRUE,
 
@@ -10086,7 +10086,7 @@ reactable(
     highlight = TRUE,
     # filterable = TRUE,
     pagination = FALSE,
-    # height = 800,
+    height = 700,
     wrap = TRUE,
   searchable = TRUE,
 
@@ -10562,7 +10562,7 @@ reactable(
     highlight = TRUE,
     # filterable = TRUE,
     pagination = FALSE,
-    # height = 800,
+    height = 700,
     wrap = TRUE,
   searchable = TRUE,
 
@@ -11109,7 +11109,7 @@ reactable(
     highlight = TRUE,
     # filterable = TRUE,
     pagination = FALSE,
-    # height = 800,
+    height = 700,
     wrap = TRUE,
   searchable = TRUE,
 
@@ -11586,7 +11586,7 @@ reactable(
     highlight = TRUE,
     # filterable = TRUE,
     pagination = FALSE,
-    # height = 800,
+    height = 700,
     wrap = TRUE,
   searchable = TRUE,
 
@@ -12133,7 +12133,7 @@ reactable(
     highlight = TRUE,
     # filterable = TRUE,
     pagination = FALSE,
-    # height = 800,
+    height = 700,
     wrap = TRUE,
   searchable = TRUE,
 
@@ -12609,7 +12609,7 @@ reactable(
     highlight = TRUE,
     # filterable = TRUE,
     pagination = FALSE,
-    # height = 800,
+    height = 700,
     wrap = TRUE,
   searchable = TRUE,
 
@@ -13158,7 +13158,7 @@ reactable(
     highlight = TRUE,
     # filterable = TRUE,
     pagination = FALSE,
-    # height = 800,
+    height = 700,
     wrap = TRUE,
   searchable = TRUE,
 
@@ -13634,7 +13634,7 @@ reactable(
     highlight = TRUE,
     # filterable = TRUE,
     pagination = FALSE,
-    # height = 800,
+    height = 700,
     wrap = TRUE,
   searchable = TRUE,
 
