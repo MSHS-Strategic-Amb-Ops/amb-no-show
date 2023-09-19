@@ -343,7 +343,7 @@ scheduling_data_raw <- as.data.frame(readRDS("/nfs/data/Applications/Ambulatory/
   # filter(Appt.Status %in% c("Arrived","No Show","Canceled"))
   
 
-sites <- c("NETWORK","MSM","MSH-MSDFP","MSW","MSBI","MSUS","MSH- AMBULATORY CARE","MSDMG")
+sites <- c("NETWORK","MSM","MSH-MSDFP","MSW","MSBI","MSUS","MSH- AMBULATORY CARE","MSDMG", "MSQ", "NYEE")
 
 start_date <- "2022-01-01"
 end_date <- Sys.Date()-1
