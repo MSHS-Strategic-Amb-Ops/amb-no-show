@@ -5512,8 +5512,87 @@ reactable(
 
 
 #### Trend
-<span style='font-size: 20px; color: #212070'>**No Show Plus Rate Trend by Site**</span><br/>
+<span style='font-size: 20px; color: #212070'>**MSHS No Show Plus Rate Trend**</span><br/>
 ```{r MSHS No Show Trend, echo = FALSE, warning = FALSE, message = FALSE}
+
+no_show_trend_mshs_all <- no_show_specialty %>%
+  mutate(Campus = "MSHS") %>%
+  group_by(Campus, Appt.MonthYear, New.PT2) %>%
+  summarise(Arrived = sum(Arrived),
+            `NoShow` = sum(`NoShow`),
+            `SameDayCanceled` = sum(`SameDayCanceled`),
+            Total = sum(Total)) %>%
+  mutate(noShow_rate = round((`NoShow` + `SameDayCanceled`)/ Total,2)*100) %>%
+  pivot_wider(names_from = New.PT2,
+              values_from = 4:8,
+              values_fill = 0) %>%
+  mutate(Total = (Total_Established + Total_New),
+         noShow_rate = round((`NoShow_Established` + `SameDayCanceled_Established` + `NoShow_New` + `SameDayCanceled_New`)/Total,2)*100,
+         new_perc = round(Total_New/Total,2)*100)
+
+
+map(unique(no_show_trend_mshs_all$Campus), function(x){
+highchart() %>%
+  hc_yAxis_multiples(
+    # list(title = list(text = "Avg Volume per Day"), lineWidth = 3),
+    list(title = list(text = "No Show Plus Rate"), lineWidth = 3, 
+         labels = list(format = '{value}%'),
+         plotLines = list(list(value = 20, color = "red", width = 2,
+                               dashStyle = "shortdash")))
+           # showLastLabel = FALSE, opposite = TRUE)
+  ) %>%
+  hc_xAxis(title = list(text = ""),
+           categories = (no_show_trend_mshs %>% filter(Campus == x))$Appt.MonthYear,
+           type = "datetime",
+           labels = list(format = '{value:%Y-%m}')
+           # dateTimeLabelFormats = list(month = '%Y-%m')
+           ) %>%
+  # hc_add_series(name = "Total Visits",
+  #               data = (volume_trend_mshs %>% filter(Campus == x))$avg_vol_all,
+  #               type = 'column',
+  #               color='#212070',
+  #               dataLabels = list(enabled = TRUE, format='{point.y}')) %>%
+  hc_add_series(name   = "Established",
+                data   = (no_show_trend_mshs %>% filter(Campus == x))$noShow_rate_Established,
+                type = 'line', 
+                # color = '#a5a7a5'
+                marker = list(enabled= TRUE),
+                color='#212070',
+                lineWidth=3,
+                lineColor='#212070'
+                ) %>%
+  hc_add_series(name   = "New",
+                data   = (no_show_trend_mshs %>% filter(Campus == x))$noShow_rate_New,
+                type = 'line', 
+                # color = '#a5a7a5'
+                marker = list(enabled= TRUE),
+                color='#d80b8c',
+                lineWidth=3,
+                lineColor='#d80b8c'
+                ) %>%
+  hc_add_series(name   = "All",
+                data   = (no_show_trend_mshs %>% filter(Campus == x))$noShow_rate,
+               type = 'line', 
+                # color = '#a5a7a5'
+                marker = list(enabled= TRUE),
+                color='#7f7f7f',
+                lineWidth=3,
+                lineColor='#7f7f7f'
+                ) %>%
+  hc_legend(align = "left", verticalAlign = "top", itemStyle = list(fontFamily ='Calibri',color ='black', fontSize = "14px")) %>%
+  hc_title(text = paste0(x, " - Avg No Show Plus Rate"), align = "left", style = list(fontWeight = 'bold', fontSize = "22px", fontFamily = "Calibri")) %>%
+  hc_subtitle(text = "Target:",
+              align = "left", style = list(fontFace = "italic", fontSize = "16px", fontFamily = "Calibri")) %>%
+    hc_tooltip(shared = TRUE, borderColor = "black")
+  }) %>%
+  hw_grid(ncol = 1, rowheight = 400) %>% htmltools::browsable()
+
+```
+<br/>
+
+
+<span style='font-size: 20px; color: #212070'>**No Show Plus Rate Trend by Site**</span><br/>
+```{r By Site No Show Trend, echo = FALSE, warning = FALSE, message = FALSE}
 
 no_show_trend_mshs <- no_show_specialty %>%
   filter(Appt.Year == current_year) %>%
@@ -5529,26 +5608,6 @@ no_show_trend_mshs <- no_show_specialty %>%
   mutate(Total = (Total_Established + Total_New),
          noShow_rate = round((`NoShow_Established` + `SameDayCanceled_Established` + `NoShow_New` + `SameDayCanceled_New`)/Total,2)*100,
          new_perc = round(Total_New/Total,2)*100)
-
-
-no_show_trend_mshs_all <- no_show_specialty %>%
-  filter(Appt.Year == current_year) %>%
-  mutate(Campus = "*MSHS") %>%
-  group_by(Campus, Appt.MonthYear, New.PT2) %>%
-  summarise(Arrived = sum(Arrived),
-            `NoShow` = sum(`NoShow`),
-            `SameDayCanceled` = sum(`SameDayCanceled`),
-            Total = sum(Total)) %>%
-  mutate(noShow_rate = round((`NoShow` + `SameDayCanceled`)/ Total,2)*100) %>%
-  pivot_wider(names_from = New.PT2,
-              values_from = 4:8,
-              values_fill = 0) %>%
-  mutate(Total = (Total_Established + Total_New),
-         noShow_rate = round((`NoShow_Established` + `SameDayCanceled_Established` + `NoShow_New` + `SameDayCanceled_New`)/Total,2)*100,
-         new_perc = round(Total_New/Total,2)*100)
-
-
-no_show_trend_mshs <- bind_rows(no_show_trend_mshs, no_show_trend_mshs_all)
 
 
 map(unique(no_show_trend_mshs$Campus), function(x){
