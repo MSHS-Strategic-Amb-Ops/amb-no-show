@@ -5516,6 +5516,7 @@ reactable(
 ```{r MSHS No Show Trend, echo = FALSE, warning = FALSE, message = FALSE}
 
 no_show_trend_mshs <- no_show_specialty %>%
+  filter(Appt.Year == current_year) %>%
   group_by(Campus, Appt.MonthYear, New.PT2) %>%
   summarise(Arrived = sum(Arrived),
             `NoShow` = sum(`NoShow`),
@@ -5529,6 +5530,25 @@ no_show_trend_mshs <- no_show_specialty %>%
          noShow_rate = round((`NoShow_Established` + `SameDayCanceled_Established` + `NoShow_New` + `SameDayCanceled_New`)/Total,2)*100,
          new_perc = round(Total_New/Total,2)*100)
 
+
+no_show_trend_mshs_all <- no_show_specialty %>%
+  filter(Appt.Year == current_year) %>%
+  mutate(Campus = "*MSHS") %>%
+  group_by(Campus, Appt.MonthYear, New.PT2) %>%
+  summarise(Arrived = sum(Arrived),
+            `NoShow` = sum(`NoShow`),
+            `SameDayCanceled` = sum(`SameDayCanceled`),
+            Total = sum(Total)) %>%
+  mutate(noShow_rate = round((`NoShow` + `SameDayCanceled`)/ Total,2)*100) %>%
+  pivot_wider(names_from = New.PT2,
+              values_from = 4:8,
+              values_fill = 0) %>%
+  mutate(Total = (Total_Established + Total_New),
+         noShow_rate = round((`NoShow_Established` + `SameDayCanceled_Established` + `NoShow_New` + `SameDayCanceled_New`)/Total,2)*100,
+         new_perc = round(Total_New/Total,2)*100)
+
+
+no_show_trend_mshs <- bind_rows(no_show_trend_mshs, no_show_trend_mshs_all)
 
 
 map(unique(no_show_trend_mshs$Campus), function(x){
@@ -5770,6 +5790,7 @@ volume_trend_specialty_function <- function(site){
   
   # site <- "MSBI"
   volume_trend_specialty <- arrived_calculation_trend_specialty %>%
+    filter(Appt.Year == current_year) %>%
     filter(Campus == site) %>%
     arrange(match(Appt.Day, day_order)) %>%
     ungroup() %>%
