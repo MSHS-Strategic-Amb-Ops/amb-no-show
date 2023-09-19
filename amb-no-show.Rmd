@@ -5542,7 +5542,7 @@ highchart() %>%
            # showLastLabel = FALSE, opposite = TRUE)
   ) %>%
   hc_xAxis(title = list(text = ""),
-           categories = (no_show_trend_mshs %>% filter(Campus == x))$Appt.MonthYear,
+           categories = (no_show_trend_mshs_all %>% filter(Campus == x))$Appt.MonthYear,
            type = "datetime",
            labels = list(format = '{value:%Y-%m}')
            # dateTimeLabelFormats = list(month = '%Y-%m')
@@ -5553,7 +5553,7 @@ highchart() %>%
   #               color='#212070',
   #               dataLabels = list(enabled = TRUE, format='{point.y}')) %>%
   hc_add_series(name   = "Established",
-                data   = (no_show_trend_mshs %>% filter(Campus == x))$noShow_rate_Established,
+                data   = (no_show_trend_mshs_all %>% filter(Campus == x))$noShow_rate_Established,
                 type = 'line', 
                 # color = '#a5a7a5'
                 marker = list(enabled= TRUE),
@@ -5562,7 +5562,7 @@ highchart() %>%
                 lineColor='#212070'
                 ) %>%
   hc_add_series(name   = "New",
-                data   = (no_show_trend_mshs %>% filter(Campus == x))$noShow_rate_New,
+                data   = (no_show_trend_mshs_all %>% filter(Campus == x))$noShow_rate_New,
                 type = 'line', 
                 # color = '#a5a7a5'
                 marker = list(enabled= TRUE),
@@ -5571,7 +5571,7 @@ highchart() %>%
                 lineColor='#d80b8c'
                 ) %>%
   hc_add_series(name   = "All",
-                data   = (no_show_trend_mshs %>% filter(Campus == x))$noShow_rate,
+                data   = (no_show_trend_mshs_all %>% filter(Campus == x))$noShow_rate,
                type = 'line', 
                 # color = '#a5a7a5'
                 marker = list(enabled= TRUE),
