@@ -331,9 +331,10 @@ not_all_na <- function(x) all(!is.na(x)) # Exclude columns with All NAs
 ```{r Import Data, echo = FALSE, warning = FALSE, message = FALSE}
 
 # scheduling_data_raw <- as.data.frame(readRDS("historical_data.rds")) %>%
-#   mutate(Campus = ifelse(Campus == "MSDD", "MSDMG", Campus)) %>%
-#   filter(!is.na(Campus))
-# filter(Appt.Status %in% c("Arrived","No Show","Canceled"))
+#   filter(!Campus %in% c("MS NOW", "MSHP", "ONCOLOGY", "MSQ", "OTHER")) %>%
+#   filter(!is.na(Campus)) %>%
+#   mutate(Campus = case_when(Campus == "MSDD" ~ "MSDMG",
+#                             TRUE ~ Campus)) 
 
 scheduling_data_raw <- as.data.frame(readRDS("/nfs/data/Applications/Ambulatory/Data_Updated/historical_data.rds")) %>%
   filter(!Campus %in% c("MS NOW", "MSHP", "ONCOLOGY", "MSQ", "OTHER")) %>%
@@ -416,7 +417,7 @@ last_year <- year(report_run_date)-1
 #   mutate(avg_vol_all = round(mean(total))) %>%
 #   group_by(Appt.Year, Campus, Appt.Day, total_day, avg_vol_all, avg_vol_day) %>%
 #   summarise(unique = n()) %>%
-#   mutate(daily_var = round((avg_vol_day-(mean(avg_vol_all)))/(mean(avg_vol_all)),2)) %>%
+#   mutate(daily_var = round((avg_vol_day-(mean(avg_vol_all)))/(mean(avg_vol_all)),3)) %>%
 #   dplyr::select(-unique)
 # 
 # arrived_calculation_ytd_mshs <- scheduling_data_raw %>%
@@ -435,7 +436,7 @@ last_year <- year(report_run_date)-1
 #   mutate(avg_vol_all = round(mean(total))) %>%
 #   group_by(Appt.Year, Appt.Day, total_day, avg_vol_all, avg_vol_day) %>%
 #   summarise(unique = n()) %>%
-#   mutate(daily_var = round((avg_vol_day-(mean(avg_vol_all)))/(mean(avg_vol_all)),2)) %>%
+#   mutate(daily_var = round((avg_vol_day-(mean(avg_vol_all)))/(mean(avg_vol_all)),3)) %>%
 #   dplyr::select(-unique) %>%
 #   mutate(Campus = "MSHS Total")
 # 
@@ -459,7 +460,7 @@ last_year <- year(report_run_date)-1
 #   mutate(avg_vol_all = round(mean(total))) %>%
 #   group_by(Appt.Year, Campus, Campus.Specialty.Group, Appt.Day, total_day, avg_vol_all, avg_vol_day) %>%
 #   summarise(unique = n()) %>%
-#   mutate(daily_var = round((avg_vol_day-(mean(avg_vol_all)))/(mean(avg_vol_all)),2)) %>%
+#   mutate(daily_var = round((avg_vol_day-(mean(avg_vol_all)))/(mean(avg_vol_all)),3)) %>%
 #   dplyr::select(-unique)
 # 
 # 
@@ -478,7 +479,7 @@ last_year <- year(report_run_date)-1
 #   mutate(avg_vol_all = mean(total)) %>%
 #   group_by(Campus, Appt.MonthYear, Appt.Day, avg_vol_all, avg_vol_day) %>%
 #   summarise(total_vol = sum(total)) %>%
-#   mutate(daily_var = round((avg_vol_day-(mean(avg_vol_all)))/(mean(avg_vol_all)),2))
+#   mutate(daily_var = round((avg_vol_day-(mean(avg_vol_all)))/(mean(avg_vol_all)),3))
 # 
 # 
 # # By site and Specialty -----------------------------------------------------------------
@@ -496,7 +497,7 @@ last_year <- year(report_run_date)-1
 #   mutate(avg_vol_all = mean(total)) %>%
 #   group_by(Campus, Campus.Specialty.Group, Appt.MonthYear, Appt.Day, avg_vol_all, avg_vol_day) %>%
 #   summarise(total_vol = sum(total)) %>%
-#   mutate(daily_var = round((avg_vol_day-(mean(avg_vol_all)))/(mean(avg_vol_all)),2))
+#   mutate(daily_var = round((avg_vol_day-(mean(avg_vol_all)))/(mean(avg_vol_all)),3))
 # 
 # ```
 # 
@@ -521,7 +522,7 @@ last_year <- year(report_run_date)-1
 #   mutate(avg_vol_all = round(mean(total))) %>%
 #   group_by(Appt.Year, Campus, Appt.Day, total_day, avg_vol_all, avg_vol_day) %>%
 #   summarise(unique = n()) %>%
-#   mutate(daily_var = round((avg_vol_day-(mean(avg_vol_all)))/(mean(avg_vol_all)),2)) %>%
+#   mutate(daily_var = round((avg_vol_day-(mean(avg_vol_all)))/(mean(avg_vol_all)),3)) %>%
 #   dplyr::select(-unique)
 # 
 # arrived_calculation_last_mshs <- scheduling_data_raw %>%
@@ -540,7 +541,7 @@ last_year <- year(report_run_date)-1
 #   mutate(avg_vol_all = round(mean(total))) %>%
 #   group_by(Appt.Year, Appt.Day, total_day, avg_vol_all, avg_vol_day) %>%
 #   summarise(unique = n()) %>%
-#   mutate(daily_var = round((avg_vol_day-(mean(avg_vol_all)))/(mean(avg_vol_all)),2)) %>%
+#   mutate(daily_var = round((avg_vol_day-(mean(avg_vol_all)))/(mean(avg_vol_all)),3)) %>%
 #   dplyr::select(-unique) %>%
 #   mutate(Campus = "MSHS Total")
 # 
@@ -564,7 +565,7 @@ last_year <- year(report_run_date)-1
 #   mutate(avg_vol_all = round(mean(total))) %>%
 #   group_by(Appt.Year, Campus, Campus.Specialty.Group, Appt.Day, total_day, avg_vol_all, avg_vol_day) %>%
 #   summarise(unique = n()) %>%
-#   mutate(daily_var = round((avg_vol_day-(mean(avg_vol_all)))/(mean(avg_vol_all)),2)) %>%
+#   mutate(daily_var = round((avg_vol_day-(mean(avg_vol_all)))/(mean(avg_vol_all)),3)) %>%
 #   dplyr::select(-unique)
 
 ```
@@ -853,11 +854,11 @@ no_show_ytd_site <- no_show_specialty %>%
             `Total_belowFourteen` = sum(`Total_belowFourteen`),
             `Total_belowThirty` = sum(`Total_belowThirty`),
             `Total_overThirty` = sum(`Total_overThirty`)) %>%
-  mutate(noShow_rate = round((`NoShow` + `SameDayCanceled`)/ Total,2),
-         `noShow_rate_sameDay` = round((`NoShow_sameDay` + `SameDayCanceled_sameDay`)/ `Total_sameDay`,2),
-         `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen` + `SameDayCanceled_belowFourteen`)/ `Total_belowFourteen`,2),
-         `noShow_rate_belowThirty` = round((`NoShow_belowThirty` + `SameDayCanceled_belowThirty`)/ `Total_belowThirty`,2),
-         `noShow_rate_overThirty` = round((`NoShow_overThirty` + `SameDayCanceled_overThirty`)/ `Total_overThirty`,2)) %>%
+  mutate(noShow_rate = round((`NoShow` + `SameDayCanceled`)/ Total,3),
+         `noShow_rate_sameDay` = round((`NoShow_sameDay` + `SameDayCanceled_sameDay`)/ `Total_sameDay`,3),
+         `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen` + `SameDayCanceled_belowFourteen`)/ `Total_belowFourteen`,3),
+         `noShow_rate_belowThirty` = round((`NoShow_belowThirty` + `SameDayCanceled_belowThirty`)/ `Total_belowThirty`,3),
+         `noShow_rate_overThirty` = round((`NoShow_overThirty` + `SameDayCanceled_overThirty`)/ `Total_overThirty`,3)) %>%
   pivot_wider(names_from = New.PT2,
               values_from = 4:28,
               values_fill = 0) %>%
@@ -881,15 +882,15 @@ no_show_ytd_site <- no_show_specialty %>%
          `SameDayCanceled_belowFourteen` = (`SameDayCanceled_belowFourteen_Established` + `SameDayCanceled_belowFourteen_New`),
          `SameDayCanceled_belowThirty` = (`SameDayCanceled_belowThirty_Established` + `SameDayCanceled_belowThirty_New`),
          `SameDayCanceled_overThirty` = (`SameDayCanceled_overThirty_Established` + `SameDayCanceled_overThirty_New`),
-         noShow_rate = round((`NoShow_Established` + `SameDayCanceled_Established` + `NoShow_New` + `SameDayCanceled_New`)/Total,2),
-         `noShow_rate_sameDay` = round((`NoShow_sameDay` + `SameDayCanceled_sameDay`)/`Total_sameDay`,2),
-         `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen` + `SameDayCanceled_belowFourteen`)/`Total_belowFourteen`,2),
-         `noShow_rate_belowThirty` = round((`NoShow_belowThirty` + `SameDayCanceled_belowThirty`)/`Total_belowThirty`,2),
-         `noShow_rate_overThirty` = round((`NoShow_overThirty` + `SameDayCanceled_overThirty`)/`Total_overThirty`,2),
-         new_perc = round(Arrived_New/Arrived,2)) %>%
+         noShow_rate = round((`NoShow_Established` + `SameDayCanceled_Established` + `NoShow_New` + `SameDayCanceled_New`)/Total,3),
+         `noShow_rate_sameDay` = round((`NoShow_sameDay` + `SameDayCanceled_sameDay`)/`Total_sameDay`,3),
+         `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen` + `SameDayCanceled_belowFourteen`)/`Total_belowFourteen`,3),
+         `noShow_rate_belowThirty` = round((`NoShow_belowThirty` + `SameDayCanceled_belowThirty`)/`Total_belowThirty`,3),
+         `noShow_rate_overThirty` = round((`NoShow_overThirty` + `SameDayCanceled_overThirty`)/`Total_overThirty`,3),
+         new_perc = round(Arrived_New/Arrived,3)) %>%
   group_by(Campus) %>%
   mutate(arrived_site = sum(Arrived),
-         arrived_perc = round(Arrived/arrived_site,2)) 
+         arrived_perc = round(Arrived/arrived_site,3)) 
 
 
 no_show_ytd_mshs <- no_show_specialty %>%
@@ -915,11 +916,11 @@ no_show_ytd_mshs <- no_show_specialty %>%
             `Total_belowFourteen` = sum(`Total_belowFourteen`),
             `Total_belowThirty` = sum(`Total_belowThirty`),
             `Total_overThirty` = sum(`Total_overThirty`)) %>%
-  mutate(noShow_rate = round((`NoShow` + `SameDayCanceled`)/ Total,2),
-         `noShow_rate_sameDay` = round((`NoShow_sameDay` + `SameDayCanceled_sameDay`)/ `Total_sameDay`,2),
-         `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen` + `SameDayCanceled_belowFourteen`)/ `Total_belowFourteen`,2),
-         `noShow_rate_belowThirty` = round((`NoShow_belowThirty` + `SameDayCanceled_belowThirty`)/ `Total_belowThirty`,2),
-         `noShow_rate_overThirty` = round((`NoShow_overThirty` + `SameDayCanceled_overThirty`)/ `Total_overThirty`,2)) %>%
+  mutate(noShow_rate = round((`NoShow` + `SameDayCanceled`)/ Total,3),
+         `noShow_rate_sameDay` = round((`NoShow_sameDay` + `SameDayCanceled_sameDay`)/ `Total_sameDay`,3),
+         `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen` + `SameDayCanceled_belowFourteen`)/ `Total_belowFourteen`,3),
+         `noShow_rate_belowThirty` = round((`NoShow_belowThirty` + `SameDayCanceled_belowThirty`)/ `Total_belowThirty`,3),
+         `noShow_rate_overThirty` = round((`NoShow_overThirty` + `SameDayCanceled_overThirty`)/ `Total_overThirty`,3)) %>%
   pivot_wider(names_from = New.PT2,
               values_from = 3:27,
               values_fill = 0) %>%
@@ -943,16 +944,16 @@ no_show_ytd_mshs <- no_show_specialty %>%
          `SameDayCanceled_belowFourteen` = (`SameDayCanceled_belowFourteen_Established` + `SameDayCanceled_belowFourteen_New`),
          `SameDayCanceled_belowThirty` = (`SameDayCanceled_belowThirty_Established` + `SameDayCanceled_belowThirty_New`),
          `SameDayCanceled_overThirty` = (`SameDayCanceled_overThirty_Established` + `SameDayCanceled_overThirty_New`),
-         noShow_rate = round((`NoShow_Established` + `SameDayCanceled_Established` + `NoShow_New` + `SameDayCanceled_New`)/Total,2),
-         `noShow_rate_sameDay` = round((`NoShow_sameDay` + `SameDayCanceled_sameDay`)/`Total_sameDay`,2),
-         `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen` + `SameDayCanceled_belowFourteen`)/`Total_belowFourteen`,2),
-         `noShow_rate_belowThirty` = round((`NoShow_belowThirty` + `SameDayCanceled_belowThirty`)/`Total_belowThirty`,2),
-         `noShow_rate_overThirty` = round((`NoShow_overThirty` + `SameDayCanceled_overThirty`)/`Total_overThirty`,2),
-         new_perc = round(Arrived_New/Arrived,2)) %>%
+         noShow_rate = round((`NoShow_Established` + `SameDayCanceled_Established` + `NoShow_New` + `SameDayCanceled_New`)/Total,3),
+         `noShow_rate_sameDay` = round((`NoShow_sameDay` + `SameDayCanceled_sameDay`)/`Total_sameDay`,3),
+         `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen` + `SameDayCanceled_belowFourteen`)/`Total_belowFourteen`,3),
+         `noShow_rate_belowThirty` = round((`NoShow_belowThirty` + `SameDayCanceled_belowThirty`)/`Total_belowThirty`,3),
+         `noShow_rate_overThirty` = round((`NoShow_overThirty` + `SameDayCanceled_overThirty`)/`Total_overThirty`,3),
+         new_perc = round(Arrived_New/Arrived,3)) %>%
   mutate(Campus = "MSHS Total") %>%
   group_by(Campus) %>%
   mutate(arrived_site = sum(Arrived),
-         arrived_perc = round(Arrived/arrived_site,2)) 
+         arrived_perc = round(Arrived/arrived_site,3)) 
 
 
 no_show_ytd_merged <- bind_rows(no_show_ytd_site, no_show_ytd_mshs)
@@ -1474,17 +1475,17 @@ reactable(
 #             `NoShow` = sum(`No Show`),
 #             `SameDayCanceled` = sum(`Same-Day Canceled`),
 #             Total = sum(Total)) %>%
-#   mutate(noShow_rate = round((`NoShow` + `SameDayCanceled`)/ Total,2)) %>%
+#   mutate(noShow_rate = round((`NoShow` + `SameDayCanceled`)/ Total,3)) %>%
 #   pivot_wider(names_from = New.PT2,
 #               values_from = 4:8,
 #               values_fill = 0) %>%
 #   mutate(Total = (Total_Established + Total_New),
 #          Arrived = (Arrived_Established + Arrived_New),
-#          noShow_rate = round((`NoShow_Established` + `SameDayCanceled_Established` + `NoShow_New` + `SameDayCanceled_New`)/Total,2),
-#          new_perc = round(Arrived_New/Arrived,2)) %>%
+#          noShow_rate = round((`NoShow_Established` + `SameDayCanceled_Established` + `NoShow_New` + `SameDayCanceled_New`)/Total,3),
+#          new_perc = round(Arrived_New/Arrived,3)) %>%
 #   group_by(Campus.Specialty.Group) %>%
 #   mutate(arrived_site = sum(Arrived),
-#          arrived_perc = round(Arrived/arrived_site,2)) 
+#          arrived_perc = round(Arrived/arrived_site,3)) 
 
 no_show_ytd_specialty <- no_show_specialty %>%
   filter(Appt.Year == current_year) %>%
@@ -1509,11 +1510,11 @@ no_show_ytd_specialty <- no_show_specialty %>%
             `Total_belowFourteen` = sum(`Total_belowFourteen`),
             `Total_belowThirty` = sum(`Total_belowThirty`),
             `Total_overThirty` = sum(`Total_overThirty`)) %>%
-  mutate(noShow_rate = round((`NoShow` + `SameDayCanceled`)/ Total,2),
-         `noShow_rate_sameDay` = round((`NoShow_sameDay` + `SameDayCanceled_sameDay`)/ `Total_sameDay`,2),
-         `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen` + `SameDayCanceled_belowFourteen`)/ `Total_belowFourteen`,2),
-         `noShow_rate_belowThirty` = round((`NoShow_belowThirty` + `SameDayCanceled_belowThirty`)/ `Total_belowThirty`,2),
-         `noShow_rate_overThirty` = round((`NoShow_overThirty` + `SameDayCanceled_overThirty`)/ `Total_overThirty`,2)) %>%
+  mutate(noShow_rate = round((`NoShow` + `SameDayCanceled`)/ Total,3),
+         `noShow_rate_sameDay` = round((`NoShow_sameDay` + `SameDayCanceled_sameDay`)/ `Total_sameDay`,3),
+         `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen` + `SameDayCanceled_belowFourteen`)/ `Total_belowFourteen`,3),
+         `noShow_rate_belowThirty` = round((`NoShow_belowThirty` + `SameDayCanceled_belowThirty`)/ `Total_belowThirty`,3),
+         `noShow_rate_overThirty` = round((`NoShow_overThirty` + `SameDayCanceled_overThirty`)/ `Total_overThirty`,3)) %>%
   pivot_wider(names_from = New.PT2,
               values_from = 4:28,
               values_fill = 0) %>%
@@ -1537,15 +1538,15 @@ no_show_ytd_specialty <- no_show_specialty %>%
          `SameDayCanceled_belowFourteen` = (`SameDayCanceled_belowFourteen_Established` + `SameDayCanceled_belowFourteen_New`),
          `SameDayCanceled_belowThirty` = (`SameDayCanceled_belowThirty_Established` + `SameDayCanceled_belowThirty_New`),
          `SameDayCanceled_overThirty` = (`SameDayCanceled_overThirty_Established` + `SameDayCanceled_overThirty_New`),
-         noShow_rate = round((`NoShow_Established` + `SameDayCanceled_Established` + `NoShow_New` + `SameDayCanceled_New`)/Total,2),
-         `noShow_rate_sameDay` = round((`NoShow_sameDay` + `SameDayCanceled_sameDay`)/`Total_sameDay`,2),
-         `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen` + `SameDayCanceled_belowFourteen`)/`Total_belowFourteen`,2),
-         `noShow_rate_belowThirty` = round((`NoShow_belowThirty` + `SameDayCanceled_belowThirty`)/`Total_belowThirty`,2),
-         `noShow_rate_overThirty` = round((`NoShow_overThirty` + `SameDayCanceled_overThirty`)/`Total_overThirty`,2),
-         new_perc = round(Arrived_New/Arrived,2)) %>%
+         noShow_rate = round((`NoShow_Established` + `SameDayCanceled_Established` + `NoShow_New` + `SameDayCanceled_New`)/Total,3),
+         `noShow_rate_sameDay` = round((`NoShow_sameDay` + `SameDayCanceled_sameDay`)/`Total_sameDay`,3),
+         `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen` + `SameDayCanceled_belowFourteen`)/`Total_belowFourteen`,3),
+         `noShow_rate_belowThirty` = round((`NoShow_belowThirty` + `SameDayCanceled_belowThirty`)/`Total_belowThirty`,3),
+         `noShow_rate_overThirty` = round((`NoShow_overThirty` + `SameDayCanceled_overThirty`)/`Total_overThirty`,3),
+         new_perc = round(Arrived_New/Arrived,3)) %>%
   group_by(Campus.Specialty.Group) %>%
   mutate(arrived_site = sum(Arrived),
-         arrived_perc = round(Arrived/arrived_site,2)) 
+         arrived_perc = round(Arrived/arrived_site,3)) 
 
 no_show_ytd_specialty <- no_show_ytd_specialty %>%
   dplyr::select(1:2, 58, 78, 80, 
@@ -2075,11 +2076,11 @@ no_show_ytd_specialty_group <- no_show_specialty %>%
             `Total_belowFourteen` = sum(`Total_belowFourteen`),
             `Total_belowThirty` = sum(`Total_belowThirty`),
             `Total_overThirty` = sum(`Total_overThirty`)) %>%
-  mutate(noShow_rate = round((`NoShow` + `SameDayCanceled`)/ Total,2),
-         `noShow_rate_sameDay` = round((`NoShow_sameDay` + `SameDayCanceled_sameDay`)/ `Total_sameDay`,2),
-         `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen` + `SameDayCanceled_belowFourteen`)/ `Total_belowFourteen`,2),
-         `noShow_rate_belowThirty` = round((`NoShow_belowThirty` + `SameDayCanceled_belowThirty`)/ `Total_belowThirty`,2),
-         `noShow_rate_overThirty` = round((`NoShow_overThirty` + `SameDayCanceled_overThirty`)/ `Total_overThirty`,2)) %>%
+  mutate(noShow_rate = round((`NoShow` + `SameDayCanceled`)/ Total,3),
+         `noShow_rate_sameDay` = round((`NoShow_sameDay` + `SameDayCanceled_sameDay`)/ `Total_sameDay`,3),
+         `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen` + `SameDayCanceled_belowFourteen`)/ `Total_belowFourteen`,3),
+         `noShow_rate_belowThirty` = round((`NoShow_belowThirty` + `SameDayCanceled_belowThirty`)/ `Total_belowThirty`,3),
+         `noShow_rate_overThirty` = round((`NoShow_overThirty` + `SameDayCanceled_overThirty`)/ `Total_overThirty`,3)) %>%
   pivot_wider(names_from = New.PT2,
               values_from = 5:29,
               values_fill = 0) %>%
@@ -2103,15 +2104,15 @@ no_show_ytd_specialty_group <- no_show_specialty %>%
          `SameDayCanceled_belowFourteen` = (`SameDayCanceled_belowFourteen_Established` + `SameDayCanceled_belowFourteen_New`),
          `SameDayCanceled_belowThirty` = (`SameDayCanceled_belowThirty_Established` + `SameDayCanceled_belowThirty_New`),
          `SameDayCanceled_overThirty` = (`SameDayCanceled_overThirty_Established` + `SameDayCanceled_overThirty_New`),
-         noShow_rate = round((`NoShow_Established` + `SameDayCanceled_Established` + `NoShow_New` + `SameDayCanceled_New`)/Total,2),
-         `noShow_rate_sameDay` = round((`NoShow_sameDay` + `SameDayCanceled_sameDay`)/`Total_sameDay`,2),
-         `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen` + `SameDayCanceled_belowFourteen`)/`Total_belowFourteen`,2),
-         `noShow_rate_belowThirty` = round((`NoShow_belowThirty` + `SameDayCanceled_belowThirty`)/`Total_belowThirty`,2),
-         `noShow_rate_overThirty` = round((`NoShow_overThirty` + `SameDayCanceled_overThirty`)/`Total_overThirty`,2),
-         new_perc = round(Arrived_New/Arrived,2)) %>%
+         noShow_rate = round((`NoShow_Established` + `SameDayCanceled_Established` + `NoShow_New` + `SameDayCanceled_New`)/Total,3),
+         `noShow_rate_sameDay` = round((`NoShow_sameDay` + `SameDayCanceled_sameDay`)/`Total_sameDay`,3),
+         `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen` + `SameDayCanceled_belowFourteen`)/`Total_belowFourteen`,3),
+         `noShow_rate_belowThirty` = round((`NoShow_belowThirty` + `SameDayCanceled_belowThirty`)/`Total_belowThirty`,3),
+         `noShow_rate_overThirty` = round((`NoShow_overThirty` + `SameDayCanceled_overThirty`)/`Total_overThirty`,3),
+         new_perc = round(Arrived_New/Arrived,3)) %>%
   group_by(Campus, Campus.Specialty.Group) %>%
   mutate(arrived_site = sum(Arrived),
-         arrived_perc = round(Arrived/arrived_site,2)) 
+         arrived_perc = round(Arrived/arrived_site,3)) 
 
 no_show_ytd_specialty_group <- no_show_ytd_specialty_group %>%
   dplyr::select(1:3, 59, 79, 81, 
@@ -2643,11 +2644,11 @@ no_show_last_site <- no_show_specialty %>%
             `Total_belowFourteen` = sum(`Total_belowFourteen`),
             `Total_belowThirty` = sum(`Total_belowThirty`),
             `Total_overThirty` = sum(`Total_overThirty`)) %>%
-  mutate(noShow_rate = round((`NoShow` + `SameDayCanceled`)/ Total,2),
-         `noShow_rate_sameDay` = round((`NoShow_sameDay` + `SameDayCanceled_sameDay`)/ `Total_sameDay`,2),
-         `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen` + `SameDayCanceled_belowFourteen`)/ `Total_belowFourteen`,2),
-         `noShow_rate_belowThirty` = round((`NoShow_belowThirty` + `SameDayCanceled_belowThirty`)/ `Total_belowThirty`,2),
-         `noShow_rate_overThirty` = round((`NoShow_overThirty` + `SameDayCanceled_overThirty`)/ `Total_overThirty`,2)) %>%
+  mutate(noShow_rate = round((`NoShow` + `SameDayCanceled`)/ Total,3),
+         `noShow_rate_sameDay` = round((`NoShow_sameDay` + `SameDayCanceled_sameDay`)/ `Total_sameDay`,3),
+         `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen` + `SameDayCanceled_belowFourteen`)/ `Total_belowFourteen`,3),
+         `noShow_rate_belowThirty` = round((`NoShow_belowThirty` + `SameDayCanceled_belowThirty`)/ `Total_belowThirty`,3),
+         `noShow_rate_overThirty` = round((`NoShow_overThirty` + `SameDayCanceled_overThirty`)/ `Total_overThirty`,3)) %>%
   pivot_wider(names_from = New.PT2,
               values_from = 4:28,
               values_fill = 0) %>%
@@ -2671,15 +2672,15 @@ no_show_last_site <- no_show_specialty %>%
          `SameDayCanceled_belowFourteen` = (`SameDayCanceled_belowFourteen_Established` + `SameDayCanceled_belowFourteen_New`),
          `SameDayCanceled_belowThirty` = (`SameDayCanceled_belowThirty_Established` + `SameDayCanceled_belowThirty_New`),
          `SameDayCanceled_overThirty` = (`SameDayCanceled_overThirty_Established` + `SameDayCanceled_overThirty_New`),
-         noShow_rate = round((`NoShow_Established` + `SameDayCanceled_Established` + `NoShow_New` + `SameDayCanceled_New`)/Total,2),
-         `noShow_rate_sameDay` = round((`NoShow_sameDay` + `SameDayCanceled_sameDay`)/`Total_sameDay`,2),
-         `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen` + `SameDayCanceled_belowFourteen`)/`Total_belowFourteen`,2),
-         `noShow_rate_belowThirty` = round((`NoShow_belowThirty` + `SameDayCanceled_belowThirty`)/`Total_belowThirty`,2),
-         `noShow_rate_overThirty` = round((`NoShow_overThirty` + `SameDayCanceled_overThirty`)/`Total_overThirty`,2),
-         new_perc = round(Arrived_New/Arrived,2)) %>%
+         noShow_rate = round((`NoShow_Established` + `SameDayCanceled_Established` + `NoShow_New` + `SameDayCanceled_New`)/Total,3),
+         `noShow_rate_sameDay` = round((`NoShow_sameDay` + `SameDayCanceled_sameDay`)/`Total_sameDay`,3),
+         `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen` + `SameDayCanceled_belowFourteen`)/`Total_belowFourteen`,3),
+         `noShow_rate_belowThirty` = round((`NoShow_belowThirty` + `SameDayCanceled_belowThirty`)/`Total_belowThirty`,3),
+         `noShow_rate_overThirty` = round((`NoShow_overThirty` + `SameDayCanceled_overThirty`)/`Total_overThirty`,3),
+         new_perc = round(Arrived_New/Arrived,3)) %>%
   group_by(Campus) %>%
   mutate(arrived_site = sum(Arrived),
-         arrived_perc = round(Arrived/arrived_site,2)) 
+         arrived_perc = round(Arrived/arrived_site,3)) 
 
 
 no_show_last_mshs <- no_show_specialty %>%
@@ -2705,11 +2706,11 @@ no_show_last_mshs <- no_show_specialty %>%
             `Total_belowFourteen` = sum(`Total_belowFourteen`),
             `Total_belowThirty` = sum(`Total_belowThirty`),
             `Total_overThirty` = sum(`Total_overThirty`)) %>%
-  mutate(noShow_rate = round((`NoShow` + `SameDayCanceled`)/ Total,2),
-         `noShow_rate_sameDay` = round((`NoShow_sameDay` + `SameDayCanceled_sameDay`)/ `Total_sameDay`,2),
-         `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen` + `SameDayCanceled_belowFourteen`)/ `Total_belowFourteen`,2),
-         `noShow_rate_belowThirty` = round((`NoShow_belowThirty` + `SameDayCanceled_belowThirty`)/ `Total_belowThirty`,2),
-         `noShow_rate_overThirty` = round((`NoShow_overThirty` + `SameDayCanceled_overThirty`)/ `Total_overThirty`,2)) %>%
+  mutate(noShow_rate = round((`NoShow` + `SameDayCanceled`)/ Total,3),
+         `noShow_rate_sameDay` = round((`NoShow_sameDay` + `SameDayCanceled_sameDay`)/ `Total_sameDay`,3),
+         `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen` + `SameDayCanceled_belowFourteen`)/ `Total_belowFourteen`,3),
+         `noShow_rate_belowThirty` = round((`NoShow_belowThirty` + `SameDayCanceled_belowThirty`)/ `Total_belowThirty`,3),
+         `noShow_rate_overThirty` = round((`NoShow_overThirty` + `SameDayCanceled_overThirty`)/ `Total_overThirty`,3)) %>%
   pivot_wider(names_from = New.PT2,
               values_from = 3:27,
               values_fill = 0) %>%
@@ -2733,16 +2734,16 @@ no_show_last_mshs <- no_show_specialty %>%
          `SameDayCanceled_belowFourteen` = (`SameDayCanceled_belowFourteen_Established` + `SameDayCanceled_belowFourteen_New`),
          `SameDayCanceled_belowThirty` = (`SameDayCanceled_belowThirty_Established` + `SameDayCanceled_belowThirty_New`),
          `SameDayCanceled_overThirty` = (`SameDayCanceled_overThirty_Established` + `SameDayCanceled_overThirty_New`),
-         noShow_rate = round((`NoShow_Established` + `SameDayCanceled_Established` + `NoShow_New` + `SameDayCanceled_New`)/Total,2),
-         `noShow_rate_sameDay` = round((`NoShow_sameDay` + `SameDayCanceled_sameDay`)/`Total_sameDay`,2),
-         `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen` + `SameDayCanceled_belowFourteen`)/`Total_belowFourteen`,2),
-         `noShow_rate_belowThirty` = round((`NoShow_belowThirty` + `SameDayCanceled_belowThirty`)/`Total_belowThirty`,2),
-         `noShow_rate_overThirty` = round((`NoShow_overThirty` + `SameDayCanceled_overThirty`)/`Total_overThirty`,2),
-         new_perc = round(Arrived_New/Arrived,2)) %>%
+         noShow_rate = round((`NoShow_Established` + `SameDayCanceled_Established` + `NoShow_New` + `SameDayCanceled_New`)/Total,3),
+         `noShow_rate_sameDay` = round((`NoShow_sameDay` + `SameDayCanceled_sameDay`)/`Total_sameDay`,3),
+         `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen` + `SameDayCanceled_belowFourteen`)/`Total_belowFourteen`,3),
+         `noShow_rate_belowThirty` = round((`NoShow_belowThirty` + `SameDayCanceled_belowThirty`)/`Total_belowThirty`,3),
+         `noShow_rate_overThirty` = round((`NoShow_overThirty` + `SameDayCanceled_overThirty`)/`Total_overThirty`,3),
+         new_perc = round(Arrived_New/Arrived,3)) %>%
   mutate(Campus = "MSHS Total") %>%
   group_by(Campus) %>%
   mutate(arrived_site = sum(Arrived),
-         arrived_perc = round(Arrived/arrived_site,2)) 
+         arrived_perc = round(Arrived/arrived_site,3)) 
 
 
 no_show_last_merged <- bind_rows(no_show_last_site, no_show_last_mshs)
@@ -3260,11 +3261,11 @@ no_show_org_last_site <- no_show_org_specialty %>%
             `Total_belowFourteen` = sum(`Total_belowFourteen`),
             `Total_belowThirty` = sum(`Total_belowThirty`),
             `Total_overThirty` = sum(`Total_overThirty`)) %>%
-  mutate(noShow_rate = round((`NoShow`)/ Total,2),
-         `noShow_rate_sameDay` = round((`NoShow_sameDay`)/ `Total_sameDay`,2),
-         `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen`)/ `Total_belowFourteen`,2),
-         `noShow_rate_belowThirty` = round((`NoShow_belowThirty`)/ `Total_belowThirty`,2),
-         `noShow_rate_overThirty` = round((`NoShow_overThirty`)/ `Total_overThirty`,2)) %>%
+  mutate(noShow_rate = round((`NoShow`)/ Total,3),
+         `noShow_rate_sameDay` = round((`NoShow_sameDay`)/ `Total_sameDay`,3),
+         `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen`)/ `Total_belowFourteen`,3),
+         `noShow_rate_belowThirty` = round((`NoShow_belowThirty`)/ `Total_belowThirty`,3),
+         `noShow_rate_overThirty` = round((`NoShow_overThirty`)/ `Total_overThirty`,3)) %>%
   pivot_wider(names_from = New.PT2,
               values_from = 4:23,
               values_fill = 0) %>%
@@ -3283,15 +3284,15 @@ no_show_org_last_site <- no_show_org_specialty %>%
          `NoShow_belowFourteen` = (`NoShow_belowFourteen_Established` + `NoShow_belowFourteen_New`),
          `NoShow_belowThirty` = (`NoShow_belowThirty_Established` + `NoShow_belowThirty_New`),
          `NoShow_overThirty` = (`NoShow_overThirty_Established` + `NoShow_overThirty_New`),
-         noShow_rate = round((`NoShow_Established` + `NoShow_New`)/Total,2),
-         `noShow_rate_sameDay` = round((`NoShow_sameDay`)/`Total_sameDay`,2),
-         `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen`)/`Total_belowFourteen`,2),
-         `noShow_rate_belowThirty` = round((`NoShow_belowThirty`)/`Total_belowThirty`,2),
-         `noShow_rate_overThirty` = round((`NoShow_overThirty`)/`Total_overThirty`,2),
-         new_perc = round(Arrived_New/Arrived,2)) %>%
+         noShow_rate = round((`NoShow_Established` + `NoShow_New`)/Total,3),
+         `noShow_rate_sameDay` = round((`NoShow_sameDay`)/`Total_sameDay`,3),
+         `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen`)/`Total_belowFourteen`,3),
+         `noShow_rate_belowThirty` = round((`NoShow_belowThirty`)/`Total_belowThirty`,3),
+         `noShow_rate_overThirty` = round((`NoShow_overThirty`)/`Total_overThirty`,3),
+         new_perc = round(Arrived_New/Arrived,3)) %>%
   group_by(Campus) %>%
   mutate(arrived_site = sum(Arrived),
-         arrived_perc = round(Arrived/arrived_site,2)) 
+         arrived_perc = round(Arrived/arrived_site,3)) 
 
 
 no_show_org_last_mshs <- no_show_org_specialty %>%
@@ -3312,11 +3313,11 @@ no_show_org_last_mshs <- no_show_org_specialty %>%
             `Total_belowFourteen` = sum(`Total_belowFourteen`),
             `Total_belowThirty` = sum(`Total_belowThirty`),
             `Total_overThirty` = sum(`Total_overThirty`)) %>%
-  mutate(noShow_rate = round((`NoShow`)/ Total,2),
-         `noShow_rate_sameDay` = round((`NoShow_sameDay`)/ `Total_sameDay`,2),
-         `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen`)/ `Total_belowFourteen`,2),
-         `noShow_rate_belowThirty` = round((`NoShow_belowThirty`)/ `Total_belowThirty`,2),
-         `noShow_rate_overThirty` = round((`NoShow_overThirty`)/ `Total_overThirty`,2)) %>%
+  mutate(noShow_rate = round((`NoShow`)/ Total,3),
+         `noShow_rate_sameDay` = round((`NoShow_sameDay`)/ `Total_sameDay`,3),
+         `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen`)/ `Total_belowFourteen`,3),
+         `noShow_rate_belowThirty` = round((`NoShow_belowThirty`)/ `Total_belowThirty`,3),
+         `noShow_rate_overThirty` = round((`NoShow_overThirty`)/ `Total_overThirty`,3)) %>%
   pivot_wider(names_from = New.PT2,
               values_from = 3:22,
               values_fill = 0) %>%
@@ -3335,16 +3336,16 @@ no_show_org_last_mshs <- no_show_org_specialty %>%
          `NoShow_belowFourteen` = (`NoShow_belowFourteen_Established` + `NoShow_belowFourteen_New`),
          `NoShow_belowThirty` = (`NoShow_belowThirty_Established` + `NoShow_belowThirty_New`),
          `NoShow_overThirty` = (`NoShow_overThirty_Established` + `NoShow_overThirty_New`),
-         noShow_rate = round((`NoShow_Established` + `NoShow_New`)/Total,2),
-         `noShow_rate_sameDay` = round((`NoShow_sameDay`)/`Total_sameDay`,2),
-         `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen`)/`Total_belowFourteen`,2),
-         `noShow_rate_belowThirty` = round((`NoShow_belowThirty`)/`Total_belowThirty`,2),
-         `noShow_rate_overThirty` = round((`NoShow_overThirty`)/`Total_overThirty`,2),
-         new_perc = round(Arrived_New/Arrived,2)) %>%
+         noShow_rate = round((`NoShow_Established` + `NoShow_New`)/Total,3),
+         `noShow_rate_sameDay` = round((`NoShow_sameDay`)/`Total_sameDay`,3),
+         `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen`)/`Total_belowFourteen`,3),
+         `noShow_rate_belowThirty` = round((`NoShow_belowThirty`)/`Total_belowThirty`,3),
+         `noShow_rate_overThirty` = round((`NoShow_overThirty`)/`Total_overThirty`,3),
+         new_perc = round(Arrived_New/Arrived,3)) %>%
   mutate(Campus = "MSHS Total") %>%
   group_by(Campus) %>%
   mutate(arrived_site = sum(Arrived),
-         arrived_perc = round(Arrived/arrived_site,2)) 
+         arrived_perc = round(Arrived/arrived_site,3)) 
 
 
 no_show_org_last_merged <- bind_rows(no_show_org_last_site, no_show_org_last_mshs)
@@ -3821,11 +3822,11 @@ no_show_all_last_site <- no_show_all_specialty %>%
             `Total_belowFourteen` = sum(`Total_belowFourteen`),
             `Total_belowThirty` = sum(`Total_belowThirty`),
             `Total_overThirty` = sum(`Total_overThirty`)) %>%
-  mutate(noShow_rate = round((`NoShow`)/ Total,2),
-         `noShow_rate_sameDay` = round((`NoShow_sameDay`)/ `Total_sameDay`,2),
-         `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen`)/ `Total_belowFourteen`,2),
-         `noShow_rate_belowThirty` = round((`NoShow_belowThirty`)/ `Total_belowThirty`,2),
-         `noShow_rate_overThirty` = round((`NoShow_overThirty`)/ `Total_overThirty`,2)) %>%
+  mutate(noShow_rate = round((`NoShow`)/ Total,3),
+         `noShow_rate_sameDay` = round((`NoShow_sameDay`)/ `Total_sameDay`,3),
+         `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen`)/ `Total_belowFourteen`,3),
+         `noShow_rate_belowThirty` = round((`NoShow_belowThirty`)/ `Total_belowThirty`,3),
+         `noShow_rate_overThirty` = round((`NoShow_overThirty`)/ `Total_overThirty`,3)) %>%
   pivot_wider(names_from = New.PT2,
               values_from = 4:28,
               values_fill = 0) %>%
@@ -3849,15 +3850,15 @@ no_show_all_last_site <- no_show_all_specialty %>%
          `SameDayCanceled_belowFourteen` = (`SameDayCanceled_belowFourteen_Established` + `SameDayCanceled_belowFourteen_New`),
          `SameDayCanceled_belowThirty` = (`SameDayCanceled_belowThirty_Established` + `SameDayCanceled_belowThirty_New`),
          `SameDayCanceled_overThirty` = (`SameDayCanceled_overThirty_Established` + `SameDayCanceled_overThirty_New`),
-         noShow_rate = round((`NoShow_Established` + `NoShow_New`)/Total,2),
-         `noShow_rate_sameDay` = round((`NoShow_sameDay`)/`Total_sameDay`,2),
-         `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen`)/`Total_belowFourteen`,2),
-         `noShow_rate_belowThirty` = round((`NoShow_belowThirty`)/`Total_belowThirty`,2),
-         `noShow_rate_overThirty` = round((`NoShow_overThirty`)/`Total_overThirty`,2),
-         new_perc = round(Arrived_New/Arrived,2)) %>%
+         noShow_rate = round((`NoShow_Established` + `NoShow_New`)/Total,3),
+         `noShow_rate_sameDay` = round((`NoShow_sameDay`)/`Total_sameDay`,3),
+         `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen`)/`Total_belowFourteen`,3),
+         `noShow_rate_belowThirty` = round((`NoShow_belowThirty`)/`Total_belowThirty`,3),
+         `noShow_rate_overThirty` = round((`NoShow_overThirty`)/`Total_overThirty`,3),
+         new_perc = round(Arrived_New/Arrived,3)) %>%
   group_by(Campus) %>%
   mutate(arrived_site = sum(Arrived),
-         arrived_perc = round(Arrived/arrived_site,2)) 
+         arrived_perc = round(Arrived/arrived_site,3)) 
 
 
 no_show_all_last_mshs <- no_show_all_specialty %>%
@@ -3883,11 +3884,11 @@ no_show_all_last_mshs <- no_show_all_specialty %>%
             `Total_belowFourteen` = sum(`Total_belowFourteen`),
             `Total_belowThirty` = sum(`Total_belowThirty`),
             `Total_overThirty` = sum(`Total_overThirty`)) %>%
-  mutate(noShow_rate = round((`NoShow`)/ Total,2),
-         `noShow_rate_sameDay` = round((`NoShow_sameDay`)/ `Total_sameDay`,2),
-         `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen`)/ `Total_belowFourteen`,2),
-         `noShow_rate_belowThirty` = round((`NoShow_belowThirty`)/ `Total_belowThirty`,2),
-         `noShow_rate_overThirty` = round((`NoShow_overThirty`)/ `Total_overThirty`,2)) %>%
+  mutate(noShow_rate = round((`NoShow`)/ Total,3),
+         `noShow_rate_sameDay` = round((`NoShow_sameDay`)/ `Total_sameDay`,3),
+         `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen`)/ `Total_belowFourteen`,3),
+         `noShow_rate_belowThirty` = round((`NoShow_belowThirty`)/ `Total_belowThirty`,3),
+         `noShow_rate_overThirty` = round((`NoShow_overThirty`)/ `Total_overThirty`,3)) %>%
   pivot_wider(names_from = New.PT2,
               values_from = 3:27,
               values_fill = 0) %>%
@@ -3911,17 +3912,17 @@ no_show_all_last_mshs <- no_show_all_specialty %>%
          `SameDayCanceled_belowFourteen` = (`SameDayCanceled_belowFourteen_Established` + `SameDayCanceled_belowFourteen_New`),
          `SameDayCanceled_belowThirty` = (`SameDayCanceled_belowThirty_Established` + `SameDayCanceled_belowThirty_New`),
          `SameDayCanceled_overThirty` = (`SameDayCanceled_overThirty_Established` + `SameDayCanceled_overThirty_New`),
-         noShow_rate = round((`NoShow_Established` + `NoShow_New`)/Total,2),
-         `noShow_rate_sameDay` = round((`NoShow_sameDay`)/`Total_sameDay`,2),
-         `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen`)/`Total_belowFourteen`,2),
-         `noShow_rate_belowThirty` = round((`NoShow_belowThirty`)/`Total_belowThirty`,2),
-         `noShow_rate_overThirty` = round((`NoShow_overThirty`)/`Total_overThirty`,2),
-         new_perc = round(Arrived_New/Arrived,2)) %>%
+         noShow_rate = round((`NoShow_Established` + `NoShow_New`)/Total,3),
+         `noShow_rate_sameDay` = round((`NoShow_sameDay`)/`Total_sameDay`,3),
+         `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen`)/`Total_belowFourteen`,3),
+         `noShow_rate_belowThirty` = round((`NoShow_belowThirty`)/`Total_belowThirty`,3),
+         `noShow_rate_overThirty` = round((`NoShow_overThirty`)/`Total_overThirty`,3),
+         new_perc = round(Arrived_New/Arrived,3)) %>%
   mutate(Campus = "MSHS Total") %>%
   group_by(Campus) %>%
   group_by(Campus) %>%
   mutate(arrived_site = sum(Arrived),
-         arrived_perc = round(Arrived/arrived_site,2))
+         arrived_perc = round(Arrived/arrived_site,3))
 
 
 no_show_all_last_merged <- bind_rows(no_show_all_last_site, no_show_all_last_mshs)
@@ -4414,11 +4415,11 @@ no_show_last_specialty <- no_show_specialty %>%
             `Total_belowFourteen` = sum(`Total_belowFourteen`),
             `Total_belowThirty` = sum(`Total_belowThirty`),
             `Total_overThirty` = sum(`Total_overThirty`)) %>%
-  mutate(noShow_rate = round((`NoShow` + `SameDayCanceled`)/ Total,2),
-         `noShow_rate_sameDay` = round((`NoShow_sameDay` + `SameDayCanceled_sameDay`)/ `Total_sameDay`,2),
-         `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen` + `SameDayCanceled_belowFourteen`)/ `Total_belowFourteen`,2),
-         `noShow_rate_belowThirty` = round((`NoShow_belowThirty` + `SameDayCanceled_belowThirty`)/ `Total_belowThirty`,2),
-         `noShow_rate_overThirty` = round((`NoShow_overThirty` + `SameDayCanceled_overThirty`)/ `Total_overThirty`,2)) %>%
+  mutate(noShow_rate = round((`NoShow` + `SameDayCanceled`)/ Total,3),
+         `noShow_rate_sameDay` = round((`NoShow_sameDay` + `SameDayCanceled_sameDay`)/ `Total_sameDay`,3),
+         `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen` + `SameDayCanceled_belowFourteen`)/ `Total_belowFourteen`,3),
+         `noShow_rate_belowThirty` = round((`NoShow_belowThirty` + `SameDayCanceled_belowThirty`)/ `Total_belowThirty`,3),
+         `noShow_rate_overThirty` = round((`NoShow_overThirty` + `SameDayCanceled_overThirty`)/ `Total_overThirty`,3)) %>%
   pivot_wider(names_from = New.PT2,
               values_from = 4:28,
               values_fill = 0) %>%
@@ -4442,15 +4443,15 @@ no_show_last_specialty <- no_show_specialty %>%
          `SameDayCanceled_belowFourteen` = (`SameDayCanceled_belowFourteen_Established` + `SameDayCanceled_belowFourteen_New`),
          `SameDayCanceled_belowThirty` = (`SameDayCanceled_belowThirty_Established` + `SameDayCanceled_belowThirty_New`),
          `SameDayCanceled_overThirty` = (`SameDayCanceled_overThirty_Established` + `SameDayCanceled_overThirty_New`),
-         noShow_rate = round((`NoShow_Established` + `SameDayCanceled_Established` + `NoShow_New` + `SameDayCanceled_New`)/Total,2),
-         `noShow_rate_sameDay` = round((`NoShow_sameDay` + `SameDayCanceled_sameDay`)/`Total_sameDay`,2),
-         `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen` + `SameDayCanceled_belowFourteen`)/`Total_belowFourteen`,2),
-         `noShow_rate_belowThirty` = round((`NoShow_belowThirty` + `SameDayCanceled_belowThirty`)/`Total_belowThirty`,2),
-         `noShow_rate_overThirty` = round((`NoShow_overThirty` + `SameDayCanceled_overThirty`)/`Total_overThirty`,2),
-         new_perc = round(Arrived_New/Arrived,2)) %>%
+         noShow_rate = round((`NoShow_Established` + `SameDayCanceled_Established` + `NoShow_New` + `SameDayCanceled_New`)/Total,3),
+         `noShow_rate_sameDay` = round((`NoShow_sameDay` + `SameDayCanceled_sameDay`)/`Total_sameDay`,3),
+         `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen` + `SameDayCanceled_belowFourteen`)/`Total_belowFourteen`,3),
+         `noShow_rate_belowThirty` = round((`NoShow_belowThirty` + `SameDayCanceled_belowThirty`)/`Total_belowThirty`,3),
+         `noShow_rate_overThirty` = round((`NoShow_overThirty` + `SameDayCanceled_overThirty`)/`Total_overThirty`,3),
+         new_perc = round(Arrived_New/Arrived,3)) %>%
   group_by(Campus.Specialty.Group) %>%
   mutate(arrived_site = sum(Arrived),
-         arrived_perc = round(Arrived/arrived_site,2)) 
+         arrived_perc = round(Arrived/arrived_site,3)) 
 
 no_show_last_specialty <- no_show_last_specialty %>%
   dplyr::select(1:2, 58, 78, 80, 
@@ -4968,11 +4969,11 @@ no_show_last_specialty_group <- no_show_specialty %>%
             `Total_belowFourteen` = sum(`Total_belowFourteen`),
             `Total_belowThirty` = sum(`Total_belowThirty`),
             `Total_overThirty` = sum(`Total_overThirty`)) %>%
-  mutate(noShow_rate = round((`NoShow` + `SameDayCanceled`)/ Total,2),
-         `noShow_rate_sameDay` = round((`NoShow_sameDay` + `SameDayCanceled_sameDay`)/ `Total_sameDay`,2),
-         `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen` + `SameDayCanceled_belowFourteen`)/ `Total_belowFourteen`,2),
-         `noShow_rate_belowThirty` = round((`NoShow_belowThirty` + `SameDayCanceled_belowThirty`)/ `Total_belowThirty`,2),
-         `noShow_rate_overThirty` = round((`NoShow_overThirty` + `SameDayCanceled_overThirty`)/ `Total_overThirty`,2)) %>%
+  mutate(noShow_rate = round((`NoShow` + `SameDayCanceled`)/ Total,3),
+         `noShow_rate_sameDay` = round((`NoShow_sameDay` + `SameDayCanceled_sameDay`)/ `Total_sameDay`,3),
+         `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen` + `SameDayCanceled_belowFourteen`)/ `Total_belowFourteen`,3),
+         `noShow_rate_belowThirty` = round((`NoShow_belowThirty` + `SameDayCanceled_belowThirty`)/ `Total_belowThirty`,3),
+         `noShow_rate_overThirty` = round((`NoShow_overThirty` + `SameDayCanceled_overThirty`)/ `Total_overThirty`,3)) %>%
   pivot_wider(names_from = New.PT2,
               values_from = 5:29,
               values_fill = 0) %>%
@@ -4996,15 +4997,15 @@ no_show_last_specialty_group <- no_show_specialty %>%
          `SameDayCanceled_belowFourteen` = (`SameDayCanceled_belowFourteen_Established` + `SameDayCanceled_belowFourteen_New`),
          `SameDayCanceled_belowThirty` = (`SameDayCanceled_belowThirty_Established` + `SameDayCanceled_belowThirty_New`),
          `SameDayCanceled_overThirty` = (`SameDayCanceled_overThirty_Established` + `SameDayCanceled_overThirty_New`),
-         noShow_rate = round((`NoShow_Established` + `SameDayCanceled_Established` + `NoShow_New` + `SameDayCanceled_New`)/Total,2),
-         `noShow_rate_sameDay` = round((`NoShow_sameDay` + `SameDayCanceled_sameDay`)/`Total_sameDay`,2),
-         `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen` + `SameDayCanceled_belowFourteen`)/`Total_belowFourteen`,2),
-         `noShow_rate_belowThirty` = round((`NoShow_belowThirty` + `SameDayCanceled_belowThirty`)/`Total_belowThirty`,2),
-         `noShow_rate_overThirty` = round((`NoShow_overThirty` + `SameDayCanceled_overThirty`)/`Total_overThirty`,2),
-         new_perc = round(Arrived_New/Arrived,2)) %>%
+         noShow_rate = round((`NoShow_Established` + `SameDayCanceled_Established` + `NoShow_New` + `SameDayCanceled_New`)/Total,3),
+         `noShow_rate_sameDay` = round((`NoShow_sameDay` + `SameDayCanceled_sameDay`)/`Total_sameDay`,3),
+         `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen` + `SameDayCanceled_belowFourteen`)/`Total_belowFourteen`,3),
+         `noShow_rate_belowThirty` = round((`NoShow_belowThirty` + `SameDayCanceled_belowThirty`)/`Total_belowThirty`,3),
+         `noShow_rate_overThirty` = round((`NoShow_overThirty` + `SameDayCanceled_overThirty`)/`Total_overThirty`,3),
+         new_perc = round(Arrived_New/Arrived,3)) %>%
   group_by(Campus.Specialty.Group, Campus) %>%
   mutate(arrived_site = sum(Arrived),
-         arrived_perc = round(Arrived/arrived_site,2)) 
+         arrived_perc = round(Arrived/arrived_site,3)) 
 
 no_show_last_specialty_group <- no_show_last_specialty_group %>%
   dplyr::select(1:3, 59, 79, 81, 
@@ -5522,13 +5523,13 @@ no_show_trend_mshs_all <- no_show_specialty %>%
             `NoShow` = sum(`NoShow`),
             `SameDayCanceled` = sum(`SameDayCanceled`),
             Total = sum(Total)) %>%
-  mutate(noShow_rate = round((`NoShow` + `SameDayCanceled`)/ Total,2)*100) %>%
+  mutate(noShow_rate = round((`NoShow` + `SameDayCanceled`)/ Total,3)*100) %>%
   pivot_wider(names_from = New.PT2,
               values_from = 4:8,
               values_fill = 0) %>%
   mutate(Total = (Total_Established + Total_New),
-         noShow_rate = round((`NoShow_Established` + `SameDayCanceled_Established` + `NoShow_New` + `SameDayCanceled_New`)/Total,2)*100,
-         new_perc = round(Total_New/Total,2)*100)
+         noShow_rate = round((`NoShow_Established` + `SameDayCanceled_Established` + `NoShow_New` + `SameDayCanceled_New`)/Total,3)*100,
+         new_perc = round(Total_New/Total,3)*100)
 
 
 map(unique(no_show_trend_mshs_all$Campus), function(x){
@@ -5536,7 +5537,7 @@ highchart() %>%
   hc_yAxis_multiples(
     # list(title = list(text = "Avg Volume per Day"), lineWidth = 3),
     list(title = list(text = "No Show Plus Rate"), lineWidth = 3, 
-         labels = list(format = '{value}%'),
+         labels = list(enabled = TRUE, format = '{value}%'),
          plotLines = list(list(value = 20, color = "red", width = 2,
                                dashStyle = "shortdash")))
            # showLastLabel = FALSE, opposite = TRUE)
@@ -5544,7 +5545,7 @@ highchart() %>%
   hc_xAxis(title = list(text = ""),
            categories = (no_show_trend_mshs_all %>% filter(Campus == x))$Appt.MonthYear,
            type = "datetime",
-           labels = list(format = '{value:%Y-%m}')
+           labels = list(enabled = TRUE, format = '{value:%Y-%m}')
            # dateTimeLabelFormats = list(month = '%Y-%m')
            ) %>%
   # hc_add_series(name = "Total Visits",
@@ -5559,8 +5560,7 @@ highchart() %>%
                 marker = list(enabled= TRUE),
                 color='#212070',
                 lineWidth=3,
-                lineColor='#212070',
-                labels = list(format = '{value:.2f}')
+                lineColor='#212070'
                 ) %>%
   hc_add_series(name   = "New",
                 data   = (no_show_trend_mshs_all %>% filter(Campus == x))$noShow_rate_New,
@@ -5569,8 +5569,7 @@ highchart() %>%
                 marker = list(enabled= TRUE),
                 color='#d80b8c',
                 lineWidth=3,
-                lineColor='#d80b8c',
-                labels = list(format = '{value:.2f}')
+                lineColor='#d80b8c'
                 ) %>%
   hc_add_series(name   = "All",
                 data   = (no_show_trend_mshs_all %>% filter(Campus == x))$noShow_rate,
@@ -5579,14 +5578,14 @@ highchart() %>%
                 marker = list(enabled= TRUE),
                 color='#7f7f7f',
                 lineWidth=3,
-                lineColor='#7f7f7f',
-               labels = list(format = '{value:.2f}')
+                lineColor='#7f7f7f'
                 ) %>%
   hc_legend(align = "left", verticalAlign = "top", itemStyle = list(fontFamily ='Calibri',color ='black', fontSize = "14px")) %>%
   hc_title(text = paste0(x, " - Avg No Show Plus Rate"), align = "left", style = list(fontWeight = 'bold', fontSize = "22px", fontFamily = "Calibri")) %>%
   hc_subtitle(text = "Target:",
               align = "left", style = list(fontFace = "italic", fontSize = "16px", fontFamily = "Calibri")) %>%
-    hc_tooltip(shared = TRUE, borderColor = "black")
+    hc_tooltip(shared = TRUE, borderColor = "black", valueSuffix = "%")
+    
   }) %>%
   hw_grid(ncol = 1, rowheight = 400) %>% htmltools::browsable()
 
@@ -5604,13 +5603,13 @@ no_show_trend_mshs <- no_show_specialty %>%
             `NoShow` = sum(`NoShow`),
             `SameDayCanceled` = sum(`SameDayCanceled`),
             Total = sum(Total)) %>%
-  mutate(noShow_rate = round((`NoShow` + `SameDayCanceled`)/ Total,2)*100) %>%
+  mutate(noShow_rate = round((`NoShow` + `SameDayCanceled`)/ Total,3)*100) %>%
   pivot_wider(names_from = New.PT2,
               values_from = 4:8,
               values_fill = 0) %>%
   mutate(Total = (Total_Established + Total_New),
-         noShow_rate = round((`NoShow_Established` + `SameDayCanceled_Established` + `NoShow_New` + `SameDayCanceled_New`)/Total,2)*100,
-         new_perc = round(Total_New/Total,2)*100)
+         noShow_rate = round((`NoShow_Established` + `SameDayCanceled_Established` + `NoShow_New` + `SameDayCanceled_New`)/Total,3)*100,
+         new_perc = round(Total_New/Total,3)*100)
 
 
 map(unique(no_show_trend_mshs$Campus), function(x){
@@ -5665,7 +5664,7 @@ highchart() %>%
   hc_title(text = paste0(x, " - Avg No Show Plus Rate"), align = "left", style = list(fontWeight = 'bold', fontSize = "22px", fontFamily = "Calibri")) %>%
   hc_subtitle(text = "Target:",
               align = "left", style = list(fontFace = "italic", fontSize = "16px", fontFamily = "Calibri")) %>%
-    hc_tooltip(shared = TRUE, borderColor = "black")
+    hc_tooltip(shared = TRUE, borderColor = "black", valueSuffix = "%")
   }) %>%
   hw_grid(ncol = 2, rowheight = 400) %>% htmltools::browsable()
 
@@ -5896,11 +5895,11 @@ no_show_ytd_site_function <- function(site){
             `Total_belowFourteen` = sum(`Total_belowFourteen`),
             `Total_belowThirty` = sum(`Total_belowThirty`),
             `Total_overThirty` = sum(`Total_overThirty`)) %>%
-  mutate(noShow_rate = round((`NoShow` + `SameDayCanceled`)/ Total,2),
-         `noShow_rate_sameDay` = round((`NoShow_sameDay` + `SameDayCanceled_sameDay`)/ `Total_sameDay`,2),
-         `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen` + `SameDayCanceled_belowFourteen`)/ `Total_belowFourteen`,2),
-         `noShow_rate_belowThirty` = round((`NoShow_belowThirty` + `SameDayCanceled_belowThirty`)/ `Total_belowThirty`,2),
-         `noShow_rate_overThirty` = round((`NoShow_overThirty` + `SameDayCanceled_overThirty`)/ `Total_overThirty`,2)) %>%
+  mutate(noShow_rate = round((`NoShow` + `SameDayCanceled`)/ Total,3),
+         `noShow_rate_sameDay` = round((`NoShow_sameDay` + `SameDayCanceled_sameDay`)/ `Total_sameDay`,3),
+         `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen` + `SameDayCanceled_belowFourteen`)/ `Total_belowFourteen`,3),
+         `noShow_rate_belowThirty` = round((`NoShow_belowThirty` + `SameDayCanceled_belowThirty`)/ `Total_belowThirty`,3),
+         `noShow_rate_overThirty` = round((`NoShow_overThirty` + `SameDayCanceled_overThirty`)/ `Total_overThirty`,3)) %>%
     pivot_wider(names_from = New.PT2,
                values_from = 5:29,
                 values_fill = 0) %>%
@@ -5924,15 +5923,15 @@ no_show_ytd_site_function <- function(site){
          `SameDayCanceled_belowFourteen` = (`SameDayCanceled_belowFourteen_Established` + `SameDayCanceled_belowFourteen_New`),
          `SameDayCanceled_belowThirty` = (`SameDayCanceled_belowThirty_Established` + `SameDayCanceled_belowThirty_New`),
          `SameDayCanceled_overThirty` = (`SameDayCanceled_overThirty_Established` + `SameDayCanceled_overThirty_New`),
-         noShow_rate = round((`NoShow_Established` + `SameDayCanceled_Established` + `NoShow_New` + `SameDayCanceled_New`)/Total,2),
-         `noShow_rate_sameDay` = round((`NoShow_sameDay` + `SameDayCanceled_sameDay`)/`Total_sameDay`,2),
-         `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen` + `SameDayCanceled_belowFourteen`)/`Total_belowFourteen`,2),
-         `noShow_rate_belowThirty` = round((`NoShow_belowThirty` + `SameDayCanceled_belowThirty`)/`Total_belowThirty`,2),
-         `noShow_rate_overThirty` = round((`NoShow_overThirty` + `SameDayCanceled_overThirty`)/`Total_overThirty`,2),
-         new_perc = round(Arrived_New/Arrived,2)) %>%
+         noShow_rate = round((`NoShow_Established` + `SameDayCanceled_Established` + `NoShow_New` + `SameDayCanceled_New`)/Total,3),
+         `noShow_rate_sameDay` = round((`NoShow_sameDay` + `SameDayCanceled_sameDay`)/`Total_sameDay`,3),
+         `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen` + `SameDayCanceled_belowFourteen`)/`Total_belowFourteen`,3),
+         `noShow_rate_belowThirty` = round((`NoShow_belowThirty` + `SameDayCanceled_belowThirty`)/`Total_belowThirty`,3),
+         `noShow_rate_overThirty` = round((`NoShow_overThirty` + `SameDayCanceled_overThirty`)/`Total_overThirty`,3),
+         new_perc = round(Arrived_New/Arrived,3)) %>%
   group_by(Campus.Specialty.Group) %>%
   mutate(arrived_site = sum(Arrived),
-         arrived_perc = round(Arrived/arrived_site,2)) %>%
+         arrived_perc = round(Arrived/arrived_site,3)) %>%
     mutate_all(~ifelse(is.nan(.), NA, .))
   
   no_show_ytd_dept <- no_show_ytd_dept %>%
@@ -5972,11 +5971,11 @@ no_show_last_site_function <- function(site){
             `Total_belowFourteen` = sum(`Total_belowFourteen`),
             `Total_belowThirty` = sum(`Total_belowThirty`),
             `Total_overThirty` = sum(`Total_overThirty`)) %>%
-  mutate(noShow_rate = round((`NoShow` + `SameDayCanceled`)/ Total,2),
-         `noShow_rate_sameDay` = round((`NoShow_sameDay` + `SameDayCanceled_sameDay`)/ `Total_sameDay`,2),
-         `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen` + `SameDayCanceled_belowFourteen`)/ `Total_belowFourteen`,2),
-         `noShow_rate_belowThirty` = round((`NoShow_belowThirty` + `SameDayCanceled_belowThirty`)/ `Total_belowThirty`,2),
-         `noShow_rate_overThirty` = round((`NoShow_overThirty` + `SameDayCanceled_overThirty`)/ `Total_overThirty`,2)) %>%
+  mutate(noShow_rate = round((`NoShow` + `SameDayCanceled`)/ Total,3),
+         `noShow_rate_sameDay` = round((`NoShow_sameDay` + `SameDayCanceled_sameDay`)/ `Total_sameDay`,3),
+         `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen` + `SameDayCanceled_belowFourteen`)/ `Total_belowFourteen`,3),
+         `noShow_rate_belowThirty` = round((`NoShow_belowThirty` + `SameDayCanceled_belowThirty`)/ `Total_belowThirty`,3),
+         `noShow_rate_overThirty` = round((`NoShow_overThirty` + `SameDayCanceled_overThirty`)/ `Total_overThirty`,3)) %>%
     pivot_wider(names_from = New.PT2,
                values_from = 5:29,
                 values_fill = 0) %>%
@@ -6000,15 +5999,15 @@ no_show_last_site_function <- function(site){
          `SameDayCanceled_belowFourteen` = (`SameDayCanceled_belowFourteen_Established` + `SameDayCanceled_belowFourteen_New`),
          `SameDayCanceled_belowThirty` = (`SameDayCanceled_belowThirty_Established` + `SameDayCanceled_belowThirty_New`),
          `SameDayCanceled_overThirty` = (`SameDayCanceled_overThirty_Established` + `SameDayCanceled_overThirty_New`),
-         noShow_rate = round((`NoShow_Established` + `SameDayCanceled_Established` + `NoShow_New` + `SameDayCanceled_New`)/Total,2),
-         `noShow_rate_sameDay` = round((`NoShow_sameDay` + `SameDayCanceled_sameDay`)/`Total_sameDay`,2),
-         `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen` + `SameDayCanceled_belowFourteen`)/`Total_belowFourteen`,2),
-         `noShow_rate_belowThirty` = round((`NoShow_belowThirty` + `SameDayCanceled_belowThirty`)/`Total_belowThirty`,2),
-         `noShow_rate_overThirty` = round((`NoShow_overThirty` + `SameDayCanceled_overThirty`)/`Total_overThirty`,2),
-         new_perc = round(Arrived_New/Arrived,2)) %>%
+         noShow_rate = round((`NoShow_Established` + `SameDayCanceled_Established` + `NoShow_New` + `SameDayCanceled_New`)/Total,3),
+         `noShow_rate_sameDay` = round((`NoShow_sameDay` + `SameDayCanceled_sameDay`)/`Total_sameDay`,3),
+         `noShow_rate_belowFourteen` = round((`NoShow_belowFourteen` + `SameDayCanceled_belowFourteen`)/`Total_belowFourteen`,3),
+         `noShow_rate_belowThirty` = round((`NoShow_belowThirty` + `SameDayCanceled_belowThirty`)/`Total_belowThirty`,3),
+         `noShow_rate_overThirty` = round((`NoShow_overThirty` + `SameDayCanceled_overThirty`)/`Total_overThirty`,3),
+         new_perc = round(Arrived_New/Arrived,3)) %>%
   group_by(Campus.Specialty.Group) %>%
   mutate(arrived_site = sum(Arrived),
-         arrived_perc = round(Arrived/arrived_site,2)) %>%
+         arrived_perc = round(Arrived/arrived_site,3)) %>%
     mutate_all(~ifelse(is.nan(.), NA, .))
 
   no_show_last_dept <- no_show_last_dept %>%
@@ -6030,14 +6029,14 @@ no_show_trend_site_function <- function(site){
               `NoShow` = sum(`NoShow`),
               `SameDayCanceled` = sum(`SameDayCanceled`),
               Total = sum(Total)) %>%
-    mutate(noShow_rate = round((`NoShow` + `SameDayCanceled`)/ Total,2)*100) %>%
+    mutate(noShow_rate = round((`NoShow` + `SameDayCanceled`)/ Total,3)*100) %>%
     pivot_wider(names_from = New.PT2,
                 values_from = 5:9,
                 values_fill = 0) %>%
     mutate(Total = (Total_Established + Total_New),
            Arrived = (Arrived_Established + Arrived_New),
-           noShow_rate = round((`NoShow_Established` + `SameDayCanceled_Established` + `NoShow_New` + `SameDayCanceled_New`)/Total,2)*100,
-           new_perc = round(Total_New/Total,2)*100) %>%
+           noShow_rate = round((`NoShow_Established` + `SameDayCanceled_Established` + `NoShow_New` + `SameDayCanceled_New`)/Total,3)*100,
+           new_perc = round(Total_New/Total,3)*100) %>%
     arrange(Appt.MonthYear)
 }
 ```
@@ -7058,7 +7057,7 @@ highchart() %>%
   hc_title(text = paste0("MSBI ", x, " - Avg No Show Plus Rate"), align = "left", style = list(fontWeight = 'bold', fontSize = "22px", fontFamily = "Calibri")) %>%
   hc_subtitle(text = "Target:",
               align = "left", style = list(fontFace = "italic", fontSize = "16px", fontFamily = "Calibri")) %>%
-    hc_tooltip(shared = TRUE, borderColor = "black")
+    hc_tooltip(shared = TRUE, borderColor = "black", valueSuffix = "%")
   }) %>%
   hw_grid(ncol = 2, rowheight = 400) %>% htmltools::browsable()
 
@@ -8085,7 +8084,7 @@ highchart() %>%
   hc_title(text = paste0("MSDMG ", x, " - Avg No Show Plus Rate"), align = "left", style = list(fontWeight = 'bold', fontSize = "22px", fontFamily = "Calibri")) %>%
   hc_subtitle(text = "Target:",
               align = "left", style = list(fontFace = "italic", fontSize = "16px", fontFamily = "Calibri")) %>%
-    hc_tooltip(shared = TRUE, borderColor = "black")
+    hc_tooltip(shared = TRUE, borderColor = "black", valueSuffix = "%")
   }) %>%
   hw_grid(ncol = 2, rowheight = 400) %>% htmltools::browsable()
 
@@ -9111,7 +9110,7 @@ highchart() %>%
   hc_title(text = paste0("MSH- AMB CARE ", x, " - Avg No Show Plus Rate"), align = "left", style = list(fontWeight = 'bold', fontSize = "22px", fontFamily = "Calibri")) %>%
   hc_subtitle(text = "Target:",
               align = "left", style = list(fontFace = "italic", fontSize = "16px", fontFamily = "Calibri")) %>%
-    hc_tooltip(shared = TRUE, borderColor = "black")
+    hc_tooltip(shared = TRUE, borderColor = "black", valueSuffix = "%")
   }) %>%
   hw_grid(ncol = 2, rowheight = 400) %>% htmltools::browsable()
 
@@ -10139,7 +10138,7 @@ highchart() %>%
   hc_title(text = paste0("MSH-MSDFP ", x, " - Avg No Show Rate"), align = "left", style = list(fontWeight = 'bold', fontSize = "22px", fontFamily = "Calibri")) %>%
   hc_subtitle(text = "Target:",
               align = "left", style = list(fontFace = "italic", fontSize = "16px", fontFamily = "Calibri")) %>%
-    hc_tooltip(shared = TRUE, borderColor = "black")
+    hc_tooltip(shared = TRUE, borderColor = "black", valueSuffix = "%")
   }) %>%
   hw_grid(ncol = 2, rowheight = 400) %>% htmltools::browsable()
 
@@ -11165,7 +11164,7 @@ highchart() %>%
   hc_title(text = paste0("MSM ", x, " - Avg No Show Plus Rate"), align = "left", style = list(fontWeight = 'bold', fontSize = "22px", fontFamily = "Calibri")) %>%
   hc_subtitle(text = "Target:",
               align = "left", style = list(fontFace = "italic", fontSize = "16px", fontFamily = "Calibri")) %>%
-    hc_tooltip(shared = TRUE, borderColor = "black")
+    hc_tooltip(shared = TRUE, borderColor = "black", valueSuffix = "%")
   }) %>%
   hw_grid(ncol = 2, rowheight = 400) %>% htmltools::browsable()
 
@@ -12192,7 +12191,7 @@ highchart() %>%
   hc_title(text = paste0("MSUS ", x, " - Avg No Show Plus Rate"), align = "left", style = list(fontWeight = 'bold', fontSize = "22px", fontFamily = "Calibri")) %>%
   hc_subtitle(text = "Target:",
               align = "left", style = list(fontFace = "italic", fontSize = "16px", fontFamily = "Calibri")) %>%
-    hc_tooltip(shared = TRUE, borderColor = "black")
+    hc_tooltip(shared = TRUE, borderColor = "black", valueSuffix = "%")
   }) %>%
   hw_grid(ncol = 2, rowheight = 400) %>% htmltools::browsable()
 
@@ -13219,7 +13218,7 @@ highchart() %>%
   hc_title(text = paste0("MSW ", x, " - Avg No Show Plus Rate"), align = "left", style = list(fontWeight = 'bold', fontSize = "22px", fontFamily = "Calibri")) %>%
   hc_subtitle(text = "Target:",
               align = "left", style = list(fontFace = "italic", fontSize = "16px", fontFamily = "Calibri")) %>%
-    hc_tooltip(shared = TRUE, borderColor = "black")
+    hc_tooltip(shared = TRUE, borderColor = "black", valueSuffix = "%")
   }) %>%
   hw_grid(ncol = 2, rowheight = 400) %>% htmltools::browsable()
 
@@ -14246,7 +14245,7 @@ highchart() %>%
   hc_title(text = paste0("NETWORK ", x, " - Avg No Show Plus Rate"), align = "left", style = list(fontWeight = 'bold', fontSize = "22px", fontFamily = "Calibri")) %>%
   hc_subtitle(text = "Target:",
               align = "left", style = list(fontFace = "italic", fontSize = "16px", fontFamily = "Calibri")) %>%
-    hc_tooltip(shared = TRUE, borderColor = "black")
+    hc_tooltip(shared = TRUE, borderColor = "black", valueSuffix = "%")
   }) %>%
   hw_grid(ncol = 2, rowheight = 400) %>% htmltools::browsable()
 
