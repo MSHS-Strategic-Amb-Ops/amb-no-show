@@ -1060,7 +1060,7 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = 'sum',
-      format = colFormat(separators = TRUE, digits = 0),
+      format = colFormat(separators = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -1077,7 +1077,7 @@ reactable(
       #   })
       #   return totalArrived / totalarrived_site
       # }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -1094,7 +1094,7 @@ reactable(
         })
         return (totalArrived_New) / totalArrived
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -1113,7 +1113,7 @@ reactable(
         })
         return (totalNoShow_Established + totalSameDayCanceled_Established) / totalTotal_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -1132,7 +1132,7 @@ reactable(
         })
         return (totalNoShow_sameDay_Established + totalSameDayCanceled_sameDay_Established) / totalTotal_sameDay_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -1151,7 +1151,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen_Established + totalSameDayCanceled_belowFourteen_Established) / totalTotal_belowFourteen_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -1170,7 +1170,7 @@ reactable(
         })
         return (totalNoShow_belowThirty_Established + totalSameDayCanceled_belowThirty_Established) / totalTotal_belowThirty_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -1189,7 +1189,7 @@ reactable(
         })
         return (totalNoShow_overThirty_Established + totalSameDayCanceled_overThirty_Established) / totalTotal_overThirty_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -1208,7 +1208,7 @@ reactable(
         })
         return (totalNoShow_New + totalSameDayCanceled_New) / totalTotal_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -1227,7 +1227,7 @@ reactable(
         })
         return (totalNoShow_sameDay_New + totalSameDayCanceled_sameDay_New) / totalTotal_sameDay_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -1246,7 +1246,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen_New + totalSameDayCanceled_belowFourteen_New) / totalTotal_belowFourteen_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -1265,7 +1265,7 @@ reactable(
         })
         return (totalNoShow_belowThirty_New + totalSameDayCanceled_belowThirty_New) / totalTotal_belowThirty_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -1284,7 +1284,7 @@ reactable(
         })
         return (totalNoShow_overThirty_New + totalSameDayCanceled_overThirty_New) / totalTotal_overThirty_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -1303,7 +1303,7 @@ reactable(
         })
         return (totalNoShow + totalSameDayCanceled) / totalTotal || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -1322,7 +1322,7 @@ reactable(
         })
         return (totalNoShow_sameDay + totalSameDayCanceled_sameDay) / totalTotal_sameDay || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -1341,7 +1341,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen + totalSameDayCanceled_belowFourteen) / totalTotal_belowFourteen || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -1360,7 +1360,7 @@ reactable(
         })
         return (totalNoShow_belowThirty + totalSameDayCanceled_belowThirty) / totalTotal_belowThirty || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -1379,7 +1379,7 @@ reactable(
         })
         return (totalNoShow_overThirty + totalSameDayCanceled_overThirty) / totalTotal_overThirty || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -1647,7 +1647,7 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = 'sum',
-      format = colFormat(separators = TRUE, digits = 0),
+      format = colFormat(separators = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -1664,7 +1664,7 @@ reactable(
       #   })
       #   return totalArrived / totalarrived_site
       # }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -1681,7 +1681,7 @@ reactable(
         })
         return (totalArrived_New) / totalArrived
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -1700,7 +1700,7 @@ reactable(
         })
         return (totalNoShow_Established + totalSameDayCanceled_Established) / totalTotal_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -1719,7 +1719,7 @@ reactable(
         })
         return (totalNoShow_sameDay_Established + totalSameDayCanceled_sameDay_Established) / totalTotal_sameDay_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -1738,7 +1738,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen_Established + totalSameDayCanceled_belowFourteen_Established) / totalTotal_belowFourteen_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -1757,7 +1757,7 @@ reactable(
         })
         return (totalNoShow_belowThirty_Established + totalSameDayCanceled_belowThirty_Established) / totalTotal_belowThirty_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -1776,7 +1776,7 @@ reactable(
         })
         return (totalNoShow_overThirty_Established + totalSameDayCanceled_overThirty_Established) / totalTotal_overThirty_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -1795,7 +1795,7 @@ reactable(
         })
         return (totalNoShow_New + totalSameDayCanceled_New) / totalTotal_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -1814,7 +1814,7 @@ reactable(
         })
         return (totalNoShow_sameDay_New + totalSameDayCanceled_sameDay_New) / totalTotal_sameDay_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -1833,7 +1833,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen_New + totalSameDayCanceled_belowFourteen_New) / totalTotal_belowFourteen_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -1852,7 +1852,7 @@ reactable(
         })
         return (totalNoShow_belowThirty_New + totalSameDayCanceled_belowThirty_New) / totalTotal_belowThirty_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -1871,7 +1871,7 @@ reactable(
         })
         return (totalNoShow_overThirty_New + totalSameDayCanceled_overThirty_New) / totalTotal_overThirty_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -1890,7 +1890,7 @@ reactable(
         })
         return (totalNoShow + totalSameDayCanceled) / totalTotal || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -1909,7 +1909,7 @@ reactable(
         })
         return (totalNoShow_sameDay + totalSameDayCanceled_sameDay) / totalTotal_sameDay || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -1928,7 +1928,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen + totalSameDayCanceled_belowFourteen) / totalTotal_belowFourteen || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -1947,7 +1947,7 @@ reactable(
         })
         return (totalNoShow_belowThirty + totalSameDayCanceled_belowThirty) / totalTotal_belowThirty || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -1966,7 +1966,7 @@ reactable(
         })
         return (totalNoShow_overThirty + totalSameDayCanceled_overThirty) / totalTotal_overThirty || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -2213,7 +2213,7 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = 'sum',
-      format = colFormat(separators = TRUE, digits = 0),
+      format = colFormat(separators = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -2230,7 +2230,7 @@ reactable(
       #   })
       #   return totalArrived / totalarrived_site
       # }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -2247,7 +2247,7 @@ reactable(
         })
         return (totalArrived_New) / totalArrived
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -2266,7 +2266,7 @@ reactable(
         })
         return (totalNoShow_Established + totalSameDayCanceled_Established) / totalTotal_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -2285,7 +2285,7 @@ reactable(
         })
         return (totalNoShow_sameDay_Established + totalSameDayCanceled_sameDay_Established) / totalTotal_sameDay_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -2304,7 +2304,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen_Established + totalSameDayCanceled_belowFourteen_Established) / totalTotal_belowFourteen_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -2323,7 +2323,7 @@ reactable(
         })
         return (totalNoShow_belowThirty_Established + totalSameDayCanceled_belowThirty_Established) / totalTotal_belowThirty_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -2342,7 +2342,7 @@ reactable(
         })
         return (totalNoShow_overThirty_Established + totalSameDayCanceled_overThirty_Established) / totalTotal_overThirty_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -2361,7 +2361,7 @@ reactable(
         })
         return (totalNoShow_New + totalSameDayCanceled_New) / totalTotal_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -2380,7 +2380,7 @@ reactable(
         })
         return (totalNoShow_sameDay_New + totalSameDayCanceled_sameDay_New) / totalTotal_sameDay_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -2399,7 +2399,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen_New + totalSameDayCanceled_belowFourteen_New) / totalTotal_belowFourteen_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -2418,7 +2418,7 @@ reactable(
         })
         return (totalNoShow_belowThirty_New + totalSameDayCanceled_belowThirty_New) / totalTotal_belowThirty_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -2437,7 +2437,7 @@ reactable(
         })
         return (totalNoShow_overThirty_New + totalSameDayCanceled_overThirty_New) / totalTotal_overThirty_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -2456,7 +2456,7 @@ reactable(
         })
         return (totalNoShow + totalSameDayCanceled) / totalTotal || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -2475,7 +2475,7 @@ reactable(
         })
         return (totalNoShow_sameDay + totalSameDayCanceled_sameDay) / totalTotal_sameDay || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -2494,7 +2494,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen + totalSameDayCanceled_belowFourteen) / totalTotal_belowFourteen || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -2513,7 +2513,7 @@ reactable(
         })
         return (totalNoShow_belowThirty + totalSameDayCanceled_belowThirty) / totalTotal_belowThirty || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -2532,7 +2532,7 @@ reactable(
         })
         return (totalNoShow_overThirty + totalSameDayCanceled_overThirty) / totalTotal_overThirty || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -2835,7 +2835,7 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = 'sum',
-      format = colFormat(separators = TRUE, digits = 0),
+      format = colFormat(separators = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -2852,7 +2852,7 @@ reactable(
       #   })
       #   return totalArrived / totalarrived_site
       # }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -2869,7 +2869,7 @@ reactable(
         })
         return (totalArrived_New) / totalArrived
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -2888,7 +2888,7 @@ reactable(
         })
         return (totalNoShow_Established + totalSameDayCanceled_Established) / totalTotal_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -2907,7 +2907,7 @@ reactable(
         })
         return (totalNoShow_sameDay_Established + totalSameDayCanceled_sameDay_Established) / totalTotal_sameDay_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -2926,7 +2926,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen_Established + totalSameDayCanceled_belowFourteen_Established) / totalTotal_belowFourteen_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -2945,7 +2945,7 @@ reactable(
         })
         return (totalNoShow_belowThirty_Established + totalSameDayCanceled_belowThirty_Established) / totalTotal_belowThirty_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -2964,7 +2964,7 @@ reactable(
         })
         return (totalNoShow_overThirty_Established + totalSameDayCanceled_overThirty_Established) / totalTotal_overThirty_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -2983,7 +2983,7 @@ reactable(
         })
         return (totalNoShow_New + totalSameDayCanceled_New) / totalTotal_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -3002,7 +3002,7 @@ reactable(
         })
         return (totalNoShow_sameDay_New + totalSameDayCanceled_sameDay_New) / totalTotal_sameDay_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -3021,7 +3021,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen_New + totalSameDayCanceled_belowFourteen_New) / totalTotal_belowFourteen_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -3040,7 +3040,7 @@ reactable(
         })
         return (totalNoShow_belowThirty_New + totalSameDayCanceled_belowThirty_New) / totalTotal_belowThirty_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -3059,7 +3059,7 @@ reactable(
         })
         return (totalNoShow_overThirty_New + totalSameDayCanceled_overThirty_New) / totalTotal_overThirty_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -3078,7 +3078,7 @@ reactable(
         })
         return (totalNoShow + totalSameDayCanceled) / totalTotal || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -3097,7 +3097,7 @@ reactable(
         })
         return (totalNoShow_sameDay + totalSameDayCanceled_sameDay) / totalTotal_sameDay || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -3116,7 +3116,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen + totalSameDayCanceled_belowFourteen) / totalTotal_belowFourteen || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -3135,7 +3135,7 @@ reactable(
         })
         return (totalNoShow_belowThirty + totalSameDayCanceled_belowThirty) / totalTotal_belowThirty || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -3154,7 +3154,7 @@ reactable(
         })
         return (totalNoShow_overThirty + totalSameDayCanceled_overThirty) / totalTotal_overThirty || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -3437,7 +3437,7 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = 'sum',
-      format = colFormat(separators = TRUE, digits = 0),
+      format = colFormat(separators = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -3454,7 +3454,7 @@ reactable(
       #   })
       #   return totalArrived / totalarrived_site
       # }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -3471,7 +3471,7 @@ reactable(
         })
         return (totalArrived_New) / totalArrived
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -3488,7 +3488,7 @@ reactable(
         })
         return (totalNoShow_Established) / totalTotal_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -3505,7 +3505,7 @@ reactable(
         })
         return (totalNoShow_sameDay_Established) / totalTotal_sameDay_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -3522,7 +3522,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen_Established) / totalTotal_belowFourteen_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -3539,7 +3539,7 @@ reactable(
         })
         return (totalNoShow_belowThirty_Established) / totalTotal_belowThirty_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -3556,7 +3556,7 @@ reactable(
         })
         return (totalNoShow_overThirty_Established) / totalTotal_overThirty_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -3573,7 +3573,7 @@ reactable(
         })
         return (totalNoShow_New) / totalTotal_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -3590,7 +3590,7 @@ reactable(
         })
         return (totalNoShow_sameDay_New) / totalTotal_sameDay_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -3607,7 +3607,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen_New) / totalTotal_belowFourteen_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -3624,7 +3624,7 @@ reactable(
         })
         return (totalNoShow_belowThirty_New) / totalTotal_belowThirty_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -3641,7 +3641,7 @@ reactable(
         })
         return (totalNoShow_overThirty_New) / totalTotal_overThirty_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -3658,7 +3658,7 @@ reactable(
         })
         return (totalNoShow) / totalTotal || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -3675,7 +3675,7 @@ reactable(
         })
         return (totalNoShow_sameDay) / totalTotal_sameDay || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -3692,7 +3692,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen) / totalTotal_belowFourteen || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -3709,7 +3709,7 @@ reactable(
         })
         return (totalNoShow_belowThirty) / totalTotal_belowThirty || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -3726,7 +3726,7 @@ reactable(
         })
         return (totalNoShow_overThirty) / totalTotal_overThirty || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -4014,7 +4014,7 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = 'sum',
-      format = colFormat(separators = TRUE, digits = 0),
+      format = colFormat(separators = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -4031,7 +4031,7 @@ reactable(
       #   })
       #   return totalArrived / totalarrived_site
       # }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -4048,7 +4048,7 @@ reactable(
         })
         return (totalArrived_New) / totalArrived
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -4065,7 +4065,7 @@ reactable(
         })
         return (totalNoShow_Established) / totalTotal_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -4082,7 +4082,7 @@ reactable(
         })
         return (totalNoShow_sameDay_Established) / totalTotal_sameDay_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -4099,7 +4099,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen_Established) / totalTotal_belowFourteen_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -4116,7 +4116,7 @@ reactable(
         })
         return (totalNoShow_belowThirty_Established) / totalTotal_belowThirty_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -4133,7 +4133,7 @@ reactable(
         })
         return (totalNoShow_overThirty_Established) / totalTotal_overThirty_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -4150,7 +4150,7 @@ reactable(
         })
         return (totalNoShow_New) / totalTotal_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -4167,7 +4167,7 @@ reactable(
         })
         return (totalNoShow_sameDay_New) / totalTotal_sameDay_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -4184,7 +4184,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen_New) / totalTotal_belowFourteen_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -4200,7 +4200,7 @@ reactable(
         })
         return (totalNoShow_belowThirty_New) / totalTotal_belowThirty_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -4217,7 +4217,7 @@ reactable(
         })
         return (totalNoShow_overThirty_New) / totalTotal_overThirty_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -4235,7 +4235,7 @@ reactable(
         })
         return (totalNoShow) / totalTotal || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -4252,7 +4252,7 @@ reactable(
         })
         return (totalNoShow_sameDay) / totalTotal_sameDay || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -4269,7 +4269,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen) / totalTotal_belowFourteen || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -4286,7 +4286,7 @@ reactable(
         })
         return (totalNoShow_belowThirty) / totalTotal_belowThirty || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -4303,7 +4303,7 @@ reactable(
         })
         return (totalNoShow_overThirty) / totalTotal_overThirty || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -4539,7 +4539,7 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = 'sum',
-      format = colFormat(separators = TRUE, digits = 0),
+      format = colFormat(separators = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -4556,7 +4556,7 @@ reactable(
       #   })
       #   return totalArrived / totalarrived_site
       # }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -4573,7 +4573,7 @@ reactable(
         })
         return (totalArrived_New) / totalArrived
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -4592,7 +4592,7 @@ reactable(
         })
         return (totalNoShow_Established + totalSameDayCanceled_Established) / totalTotal_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -4611,7 +4611,7 @@ reactable(
         })
         return (totalNoShow_sameDay_Established + totalSameDayCanceled_sameDay_Established) / totalTotal_sameDay_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -4630,7 +4630,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen_Established + totalSameDayCanceled_belowFourteen_Established) / totalTotal_belowFourteen_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -4649,7 +4649,7 @@ reactable(
         })
         return (totalNoShow_belowThirty_Established + totalSameDayCanceled_belowThirty_Established) / totalTotal_belowThirty_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -4668,7 +4668,7 @@ reactable(
         })
         return (totalNoShow_overThirty_Established + totalSameDayCanceled_overThirty_Established) / totalTotal_overThirty_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -4687,7 +4687,7 @@ reactable(
         })
         return (totalNoShow_New + totalSameDayCanceled_New) / totalTotal_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -4706,7 +4706,7 @@ reactable(
         })
         return (totalNoShow_sameDay_New + totalSameDayCanceled_sameDay_New) / totalTotal_sameDay_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -4725,7 +4725,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen_New + totalSameDayCanceled_belowFourteen_New) / totalTotal_belowFourteen_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -4744,7 +4744,7 @@ reactable(
         })
         return (totalNoShow_belowThirty_New + totalSameDayCanceled_belowThirty_New) / totalTotal_belowThirty_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -4763,7 +4763,7 @@ reactable(
         })
         return (totalNoShow_overThirty_New + totalSameDayCanceled_overThirty_New) / totalTotal_overThirty_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -4782,7 +4782,7 @@ reactable(
         })
         return (totalNoShow + totalSameDayCanceled) / totalTotal || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -4801,7 +4801,7 @@ reactable(
         })
         return (totalNoShow_sameDay + totalSameDayCanceled_sameDay) / totalTotal_sameDay || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -4820,7 +4820,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen + totalSameDayCanceled_belowFourteen) / totalTotal_belowFourteen || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -4839,7 +4839,7 @@ reactable(
         })
         return (totalNoShow_belowThirty + totalSameDayCanceled_belowThirty) / totalTotal_belowThirty || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -4858,7 +4858,7 @@ reactable(
         })
         return (totalNoShow_overThirty + totalSameDayCanceled_overThirty) / totalTotal_overThirty || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -5107,7 +5107,7 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = 'sum',
-      format = colFormat(separators = TRUE, digits = 0),
+      format = colFormat(separators = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -5124,7 +5124,7 @@ reactable(
       #   })
       #   return totalArrived / totalarrived_site
       # }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -5141,7 +5141,7 @@ reactable(
         })
         return (totalArrived_New) / totalArrived
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -5160,7 +5160,7 @@ reactable(
         })
         return (totalNoShow_Established + totalSameDayCanceled_Established) / totalTotal_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -5179,7 +5179,7 @@ reactable(
         })
         return (totalNoShow_sameDay_Established + totalSameDayCanceled_sameDay_Established) / totalTotal_sameDay_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -5198,7 +5198,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen_Established + totalSameDayCanceled_belowFourteen_Established) / totalTotal_belowFourteen_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -5217,7 +5217,7 @@ reactable(
         })
         return (totalNoShow_belowThirty_Established + totalSameDayCanceled_belowThirty_Established) / totalTotal_belowThirty_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -5236,7 +5236,7 @@ reactable(
         })
         return (totalNoShow_overThirty_Established + totalSameDayCanceled_overThirty_Established) / totalTotal_overThirty_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -5255,7 +5255,7 @@ reactable(
         })
         return (totalNoShow_New + totalSameDayCanceled_New) / totalTotal_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -5274,7 +5274,7 @@ reactable(
         })
         return (totalNoShow_sameDay_New + totalSameDayCanceled_sameDay_New) / totalTotal_sameDay_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -5293,7 +5293,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen_New + totalSameDayCanceled_belowFourteen_New) / totalTotal_belowFourteen_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -5312,7 +5312,7 @@ reactable(
         })
         return (totalNoShow_belowThirty_New + totalSameDayCanceled_belowThirty_New) / totalTotal_belowThirty_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -5331,7 +5331,7 @@ reactable(
         })
         return (totalNoShow_overThirty_New + totalSameDayCanceled_overThirty_New) / totalTotal_overThirty_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -5350,7 +5350,7 @@ reactable(
         })
         return (totalNoShow + totalSameDayCanceled) / totalTotal || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -5369,7 +5369,7 @@ reactable(
         })
         return (totalNoShow_sameDay + totalSameDayCanceled_sameDay) / totalTotal_sameDay || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -5388,7 +5388,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen + totalSameDayCanceled_belowFourteen) / totalTotal_belowFourteen || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -5407,7 +5407,7 @@ reactable(
         })
         return (totalNoShow_belowThirty + totalSameDayCanceled_belowThirty) / totalTotal_belowThirty || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -5426,7 +5426,7 @@ reactable(
         })
         return (totalNoShow_overThirty + totalSameDayCanceled_overThirty) / totalTotal_overThirty || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -5559,7 +5559,8 @@ highchart() %>%
                 marker = list(enabled= TRUE),
                 color='#212070',
                 lineWidth=3,
-                lineColor='#212070'
+                lineColor='#212070',
+                labels = list(format = '{value:.2f}')
                 ) %>%
   hc_add_series(name   = "New",
                 data   = (no_show_trend_mshs_all %>% filter(Campus == x))$noShow_rate_New,
@@ -5568,7 +5569,8 @@ highchart() %>%
                 marker = list(enabled= TRUE),
                 color='#d80b8c',
                 lineWidth=3,
-                lineColor='#d80b8c'
+                lineColor='#d80b8c',
+                labels = list(format = '{value:.2f}')
                 ) %>%
   hc_add_series(name   = "All",
                 data   = (no_show_trend_mshs_all %>% filter(Campus == x))$noShow_rate,
@@ -5577,7 +5579,8 @@ highchart() %>%
                 marker = list(enabled= TRUE),
                 color='#7f7f7f',
                 lineWidth=3,
-                lineColor='#7f7f7f'
+                lineColor='#7f7f7f',
+               labels = list(format = '{value:.2f}')
                 ) %>%
   hc_legend(align = "left", verticalAlign = "top", itemStyle = list(fontFamily ='Calibri',color ='black', fontSize = "14px")) %>%
   hc_title(text = paste0(x, " - Avg No Show Plus Rate"), align = "left", style = list(fontWeight = 'bold', fontSize = "22px", fontFamily = "Calibri")) %>%
@@ -6116,7 +6119,7 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = 'sum',
-      format = colFormat(separators = TRUE, digits = 0),
+      format = colFormat(separators = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -6133,7 +6136,7 @@ reactable(
       #   })
       #   return totalArrived / totalarrived_site
       # }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -6150,7 +6153,7 @@ reactable(
         })
         return (totalArrived_New) / totalArrived
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -6169,7 +6172,7 @@ reactable(
         })
         return (totalNoShow_Established + totalSameDayCanceled_Established) / totalTotal_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -6188,7 +6191,7 @@ reactable(
         })
         return (totalNoShow_sameDay_Established + totalSameDayCanceled_sameDay_Established) / totalTotal_sameDay_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -6207,7 +6210,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen_Established + totalSameDayCanceled_belowFourteen_Established) / totalTotal_belowFourteen_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -6226,7 +6229,7 @@ reactable(
         })
         return (totalNoShow_belowThirty_Established + totalSameDayCanceled_belowThirty_Established) / totalTotal_belowThirty_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -6245,7 +6248,7 @@ reactable(
         })
         return (totalNoShow_overThirty_Established + totalSameDayCanceled_overThirty_Established) / totalTotal_overThirty_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -6264,7 +6267,7 @@ reactable(
         })
         return (totalNoShow_New + totalSameDayCanceled_New) / totalTotal_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -6283,7 +6286,7 @@ reactable(
         })
         return (totalNoShow_sameDay_New + totalSameDayCanceled_sameDay_New) / totalTotal_sameDay_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -6302,7 +6305,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen_New + totalSameDayCanceled_belowFourteen_New) / totalTotal_belowFourteen_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -6321,7 +6324,7 @@ reactable(
         })
         return (totalNoShow_belowThirty_New + totalSameDayCanceled_belowThirty_New) / totalTotal_belowThirty_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -6340,7 +6343,7 @@ reactable(
         })
         return (totalNoShow_overThirty_New + totalSameDayCanceled_overThirty_New) / totalTotal_overThirty_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -6359,7 +6362,7 @@ reactable(
         })
         return (totalNoShow + totalSameDayCanceled) / totalTotal || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -6378,7 +6381,7 @@ reactable(
         })
         return (totalNoShow_sameDay + totalSameDayCanceled_sameDay) / totalTotal_sameDay || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -6397,7 +6400,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen + totalSameDayCanceled_belowFourteen) / totalTotal_belowFourteen || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -6416,7 +6419,7 @@ reactable(
         })
         return (totalNoShow_belowThirty + totalSameDayCanceled_belowThirty) / totalTotal_belowThirty || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -6435,7 +6438,7 @@ reactable(
         })
         return (totalNoShow_overThirty + totalSameDayCanceled_overThirty) / totalTotal_overThirty || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -6592,7 +6595,7 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = 'sum',
-      format = colFormat(separators = TRUE, digits = 0),
+      format = colFormat(separators = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -6609,7 +6612,7 @@ reactable(
       #   })
       #   return totalArrived / totalarrived_site
       # }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -6626,7 +6629,7 @@ reactable(
         })
         return (totalArrived_New) / totalArrived
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -6645,7 +6648,7 @@ reactable(
         })
         return (totalNoShow_Established + totalSameDayCanceled_Established) / totalTotal_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -6664,7 +6667,7 @@ reactable(
         })
         return (totalNoShow_sameDay_Established + totalSameDayCanceled_sameDay_Established) / totalTotal_sameDay_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -6683,7 +6686,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen_Established + totalSameDayCanceled_belowFourteen_Established) / totalTotal_belowFourteen_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -6702,7 +6705,7 @@ reactable(
         })
         return (totalNoShow_belowThirty_Established + totalSameDayCanceled_belowThirty_Established) / totalTotal_belowThirty_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -6721,7 +6724,7 @@ reactable(
         })
         return (totalNoShow_overThirty_Established + totalSameDayCanceled_overThirty_Established) / totalTotal_overThirty_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -6740,7 +6743,7 @@ reactable(
         })
         return (totalNoShow_New + totalSameDayCanceled_New) / totalTotal_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -6759,7 +6762,7 @@ reactable(
         })
         return (totalNoShow_sameDay_New + totalSameDayCanceled_sameDay_New) / totalTotal_sameDay_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -6778,7 +6781,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen_New + totalSameDayCanceled_belowFourteen_New) / totalTotal_belowFourteen_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -6797,7 +6800,7 @@ reactable(
         })
         return (totalNoShow_belowThirty_New + totalSameDayCanceled_belowThirty_New) / totalTotal_belowThirty_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -6816,7 +6819,7 @@ reactable(
         })
         return (totalNoShow_overThirty_New + totalSameDayCanceled_overThirty_New) / totalTotal_overThirty_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -6835,7 +6838,7 @@ reactable(
         })
         return (totalNoShow + totalSameDayCanceled) / totalTotal || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -6854,7 +6857,7 @@ reactable(
         })
         return (totalNoShow_sameDay + totalSameDayCanceled_sameDay) / totalTotal_sameDay || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -6873,7 +6876,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen + totalSameDayCanceled_belowFourteen) / totalTotal_belowFourteen || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -6892,7 +6895,7 @@ reactable(
         })
         return (totalNoShow_belowThirty + totalSameDayCanceled_belowThirty) / totalTotal_belowThirty || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -6911,7 +6914,7 @@ reactable(
         })
         return (totalNoShow_overThirty + totalSameDayCanceled_overThirty) / totalTotal_overThirty || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -7028,7 +7031,8 @@ highchart() %>%
                 marker = list(enabled= TRUE),
                 color='#212070',
                 lineWidth=3,
-                lineColor='#212070'
+                lineColor='#212070',
+                labels = list(format = '{value:.2f}')
                 ) %>%
   hc_add_series(name   = "New",
                 data   = (no_show_trend_site_output %>% filter(Campus.Specialty.Group == x))$noShow_rate_New,
@@ -7037,7 +7041,8 @@ highchart() %>%
                 marker = list(enabled= TRUE),
                 color='#d80b8c',
                 lineWidth=3,
-                lineColor='#d80b8c'
+                lineColor='#d80b8c',
+                labels = list(format = '{value:.2f}')
                 ) %>%
   hc_add_series(name   = "All",
                 data   = (no_show_trend_site_output %>% filter(Campus.Specialty.Group == x))$noShow_rate,
@@ -7046,7 +7051,8 @@ highchart() %>%
                 marker = list(enabled= TRUE),
                 color='#7f7f7f',
                 lineWidth=3,
-                lineColor='#7f7f7f'
+                lineColor='#7f7f7f',
+               labels = list(format = '{value:.2f}')
                 ) %>%
   hc_legend(align = "left", verticalAlign = "top", itemStyle = list(fontFamily ='Calibri',color ='black', fontSize = "14px")) %>%
   hc_title(text = paste0("MSBI ", x, " - Avg No Show Plus Rate"), align = "left", style = list(fontWeight = 'bold', fontSize = "22px", fontFamily = "Calibri")) %>%
@@ -7140,7 +7146,7 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = 'sum',
-      format = colFormat(separators = TRUE, digits = 0),
+      format = colFormat(separators = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -7157,7 +7163,7 @@ reactable(
       #   })
       #   return totalArrived / totalarrived_site
       # }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -7174,7 +7180,7 @@ reactable(
         })
         return (totalArrived_New) / totalArrived
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -7193,7 +7199,7 @@ reactable(
         })
         return (totalNoShow_Established + totalSameDayCanceled_Established) / totalTotal_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -7212,7 +7218,7 @@ reactable(
         })
         return (totalNoShow_sameDay_Established + totalSameDayCanceled_sameDay_Established) / totalTotal_sameDay_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -7231,7 +7237,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen_Established + totalSameDayCanceled_belowFourteen_Established) / totalTotal_belowFourteen_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -7250,7 +7256,7 @@ reactable(
         })
         return (totalNoShow_belowThirty_Established + totalSameDayCanceled_belowThirty_Established) / totalTotal_belowThirty_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -7269,7 +7275,7 @@ reactable(
         })
         return (totalNoShow_overThirty_Established + totalSameDayCanceled_overThirty_Established) / totalTotal_overThirty_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -7288,7 +7294,7 @@ reactable(
         })
         return (totalNoShow_New + totalSameDayCanceled_New) / totalTotal_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -7307,7 +7313,7 @@ reactable(
         })
         return (totalNoShow_sameDay_New + totalSameDayCanceled_sameDay_New) / totalTotal_sameDay_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -7326,7 +7332,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen_New + totalSameDayCanceled_belowFourteen_New) / totalTotal_belowFourteen_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -7345,7 +7351,7 @@ reactable(
         })
         return (totalNoShow_belowThirty_New + totalSameDayCanceled_belowThirty_New) / totalTotal_belowThirty_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -7364,7 +7370,7 @@ reactable(
         })
         return (totalNoShow_overThirty_New + totalSameDayCanceled_overThirty_New) / totalTotal_overThirty_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -7383,7 +7389,7 @@ reactable(
         })
         return (totalNoShow + totalSameDayCanceled) / totalTotal || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -7402,7 +7408,7 @@ reactable(
         })
         return (totalNoShow_sameDay + totalSameDayCanceled_sameDay) / totalTotal_sameDay || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -7421,7 +7427,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen + totalSameDayCanceled_belowFourteen) / totalTotal_belowFourteen || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -7440,7 +7446,7 @@ reactable(
         })
         return (totalNoShow_belowThirty + totalSameDayCanceled_belowThirty) / totalTotal_belowThirty || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -7459,7 +7465,7 @@ reactable(
         })
         return (totalNoShow_overThirty + totalSameDayCanceled_overThirty) / totalTotal_overThirty || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -7616,7 +7622,7 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = 'sum',
-      format = colFormat(separators = TRUE, digits = 0),
+      format = colFormat(separators = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -7633,7 +7639,7 @@ reactable(
       #   })
       #   return totalArrived / totalarrived_site
       # }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -7650,7 +7656,7 @@ reactable(
         })
         return (totalArrived_New) / totalArrived
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -7669,7 +7675,7 @@ reactable(
         })
         return (totalNoShow_Established + totalSameDayCanceled_Established) / totalTotal_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -7688,7 +7694,7 @@ reactable(
         })
         return (totalNoShow_sameDay_Established + totalSameDayCanceled_sameDay_Established) / totalTotal_sameDay_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -7707,7 +7713,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen_Established + totalSameDayCanceled_belowFourteen_Established) / totalTotal_belowFourteen_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -7726,7 +7732,7 @@ reactable(
         })
         return (totalNoShow_belowThirty_Established + totalSameDayCanceled_belowThirty_Established) / totalTotal_belowThirty_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -7745,7 +7751,7 @@ reactable(
         })
         return (totalNoShow_overThirty_Established + totalSameDayCanceled_overThirty_Established) / totalTotal_overThirty_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -7764,7 +7770,7 @@ reactable(
         })
         return (totalNoShow_New + totalSameDayCanceled_New) / totalTotal_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -7783,7 +7789,7 @@ reactable(
         })
         return (totalNoShow_sameDay_New + totalSameDayCanceled_sameDay_New) / totalTotal_sameDay_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -7802,7 +7808,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen_New + totalSameDayCanceled_belowFourteen_New) / totalTotal_belowFourteen_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -7821,7 +7827,7 @@ reactable(
         })
         return (totalNoShow_belowThirty_New + totalSameDayCanceled_belowThirty_New) / totalTotal_belowThirty_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -7840,7 +7846,7 @@ reactable(
         })
         return (totalNoShow_overThirty_New + totalSameDayCanceled_overThirty_New) / totalTotal_overThirty_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -7859,7 +7865,7 @@ reactable(
         })
         return (totalNoShow + totalSameDayCanceled) / totalTotal || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -7878,7 +7884,7 @@ reactable(
         })
         return (totalNoShow_sameDay + totalSameDayCanceled_sameDay) / totalTotal_sameDay || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -7897,7 +7903,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen + totalSameDayCanceled_belowFourteen) / totalTotal_belowFourteen || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -7916,7 +7922,7 @@ reactable(
         })
         return (totalNoShow_belowThirty + totalSameDayCanceled_belowThirty) / totalTotal_belowThirty || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -7935,7 +7941,7 @@ reactable(
         })
         return (totalNoShow_overThirty + totalSameDayCanceled_overThirty) / totalTotal_overThirty || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -8052,7 +8058,8 @@ highchart() %>%
                 marker = list(enabled= TRUE),
                 color='#212070',
                 lineWidth=3,
-                lineColor='#212070'
+                lineColor='#212070',
+                labels = list(format = '{value:.2f}')
                 ) %>%
   hc_add_series(name   = "New",
                 data   = (no_show_trend_site_output %>% filter(Campus.Specialty.Group == x))$noShow_rate_New,
@@ -8061,7 +8068,8 @@ highchart() %>%
                 marker = list(enabled= TRUE),
                 color='#d80b8c',
                 lineWidth=3,
-                lineColor='#d80b8c'
+                lineColor='#d80b8c',
+                labels = list(format = '{value:.2f}')
                 ) %>%
   hc_add_series(name   = "All",
                 data   = (no_show_trend_site_output %>% filter(Campus.Specialty.Group == x))$noShow_rate,
@@ -8070,7 +8078,8 @@ highchart() %>%
                 marker = list(enabled= TRUE),
                 color='#7f7f7f',
                 lineWidth=3,
-                lineColor='#7f7f7f'
+                lineColor='#7f7f7f',
+               labels = list(format = '{value:.2f}')
                 ) %>%
   hc_legend(align = "left", verticalAlign = "top", itemStyle = list(fontFamily ='Calibri',color ='black', fontSize = "14px")) %>%
   hc_title(text = paste0("MSDMG ", x, " - Avg No Show Plus Rate"), align = "left", style = list(fontWeight = 'bold', fontSize = "22px", fontFamily = "Calibri")) %>%
@@ -8163,7 +8172,7 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = 'sum',
-      format = colFormat(separators = TRUE, digits = 0),
+      format = colFormat(separators = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -8180,7 +8189,7 @@ reactable(
       #   })
       #   return totalArrived / totalarrived_site
       # }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -8197,7 +8206,7 @@ reactable(
         })
         return (totalArrived_New) / totalArrived
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -8216,7 +8225,7 @@ reactable(
         })
         return (totalNoShow_Established + totalSameDayCanceled_Established) / totalTotal_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -8235,7 +8244,7 @@ reactable(
         })
         return (totalNoShow_sameDay_Established + totalSameDayCanceled_sameDay_Established) / totalTotal_sameDay_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -8254,7 +8263,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen_Established + totalSameDayCanceled_belowFourteen_Established) / totalTotal_belowFourteen_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -8273,7 +8282,7 @@ reactable(
         })
         return (totalNoShow_belowThirty_Established + totalSameDayCanceled_belowThirty_Established) / totalTotal_belowThirty_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -8292,7 +8301,7 @@ reactable(
         })
         return (totalNoShow_overThirty_Established + totalSameDayCanceled_overThirty_Established) / totalTotal_overThirty_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -8311,7 +8320,7 @@ reactable(
         })
         return (totalNoShow_New + totalSameDayCanceled_New) / totalTotal_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -8330,7 +8339,7 @@ reactable(
         })
         return (totalNoShow_sameDay_New + totalSameDayCanceled_sameDay_New) / totalTotal_sameDay_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -8349,7 +8358,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen_New + totalSameDayCanceled_belowFourteen_New) / totalTotal_belowFourteen_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -8368,7 +8377,7 @@ reactable(
         })
         return (totalNoShow_belowThirty_New + totalSameDayCanceled_belowThirty_New) / totalTotal_belowThirty_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -8387,7 +8396,7 @@ reactable(
         })
         return (totalNoShow_overThirty_New + totalSameDayCanceled_overThirty_New) / totalTotal_overThirty_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -8406,7 +8415,7 @@ reactable(
         })
         return (totalNoShow + totalSameDayCanceled) / totalTotal || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -8425,7 +8434,7 @@ reactable(
         })
         return (totalNoShow_sameDay + totalSameDayCanceled_sameDay) / totalTotal_sameDay || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -8444,7 +8453,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen + totalSameDayCanceled_belowFourteen) / totalTotal_belowFourteen || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -8463,7 +8472,7 @@ reactable(
         })
         return (totalNoShow_belowThirty + totalSameDayCanceled_belowThirty) / totalTotal_belowThirty || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -8482,7 +8491,7 @@ reactable(
         })
         return (totalNoShow_overThirty + totalSameDayCanceled_overThirty) / totalTotal_overThirty || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -8639,7 +8648,7 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = 'sum',
-      format = colFormat(separators = TRUE, digits = 0),
+      format = colFormat(separators = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -8656,7 +8665,7 @@ reactable(
       #   })
       #   return totalArrived / totalarrived_site
       # }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -8673,7 +8682,7 @@ reactable(
         })
         return (totalArrived_New) / totalArrived
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -8692,7 +8701,7 @@ reactable(
         })
         return (totalNoShow_Established + totalSameDayCanceled_Established) / totalTotal_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -8711,7 +8720,7 @@ reactable(
         })
         return (totalNoShow_sameDay_Established + totalSameDayCanceled_sameDay_Established) / totalTotal_sameDay_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -8730,7 +8739,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen_Established + totalSameDayCanceled_belowFourteen_Established) / totalTotal_belowFourteen_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -8749,7 +8758,7 @@ reactable(
         })
         return (totalNoShow_belowThirty_Established + totalSameDayCanceled_belowThirty_Established) / totalTotal_belowThirty_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -8768,7 +8777,7 @@ reactable(
         })
         return (totalNoShow_overThirty_Established + totalSameDayCanceled_overThirty_Established) / totalTotal_overThirty_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -8787,7 +8796,7 @@ reactable(
         })
         return (totalNoShow_New + totalSameDayCanceled_New) / totalTotal_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -8806,7 +8815,7 @@ reactable(
         })
         return (totalNoShow_sameDay_New + totalSameDayCanceled_sameDay_New) / totalTotal_sameDay_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -8825,7 +8834,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen_New + totalSameDayCanceled_belowFourteen_New) / totalTotal_belowFourteen_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -8844,7 +8853,7 @@ reactable(
         })
         return (totalNoShow_belowThirty_New + totalSameDayCanceled_belowThirty_New) / totalTotal_belowThirty_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -8863,7 +8872,7 @@ reactable(
         })
         return (totalNoShow_overThirty_New + totalSameDayCanceled_overThirty_New) / totalTotal_overThirty_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -8882,7 +8891,7 @@ reactable(
         })
         return (totalNoShow + totalSameDayCanceled) / totalTotal || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -8901,7 +8910,7 @@ reactable(
         })
         return (totalNoShow_sameDay + totalSameDayCanceled_sameDay) / totalTotal_sameDay || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -8920,7 +8929,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen + totalSameDayCanceled_belowFourteen) / totalTotal_belowFourteen || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -8939,7 +8948,7 @@ reactable(
         })
         return (totalNoShow_belowThirty + totalSameDayCanceled_belowThirty) / totalTotal_belowThirty || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -8958,7 +8967,7 @@ reactable(
         })
         return (totalNoShow_overThirty + totalSameDayCanceled_overThirty) / totalTotal_overThirty || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -9075,7 +9084,8 @@ highchart() %>%
                 marker = list(enabled= TRUE),
                 color='#212070',
                 lineWidth=3,
-                lineColor='#212070'
+                lineColor='#212070',
+                labels = list(format = '{value:.2f}')
                 ) %>%
   hc_add_series(name   = "New",
                 data   = (no_show_trend_site_output %>% filter(Campus.Specialty.Group == x))$noShow_rate_New,
@@ -9084,7 +9094,8 @@ highchart() %>%
                 marker = list(enabled= TRUE),
                 color='#d80b8c',
                 lineWidth=3,
-                lineColor='#d80b8c'
+                lineColor='#d80b8c',
+                labels = list(format = '{value:.2f}')
                 ) %>%
   hc_add_series(name   = "All",
                 data   = (no_show_trend_site_output %>% filter(Campus.Specialty.Group == x))$noShow_rate,
@@ -9093,7 +9104,8 @@ highchart() %>%
                 marker = list(enabled= TRUE),
                 color='#7f7f7f',
                 lineWidth=3,
-                lineColor='#7f7f7f'
+                lineColor='#7f7f7f',
+               labels = list(format = '{value:.2f}')
                 ) %>%
   hc_legend(align = "left", verticalAlign = "top", itemStyle = list(fontFamily ='Calibri',color ='black', fontSize = "14px")) %>%
   hc_title(text = paste0("MSH- AMB CARE ", x, " - Avg No Show Plus Rate"), align = "left", style = list(fontWeight = 'bold', fontSize = "22px", fontFamily = "Calibri")) %>%
@@ -9187,7 +9199,7 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = 'sum',
-      format = colFormat(separators = TRUE, digits = 0),
+      format = colFormat(separators = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -9204,7 +9216,7 @@ reactable(
       #   })
       #   return totalArrived / totalarrived_site
       # }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -9221,7 +9233,7 @@ reactable(
         })
         return (totalArrived_New) / totalArrived
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -9240,7 +9252,7 @@ reactable(
         })
         return (totalNoShow_Established + totalSameDayCanceled_Established) / totalTotal_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -9259,7 +9271,7 @@ reactable(
         })
         return (totalNoShow_sameDay_Established + totalSameDayCanceled_sameDay_Established) / totalTotal_sameDay_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -9278,7 +9290,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen_Established + totalSameDayCanceled_belowFourteen_Established) / totalTotal_belowFourteen_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -9297,7 +9309,7 @@ reactable(
         })
         return (totalNoShow_belowThirty_Established + totalSameDayCanceled_belowThirty_Established) / totalTotal_belowThirty_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -9316,7 +9328,7 @@ reactable(
         })
         return (totalNoShow_overThirty_Established + totalSameDayCanceled_overThirty_Established) / totalTotal_overThirty_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -9335,7 +9347,7 @@ reactable(
         })
         return (totalNoShow_New + totalSameDayCanceled_New) / totalTotal_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -9354,7 +9366,7 @@ reactable(
         })
         return (totalNoShow_sameDay_New + totalSameDayCanceled_sameDay_New) / totalTotal_sameDay_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -9373,7 +9385,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen_New + totalSameDayCanceled_belowFourteen_New) / totalTotal_belowFourteen_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -9392,7 +9404,7 @@ reactable(
         })
         return (totalNoShow_belowThirty_New + totalSameDayCanceled_belowThirty_New) / totalTotal_belowThirty_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -9411,7 +9423,7 @@ reactable(
         })
         return (totalNoShow_overThirty_New + totalSameDayCanceled_overThirty_New) / totalTotal_overThirty_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -9430,7 +9442,7 @@ reactable(
         })
         return (totalNoShow + totalSameDayCanceled) / totalTotal || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -9449,7 +9461,7 @@ reactable(
         })
         return (totalNoShow_sameDay + totalSameDayCanceled_sameDay) / totalTotal_sameDay || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -9468,7 +9480,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen + totalSameDayCanceled_belowFourteen) / totalTotal_belowFourteen || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -9487,7 +9499,7 @@ reactable(
         })
         return (totalNoShow_belowThirty + totalSameDayCanceled_belowThirty) / totalTotal_belowThirty || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -9506,7 +9518,7 @@ reactable(
         })
         return (totalNoShow_overThirty + totalSameDayCanceled_overThirty) / totalTotal_overThirty || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -9663,7 +9675,7 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = 'sum',
-      format = colFormat(separators = TRUE, digits = 0),
+      format = colFormat(separators = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -9680,7 +9692,7 @@ reactable(
       #   })
       #   return totalArrived / totalarrived_site
       # }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -9697,7 +9709,7 @@ reactable(
         })
         return (totalArrived_New) / totalArrived
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -9716,7 +9728,7 @@ reactable(
         })
         return (totalNoShow_Established + totalSameDayCanceled_Established) / totalTotal_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -9735,7 +9747,7 @@ reactable(
         })
         return (totalNoShow_sameDay_Established + totalSameDayCanceled_sameDay_Established) / totalTotal_sameDay_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -9754,7 +9766,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen_Established + totalSameDayCanceled_belowFourteen_Established) / totalTotal_belowFourteen_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -9773,7 +9785,7 @@ reactable(
         })
         return (totalNoShow_belowThirty_Established + totalSameDayCanceled_belowThirty_Established) / totalTotal_belowThirty_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -9792,7 +9804,7 @@ reactable(
         })
         return (totalNoShow_overThirty_Established + totalSameDayCanceled_overThirty_Established) / totalTotal_overThirty_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -9811,7 +9823,7 @@ reactable(
         })
         return (totalNoShow_New + totalSameDayCanceled_New) / totalTotal_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -9830,7 +9842,7 @@ reactable(
         })
         return (totalNoShow_sameDay_New + totalSameDayCanceled_sameDay_New) / totalTotal_sameDay_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -9849,7 +9861,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen_New + totalSameDayCanceled_belowFourteen_New) / totalTotal_belowFourteen_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -9868,7 +9880,7 @@ reactable(
         })
         return (totalNoShow_belowThirty_New + totalSameDayCanceled_belowThirty_New) / totalTotal_belowThirty_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -9887,7 +9899,7 @@ reactable(
         })
         return (totalNoShow_overThirty_New + totalSameDayCanceled_overThirty_New) / totalTotal_overThirty_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -9906,7 +9918,7 @@ reactable(
         })
         return (totalNoShow + totalSameDayCanceled) / totalTotal || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -9925,7 +9937,7 @@ reactable(
         })
         return (totalNoShow_sameDay + totalSameDayCanceled_sameDay) / totalTotal_sameDay || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -9944,7 +9956,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen + totalSameDayCanceled_belowFourteen) / totalTotal_belowFourteen || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -9963,7 +9975,7 @@ reactable(
         })
         return (totalNoShow_belowThirty + totalSameDayCanceled_belowThirty) / totalTotal_belowThirty || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -9982,7 +9994,7 @@ reactable(
         })
         return (totalNoShow_overThirty + totalSameDayCanceled_overThirty) / totalTotal_overThirty || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -10100,7 +10112,8 @@ highchart() %>%
                 marker = list(enabled= TRUE),
                 color='#212070',
                 lineWidth=3,
-                lineColor='#212070'
+                lineColor='#212070',
+                labels = list(format = '{value:.2f}')
                 ) %>%
   hc_add_series(name   = "New",
                 data   = (no_show_trend_site_output %>% filter(Campus.Specialty.Group == x))$noShow_rate_New,
@@ -10109,7 +10122,8 @@ highchart() %>%
                 marker = list(enabled= TRUE),
                 color='#d80b8c',
                 lineWidth=3,
-                lineColor='#d80b8c'
+                lineColor='#d80b8c',
+                labels = list(format = '{value:.2f}')
                 ) %>%
   hc_add_series(name   = "All",
                 data   = (no_show_trend_site_output %>% filter(Campus.Specialty.Group == x))$noShow_rate,
@@ -10118,7 +10132,8 @@ highchart() %>%
                 marker = list(enabled= TRUE),
                 color='#7f7f7f',
                 lineWidth=3,
-                lineColor='#7f7f7f'
+                lineColor='#7f7f7f',
+               labels = list(format = '{value:.2f}')
                 ) %>%
   hc_legend(align = "left", verticalAlign = "top", itemStyle = list(fontFamily ='Calibri',color ='black', fontSize = "14px")) %>%
   hc_title(text = paste0("MSH-MSDFP ", x, " - Avg No Show Rate"), align = "left", style = list(fontWeight = 'bold', fontSize = "22px", fontFamily = "Calibri")) %>%
@@ -10211,7 +10226,7 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = 'sum',
-      format = colFormat(separators = TRUE, digits = 0),
+      format = colFormat(separators = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -10228,7 +10243,7 @@ reactable(
       #   })
       #   return totalArrived / totalarrived_site
       # }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -10245,7 +10260,7 @@ reactable(
         })
         return (totalArrived_New) / totalArrived
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -10264,7 +10279,7 @@ reactable(
         })
         return (totalNoShow_Established + totalSameDayCanceled_Established) / totalTotal_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -10283,7 +10298,7 @@ reactable(
         })
         return (totalNoShow_sameDay_Established + totalSameDayCanceled_sameDay_Established) / totalTotal_sameDay_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -10302,7 +10317,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen_Established + totalSameDayCanceled_belowFourteen_Established) / totalTotal_belowFourteen_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -10321,7 +10336,7 @@ reactable(
         })
         return (totalNoShow_belowThirty_Established + totalSameDayCanceled_belowThirty_Established) / totalTotal_belowThirty_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -10340,7 +10355,7 @@ reactable(
         })
         return (totalNoShow_overThirty_Established + totalSameDayCanceled_overThirty_Established) / totalTotal_overThirty_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -10359,7 +10374,7 @@ reactable(
         })
         return (totalNoShow_New + totalSameDayCanceled_New) / totalTotal_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -10378,7 +10393,7 @@ reactable(
         })
         return (totalNoShow_sameDay_New + totalSameDayCanceled_sameDay_New) / totalTotal_sameDay_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -10397,7 +10412,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen_New + totalSameDayCanceled_belowFourteen_New) / totalTotal_belowFourteen_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -10416,7 +10431,7 @@ reactable(
         })
         return (totalNoShow_belowThirty_New + totalSameDayCanceled_belowThirty_New) / totalTotal_belowThirty_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -10435,7 +10450,7 @@ reactable(
         })
         return (totalNoShow_overThirty_New + totalSameDayCanceled_overThirty_New) / totalTotal_overThirty_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -10454,7 +10469,7 @@ reactable(
         })
         return (totalNoShow + totalSameDayCanceled) / totalTotal || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -10473,7 +10488,7 @@ reactable(
         })
         return (totalNoShow_sameDay + totalSameDayCanceled_sameDay) / totalTotal_sameDay || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -10492,7 +10507,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen + totalSameDayCanceled_belowFourteen) / totalTotal_belowFourteen || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -10511,7 +10526,7 @@ reactable(
         })
         return (totalNoShow_belowThirty + totalSameDayCanceled_belowThirty) / totalTotal_belowThirty || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -10530,7 +10545,7 @@ reactable(
         })
         return (totalNoShow_overThirty + totalSameDayCanceled_overThirty) / totalTotal_overThirty || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -10687,7 +10702,7 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = 'sum',
-      format = colFormat(separators = TRUE, digits = 0),
+      format = colFormat(separators = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -10704,7 +10719,7 @@ reactable(
       #   })
       #   return totalArrived / totalarrived_site
       # }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -10721,7 +10736,7 @@ reactable(
         })
         return (totalArrived_New) / totalArrived
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -10740,7 +10755,7 @@ reactable(
         })
         return (totalNoShow_Established + totalSameDayCanceled_Established) / totalTotal_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -10759,7 +10774,7 @@ reactable(
         })
         return (totalNoShow_sameDay_Established + totalSameDayCanceled_sameDay_Established) / totalTotal_sameDay_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -10778,7 +10793,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen_Established + totalSameDayCanceled_belowFourteen_Established) / totalTotal_belowFourteen_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -10797,7 +10812,7 @@ reactable(
         })
         return (totalNoShow_belowThirty_Established + totalSameDayCanceled_belowThirty_Established) / totalTotal_belowThirty_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -10816,7 +10831,7 @@ reactable(
         })
         return (totalNoShow_overThirty_Established + totalSameDayCanceled_overThirty_Established) / totalTotal_overThirty_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -10835,7 +10850,7 @@ reactable(
         })
         return (totalNoShow_New + totalSameDayCanceled_New) / totalTotal_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -10854,7 +10869,7 @@ reactable(
         })
         return (totalNoShow_sameDay_New + totalSameDayCanceled_sameDay_New) / totalTotal_sameDay_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -10873,7 +10888,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen_New + totalSameDayCanceled_belowFourteen_New) / totalTotal_belowFourteen_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -10892,7 +10907,7 @@ reactable(
         })
         return (totalNoShow_belowThirty_New + totalSameDayCanceled_belowThirty_New) / totalTotal_belowThirty_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -10911,7 +10926,7 @@ reactable(
         })
         return (totalNoShow_overThirty_New + totalSameDayCanceled_overThirty_New) / totalTotal_overThirty_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -10930,7 +10945,7 @@ reactable(
         })
         return (totalNoShow + totalSameDayCanceled) / totalTotal || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -10949,7 +10964,7 @@ reactable(
         })
         return (totalNoShow_sameDay + totalSameDayCanceled_sameDay) / totalTotal_sameDay || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -10968,7 +10983,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen + totalSameDayCanceled_belowFourteen) / totalTotal_belowFourteen || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -10987,7 +11002,7 @@ reactable(
         })
         return (totalNoShow_belowThirty + totalSameDayCanceled_belowThirty) / totalTotal_belowThirty || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -11006,7 +11021,7 @@ reactable(
         })
         return (totalNoShow_overThirty + totalSameDayCanceled_overThirty) / totalTotal_overThirty || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -11123,7 +11138,8 @@ highchart() %>%
                 marker = list(enabled= TRUE),
                 color='#212070',
                 lineWidth=3,
-                lineColor='#212070'
+                lineColor='#212070',
+                labels = list(format = '{value:.2f}')
                 ) %>%
   hc_add_series(name   = "New",
                 data   = (no_show_trend_site_output %>% filter(Campus.Specialty.Group == x))$noShow_rate_New,
@@ -11132,7 +11148,8 @@ highchart() %>%
                 marker = list(enabled= TRUE),
                 color='#d80b8c',
                 lineWidth=3,
-                lineColor='#d80b8c'
+                lineColor='#d80b8c',
+                labels = list(format = '{value:.2f}')
                 ) %>%
   hc_add_series(name   = "All",
                 data   = (no_show_trend_site_output %>% filter(Campus.Specialty.Group == x))$noShow_rate,
@@ -11141,7 +11158,8 @@ highchart() %>%
                 marker = list(enabled= TRUE),
                 color='#7f7f7f',
                 lineWidth=3,
-                lineColor='#7f7f7f'
+                lineColor='#7f7f7f',
+               labels = list(format = '{value:.2f}')
                 ) %>%
   hc_legend(align = "left", verticalAlign = "top", itemStyle = list(fontFamily ='Calibri',color ='black', fontSize = "14px")) %>%
   hc_title(text = paste0("MSM ", x, " - Avg No Show Plus Rate"), align = "left", style = list(fontWeight = 'bold', fontSize = "22px", fontFamily = "Calibri")) %>%
@@ -11234,7 +11252,7 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = 'sum',
-      format = colFormat(separators = TRUE, digits = 0),
+      format = colFormat(separators = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -11251,7 +11269,7 @@ reactable(
       #   })
       #   return totalArrived / totalarrived_site
       # }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -11268,7 +11286,7 @@ reactable(
         })
         return (totalArrived_New) / totalArrived
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -11287,7 +11305,7 @@ reactable(
         })
         return (totalNoShow_Established + totalSameDayCanceled_Established) / totalTotal_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -11306,7 +11324,7 @@ reactable(
         })
         return (totalNoShow_sameDay_Established + totalSameDayCanceled_sameDay_Established) / totalTotal_sameDay_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -11325,7 +11343,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen_Established + totalSameDayCanceled_belowFourteen_Established) / totalTotal_belowFourteen_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -11344,7 +11362,7 @@ reactable(
         })
         return (totalNoShow_belowThirty_Established + totalSameDayCanceled_belowThirty_Established) / totalTotal_belowThirty_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -11363,7 +11381,7 @@ reactable(
         })
         return (totalNoShow_overThirty_Established + totalSameDayCanceled_overThirty_Established) / totalTotal_overThirty_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -11382,7 +11400,7 @@ reactable(
         })
         return (totalNoShow_New + totalSameDayCanceled_New) / totalTotal_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -11401,7 +11419,7 @@ reactable(
         })
         return (totalNoShow_sameDay_New + totalSameDayCanceled_sameDay_New) / totalTotal_sameDay_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -11420,7 +11438,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen_New + totalSameDayCanceled_belowFourteen_New) / totalTotal_belowFourteen_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -11439,7 +11457,7 @@ reactable(
         })
         return (totalNoShow_belowThirty_New + totalSameDayCanceled_belowThirty_New) / totalTotal_belowThirty_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -11458,7 +11476,7 @@ reactable(
         })
         return (totalNoShow_overThirty_New + totalSameDayCanceled_overThirty_New) / totalTotal_overThirty_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -11477,7 +11495,7 @@ reactable(
         })
         return (totalNoShow + totalSameDayCanceled) / totalTotal || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -11496,7 +11514,7 @@ reactable(
         })
         return (totalNoShow_sameDay + totalSameDayCanceled_sameDay) / totalTotal_sameDay || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -11515,7 +11533,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen + totalSameDayCanceled_belowFourteen) / totalTotal_belowFourteen || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -11534,7 +11552,7 @@ reactable(
         })
         return (totalNoShow_belowThirty + totalSameDayCanceled_belowThirty) / totalTotal_belowThirty || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -11553,7 +11571,7 @@ reactable(
         })
         return (totalNoShow_overThirty + totalSameDayCanceled_overThirty) / totalTotal_overThirty || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -11711,7 +11729,7 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = 'sum',
-      format = colFormat(separators = TRUE, digits = 0),
+      format = colFormat(separators = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -11728,7 +11746,7 @@ reactable(
       #   })
       #   return totalArrived / totalarrived_site
       # }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -11745,7 +11763,7 @@ reactable(
         })
         return (totalArrived_New) / totalArrived
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -11764,7 +11782,7 @@ reactable(
         })
         return (totalNoShow_Established + totalSameDayCanceled_Established) / totalTotal_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -11783,7 +11801,7 @@ reactable(
         })
         return (totalNoShow_sameDay_Established + totalSameDayCanceled_sameDay_Established) / totalTotal_sameDay_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -11802,7 +11820,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen_Established + totalSameDayCanceled_belowFourteen_Established) / totalTotal_belowFourteen_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -11821,7 +11839,7 @@ reactable(
         })
         return (totalNoShow_belowThirty_Established + totalSameDayCanceled_belowThirty_Established) / totalTotal_belowThirty_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -11840,7 +11858,7 @@ reactable(
         })
         return (totalNoShow_overThirty_Established + totalSameDayCanceled_overThirty_Established) / totalTotal_overThirty_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -11859,7 +11877,7 @@ reactable(
         })
         return (totalNoShow_New + totalSameDayCanceled_New) / totalTotal_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -11878,7 +11896,7 @@ reactable(
         })
         return (totalNoShow_sameDay_New + totalSameDayCanceled_sameDay_New) / totalTotal_sameDay_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -11897,7 +11915,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen_New + totalSameDayCanceled_belowFourteen_New) / totalTotal_belowFourteen_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -11916,7 +11934,7 @@ reactable(
         })
         return (totalNoShow_belowThirty_New + totalSameDayCanceled_belowThirty_New) / totalTotal_belowThirty_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -11935,7 +11953,7 @@ reactable(
         })
         return (totalNoShow_overThirty_New + totalSameDayCanceled_overThirty_New) / totalTotal_overThirty_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -11954,7 +11972,7 @@ reactable(
         })
         return (totalNoShow + totalSameDayCanceled) / totalTotal || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -11973,7 +11991,7 @@ reactable(
         })
         return (totalNoShow_sameDay + totalSameDayCanceled_sameDay) / totalTotal_sameDay || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -11992,7 +12010,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen + totalSameDayCanceled_belowFourteen) / totalTotal_belowFourteen || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -12011,7 +12029,7 @@ reactable(
         })
         return (totalNoShow_belowThirty + totalSameDayCanceled_belowThirty) / totalTotal_belowThirty || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -12030,7 +12048,7 @@ reactable(
         })
         return (totalNoShow_overThirty + totalSameDayCanceled_overThirty) / totalTotal_overThirty || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -12147,7 +12165,8 @@ highchart() %>%
                 marker = list(enabled= TRUE),
                 color='#212070',
                 lineWidth=3,
-                lineColor='#212070'
+                lineColor='#212070',
+                labels = list(format = '{value:.2f}')
                 ) %>%
   hc_add_series(name   = "New",
                 data   = (no_show_trend_site_output %>% filter(Campus.Specialty.Group == x))$noShow_rate_New,
@@ -12156,7 +12175,8 @@ highchart() %>%
                 marker = list(enabled= TRUE),
                 color='#d80b8c',
                 lineWidth=3,
-                lineColor='#d80b8c'
+                lineColor='#d80b8c',
+                labels = list(format = '{value:.2f}')
                 ) %>%
   hc_add_series(name   = "All",
                 data   = (no_show_trend_site_output %>% filter(Campus.Specialty.Group == x))$noShow_rate,
@@ -12165,7 +12185,8 @@ highchart() %>%
                 marker = list(enabled= TRUE),
                 color='#7f7f7f',
                 lineWidth=3,
-                lineColor='#7f7f7f'
+                lineColor='#7f7f7f',
+               labels = list(format = '{value:.2f}')
                 ) %>%
   hc_legend(align = "left", verticalAlign = "top", itemStyle = list(fontFamily ='Calibri',color ='black', fontSize = "14px")) %>%
   hc_title(text = paste0("MSUS ", x, " - Avg No Show Plus Rate"), align = "left", style = list(fontWeight = 'bold', fontSize = "22px", fontFamily = "Calibri")) %>%
@@ -12258,7 +12279,7 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = 'sum',
-      format = colFormat(separators = TRUE, digits = 0),
+      format = colFormat(separators = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -12275,7 +12296,7 @@ reactable(
       #   })
       #   return totalArrived / totalarrived_site
       # }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -12292,7 +12313,7 @@ reactable(
         })
         return (totalArrived_New) / totalArrived
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -12311,7 +12332,7 @@ reactable(
         })
         return (totalNoShow_Established + totalSameDayCanceled_Established) / totalTotal_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -12330,7 +12351,7 @@ reactable(
         })
         return (totalNoShow_sameDay_Established + totalSameDayCanceled_sameDay_Established) / totalTotal_sameDay_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -12349,7 +12370,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen_Established + totalSameDayCanceled_belowFourteen_Established) / totalTotal_belowFourteen_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -12368,7 +12389,7 @@ reactable(
         })
         return (totalNoShow_belowThirty_Established + totalSameDayCanceled_belowThirty_Established) / totalTotal_belowThirty_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -12387,7 +12408,7 @@ reactable(
         })
         return (totalNoShow_overThirty_Established + totalSameDayCanceled_overThirty_Established) / totalTotal_overThirty_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -12406,7 +12427,7 @@ reactable(
         })
         return (totalNoShow_New + totalSameDayCanceled_New) / totalTotal_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -12425,7 +12446,7 @@ reactable(
         })
         return (totalNoShow_sameDay_New + totalSameDayCanceled_sameDay_New) / totalTotal_sameDay_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -12444,7 +12465,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen_New + totalSameDayCanceled_belowFourteen_New) / totalTotal_belowFourteen_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -12463,7 +12484,7 @@ reactable(
         })
         return (totalNoShow_belowThirty_New + totalSameDayCanceled_belowThirty_New) / totalTotal_belowThirty_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -12482,7 +12503,7 @@ reactable(
         })
         return (totalNoShow_overThirty_New + totalSameDayCanceled_overThirty_New) / totalTotal_overThirty_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -12501,7 +12522,7 @@ reactable(
         })
         return (totalNoShow + totalSameDayCanceled) / totalTotal || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -12520,7 +12541,7 @@ reactable(
         })
         return (totalNoShow_sameDay + totalSameDayCanceled_sameDay) / totalTotal_sameDay || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -12539,7 +12560,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen + totalSameDayCanceled_belowFourteen) / totalTotal_belowFourteen || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -12558,7 +12579,7 @@ reactable(
         })
         return (totalNoShow_belowThirty + totalSameDayCanceled_belowThirty) / totalTotal_belowThirty || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -12577,7 +12598,7 @@ reactable(
         })
         return (totalNoShow_overThirty + totalSameDayCanceled_overThirty) / totalTotal_overThirty || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -12734,7 +12755,7 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = 'sum',
-      format = colFormat(separators = TRUE, digits = 0),
+      format = colFormat(separators = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -12751,7 +12772,7 @@ reactable(
       #   })
       #   return totalArrived / totalarrived_site
       # }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -12768,7 +12789,7 @@ reactable(
         })
         return (totalArrived_New) / totalArrived
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -12787,7 +12808,7 @@ reactable(
         })
         return (totalNoShow_Established + totalSameDayCanceled_Established) / totalTotal_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -12806,7 +12827,7 @@ reactable(
         })
         return (totalNoShow_sameDay_Established + totalSameDayCanceled_sameDay_Established) / totalTotal_sameDay_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -12825,7 +12846,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen_Established + totalSameDayCanceled_belowFourteen_Established) / totalTotal_belowFourteen_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -12844,7 +12865,7 @@ reactable(
         })
         return (totalNoShow_belowThirty_Established + totalSameDayCanceled_belowThirty_Established) / totalTotal_belowThirty_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -12863,7 +12884,7 @@ reactable(
         })
         return (totalNoShow_overThirty_Established + totalSameDayCanceled_overThirty_Established) / totalTotal_overThirty_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -12882,7 +12903,7 @@ reactable(
         })
         return (totalNoShow_New + totalSameDayCanceled_New) / totalTotal_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -12901,7 +12922,7 @@ reactable(
         })
         return (totalNoShow_sameDay_New + totalSameDayCanceled_sameDay_New) / totalTotal_sameDay_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -12920,7 +12941,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen_New + totalSameDayCanceled_belowFourteen_New) / totalTotal_belowFourteen_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -12939,7 +12960,7 @@ reactable(
         })
         return (totalNoShow_belowThirty_New + totalSameDayCanceled_belowThirty_New) / totalTotal_belowThirty_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -12958,7 +12979,7 @@ reactable(
         })
         return (totalNoShow_overThirty_New + totalSameDayCanceled_overThirty_New) / totalTotal_overThirty_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -12977,7 +12998,7 @@ reactable(
         })
         return (totalNoShow + totalSameDayCanceled) / totalTotal || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -12996,7 +13017,7 @@ reactable(
         })
         return (totalNoShow_sameDay + totalSameDayCanceled_sameDay) / totalTotal_sameDay || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -13015,7 +13036,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen + totalSameDayCanceled_belowFourteen) / totalTotal_belowFourteen || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -13034,7 +13055,7 @@ reactable(
         })
         return (totalNoShow_belowThirty + totalSameDayCanceled_belowThirty) / totalTotal_belowThirty || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -13053,7 +13074,7 @@ reactable(
         })
         return (totalNoShow_overThirty + totalSameDayCanceled_overThirty) / totalTotal_overThirty || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -13171,7 +13192,8 @@ highchart() %>%
                 marker = list(enabled= TRUE),
                 color='#212070',
                 lineWidth=3,
-                lineColor='#212070'
+                lineColor='#212070',
+                labels = list(format = '{value:.2f}')
                 ) %>%
   hc_add_series(name   = "New",
                 data   = (no_show_trend_site_output %>% filter(Campus.Specialty.Group == x))$noShow_rate_New,
@@ -13180,7 +13202,8 @@ highchart() %>%
                 marker = list(enabled= TRUE),
                 color='#d80b8c',
                 lineWidth=3,
-                lineColor='#d80b8c'
+                lineColor='#d80b8c',
+                labels = list(format = '{value:.2f}')
                 ) %>%
   hc_add_series(name   = "All",
                 data   = (no_show_trend_site_output %>% filter(Campus.Specialty.Group == x))$noShow_rate,
@@ -13189,7 +13212,8 @@ highchart() %>%
                 marker = list(enabled= TRUE),
                 color='#7f7f7f',
                 lineWidth=3,
-                lineColor='#7f7f7f'
+                lineColor='#7f7f7f',
+               labels = list(format = '{value:.2f}')
                 ) %>%
   hc_legend(align = "left", verticalAlign = "top", itemStyle = list(fontFamily ='Calibri',color ='black', fontSize = "14px")) %>%
   hc_title(text = paste0("MSW ", x, " - Avg No Show Plus Rate"), align = "left", style = list(fontWeight = 'bold', fontSize = "22px", fontFamily = "Calibri")) %>%
@@ -13283,7 +13307,7 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = 'sum',
-      format = colFormat(separators = TRUE, digits = 0),
+      format = colFormat(separators = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -13300,7 +13324,7 @@ reactable(
       #   })
       #   return totalArrived / totalarrived_site
       # }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -13317,7 +13341,7 @@ reactable(
         })
         return (totalArrived_New) / totalArrived
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -13336,7 +13360,7 @@ reactable(
         })
         return (totalNoShow_Established + totalSameDayCanceled_Established) / totalTotal_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -13355,7 +13379,7 @@ reactable(
         })
         return (totalNoShow_sameDay_Established + totalSameDayCanceled_sameDay_Established) / totalTotal_sameDay_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -13374,7 +13398,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen_Established + totalSameDayCanceled_belowFourteen_Established) / totalTotal_belowFourteen_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -13393,7 +13417,7 @@ reactable(
         })
         return (totalNoShow_belowThirty_Established + totalSameDayCanceled_belowThirty_Established) / totalTotal_belowThirty_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -13412,7 +13436,7 @@ reactable(
         })
         return (totalNoShow_overThirty_Established + totalSameDayCanceled_overThirty_Established) / totalTotal_overThirty_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -13431,7 +13455,7 @@ reactable(
         })
         return (totalNoShow_New + totalSameDayCanceled_New) / totalTotal_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -13450,7 +13474,7 @@ reactable(
         })
         return (totalNoShow_sameDay_New + totalSameDayCanceled_sameDay_New) / totalTotal_sameDay_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -13469,7 +13493,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen_New + totalSameDayCanceled_belowFourteen_New) / totalTotal_belowFourteen_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -13488,7 +13512,7 @@ reactable(
         })
         return (totalNoShow_belowThirty_New + totalSameDayCanceled_belowThirty_New) / totalTotal_belowThirty_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -13507,7 +13531,7 @@ reactable(
         })
         return (totalNoShow_overThirty_New + totalSameDayCanceled_overThirty_New) / totalTotal_overThirty_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -13526,7 +13550,7 @@ reactable(
         })
         return (totalNoShow + totalSameDayCanceled) / totalTotal || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -13545,7 +13569,7 @@ reactable(
         })
         return (totalNoShow_sameDay + totalSameDayCanceled_sameDay) / totalTotal_sameDay || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -13564,7 +13588,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen + totalSameDayCanceled_belowFourteen) / totalTotal_belowFourteen || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -13583,7 +13607,7 @@ reactable(
         })
         return (totalNoShow_belowThirty + totalSameDayCanceled_belowThirty) / totalTotal_belowThirty || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -13602,7 +13626,7 @@ reactable(
         })
         return (totalNoShow_overThirty + totalSameDayCanceled_overThirty) / totalTotal_overThirty || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -13759,7 +13783,7 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = 'sum',
-      format = colFormat(separators = TRUE, digits = 0),
+      format = colFormat(separators = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -13776,7 +13800,7 @@ reactable(
       #   })
       #   return totalArrived / totalarrived_site
       # }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -13793,7 +13817,7 @@ reactable(
         })
         return (totalArrived_New) / totalArrived
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -13812,7 +13836,7 @@ reactable(
         })
         return (totalNoShow_Established + totalSameDayCanceled_Established) / totalTotal_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -13831,7 +13855,7 @@ reactable(
         })
         return (totalNoShow_sameDay_Established + totalSameDayCanceled_sameDay_Established) / totalTotal_sameDay_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -13850,7 +13874,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen_Established + totalSameDayCanceled_belowFourteen_Established) / totalTotal_belowFourteen_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -13869,7 +13893,7 @@ reactable(
         })
         return (totalNoShow_belowThirty_Established + totalSameDayCanceled_belowThirty_Established) / totalTotal_belowThirty_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -13888,7 +13912,7 @@ reactable(
         })
         return (totalNoShow_overThirty_Established + totalSameDayCanceled_overThirty_Established) / totalTotal_overThirty_Established || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -13907,7 +13931,7 @@ reactable(
         })
         return (totalNoShow_New + totalSameDayCanceled_New) / totalTotal_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -13926,7 +13950,7 @@ reactable(
         })
         return (totalNoShow_sameDay_New + totalSameDayCanceled_sameDay_New) / totalTotal_sameDay_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -13945,7 +13969,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen_New + totalSameDayCanceled_belowFourteen_New) / totalTotal_belowFourteen_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -13964,7 +13988,7 @@ reactable(
         })
         return (totalNoShow_belowThirty_New + totalSameDayCanceled_belowThirty_New) / totalTotal_belowThirty_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -13983,7 +14007,7 @@ reactable(
         })
         return (totalNoShow_overThirty_New + totalSameDayCanceled_overThirty_New) / totalTotal_overThirty_New || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -14002,7 +14026,7 @@ reactable(
         })
         return (totalNoShow + totalSameDayCanceled) / totalTotal || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -14021,7 +14045,7 @@ reactable(
         })
         return (totalNoShow_sameDay + totalSameDayCanceled_sameDay) / totalTotal_sameDay || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -14040,7 +14064,7 @@ reactable(
         })
         return (totalNoShow_belowFourteen + totalSameDayCanceled_belowFourteen) / totalTotal_belowFourteen || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
    
@@ -14059,7 +14083,7 @@ reactable(
         })
         return (totalNoShow_belowThirty + totalSameDayCanceled_belowThirty) / totalTotal_belowThirty || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -14078,7 +14102,7 @@ reactable(
         })
         return (totalNoShow_overThirty + totalSameDayCanceled_overThirty) / totalTotal_overThirty || '-'
       }"),
-      format = colFormat(percent = TRUE, digits = 0),
+      format = colFormat(percent = TRUE, digits = 1),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
     
@@ -14195,7 +14219,8 @@ highchart() %>%
                 marker = list(enabled= TRUE),
                 color='#212070',
                 lineWidth=3,
-                lineColor='#212070'
+                lineColor='#212070',
+                labels = list(format = '{value:.2f}')
                 ) %>%
   hc_add_series(name   = "New",
                 data   = (no_show_trend_site_output %>% filter(Campus.Specialty.Group == x))$noShow_rate_New,
@@ -14204,7 +14229,8 @@ highchart() %>%
                 marker = list(enabled= TRUE),
                 color='#d80b8c',
                 lineWidth=3,
-                lineColor='#d80b8c'
+                lineColor='#d80b8c',
+                labels = list(format = '{value:.2f}')
                 ) %>%
   hc_add_series(name   = "All",
                 data   = (no_show_trend_site_output %>% filter(Campus.Specialty.Group == x))$noShow_rate,
@@ -14213,7 +14239,8 @@ highchart() %>%
                 marker = list(enabled= TRUE),
                 color='#7f7f7f',
                 lineWidth=3,
-                lineColor='#7f7f7f'
+                lineColor='#7f7f7f',
+               labels = list(format = '{value:.2f}')
                 ) %>%
   hc_legend(align = "left", verticalAlign = "top", itemStyle = list(fontFamily ='Calibri',color ='black', fontSize = "14px")) %>%
   hc_title(text = paste0("NETWORK ", x, " - Avg No Show Plus Rate"), align = "left", style = list(fontWeight = 'bold', fontSize = "22px", fontFamily = "Calibri")) %>%
@@ -14305,7 +14332,7 @@ highchart() %>%
 <!--       maxWidth = 90, -->
 <!--       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"), -->
 <!--       aggregate = 'sum', -->
-<!--       format = colFormat(separators = TRUE, digits = 0), -->
+<!--       format = colFormat(separators = TRUE, digits = 1), -->
 <!--       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)") -->
 <!--     ), -->
 
@@ -14322,7 +14349,7 @@ highchart() %>%
 <!--       #   }) -->
 <!--       #   return totalArrived / totalarrived_site -->
 <!--       # }"), -->
-<!--       format = colFormat(percent = TRUE, digits = 0), -->
+<!--       format = colFormat(percent = TRUE, digits = 1), -->
 <!--       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)") -->
 <!--     ), -->
 
@@ -14339,7 +14366,7 @@ highchart() %>%
 <!--         }) -->
 <!--         return (totalArrived_New) / totalArrived -->
 <!--       }"), -->
-<!--       format = colFormat(percent = TRUE, digits = 0), -->
+<!--       format = colFormat(percent = TRUE, digits = 1), -->
 <!--       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)") -->
 <!--     ), -->
 
@@ -14358,7 +14385,7 @@ highchart() %>%
 <!--         }) -->
 <!--         return (totalNoShow_Established + totalSameDayCanceled_Established) / totalTotal_Established || '-' -->
 <!--       }"), -->
-<!--       format = colFormat(percent = TRUE, digits = 0), -->
+<!--       format = colFormat(percent = TRUE, digits = 1), -->
 <!--       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)") -->
 <!--     ), -->
 
@@ -14377,7 +14404,7 @@ highchart() %>%
 <!--         }) -->
 <!--         return (totalNoShow_sameDay_Established + totalSameDayCanceled_sameDay_Established) / totalTotal_sameDay_Established || '-' -->
 <!--       }"), -->
-<!--       format = colFormat(percent = TRUE, digits = 0), -->
+<!--       format = colFormat(percent = TRUE, digits = 1), -->
 <!--       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)") -->
 <!--     ), -->
 
@@ -14396,7 +14423,7 @@ highchart() %>%
 <!--         }) -->
 <!--         return (totalNoShow_belowFourteen_Established + totalSameDayCanceled_belowFourteen_Established) / totalTotal_belowFourteen_Established || '-' -->
 <!--       }"), -->
-<!--       format = colFormat(percent = TRUE, digits = 0), -->
+<!--       format = colFormat(percent = TRUE, digits = 1), -->
 <!--       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)") -->
 <!--     ), -->
 
@@ -14415,7 +14442,7 @@ highchart() %>%
 <!--         }) -->
 <!--         return (totalNoShow_belowThirty_Established + totalSameDayCanceled_belowThirty_Established) / totalTotal_belowThirty_Established || '-' -->
 <!--       }"), -->
-<!--       format = colFormat(percent = TRUE, digits = 0), -->
+<!--       format = colFormat(percent = TRUE, digits = 1), -->
 <!--       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)") -->
 <!--     ), -->
 
@@ -14434,7 +14461,7 @@ highchart() %>%
 <!--         }) -->
 <!--         return (totalNoShow_overThirty_Established + totalSameDayCanceled_overThirty_Established) / totalTotal_overThirty_Established || '-' -->
 <!--       }"), -->
-<!--       format = colFormat(percent = TRUE, digits = 0), -->
+<!--       format = colFormat(percent = TRUE, digits = 1), -->
 <!--       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)") -->
 <!--     ), -->
 
@@ -14453,7 +14480,7 @@ highchart() %>%
 <!--         }) -->
 <!--         return (totalNoShow_New + totalSameDayCanceled_New) / totalTotal_New || '-' -->
 <!--       }"), -->
-<!--       format = colFormat(percent = TRUE, digits = 0), -->
+<!--       format = colFormat(percent = TRUE, digits = 1), -->
 <!--       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)") -->
 <!--     ), -->
 
@@ -14472,7 +14499,7 @@ highchart() %>%
 <!--         }) -->
 <!--         return (totalNoShow_sameDay_New + totalSameDayCanceled_sameDay_New) / totalTotal_sameDay_New || '-' -->
 <!--       }"), -->
-<!--       format = colFormat(percent = TRUE, digits = 0), -->
+<!--       format = colFormat(percent = TRUE, digits = 1), -->
 <!--       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)") -->
 <!--     ), -->
 
@@ -14491,7 +14518,7 @@ highchart() %>%
 <!--         }) -->
 <!--         return (totalNoShow_belowFourteen_New + totalSameDayCanceled_belowFourteen_New) / totalTotal_belowFourteen_New || '-' -->
 <!--       }"), -->
-<!--       format = colFormat(percent = TRUE, digits = 0), -->
+<!--       format = colFormat(percent = TRUE, digits = 1), -->
 <!--       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)") -->
 <!--     ), -->
 
@@ -14510,7 +14537,7 @@ highchart() %>%
 <!--         }) -->
 <!--         return (totalNoShow_belowThirty_New + totalSameDayCanceled_belowThirty_New) / totalTotal_belowThirty_New || '-' -->
 <!--       }"), -->
-<!--       format = colFormat(percent = TRUE, digits = 0), -->
+<!--       format = colFormat(percent = TRUE, digits = 1), -->
 <!--       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)") -->
 <!--     ), -->
 
@@ -14529,7 +14556,7 @@ highchart() %>%
 <!--         }) -->
 <!--         return (totalNoShow_overThirty_New + totalSameDayCanceled_overThirty_New) / totalTotal_overThirty_New || '-' -->
 <!--       }"), -->
-<!--       format = colFormat(percent = TRUE, digits = 0), -->
+<!--       format = colFormat(percent = TRUE, digits = 1), -->
 <!--       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)") -->
 <!--     ), -->
 
@@ -14548,7 +14575,7 @@ highchart() %>%
 <!--         }) -->
 <!--         return (totalNoShow + totalSameDayCanceled) / totalTotal || '-' -->
 <!--       }"), -->
-<!--       format = colFormat(percent = TRUE, digits = 0), -->
+<!--       format = colFormat(percent = TRUE, digits = 1), -->
 <!--       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)") -->
 <!--     ), -->
 
@@ -14567,7 +14594,7 @@ highchart() %>%
 <!--         }) -->
 <!--         return (totalNoShow_sameDay + totalSameDayCanceled_sameDay) / totalTotal_sameDay || '-' -->
 <!--       }"), -->
-<!--       format = colFormat(percent = TRUE, digits = 0), -->
+<!--       format = colFormat(percent = TRUE, digits = 1), -->
 <!--       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)") -->
 <!--     ), -->
 
@@ -14586,7 +14613,7 @@ highchart() %>%
 <!--         }) -->
 <!--         return (totalNoShow_belowFourteen + totalSameDayCanceled_belowFourteen) / totalTotal_belowFourteen || '-' -->
 <!--       }"), -->
-<!--       format = colFormat(percent = TRUE, digits = 0), -->
+<!--       format = colFormat(percent = TRUE, digits = 1), -->
 <!--       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)") -->
 <!--     ), -->
 
@@ -14605,7 +14632,7 @@ highchart() %>%
 <!--         }) -->
 <!--         return (totalNoShow_belowThirty + totalSameDayCanceled_belowThirty) / totalTotal_belowThirty || '-' -->
 <!--       }"), -->
-<!--       format = colFormat(percent = TRUE, digits = 0), -->
+<!--       format = colFormat(percent = TRUE, digits = 1), -->
 <!--       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)") -->
 <!--     ), -->
 
@@ -14624,7 +14651,7 @@ highchart() %>%
 <!--         }) -->
 <!--         return (totalNoShow_overThirty + totalSameDayCanceled_overThirty) / totalTotal_overThirty || '-' -->
 <!--       }"), -->
-<!--       format = colFormat(percent = TRUE, digits = 0), -->
+<!--       format = colFormat(percent = TRUE, digits = 1), -->
 <!--       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)") -->
 <!--     ), -->
 
@@ -14780,7 +14807,7 @@ highchart() %>%
 <!--       maxWidth = 90, -->
 <!--       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"), -->
 <!--       aggregate = 'sum', -->
-<!--       format = colFormat(separators = TRUE, digits = 0), -->
+<!--       format = colFormat(separators = TRUE, digits = 1), -->
 <!--       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)") -->
 <!--     ), -->
 
@@ -14797,7 +14824,7 @@ highchart() %>%
 <!--       #   }) -->
 <!--       #   return totalArrived / totalarrived_site -->
 <!--       # }"), -->
-<!--       format = colFormat(percent = TRUE, digits = 0), -->
+<!--       format = colFormat(percent = TRUE, digits = 1), -->
 <!--       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)") -->
 <!--     ), -->
 
@@ -14814,7 +14841,7 @@ highchart() %>%
 <!--         }) -->
 <!--         return (totalArrived_New) / totalArrived -->
 <!--       }"), -->
-<!--       format = colFormat(percent = TRUE, digits = 0), -->
+<!--       format = colFormat(percent = TRUE, digits = 1), -->
 <!--       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)") -->
 <!--     ), -->
 
@@ -14833,7 +14860,7 @@ highchart() %>%
 <!--         }) -->
 <!--         return (totalNoShow_Established + totalSameDayCanceled_Established) / totalTotal_Established || '-' -->
 <!--       }"), -->
-<!--       format = colFormat(percent = TRUE, digits = 0), -->
+<!--       format = colFormat(percent = TRUE, digits = 1), -->
 <!--       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)") -->
 <!--     ), -->
 
@@ -14852,7 +14879,7 @@ highchart() %>%
 <!--         }) -->
 <!--         return (totalNoShow_sameDay_Established + totalSameDayCanceled_sameDay_Established) / totalTotal_sameDay_Established || '-' -->
 <!--       }"), -->
-<!--       format = colFormat(percent = TRUE, digits = 0), -->
+<!--       format = colFormat(percent = TRUE, digits = 1), -->
 <!--       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)") -->
 <!--     ), -->
 
@@ -14871,7 +14898,7 @@ highchart() %>%
 <!--         }) -->
 <!--         return (totalNoShow_belowFourteen_Established + totalSameDayCanceled_belowFourteen_Established) / totalTotal_belowFourteen_Established || '-' -->
 <!--       }"), -->
-<!--       format = colFormat(percent = TRUE, digits = 0), -->
+<!--       format = colFormat(percent = TRUE, digits = 1), -->
 <!--       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)") -->
 <!--     ), -->
 
@@ -14890,7 +14917,7 @@ highchart() %>%
 <!--         }) -->
 <!--         return (totalNoShow_belowThirty_Established + totalSameDayCanceled_belowThirty_Established) / totalTotal_belowThirty_Established || '-' -->
 <!--       }"), -->
-<!--       format = colFormat(percent = TRUE, digits = 0), -->
+<!--       format = colFormat(percent = TRUE, digits = 1), -->
 <!--       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)") -->
 <!--     ), -->
 
@@ -14909,7 +14936,7 @@ highchart() %>%
 <!--         }) -->
 <!--         return (totalNoShow_overThirty_Established + totalSameDayCanceled_overThirty_Established) / totalTotal_overThirty_Established || '-' -->
 <!--       }"), -->
-<!--       format = colFormat(percent = TRUE, digits = 0), -->
+<!--       format = colFormat(percent = TRUE, digits = 1), -->
 <!--       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)") -->
 <!--     ), -->
 
@@ -14928,7 +14955,7 @@ highchart() %>%
 <!--         }) -->
 <!--         return (totalNoShow_New + totalSameDayCanceled_New) / totalTotal_New || '-' -->
 <!--       }"), -->
-<!--       format = colFormat(percent = TRUE, digits = 0), -->
+<!--       format = colFormat(percent = TRUE, digits = 1), -->
 <!--       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)") -->
 <!--     ), -->
 
@@ -14947,7 +14974,7 @@ highchart() %>%
 <!--         }) -->
 <!--         return (totalNoShow_sameDay_New + totalSameDayCanceled_sameDay_New) / totalTotal_sameDay_New || '-' -->
 <!--       }"), -->
-<!--       format = colFormat(percent = TRUE, digits = 0), -->
+<!--       format = colFormat(percent = TRUE, digits = 1), -->
 <!--       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)") -->
 <!--     ), -->
 
@@ -14966,7 +14993,7 @@ highchart() %>%
 <!--         }) -->
 <!--         return (totalNoShow_belowFourteen_New + totalSameDayCanceled_belowFourteen_New) / totalTotal_belowFourteen_New || '-' -->
 <!--       }"), -->
-<!--       format = colFormat(percent = TRUE, digits = 0), -->
+<!--       format = colFormat(percent = TRUE, digits = 1), -->
 <!--       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)") -->
 <!--     ), -->
 
@@ -14985,7 +15012,7 @@ highchart() %>%
 <!--         }) -->
 <!--         return (totalNoShow_belowThirty_New + totalSameDayCanceled_belowThirty_New) / totalTotal_belowThirty_New || '-' -->
 <!--       }"), -->
-<!--       format = colFormat(percent = TRUE, digits = 0), -->
+<!--       format = colFormat(percent = TRUE, digits = 1), -->
 <!--       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)") -->
 <!--     ), -->
 
@@ -15004,7 +15031,7 @@ highchart() %>%
 <!--         }) -->
 <!--         return (totalNoShow_overThirty_New + totalSameDayCanceled_overThirty_New) / totalTotal_overThirty_New || '-' -->
 <!--       }"), -->
-<!--       format = colFormat(percent = TRUE, digits = 0), -->
+<!--       format = colFormat(percent = TRUE, digits = 1), -->
 <!--       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)") -->
 <!--     ), -->
 
@@ -15023,7 +15050,7 @@ highchart() %>%
 <!--         }) -->
 <!--         return (totalNoShow + totalSameDayCanceled) / totalTotal || '-' -->
 <!--       }"), -->
-<!--       format = colFormat(percent = TRUE, digits = 0), -->
+<!--       format = colFormat(percent = TRUE, digits = 1), -->
 <!--       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)") -->
 <!--     ), -->
 
@@ -15042,7 +15069,7 @@ highchart() %>%
 <!--         }) -->
 <!--         return (totalNoShow_sameDay + totalSameDayCanceled_sameDay) / totalTotal_sameDay || '-' -->
 <!--       }"), -->
-<!--       format = colFormat(percent = TRUE, digits = 0), -->
+<!--       format = colFormat(percent = TRUE, digits = 1), -->
 <!--       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)") -->
 <!--     ), -->
 
@@ -15061,7 +15088,7 @@ highchart() %>%
 <!--         }) -->
 <!--         return (totalNoShow_belowFourteen + totalSameDayCanceled_belowFourteen) / totalTotal_belowFourteen || '-' -->
 <!--       }"), -->
-<!--       format = colFormat(percent = TRUE, digits = 0), -->
+<!--       format = colFormat(percent = TRUE, digits = 1), -->
 <!--       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)") -->
 <!--     ), -->
 
@@ -15080,7 +15107,7 @@ highchart() %>%
 <!--         }) -->
 <!--         return (totalNoShow_belowThirty + totalSameDayCanceled_belowThirty) / totalTotal_belowThirty || '-' -->
 <!--       }"), -->
-<!--       format = colFormat(percent = TRUE, digits = 0), -->
+<!--       format = colFormat(percent = TRUE, digits = 1), -->
 <!--       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)") -->
 <!--     ), -->
 
@@ -15099,7 +15126,7 @@ highchart() %>%
 <!--         }) -->
 <!--         return (totalNoShow_overThirty + totalSameDayCanceled_overThirty) / totalTotal_overThirty || '-' -->
 <!--       }"), -->
-<!--       format = colFormat(percent = TRUE, digits = 0), -->
+<!--       format = colFormat(percent = TRUE, digits = 1), -->
 <!--       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)") -->
 <!--     ), -->
 
