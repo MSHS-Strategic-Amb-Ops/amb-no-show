@@ -1061,7 +1061,7 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = 'sum',
-      format = colFormat(separators = TRUE, digits = 1),
+      format = colFormat(separators = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -1648,7 +1648,7 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = 'sum',
-      format = colFormat(separators = TRUE, digits = 1),
+      format = colFormat(separators = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -2214,7 +2214,7 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = 'sum',
-      format = colFormat(separators = TRUE, digits = 1),
+      format = colFormat(separators = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -2836,7 +2836,7 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = 'sum',
-      format = colFormat(separators = TRUE, digits = 1),
+      format = colFormat(separators = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -3438,7 +3438,7 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = 'sum',
-      format = colFormat(separators = TRUE, digits = 1),
+      format = colFormat(separators = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -4015,7 +4015,7 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = 'sum',
-      format = colFormat(separators = TRUE, digits = 1),
+      format = colFormat(separators = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -4540,7 +4540,7 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = 'sum',
-      format = colFormat(separators = TRUE, digits = 1),
+      format = colFormat(separators = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -5108,7 +5108,7 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = 'sum',
-      format = colFormat(separators = TRUE, digits = 1),
+      format = colFormat(separators = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -6118,7 +6118,7 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = 'sum',
-      format = colFormat(separators = TRUE, digits = 1),
+      format = colFormat(separators = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -6594,7 +6594,7 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = 'sum',
-      format = colFormat(separators = TRUE, digits = 1),
+      format = colFormat(separators = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -7145,7 +7145,7 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = 'sum',
-      format = colFormat(separators = TRUE, digits = 1),
+      format = colFormat(separators = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -7621,7 +7621,7 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = 'sum',
-      format = colFormat(separators = TRUE, digits = 1),
+      format = colFormat(separators = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -8171,7 +8171,7 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = 'sum',
-      format = colFormat(separators = TRUE, digits = 1),
+      format = colFormat(separators = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -8647,7 +8647,7 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = 'sum',
-      format = colFormat(separators = TRUE, digits = 1),
+      format = colFormat(separators = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -9198,7 +9198,7 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = 'sum',
-      format = colFormat(separators = TRUE, digits = 1),
+      format = colFormat(separators = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -9674,7 +9674,7 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = 'sum',
-      format = colFormat(separators = TRUE, digits = 1),
+      format = colFormat(separators = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -10225,7 +10225,7 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = 'sum',
-      format = colFormat(separators = TRUE, digits = 1),
+      format = colFormat(separators = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -10701,7 +10701,7 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = 'sum',
-      format = colFormat(separators = TRUE, digits = 1),
+      format = colFormat(separators = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -11251,7 +11251,7 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = 'sum',
-      format = colFormat(separators = TRUE, digits = 1),
+      format = colFormat(separators = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -11728,7 +11728,7 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = 'sum',
-      format = colFormat(separators = TRUE, digits = 1),
+      format = colFormat(separators = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -12278,7 +12278,7 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = 'sum',
-      format = colFormat(separators = TRUE, digits = 1),
+      format = colFormat(separators = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -12754,7 +12754,7 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = 'sum',
-      format = colFormat(separators = TRUE, digits = 1),
+      format = colFormat(separators = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -13306,7 +13306,7 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = 'sum',
-      format = colFormat(separators = TRUE, digits = 1),
+      format = colFormat(separators = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
@@ -13782,7 +13782,7 @@ reactable(
       maxWidth = 90,
       headerStyle = list(background = "#210070", color = "white", fontWeight = "Bold", fontSize = "14px"),
       aggregate = 'sum',
-      format = colFormat(separators = TRUE, digits = 1),
+      format = colFormat(separators = TRUE, digits = 0),
       style = list(borderLeft = "1.5px solid rgb(230, 230, 230)")
     ),
 
