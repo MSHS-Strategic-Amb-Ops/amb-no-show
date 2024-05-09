@@ -1039,12 +1039,12 @@ reactable(
     wrap = TRUE,
   searchable = TRUE,
   
-  rowStyle = function(index) {
-            if (index %in% c(10)) {
-              list(`border-top` = "2px solid rgb(184,184,184)",
-                   fontWeight = "Bold")
-            }
-          },
+  # rowStyle = function(index) {
+  #           if (index %in% c(10)) {
+  #             list(`border-top` = "2px solid rgb(184,184,184)",
+  #                  fontWeight = "Bold")
+  #           }
+  #         },
 
   groupBy = c("CAMPUS"),
 
